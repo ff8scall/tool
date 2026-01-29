@@ -195,41 +195,45 @@ const IdolPositionTest = () => {
                 </div>
             )}
 
-            {step === 'result' && (
-                <div className="animate-scale-in text-center bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
-                    <div className="mb-6">
-                        {getResult(scores).icon({ className: `w-24 h-24 mx-auto animate-bounce ${getResult(scores).color}` })}
-                    </div>
+            {step === 'result' && (() => {
+                const result = getResult(scores);
+                const ResultIcon = result.icon;
+                return (
+                    <div className="animate-scale-in text-center bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
+                        <div className="mb-6">
+                            <ResultIcon className={`w-24 h-24 mx-auto animate-bounce ${result.color}`} />
+                        </div>
 
-                    <span className="text-gray-500 dark:text-gray-400 font-bold">당신의 데뷔 포지션은</span>
-                    <h2 className={`text-3xl md:text-4xl font-black mt-2 mb-6 ${getResult(scores).color}`}>
-                        {getResult(scores).title}
-                    </h2>
+                        <span className="text-gray-500 dark:text-gray-400 font-bold">당신의 데뷔 포지션은</span>
+                        <h2 className={`text-3xl md:text-4xl font-black mt-2 mb-6 ${result.color}`}>
+                            {result.title}
+                        </h2>
 
-                    <div className={`p-6 rounded-2xl mb-8 ${getResult(scores).bg} dark:bg-opacity-10 text-left`}>
-                        <p className="text-lg text-gray-800 dark:text-gray-200 leading-relaxed font-bold">
-                            {getResult(scores).desc}
-                        </p>
-                    </div>
+                        <div className={`p-6 rounded-2xl mb-8 ${result.bg} dark:bg-opacity-10 text-left`}>
+                            <p className="text-lg text-gray-800 dark:text-gray-200 leading-relaxed font-bold">
+                                {result.desc}
+                            </p>
+                        </div>
 
-                    <div className="flex gap-4 justify-center">
-                        <button
-                            onClick={resetTest}
-                            className="flex-1 py-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
-                        >
-                            <RefreshCw className="w-5 h-5" />
-                            다시하기
-                        </button>
-                        <button
-                            onClick={shareResult}
-                            className="flex-1 py-4 bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-500/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1"
-                        >
-                            <Share2 className="w-5 h-5" />
-                            공유하기
-                        </button>
+                        <div className="flex gap-4 justify-center">
+                            <button
+                                onClick={resetTest}
+                                className="flex-1 py-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
+                            >
+                                <RefreshCw className="w-5 h-5" />
+                                다시하기
+                            </button>
+                            <button
+                                onClick={shareResult}
+                                className="flex-1 py-4 bg-indigo-500 hover:bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-500/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1"
+                            >
+                                <Share2 className="w-5 h-5" />
+                                공유하기
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
+                );
+            })()}
         </div>
     );
 };
