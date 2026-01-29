@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Download, Share2, RefreshCw, Smile, Zap, Coffee, Brain, Heart, Sparkles, Check, Info, User, Star } from 'lucide-react';
-import { domToPng } from 'modern-screenshot';
+import { Smile, Zap, Coffee, Brain, Heart, Sparkles, Check, Info, User, Star } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import ShareableResult from '../components/ShareableResult';
 
 const MentalAge = () => {
     const [step, setStep] = useState(0); // 0: Start, 1: Quiz, 2: Result
@@ -235,10 +235,10 @@ const MentalAge = () => {
             )}
 
             {step === 2 && currentResult && (
-                <div className="space-y-10 animate-in zoom-in-90 duration-700">
-                    <div
-                        ref={resultRef}
-                        className="bg-white border-[12px] border-slate-50 rounded-[4rem] p-10 md:p-16 shadow-2xl relative overflow-hidden"
+                <div className="animate-in zoom-in-90 duration-700">
+                    <ShareableResult
+                        title="나의 정신 연령 테스트 결과"
+                        onRestart={() => { setStep(0); setCurrentQuestion(0); setTotalScore(0); }}
                     >
                         <div className="relative space-y-12 text-center">
                             <div className="space-y-4">
@@ -261,40 +261,11 @@ const MentalAge = () => {
                                 </p>
                             </div>
 
-                            <div className="pt-12 flex flex-col items-center">
-                                <div className="text-2xl font-black text-slate-200 tracking-[0.6em] mb-2 uppercase">TOOL HIVE</div>
+                            <div className="pt-4 flex flex-col items-center">
                                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Mind Aging Lab | Verified Report</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="flex flex-wrap justify-center gap-4 no-print">
-                        <button
-                            onClick={saveAsImage}
-                            className="flex items-center gap-3 px-10 py-5 bg-indigo-600 text-white rounded-full font-black text-xl hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-indigo-600/30"
-                        >
-                            <Download size={24} /> 결과 카드 저장
-                        </button>
-                        <button
-                            onClick={() => {
-                                if (navigator.share) {
-                                    navigator.share({ title: '나의 정신 연령 테스트 결과', text: `나의 정신 연령은 ${currentResult.age}! 당신의 마음 나이는 몇 살인가요?`, url: window.location.href });
-                                } else {
-                                    alert('링크가 복사되었습니다!');
-                                    navigator.clipboard.writeText(window.location.href);
-                                }
-                            }}
-                            className="flex items-center gap-3 px-10 py-5 bg-white text-slate-700 rounded-full font-black text-xl hover:scale-105 transition-all border-4 border-slate-50 shadow-lg"
-                        >
-                            <Share2 size={24} /> 결과 공유하기
-                        </button>
-                        <button
-                            onClick={() => { setStep(0); setCurrentQuestion(0); setTotalScore(0); }}
-                            className="flex items-center gap-3 px-10 py-5 bg-slate-100 text-slate-400 rounded-full font-black text-xl hover:scale-105 transition-all hover:text-indigo-600"
-                        >
-                            <RefreshCw size={24} /> 다시 하기
-                        </button>
-                    </div>
+                    </ShareableResult>
                 </div>
             )}
 

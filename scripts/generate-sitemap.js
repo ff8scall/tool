@@ -21,7 +21,7 @@ const sitemapPath = path.join(distPath, 'sitemap.xml');
 
 // Base URL - ensuring it matches the user's domain
 // Base URL - ensuring it matches the user's domain
-const BASE_URL = process.env.VITE_BASE_URL || 'https://tool-hive.vercel.app';
+const BASE_URL = process.env.VITE_BASE_URL || 'https://ff8scall.github.io/utility-hub';
 
 function generateSitemap() {
     console.log('Generating sitemap...');
