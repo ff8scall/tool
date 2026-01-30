@@ -41,6 +41,7 @@ const getRoutes = () => {
 }
 
 // https://vite.dev/config/
+// Trigger redeploy for MIME type fix
 export default defineConfig({
   plugins: [
     react(),
