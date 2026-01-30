@@ -140,7 +140,7 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <Router basename="/utility-hub">
+        <Router basename="/">
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
