@@ -64,5 +64,5 @@ export default defineConfig({
       }),
     ]),
   ],
-  base: '/utility-hub/',
+  base: '/',
 })
