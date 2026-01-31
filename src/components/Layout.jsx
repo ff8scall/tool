@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
     };
 
     // Sort categories by predefined order
-    const categoryOrder = ['unit', 'finance', 'text', 'dev', 'utility', 'health', 'games', 'fun'];
+    const categoryOrder = ['unit', 'finance', 'text', 'dev', 'utility', 'health', 'games', 'fun', 'trivia'];
 
     const navCategories = categoryOrder.map(id => {
         const categoryTools = tools.filter(tool => tool.category === id);

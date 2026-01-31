@@ -17,7 +17,8 @@ export const toolCategories = {
     utility: '유틸리티',
     health: '건강',
     games: '게임',
-    fun: '운세/재미'
+    fun: '운세/재미',
+    trivia: '간단 상식 테스트'
 };
 
 export const toolCategoryData = {
@@ -76,6 +77,13 @@ export const toolCategoryData = {
         keywords: '무료운세, 사주팔자, MBTI테스트, 심리테스트, 타로카드, 오늘의운세',
         icon: Sparkles,
         color: 'from-purple-500 to-fuchsia-600'
+    },
+    trivia: {
+        title: '간단 상식 테스트 모음',
+        description: '초성 퀴즈, 상식 문제 등 재미있게 지식을 쌓을 수 있는 퀴즈 모음입니다.',
+        keywords: '상식, 퀴즈, 초성게임, 단어맞추기, trivia',
+        icon: BookOpen,
+        color: 'from-yellow-400 to-orange-500'
     }
 };
 
@@ -1016,6 +1024,36 @@ export const tools = [
         keywords: ['정신연령', '심리테스트', 'mentalage', '재미', '꼰대테스트']
     },
     {
+        id: 'mandalart',
+        title: '만다라트 계획표',
+        description: '오타니 쇼헤이의 목표 달성 비법! 9x9 목표 달성표 만들기',
+        path: '/mandalart',
+        category: 'utility', // or 'text' or 'fun', utility fits best for planner
+        icon: Grid3X3,
+        color: 'bg-sky-500',
+        keywords: ['만다라트', '계획표', '목표달성', '오타니', 'mandalart', 'plan']
+    },
+    {
+        id: 'life-expectancy',
+        title: '기대 수명 계산기',
+        description: '술, 담배, 운동 습관으로 알아보는 나의 남은 수명은? (건강 수명 테스트)',
+        path: '/life-expectancy',
+        category: 'health', // or 'fun'
+        icon: Activity,
+        color: 'bg-rose-500',
+        keywords: ['기대수명', '수명계산기', '건강테스트', '남은수명', 'life', 'expectancy']
+    },
+    {
+        id: 'lotto-sim',
+        title: '로또 1등 당첨 시뮬레이터',
+        description: '내가 로또를 평생 산다면 언제 1등 될까? 현실적인 확률 체험기',
+        path: '/lotto-sim',
+        category: 'fun',
+        icon: DollarSign,
+        color: 'bg-yellow-500',
+        keywords: ['로또시뮬레이터', '로또', '당첨확률', '1등', 'lotto', 'simulation']
+    },
+    {
         id: 'brain-structure',
         title: '나의 뇌 구조 분석',
         description: '이름으로 보는 머릿속 생각 키워드 분석 리포트',
@@ -1364,5 +1402,16 @@ export const tools = [
         icon: Shield,
         color: 'bg-blue-600',
         keywords: ['회복탄력성', '멘탈', '자존감', '심리테스트', 'resilience', 'mental']
+    },
+    // Trivia
+    {
+        id: 'initial-sound-quiz',
+        title: '초성 단어 퀴즈',
+        description: '제시된 초성과 설명을 보고 단어를 맞추는 퀴즈 게임',
+        path: '/initial-sound-quiz',
+        category: 'trivia',
+        icon: BookOpen,
+        color: 'bg-orange-500',
+        keywords: ['초성', '퀴즈', '단어', 'game', 'quiz']
     }
 ];

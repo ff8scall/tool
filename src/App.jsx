@@ -135,6 +135,10 @@ import HoguTest from './pages/HoguTest';
 import DebateTest from './pages/DebateTest';
 import IdolPositionTest from './pages/IdolPositionTest';
 import ResilienceTest from './pages/ResilienceTest';
+import MandalartPlanner from './pages/MandalartPlanner';
+import LifeExpectancy from './pages/LifeExpectancy';
+import LottoSimulator from './pages/LottoSimulator';
+import InitialSoundQuiz from './pages/InitialSoundQuiz';
 
 function App() {
   return (
@@ -303,6 +307,10 @@ function App() {
               <Route path="/debate-test" element={<DebateTest />} />
               <Route path="/idol-test" element={<IdolPositionTest />} />
               <Route path="/resilience-test" element={<ResilienceTest />} />
+              <Route path="/mandalart" element={<MandalartPlanner />} />
+              <Route path="/life-expectancy" element={<LifeExpectancy />} />
+              <Route path="/lotto-sim" element={<LottoSimulator />} />
+              <Route path="/initial-sound-quiz" element={<InitialSoundQuiz />} />
               <Route path="*" element={
                 <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
                   <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">404</h1>
