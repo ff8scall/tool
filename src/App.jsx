@@ -139,6 +139,11 @@ import MandalartPlanner from './pages/MandalartPlanner';
 import LifeExpectancy from './pages/LifeExpectancy';
 import LottoSimulator from './pages/LottoSimulator';
 import InitialSoundQuiz from './pages/InitialSoundQuiz';
+import FoodQuiz from './pages/FoodQuiz';
+import AssociationQuiz from './pages/AssociationQuiz';
+import AdditionQuiz from './pages/AdditionQuiz';
+import SubtractionQuiz from './pages/SubtractionQuiz';
+import MultiplicationQuiz from './pages/MultiplicationQuiz';
 
 function App() {
   return (
@@ -311,6 +316,11 @@ function App() {
               <Route path="/life-expectancy" element={<LifeExpectancy />} />
               <Route path="/lotto-sim" element={<LottoSimulator />} />
               <Route path="/initial-sound-quiz" element={<InitialSoundQuiz />} />
+              <Route path="/food-quiz" element={<FoodQuiz />} />
+              <Route path="/association-quiz" element={<AssociationQuiz />} />
+              <Route path="/simple-addition" element={<AdditionQuiz />} />
+              <Route path="/simple-subtraction" element={<SubtractionQuiz />} />
+              <Route path="/simple-multiplication" element={<MultiplicationQuiz />} />
               <Route path="*" element={
                 <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
                   <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">404</h1>

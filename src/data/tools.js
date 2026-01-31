@@ -6,7 +6,7 @@ import {
     Heart, Brain, Scroll, Gift, PenTool, Timer, CheckSquare, Lightbulb,
     Binary, FileCode, Edit, GitCompare, Barcode, Youtube, ImageIcon,
     Ruler, Weight, FileDigit, Key, Thermometer, Link, Trophy, MousePointer2, Crosshair, Target, Bomb, Disc, GitCommit,
-    ArrowLeftRight, FileJson, Droplet, Gauge, Percent, Divide, Dices, Utensils, Bird, Grid3X3, Layers, PawPrint, Wind, User, Mic, Scale, Cookie, Eye, Circle, Ear, Music, BookOpen, HelpCircle, Radio, Smile, Battery, Smartphone, Briefcase, HelpingHand, MessageSquare, Mic2, Shield, Dog
+    ArrowLeftRight, FileJson, Droplet, Gauge, Percent, Divide, Dices, Utensils, Bird, Grid3X3, Layers, PawPrint, Wind, User, Mic, Scale, Cookie, Eye, Circle, Ear, Music, BookOpen, HelpCircle, Radio, Smile, Battery, Smartphone, Briefcase, HelpingHand, MessageSquare, Mic2, Shield, Dog, Plus, Minus, X
 } from 'lucide-react';
 
 export const toolCategories = {
@@ -1413,5 +1413,55 @@ export const tools = [
         icon: BookOpen,
         color: 'bg-orange-500',
         keywords: ['초성', '퀴즈', '단어', 'game', 'quiz']
+    },
+    {
+        id: 'food-quiz',
+        title: '음식 이름 퀴즈',
+        description: '3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임',
+        path: '/food-quiz',
+        category: 'trivia',
+        icon: Utensils,
+        color: 'bg-orange-500',
+        keywords: ['음식', '퀴즈', 'food', 'quiz', 'game', '맞추기']
+    },
+    {
+        id: 'association-quiz',
+        title: '연상 퀴즈 (단어 3개)',
+        description: '세 가지 관련 단어를 보고 공통으로 떠오르는 단어를 맞히는 퀴즈',
+        path: '/association-quiz',
+        category: 'trivia',
+        icon: Lightbulb,
+        color: 'bg-indigo-500',
+        keywords: ['연상', '퀴즈', '단어', '추리', 'association', 'quiz']
+    },
+    {
+        id: 'simple-addition',
+        title: '간단 덧셈 퀴즈',
+        description: '1단계부터 3단계까지 난이도별 덧셈 문제를 풀어보세요.',
+        path: '/simple-addition',
+        category: 'trivia',
+        icon: Plus,
+        color: 'bg-blue-500',
+        keywords: ['수학', '덧셈', '더하기', '산수', 'math', 'plus', 'addition']
+    },
+    {
+        id: 'simple-subtraction',
+        title: '간단 뺄셈 퀴즈',
+        description: '1단계부터 3단계까지 난이도별 뺄셈 문제를 풀어보세요.',
+        path: '/simple-subtraction',
+        category: 'trivia',
+        icon: Minus,
+        color: 'bg-red-500',
+        keywords: ['수학', '뺄셈', '빼기', '산수', 'math', 'minus', 'subtraction']
+    },
+    {
+        id: 'simple-multiplication',
+        title: '간단 곱셈 퀴즈',
+        description: '1단계부터 3단계까지 난이도별 곱셈 문제를 풀어보세요.',
+        path: '/simple-multiplication',
+        category: 'trivia',
+        icon: X,
+        color: 'bg-green-500',
+        keywords: ['수학', '곱셈', '곱하기', '구구단', 'math', 'multiplication', 'times']
     }
 ];
