@@ -23,7 +23,7 @@ export const toolCategories = {
 
 export const toolCategoryData = {
     unit: {
-        title: '무료 온라인 단위 변환기 모음',
+        title: '단위 변환기 모음',
         description: '길이, 무게, 환율, 온도, 면적 등 모든 단위를 한곳에서 즉시 변환하세요. 실시간 환율 정보와 정확한 단위 변환 공식을 제공합니다.',
         keywords: '단위변환기, 환율계산기, 길이변환, 무게변환, 온도계산기, 무료단위변환',
         icon: Ruler,
@@ -65,7 +65,7 @@ export const toolCategoryData = {
         color: 'from-rose-500 to-pink-500'
     },
     games: {
-        title: '무료 온라인 미니 게임 모음',
+        title: '미니 게임 모음',
         description: '수박 게임, 2048, 스도쿠, 스네이크 등 별도의 설치 없이 바로 즐길 수 있는 중독성 만점 미니 게임들을 한곳에서 플레이하세요.',
         keywords: '미니게임, 온라인게임, 무료게임, 수박게임, 2048, 스도쿠, 간단한게임',
         icon: Gamepad2,
@@ -91,7 +91,7 @@ export const tools = [
     // Unit Converters
     {
         id: 'length',
-        title: '무료 온라인 길이 변환기 | 미터, 피트, 인치 단위 계산',
+        title: '길이 변환기 | 미터, 피트, 인치 단위 계산',
         description: '다양한 길이 단위를 즉시 변환하세요. 미터(m), 피트(ft), 인치(in), 센티미터(cm) 등 모든 길이 단위를 지원하는 정확한 무료 온라인 변환 도구입니다.',
         path: '/length',
         category: 'unit',
@@ -101,7 +101,7 @@ export const tools = [
     },
     {
         id: 'weight',
-        title: '무료 무게 변환기 | 킬로그램, 파운드, 온스 단위 계산',
+        title: '무게 변환기 | 킬로그램, 파운드, 온스 단위 계산',
         description: '킬로그램(kg), 파운드(lb), 온스(oz), 그람(g) 등 다양한 무게 단위를 실시간으로 변환하세요. 정확하고 간편한 무료 온라인 무게 변환 도구.',
         path: '/weight',
         category: 'unit',
@@ -143,7 +143,7 @@ export const tools = [
     // Health
     {
         id: 'bmi',
-        title: '무료 BMI 계산기 | 비만도 측정 및 체질량 지수 확인',
+        title: 'BMI 계산기 | 비만도 측정 및 체질량 지수 확인',
         description: '나의 비만도는 얼마일까? 키와 몸무게만 입력하여 정확한 BMI(체질량 지수)를 측정하고 건강 상태를 확인하세요. WHO 기준 표준 체중 가이드 제공.',
         path: '/bmi',
         category: 'health',
@@ -255,7 +255,7 @@ export const tools = [
     },
     {
         id: 'suika-game',
-        title: '수박 게임 (Suika Game) | 무료 온라인 머지 퍼즐 게임',
+        title: '수박 게임 (Suika Game) | 머지 퍼즐 게임',
         description: '중독성 강한 수박 게임을 온라인에서 무료로 즐기세요! 과일을 합쳐서 가장 큰 수박을 만드는 머지 퍼즐 게임. 높은 점수에 도전하고 친구들과 공유하세요.',
         path: '/suika-game',
         category: 'games',
@@ -765,7 +765,7 @@ export const tools = [
     },
     {
         id: 'saju',
-        title: '무료 만세력',
+        title: '만세력',
         description: '생년월일로 사주팔자 확인',
         path: '/saju',
         category: 'fun',
@@ -1463,5 +1463,25 @@ export const tools = [
         icon: X,
         color: 'bg-green-500',
         keywords: ['수학', '곱셈', '곱하기', '구구단', 'math', 'multiplication', 'times']
+    },
+    {
+        id: 'if-i-am-god',
+        title: '내가 만약 신이라면? | 수호신 유형 테스트',
+        description: '이름만 넣으면 지름신, 잠의 신, 파괴의 신 등 나를 수호하는 신격 유형을 분석해 드립니다.',
+        path: '/if-i-am-god',
+        category: 'fun',
+        icon: Sparkles,
+        color: 'bg-indigo-600',
+        keywords: ['신테스트', '이름테스트', '수호신', '심리테스트', '재미', '바이럴']
+    },
+    {
+        id: 'life-bgm',
+        title: '인생 BGM 추출기',
+        description: '나의 삶이 영화라면 어떤 음악이 흐를까? 이름과 기분으로 인생 OST를 추천합니다.',
+        path: '/life-bgm',
+        category: 'fun',
+        icon: Music,
+        color: 'bg-stone-800',
+        keywords: ['인생bgm', '인생음악', '플레이리스트', '감성테스트', '이름테스트']
     }
 ];
