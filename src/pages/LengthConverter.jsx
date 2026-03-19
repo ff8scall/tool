@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRightLeft, Ruler, Clock, Trash2 } from 'lucide-react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import useHistory from '../hooks/useHistory';
 
 const units = [
@@ -31,15 +32,12 @@ const LengthConverter = () => {
         const fromRatio = units.find(u => u.value === fromUnit)?.ratio || 1;
         const toRatio = units.find(u => u.value === toUnit)?.ratio || 1;
 
-        // Convert to meters first, then to target unit
         const valueInMeters = parseFloat(amount) * fromRatio;
         const convertedValue = valueInMeters / toRatio;
 
-        // Format output to avoid long decimals, but keep precision for small numbers
         const formattedResult = Number(convertedValue.toPrecision(10)).toLocaleString('ko-KR', { maximumFractionDigits: 10 });
         setResult(formattedResult);
 
-        // Auto-save to history after 2 seconds of inactivity
         const timer = setTimeout(() => {
             if (amount && formattedResult) {
                 const now = new Date();
@@ -60,22 +58,28 @@ const LengthConverter = () => {
     };
 
     const handleHistoryClick = (item) => {
-        // Parse "10 m" -> amount="10", fromUnit="m"
         const [val, unit] = item.from.split(' ');
         setAmount(val);
         setFromUnit(unit);
-        // To unit is in item.to but we might want to keep current toUnit or parse it too
-        // Let's parse toUnit as well
         const [, targetUnit] = item.to.split(' ');
         setToUnit(targetUnit);
     };
 
+    const faqs = [
+        { q: '1인치(inch)는 몇 센티미터(cm)인가요?', a: '1인치는 정확히 2.54cm입니다. 미국에서 TV나 모니터 화면 크기를 인치로 표기하기 때문에 인치↔cm 변환이 자주 필요합니다. 예: 65인치 TV = 약 165.1cm.' },
+        { q: '1피트(ft)는 몇 미터(m)인가요?', a: '1피트는 0.3048m, 즉 약 30.48cm입니다. 키를 피트·인치로 표기하는 나라(미국, 영국 등)와 미터법을 쓰는 나라 간 변환 시 자주 사용됩니다. 예: 6ft = 약 182.88cm.' },
+        { q: '1마일(mile)은 몇 km인가요?', a: '1마일(법정 마일)은 정확히 1.609344km입니다. 미국·영국 도로 표지판의 miles를 km로 변환할 때 사용합니다. 예: 100miles ≈ 160.93km.' },
+        { q: '변환 결과에 소수점이 너무 많이 나와요.', a: '매우 큰 단위와 작은 단위 간 변환 시 소수점이 길어질 수 있습니다. 결과는 유효숫자 10자리까지 표시합니다. 필요에 따라 직접 반올림하여 사용하세요.' },
+        { q: '야드(yd)는 주로 어디에서 쓰이나요?', a: '야드는 미식축구 경기장 거리 단위, 골프 홀 거리 표기, 원단·섬유의 길이 측정 등에 주로 사용됩니다. 1야드 = 3피트 = 0.9144m입니다.' },
+    ];
+
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <SEO
-                title="길이 변환기"
-                description="mm, cm, m, km, in, ft, yd, mile 등 다양한 길이 단위를 쉽고 정확하게 변환하세요."
-                keywords="길이 변환, 단위 변환, 미터 변환, 인치 변환"
+                title="길이 변환기 | 미터, 센티미터, 인치, 피트, 마일 단위 변환"
+                description="mm, cm, m, km, 인치(in), 피트(ft), 야드(yd), 마일(mile) 등 모든 길이 단위를 즉시 변환하세요. 미터법과 야드파운드법을 지원하는 정확한 길이 변환 계산기."
+                keywords="길이변환기, 미터변환, 인치센티미터변환, 피트미터변환, 마일킬로미터변환, cm인치, 피트cm, 야드파운드법, 단위변환"
+                faqs={faqs}
             />
 
             <div className="text-center space-y-4">
@@ -84,7 +88,7 @@ const LengthConverter = () => {
                     길이 변환기
                 </h1>
                 <p className="text-text-secondary">
-                    다양한 길이 단위를 쉽고 정확하게 변환하세요.
+                    mm · cm · m · km · 인치 · 피트 · 야드 · 마일 — 모든 길이 단위를 즉시 변환하세요.
                 </p>
             </div>
 
@@ -147,7 +151,6 @@ const LengthConverter = () => {
                 </div>
             </div>
 
-            {/* History Section */}
             {history.length > 0 && (
                 <div className="card p-6 space-y-4">
                     <div className="flex items-center justify-between">
@@ -183,6 +186,27 @@ const LengthConverter = () => {
                     </div>
                 </div>
             )}
+
+            <ToolGuide
+                title="길이 변환기 사용 가이드"
+                intro="길이 변환기는 전 세계에서 사용되는 미터법(mm, cm, m, km)과 야드파운드법(인치, 피트, 야드, 마일)을 정확하게 상호 변환해주는 도구입니다. 해외 직구 시 신발·의류 사이즈 확인, 인테리어 계획, 해외여행 거리 감각 파악, 학교 수업 등 다양한 상황에서 활용할 수 있습니다."
+                steps={[
+                    '"변환할 값" 입력란에 변환하고 싶은 숫자를 입력합니다.',
+                    '"에서" 드롭다운에서 현재 단위를 선택합니다. (예: 인치)',
+                    '"으로" 드롭다운에서 변환 대상 단위를 선택합니다. (예: 센티미터)',
+                    '결과가 자동으로 즉시 계산되어 하단에 표시됩니다.',
+                    '⇄ 버튼을 클릭하면 변환 방향을 한 번에 바꿀 수 있습니다.',
+                    '변환 기록은 자동 저장되며, 클릭 한 번으로 이전 값을 불러옵니다.',
+                ]}
+                tips={[
+                    '1인치 = 2.54cm, 1피트 = 30.48cm, 1마일 ≈ 1.609km 등 핵심 환산값을 기억해두면 빠르게 어림짐작할 수 있습니다.',
+                    '해외 쇼핑몰에서 신발 사이즈가 인치로 표기될 때 즉시 cm로 변환해 확인하세요.',
+                    '미국 드라마 속 인물의 키가 "6 feet 2 inches"라면, 이 도구로 변환하면 약 187.96cm입니다.',
+                    '건축·인테리어 도면은 주로 mm 단위를 사용합니다. m 입력 후 mm로 변환해 즉시 비교해보세요.',
+                    '골프장 거리 표기(야드)를 미터로 변환하면 더 직관적으로 거리를 파악할 수 있습니다.',
+                ]}
+                faqs={faqs}
+            />
         </div>
     );
 };
