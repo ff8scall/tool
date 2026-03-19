@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://ff8scall.github.io/</loc>
+    <loc>https://tool.lego-sia.com/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,25 +12,25 @@
   
   <!-- Unit Converters -->
   <url>
-    <loc>https://ff8scall.github.io/length/</loc>
+    <loc>https://tool.lego-sia.com/length/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/weight/</loc>
+    <loc>https://tool.lego-sia.com/weight/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/currency/</loc>
+    <loc>https://tool.lego-sia.com/currency/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/temperature-converter/</loc>
+    <loc>https://tool.lego-sia.com/temperature-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -38,13 +38,13 @@
   
   <!-- Health Tools -->
   <url>
-    <loc>https://ff8scall.github.io/bmi/</loc>
+    <loc>https://tool.lego-sia.com/bmi/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/bmr/</loc>
+    <loc>https://tool.lego-sia.com/bmr/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -52,55 +52,55 @@
   
   <!-- Games -->
   <url>
-    <loc>https://ff8scall.github.io/one-to-fifty/</loc>
+    <loc>https://tool.lego-sia.com/one-to-fifty/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/cps-test/</loc>
+    <loc>https://tool.lego-sia.com/cps-test/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/aim-trainer/</loc>
+    <loc>https://tool.lego-sia.com/aim-trainer/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/number-memory/</loc>
+    <loc>https://tool.lego-sia.com/number-memory/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/number-baseball/</loc>
+    <loc>https://tool.lego-sia.com/number-baseball/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/minesweeper/</loc>
+    <loc>https://tool.lego-sia.com/minesweeper/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/roulette/</loc>
+    <loc>https://tool.lego-sia.com/roulette/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/ladder-game/</loc>
+    <loc>https://tool.lego-sia.com/ladder-game/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/typing-test/</loc>
+    <loc>https://tool.lego-sia.com/typing-test/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -108,37 +108,37 @@
   
   <!-- Finance/Life Calculators -->
   <url>
-    <loc>https://ff8scall.github.io/loan/</loc>
+    <loc>https://tool.lego-sia.com/loan/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/salary-calc/</loc>
+    <loc>https://tool.lego-sia.com/salary-calc/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/compound-interest/</loc>
+    <loc>https://tool.lego-sia.com/compound-interest/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/work-hours/</loc>
+    <loc>https://tool.lego-sia.com/work-hours/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/age-calc/</loc>
+    <loc>https://tool.lego-sia.com/age-calc/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/date/</loc>
+    <loc>https://tool.lego-sia.com/date/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -146,31 +146,31 @@
   
   <!-- Text Tools -->
   <url>
-    <loc>https://ff8scall.github.io/word-count/</loc>
+    <loc>https://tool.lego-sia.com/word-count/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/unicode/</loc>
+    <loc>https://tool.lego-sia.com/unicode/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/string-converter/</loc>
+    <loc>https://tool.lego-sia.com/string-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/base64/</loc>
+    <loc>https://tool.lego-sia.com/base64/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/html-encoder/</loc>
+    <loc>https://tool.lego-sia.com/html-encoder/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -178,97 +178,97 @@
   
   <!-- Developer Tools -->
   <url>
-    <loc>https://ff8scall.github.io/base-converter/</loc>
+    <loc>https://tool.lego-sia.com/base-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/json-formatter/</loc>
+    <loc>https://tool.lego-sia.com/json-formatter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/markdown-editor/</loc>
+    <loc>https://tool.lego-sia.com/markdown-editor/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/html-view/</loc>
+    <loc>https://tool.lego-sia.com/html-view/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/diff/</loc>
+    <loc>https://tool.lego-sia.com/diff/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/web-editor/</loc>
+    <loc>https://tool.lego-sia.com/web-editor/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/hash-gen/</loc>
+    <loc>https://tool.lego-sia.com/hash-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/uuid-gen/</loc>
+    <loc>https://tool.lego-sia.com/uuid-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/ascii-art/</loc>
+    <loc>https://tool.lego-sia.com/ascii-art/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/ascii-table/</loc>
+    <loc>https://tool.lego-sia.com/ascii-table/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/special-char/</loc>
+    <loc>https://tool.lego-sia.com/special-char/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/cron-generator/</loc>
+    <loc>https://tool.lego-sia.com/cron-generator/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/csv-json/</loc>
+    <loc>https://tool.lego-sia.com/csv-json/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/url-encoder/</loc>
+    <loc>https://tool.lego-sia.com/url-encoder/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/jwt-decoder/</loc>
+    <loc>https://tool.lego-sia.com/jwt-decoder/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/regex-tester/</loc>
+    <loc>https://tool.lego-sia.com/regex-tester/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -276,73 +276,73 @@
   
   <!-- Utility Tools -->
   <url>
-    <loc>https://ff8scall.github.io/qr-gen/</loc>
+    <loc>https://tool.lego-sia.com/qr-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/barcode-gen/</loc>
+    <loc>https://tool.lego-sia.com/barcode-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/password-gen/</loc>
+    <loc>https://tool.lego-sia.com/password-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/color-picker/</loc>
+    <loc>https://tool.lego-sia.com/color-picker/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/image-base64/</loc>
+    <loc>https://tool.lego-sia.com/image-base64/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/ip-address/</loc>
+    <loc>https://tool.lego-sia.com/ip-address/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/timer/</loc>
+    <loc>https://tool.lego-sia.com/timer/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/pomodoro-timer/</loc>
+    <loc>https://tool.lego-sia.com/pomodoro-timer/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/checklist/</loc>
+    <loc>https://tool.lego-sia.com/checklist/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/flashlight/</loc>
+    <loc>https://tool.lego-sia.com/flashlight/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/image-resize/</loc>
+    <loc>https://tool.lego-sia.com/image-resize/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/youtube-thumbnail/</loc>
+    <loc>https://tool.lego-sia.com/youtube-thumbnail/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -350,85 +350,85 @@
   
   <!-- Fun/Fortune Tools -->
   <url>
-    <loc>https://ff8scall.github.io/blood-type/</loc>
+    <loc>https://tool.lego-sia.com/blood-type/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/mbti/</loc>
+    <loc>https://tool.lego-sia.com/mbti/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/saju/</loc>
+    <loc>https://tool.lego-sia.com/saju/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/zodiac-fortune/</loc>
+    <loc>https://tool.lego-sia.com/zodiac-fortune/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/horoscope/</loc>
+    <loc>https://tool.lego-sia.com/horoscope/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/dream-interpretation/</loc>
+    <loc>https://tool.lego-sia.com/dream-interpretation/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/name-analysis/</loc>
+    <loc>https://tool.lego-sia.com/name-analysis/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/biorhythm/</loc>
+    <loc>https://tool.lego-sia.com/biorhythm/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/birth-gen/</loc>
+    <loc>https://tool.lego-sia.com/birth-gen/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/tarot/</loc>
+    <loc>https://tool.lego-sia.com/tarot/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/lotto/</loc>
+    <loc>https://tool.lego-sia.com/lotto/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/discount-calculator/</loc>
+    <loc>https://tool.lego-sia.com/discount-calculator/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/color-extractor/</loc>
+    <loc>https://tool.lego-sia.com/color-extractor/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/qr-generator/</loc>
+    <loc>https://tool.lego-sia.com/qr-generator/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -436,19 +436,19 @@
   
   <!-- New Unit Converters -->
   <url>
-    <loc>https://ff8scall.github.io/area-converter/</loc>
+    <loc>https://tool.lego-sia.com/area-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/volume-converter/</loc>
+    <loc>https://tool.lego-sia.com/volume-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/speed-converter/</loc>
+    <loc>https://tool.lego-sia.com/speed-converter/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -456,199 +456,199 @@
   
   <!-- New Utility Tools -->
   <url>
-    <loc>https://ff8scall.github.io/world-clock/</loc>
+    <loc>https://tool.lego-sia.com/world-clock/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/percent-calculator/</loc>
+    <loc>https://tool.lego-sia.com/percent-calculator/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/fraction-calculator/</loc>
+    <loc>https://tool.lego-sia.com/fraction-calculator/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/encryption-tool/</loc>
+    <loc>https://tool.lego-sia.com/encryption-tool/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/dice-roller/</loc>
+    <loc>https://tool.lego-sia.com/dice-roller/</loc>
     <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/lunch-recommender/</loc>
+    <loc>https://tool.lego-sia.com/lunch-recommender/</loc>
     <lastmod>2025-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 <url>
-  <loc>https://ff8scall.github.io/flappy-bird/</loc>
+  <loc>https://tool.lego-sia.com/flappy-bird/</loc>
   <lastmod>2026-01-14</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/suika-game/</loc>
+  <loc>https://tool.lego-sia.com/suika-game/</loc>
   <lastmod>2026-01-14</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/missile-dodge/</loc>
+  <loc>https://tool.lego-sia.com/missile-dodge/</loc>
   <lastmod>2026-01-14</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/snake-game/</loc>
+  <loc>https://tool.lego-sia.com/snake-game/</loc>
   <lastmod>2026-01-16</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/sudoku/</loc>
+  <loc>https://tool.lego-sia.com/sudoku/</loc>
   <lastmod>2026-01-16</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/tower-stacker/</loc>
+  <loc>https://tool.lego-sia.com/tower-stacker/</loc>
   <lastmod>2026-01-16</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/hearing-test/</loc>
+  <loc>https://tool.lego-sia.com/hearing-test/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/spelling-quiz/</loc>
+  <loc>https://tool.lego-sia.com/spelling-quiz/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/time-sense/</loc>
+  <loc>https://tool.lego-sia.com/time-sense/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/pitch-test/</loc>
+  <loc>https://tool.lego-sia.com/pitch-test/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/capital-quiz/</loc>
+  <loc>https://tool.lego-sia.com/capital-quiz/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/typing-defense/</loc>
+  <loc>https://tool.lego-sia.com/typing-defense/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/vocabulary-test/</loc>
+  <loc>https://tool.lego-sia.com/vocabulary-test/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/dynamic-acuity/</loc>
+  <loc>https://tool.lego-sia.com/dynamic-acuity/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/hangman/</loc>
+  <loc>https://tool.lego-sia.com/hangman/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://ff8scall.github.io/morse-code/</loc>
+  <loc>https://tool.lego-sia.com/morse-code/</loc>
   <lastmod>2026-01-29</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
   <url>
-    <loc>https://ff8scall.github.io/smile-dating-test/</loc>
+    <loc>https://tool.lego-sia.com/smile-dating-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/dating-test/</loc>
+    <loc>https://tool.lego-sia.com/dating-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/stress-test/</loc>
+    <loc>https://tool.lego-sia.com/stress-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/brain-type/</loc>
+    <loc>https://tool.lego-sia.com/brain-type/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/eq-test/</loc>
+    <loc>https://tool.lego-sia.com/eq-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/smartphone-addiction/</loc>
+    <loc>https://tool.lego-sia.com/smartphone-addiction/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/kkondae-test/</loc>
+    <loc>https://tool.lego-sia.com/kkondae-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/hogu-test/</loc>
+    <loc>https://tool.lego-sia.com/hogu-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/debate-test/</loc>
+    <loc>https://tool.lego-sia.com/debate-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/idol-test/</loc>
+    <loc>https://tool.lego-sia.com/idol-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ff8scall.github.io/resilience-test/</loc>
+    <loc>https://tool.lego-sia.com/resilience-test/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

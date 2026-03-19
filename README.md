@@ -2,7 +2,7 @@
 
 > 88개 이상의 무료 온라인 도구 모음 - 계산기, 변환기, 생성기 등
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://ff8scall.github.io/utility-hub/)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://tool.lego-sia.com/)
 [![GitHub](https://img.shields.io/badge/github-repository-blue?style=for-the-badge&logo=github)](https://github.com/ff8scall/utility-hub)
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-7.2.2-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
@@ -162,7 +162,7 @@ npm run lint
 
 This project is automatically deployed to GitHub Pages using GitHub Actions.
 
-**Live URL**: https://ff8scall.github.io/utility-hub/
+**Live URL**: https://tool.lego-sia.com/
 
 Every push to the `main` branch triggers an automatic build and deployment.
 
@@ -197,7 +197,7 @@ This project is open source and available under the [MIT License](LICENSE).
 **ff8scall**
 
 - GitHub: [@ff8scall](https://github.com/ff8scall)
-- Website: [Utility Hub](https://ff8scall.github.io/utility-hub/)
+- Website: [Utility Hub](https://tool.lego-sia.com/)
 
 ## 🙏 Acknowledgments
 
