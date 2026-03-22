@@ -5,22 +5,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import tools data setup
-// Since tools.js is an ES module, we read it as text to avoid import issues in this script context
-// or we can try to import it if we are sure about the environment. 
-// For robustness against environmental differences (CJS vs ESM), we'll read and regex like the verify script,
-// BUT for a production build script, importing is cleaner if it works. 
-// Given the project is "type": "module", we should be able to import it.
-// However, the verify script used 'createRequire'. Let's stick to the robust regex method 
-// matching the verify script which we know works, to avoid transitive dependency issues (Lucide icons etc)
-// when running this script in Node environment without a bundler.
-
 const toolsPath = path.resolve(__dirname, '../src/data/tools.js');
+const publicPath = path.resolve(__dirname, '../public');
 const distPath = path.resolve(__dirname, '../dist');
-const sitemapPath = path.join(distPath, 'sitemap.xml');
 
-// Base URL - ensuring it matches the user's domain
-// Base URL - ensuring it matches the user's domain
+// Base URL - ensuring it matches the current domain
 const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
 
 function generateSitemap() {
@@ -32,85 +21,127 @@ function generateSitemap() {
     }
 
     const content = fs.readFileSync(toolsPath, 'utf-8');
-    const matches = content.matchAll(/path:\s*'([^']+)'/g);
+    
+    // Better tool extraction: instead of regexing across EVERYTHING, we'll try to split by blocks
+    const translatedTools = new Set();
+    
+    // Find where tools array starts
+    const toolsStartIndex = content.indexOf('export const tools = [');
+    if (toolsStartIndex === -1) {
+        console.error('Could not find tools array in tools.js');
+        process.exit(1);
+    }
+
+    const toolsContent = content.substring(toolsStartIndex);
+    
+    // Divide into individual tool objects using simple delimiter (assuming flat structure as in tools.js)
+    const toolBlocks = toolsContent.split('},').map(block => block.trim());
+
+    for (const block of toolBlocks) {
+        const pathMatch = block.match(/path:\s*'([^']+)'/);
+        const translatedMatch = block.match(/translated:\s*true/);
+        
+        if (pathMatch && translatedMatch) {
+            translatedTools.add(pathMatch[1]);
+        }
+    }
+
+    console.log(`Detected ${translatedTools.size} translated tools.`);
 
     const urls = [];
 
+    // Base URL objects
+    const pushUrls = (pathRoute, priority, changefreq, forceEn = false) => {
+        const cleanRoute = pathRoute.startsWith('/') ? pathRoute : `/${pathRoute}`;
+        const koUrl = `${BASE_URL}${cleanRoute}`.replace(/\/$/, '') || `${BASE_URL}/`;
+        const enUrl = `${BASE_URL}/en${cleanRoute}`.replace(/\/$/, '') || `${BASE_URL}/en`;
+        
+        // Always add Korean (default)
+        urls.push({
+            loc: koUrl,
+            koUrl,
+            enUrl,
+            changefreq,
+            priority,
+            lang: 'ko'
+        });
+        
+        // Add English only if tool is translated or it's a core page
+        const isTranslated = translatedTools.has(pathRoute) || pathRoute === '' || pathRoute.startsWith('category/');
+        if (isTranslated || forceEn) {
+            urls.push({
+                loc: enUrl,
+                koUrl,
+                enUrl,
+                changefreq,
+                priority,
+                lang: 'en'
+            });
+        }
+    };
+
     // Add home page
-    urls.push({
-        loc: `${BASE_URL}/`,
-        changefreq: 'weekly',
-        priority: '1.0'
-    });
+    pushUrls('', '1.0', 'weekly', true);
 
     // Add category pages
-    const categoryMatches = content.matchAll(/(\w+):\s*'[^']+'/g);
-    const categoryIds = new Set();
-
-    // The previous regex might catch many things, let's be more specific for toolCategories object
     const categoryBlock = content.match(/export const toolCategories = {([\s\S]+?)}/);
     if (categoryBlock) {
         const ids = categoryBlock[1].matchAll(/(\w+):/g);
         for (const id of ids) {
-            categoryIds.add(id[1]);
+            pushUrls(`category/${id[1]}`, '0.9', 'weekly', true);
         }
     }
 
-    for (const id of categoryIds) {
-        urls.push({
-            loc: `${BASE_URL}/category/${id}/`,
-            changefreq: 'weekly',
-            priority: '0.9'
-        });
-    }
-
     // Add tool pages
-    for (const match of matches) {
+    const toolMatches = content.matchAll(/path:\s*'([^']+)'/g);
+    const seenPaths = new Set();
+    for (const match of toolMatches) {
         const routePath = match[1];
-        if (routePath === '/') continue; // Already added
-
-        // Ensure clean URL joining
-        const url = `${BASE_URL}${routePath}/`; // Add trailing slash for folder structure
-        urls.push({
-            loc: url,
-            changefreq: 'monthly',
-            priority: '0.8'
-        });
+        if (routePath === '/' || seenPaths.has(routePath)) continue;
+        seenPaths.add(routePath);
+        pushUrls(routePath, '0.8', 'monthly');
     }
 
     const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.map(url => `  <url>
     <loc>${url.loc}</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="${url.koUrl}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${url.enUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${url.koUrl}" />
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join('\n')}
 </urlset>`;
 
-    if (!fs.existsSync(distPath)) {
-        fs.mkdirSync(distPath, { recursive: true });
+    // Write to both public and dist if they exist
+    if (fs.existsSync(publicPath)) {
+        fs.writeFileSync(path.join(publicPath, 'sitemap.xml'), sitemapContent);
+        console.log(`Sitemap updated in ${publicPath}/sitemap.xml`);
     }
 
-    fs.writeFileSync(sitemapPath, sitemapContent);
-    console.log(`Sitemap generated at ${sitemapPath} with ${urls.length} URLs.`);
+    if (fs.existsSync(distPath)) {
+        fs.writeFileSync(path.join(distPath, 'sitemap.xml'), sitemapContent);
+        console.log(`Sitemap updated in ${distPath}/sitemap.xml`);
+    }
+
+    console.log(`Sitemap generation complete with ${urls.length} URLs.`);
 
     generateRSS(urls);
 }
 
 function generateRSS(urls) {
     console.log('Generating RSS feed...');
-    const rssPath = path.join(distPath, 'rss.xml');
+    const rssPathPublic = path.join(publicPath, 'rss.xml');
+    const rssPathDist = path.join(distPath, 'rss.xml');
 
     // Create RSS items
     const items = urls.map(url => {
-        // Simple title extraction from URL for RSS example
         let title = 'Home';
         if (url.loc !== `${BASE_URL}/`) {
             const pathParts = url.loc.replace(BASE_URL, '').split('/');
-            // Get the first meaningful part
             const slug = pathParts.find(p => p && p.length > 0) || 'Tool';
-            // Convert kebab-case to Title Case
             title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
 
@@ -125,9 +156,9 @@ function generateRSS(urls) {
     const rssContent = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tool Hive - 무료 온라인 도구 모음</title>
+    <title>Tool Hive - Free Online Utility Tools</title>
     <link>${BASE_URL}/</link>
-    <description>88개 이상의 무료 온라인 도구 모음</description>
+    <description>Over 134+ free online tools for your productivity</description>
     <language>ko-kr</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
@@ -135,8 +166,13 @@ ${items}
   </channel>
 </rss>`;
 
-    fs.writeFileSync(rssPath, rssContent);
-    console.log(`RSS feed generated at ${rssPath}`);
+    if (fs.existsSync(publicPath)) {
+        fs.writeFileSync(rssPathPublic, rssContent);
+    }
+    if (fs.existsSync(distPath)) {
+        fs.writeFileSync(rssPathDist, rssContent);
+    }
+    console.log(`RSS feed generation complete.`);
 }
 
 generateSitemap();
