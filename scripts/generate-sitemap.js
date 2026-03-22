@@ -139,10 +139,20 @@ function generateRSS(urls) {
     // Create RSS items
     const items = urls.map(url => {
         let title = 'Home';
-        if (url.loc !== `${BASE_URL}/`) {
-            const pathParts = url.loc.replace(BASE_URL, '').split('/');
-            const slug = pathParts.find(p => p && p.length > 0) || 'Tool';
+        const cleanLoc = url.loc.replace(BASE_URL, '').replace(/^\/en/, '');
+        
+        if (cleanLoc && cleanLoc !== '/') {
+            const pathParts = cleanLoc.split('/').filter(p => p && p.length > 0);
+            const slug = pathParts[pathParts.length - 1] || 'Tool';
+            // Convert kebab-case to Title Case
             title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            
+            // Add (EN) suffix for English URLs
+            if (url.loc.includes('/en/')) {
+                title += ' (EN)';
+            }
+        } else if (url.loc.endsWith('/en')) {
+            title = 'Home (EN)';
         }
 
         return `    <item>
