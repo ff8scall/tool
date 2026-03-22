@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Globe, Flag, MapPin, Trophy } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const CapitalQuiz = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
@@ -140,13 +142,37 @@ const CapitalQuiz = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "수도 퀴즈에는 어떤 나라들이 나오나요?",
+            "a": "전 세계 다양한 대륙의 국가들과 그 나라의 국기, 그리고 수도 이름이 문제로 출제됩니다."
+        },
+        {
+            "q": "모르는 나라가 너무 많아요.",
+            "a": "반복해서 풀다 보면 자연스럽게 세계 지리와 상식을 습득할 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "국기 이미지와 나라 이름을 확인합니다.",
+        "제시된 보기 중 올바른 수도 이름을 선택합니다.",
+        "정답 해설을 통해 상식을 넓히고 다음 문제로 넘어갑니다."
+    ];
+    const toolTips = [
+        "오답 노트 기능은 없지만, 틀린 문제를 기억해두면 학습에 도움이 됩니다.",
+        "가족, 친구들과 상식 대결을 펼쳐보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>세계 수도 퀴즈 | 나라는 알지만 수도는? - Utility Hub</title>
-                <meta name="description" content="미국의 수도는 뉴욕이 아닙니다! 헷갈리는 세계 각국의 수도를 맞춰보세요. 당신의 상식 레벨을 테스트하는 수도 맞추기 퀴즈." />
-                <meta name="keywords" content="수도퀴즈, 국기퀴즈, 세계지리, 상식퀴즈, 나라수도, capital city quiz" />
-            </Helmet>
+            <SEO
+                title="세계 수도 퀴즈 | 나라는 알지만 수도는?"
+                description="미국의 수도는 뉴욕이 아닙니다! 헷갈리는 세계 각국의 수도를 맞춰보세요. 당신의 상식 레벨을 테스트하는 수도 맞추기 퀴즈."
+                keywords="수도퀴즈, 국기퀴즈, 세계지리, 상식퀴즈, 나라수도, capital city quiz"
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -286,6 +312,16 @@ const CapitalQuiz = () => {
                     animation: bounce-short 2s infinite;
                 }
             `}</style>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="세계 수도 퀴즈 안내"
+                    intro="미국의 수도는 뉴욕이 아닙니다! 헷갈리는 세계 각국의 수도를 맞춰보세요. 당신의 상식 레벨을 테스트하는 수도 맞추기 퀴즈."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

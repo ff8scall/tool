@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Lightbulb, Trophy, RefreshCw, Check, X, ArrowRight, Share2, Tag } from 'lucide-react';
 import { associationQuizData } from '../data/associationQuizData';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const AssociationQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -97,12 +99,37 @@ const AssociationQuiz = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "연상 퀴즈란 무엇인가요?",
+            "a": "세 가지 연관된 단어를 힌트로 보고, 공통으로 떠오르는 정답을 맞추는 게임입니다."
+        },
+        {
+            "q": "힌트를 더 볼 수 있나요?",
+            "a": "처음에는 2개의 단어가 제공되며, 어려울 경우 마지막 3번째 단어 힌트를 볼 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "주어진 단어 힌트들을 유심히 살펴봅니다.",
+        "공통으로 연상되는 단어를 유추하여 입력란에 적습니다.",
+        "정답 확인 후 다음 문제로 넘어갑니다."
+    ];
+    const toolTips = [
+        "직관적으로 떠오르는 단어가 정답일 확률이 높습니다.",
+        "친구들과 함께 풀면 더 재미있습니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
-            <Helmet>
-                <title>연상 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="제시된 3개의 단어를 보고 떠오르는 하나의 정답을 맞추는 연상 퀴즈 게임입니다." />
-            </Helmet>
+            <SEO
+                title="연상 퀴즈 | 간단 상식 테스트"
+                description="제시된 3개의 단어를 보고 떠오르는 하나의 정답을 맞추는 연상 퀴즈 게임입니다."
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -270,6 +297,16 @@ const AssociationQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="연상 퀴즈 안내"
+                    intro="제시된 3개의 단어를 보고 떠오르는 하나의 정답을 맞추는 연상 퀴즈 게임입니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

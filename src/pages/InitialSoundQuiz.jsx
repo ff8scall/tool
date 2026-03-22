@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { BookOpen, Trophy, RefreshCw, Check, X, ArrowRight, Share2, Home } from 'lucide-react';
 import { initialSoundQuizData } from '../data/initialSoundQuizData';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const InitialSoundQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -95,12 +97,37 @@ const InitialSoundQuiz = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "초성 퀴즈는 어떻게 푸나요?",
+            "a": "제시된 한글 자음(초성) 힌트와 설명 글을 읽고 올바른 단어를 유추하여 타이핑하면 됩니다."
+        },
+        {
+            "q": "맞춤법이 띄어쓰기까지 정확해야 하나요?",
+            "a": "일반적으로 띄어쓰기 없이 붙여서 입력하는 것이 표준이며, 가장 보편적인 단어 위주로 정답이 설정되어 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "화면에 뜬 큼직한 'ㄱ ㄴ ㄷ' 등의 초성 힌트를 확인합니다.",
+        "아래에 제시된 부연 설명을 통해 단어의 범위를 좁힙니다.",
+        "정답을 입력창에 정확히 적어 제출합니다."
+    ];
+    const toolTips = [
+        "명사 위주의 표준어가 주로 출제되므로 백과사전적인 지식을 떠올리면 유리합니다.",
+        "친구와 초성 퀴즈 내기를 하면서 워밍업 게임으로 즐겨보세요."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
-            <Helmet>
-                <title>초성 단어 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="제시된 초성과 설명을 보고 단어를 맞추는 재미있는 초성 퀴즈 게임입니다." />
-            </Helmet>
+            <SEO
+                title="초성 단어 퀴즈 | 간단 상식 테스트"
+                description="제시된 초성과 설명을 보고 단어를 맞추는 재미있는 초성 퀴즈 게임입니다."
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -278,6 +305,16 @@ const InitialSoundQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="초성 단어 퀴즈 안내"
+                    intro="제시된 초성과 설명을 보고 단어를 맞추는 재미있는 초성 퀴즈 게임입니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { X as XIcon, Calculator, Trophy, RefreshCw, ChevronLeft, Delete, Check } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const MultiplicationQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -28,7 +30,28 @@ const MultiplicationQuiz = () => {
                     return prev - 1;
                 });
             }, 1000);
-            return () => clearInterval(timer);
+            
+    const toolFaqs = [
+        {
+            "q": "구구단 퀴즈인가요?",
+            "a": "간단한 두 자리수 이상의 곱셈까지 포함되어 있어 구구단 이상의 암산 능력을 요구하는 퀴즈입니다."
+        },
+        {
+            "q": "틀리면 어떻게 되나요?",
+            "a": "오답 페널티나 점수 감점이 있으며, 정답을 입력할 때까지 다시 도전할 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "자신의 암산 실력에 맞는 난이도(1단계~3단계)를 선택합니다.",
+        "화면에 나타나는 곱셈 문제의 답을 머릿속으로 계산합니다.",
+        "정답을 입력하고 다음 문제로 넘어가며 콤보 점수를 쌓습니다."
+    ];
+    const toolTips = [
+        "계산기를 쓰지 않고 오로지 암산으로 도전해야 제대로 된 두뇌 트레이닝 효과를 얻을 수 있습니다.",
+        "매일 시간을 정해놓고 10문제씩 푸는 습관을 들이면 수학적 감각이 눈에 띄게 좋아집니다."
+    ];
+
+    return () => clearInterval(timer);
         }
     }, [gameState, timeLimit]);
 
@@ -123,10 +146,14 @@ const MultiplicationQuiz = () => {
 
     return (
         <div className="max-w-md mx-auto px-4 py-8">
-            <Helmet>
-                <title>간단 곱셈 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="1단계부터 3단계까지 난이도 별로 즐기는 간단 곱셈 퀴즈입니다." />
-            </Helmet>
+            <SEO
+                title="간단 곱셈 퀴즈 | 간단 상식 테스트"
+                description="1단계부터 3단계까지 난이도 별로 즐기는 간단 곱셈 퀴즈입니다."
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center p-3 bg-green-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -328,6 +355,16 @@ const MultiplicationQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="간단 곱셈 퀴즈 안내"
+                    intro="1단계부터 3단계까지 난이도 별로 즐기는 간단 곱셈 퀴즈입니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

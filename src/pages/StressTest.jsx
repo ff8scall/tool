@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Battery, AlertTriangle, Coffee } from 'lucide-react';
 
 const StressTest = () => {
@@ -75,13 +75,37 @@ const StressTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "스트레스 및 번아웃 테스트의 지표는 무엇인가요?",
+            "a": "최소 수면 보장 시간, 업무나 학업의 피로도, 원인 모를 무기력증 등 정신의학과에서 널리 쓰이는 기본 신체/심리 문진표 지표를 참고했습니다."
+        },
+        {
+            "q": "결과가 심각하게 나오는데 병원에 가야 하나요?",
+            "a": "본 테스트는 의료 목적이 아닙니다. 하지만 자가 테스트 결과가 지속적으로 심각 단계로 나온다면, 망설이지 말고 혼자 고민하기보다는 전문 심리 상담이나 병원 방문을 적극적으로 권장합니다."
+        }
+    ];
+    const toolSteps = [
+        "최근 2주에서 한 달 동안 본인이 느낀 피로감, 우울함의 단어들을 나열한 체크리스트를 확인합니다.",
+        "본인의 상태와 가장 비슷한 문장에 솔직하게 해당하는 빈도(자주, 가끔 등)를 선택합니다.",
+        "도출된 스트레스 지수 점수를 확인하고 상황별 마음 챙김 조언을 꼼꼼히 스크롤 해 읽어봅니다."
+    ];
+    const toolTips = [
+        "테스트하는 그 순간 기분에 좌우되지 마시고, '최근 일주일간 나의 기상 직후 기분'을 평균적으로 머릿속에 떠올린 후 문항에 대답해보세요.",
+        "명상, 반신욕, 디지털 기기 멀리하기 등 추천된 솔루션을 오늘 저녁 당장 하나라도 실천해 보는 것이 중요합니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>번아웃/스트레스 테스트 | 자가진단 체크리스트 - Utility Hub</title>
-                <meta name="description" content="혹시 나도 번아웃? 간단한 체크리스트로 현재 스트레스 지수를 확인하고 관리법을 알아보세요." />
-                <meta name="keywords" content="스트레스, 번아웃, 자가진단, 심리테스트, 우울증, 만성피로" />
-            </Helmet>
+            <SEO
+                title="번아웃/스트레스 테스트 | 자가진단 체크리스트"
+                description="혹시 나도 번아웃? 간단한 체크리스트로 현재 스트레스 지수를 확인하고 관리법을 알아보세요."
+                keywords="스트레스, 번아웃, 자가진단, 심리테스트, 우울증, 만성피로"
+                category="건강"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -202,6 +226,16 @@ const StressTest = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="번아웃/스트레스 테스트 안내"
+                    intro="혹시 나도 번아웃? 간단한 체크리스트로 현재 스트레스 지수를 확인하고 관리법을 알아보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };
@@ -211,5 +245,7 @@ const StressTest = () => {
 // But I need to check if CheckCircle2 is available in 'lucide-react'. It usually is.
 // Actually CheckCircle2 is available.
 import { CheckCircle2 as CheckCircle2Icon } from 'lucide-react'; // Just to be safe if named export collision
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 export default StressTest;

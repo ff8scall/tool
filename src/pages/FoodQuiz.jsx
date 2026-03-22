@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Utensils, Trophy, RefreshCw, Check, X, ArrowRight, Share2, HelpCircle } from 'lucide-react';
 import { foodQuizData } from '../data/foodQuizData';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const FoodQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -103,12 +105,37 @@ const FoodQuiz = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "음식 이름 퀴즈는 어떻게 하나요?",
+            "a": "재료, 맛, 원산지 등의 힌트를 보고 해당 음식의 정확한 이름을 맞추는 퀴즈입니다."
+        },
+        {
+            "q": "힌트는 몇 개까지 나오나요?",
+            "a": "단어의 난이도에 따라 다르지만 보통 3가지의 상세한 힌트가 순차적으로 제공됩니다."
+        }
+    ];
+    const toolSteps = [
+        "첫 번째 힌트를 보고 음식을 예상해 봅니다.",
+        "잘 모르겠다면 다음 힌트를 확인하며 정답을 좁혀갑니다.",
+        "생각한 음식 이름을 입력하여 정답을 맞춥니다."
+    ];
+    const toolTips = [
+        "가장 좋아하는 음식 카테고리를 상상하며 풀면 더욱 쉽게 풀 수 있습니다.",
+        "야식이 생각나는 밤에 풀면 식욕을 자극할 수 있으니 주의하세요!"
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
-            <Helmet>
-                <title>음식 이름 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!" />
-            </Helmet>
+            <SEO
+                title="음식 이름 퀴즈 | 간단 상식 테스트"
+                description="3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!"
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -324,6 +351,16 @@ const FoodQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="음식 이름 퀴즈 안내"
+                    intro="3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!"
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

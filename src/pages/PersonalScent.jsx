@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Wind, Leaf, Sun, Droplet, Star } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const PersonalScent = () => {
     const [step, setStep] = useState(0);
@@ -176,13 +178,37 @@ const PersonalScent = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "퍼스널 향기 테스트의 원리는 무엇인가요?",
+            "a": "개인의 평소 선호하는 계절, 옷차림, 휴식 방식 등의 라이프 스타일을 분석하여, 이 분위기와 가장 부합하는 향기 노트(시트러스, 우디, 머스크 등)를 추천합니다."
+        },
+        {
+            "q": "추천해준 향수를 실제로 살 수 있나요?",
+            "a": "결과에 나오는 향수 계열이나 어울리는 시판 향수들의 리스트를 참고하여, 올리브영이나 백화점에 시향하러 가시면 향수 선택에 아주 큰 도움이 됩니다."
+        }
+    ];
+    const toolSteps = [
+        "휴일에 가고 싶은 장소, 좋아하는 원단 재질, 비 오는 날의 감정 등의 문항을 체크합니다.",
+        "나의 취향과 성격이 가장 자연스럽게 녹아드는 응답을 골라 제출합니다.",
+        "분석된 나의 '퍼스널 향기'와 어울리는 구체적인 향수 노트를 확인합니다."
+    ];
+    const toolTips = [
+        "본인이 좋아하는 향보다 주변 사람들이 '너한테는 이런 향이 날 것 같아'라고 말했던 분위기를 고르면 더욱 퍼스널한 결과가 나옵니다.",
+        "결과창에 나온 어울리는 '추천 향료(Notes)'들을 캡처해 두었다가 향수 쇼핑 때 점원에게 보여주세요!"
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>나만의 향기 테스트 | 퍼스널 향수 추천 - Utility Hub</title>
-                <meta name="description" content="나의 분위기와 성격에 딱 맞는 향수는? 간단한 테스트로 알아보는 퍼스널 향기 찾기! 비누향, 우디향, 플로럴향, 시트러스향, 머스크향 추천." />
-                <meta name="keywords" content="향수테스트, 향기테스트, 퍼스널향수, 향수추천, 심리테스트" />
-            </Helmet>
+            <SEO
+                title="나만의 향기 테스트 | 퍼스널 향수 추천"
+                description="나의 분위기와 성격에 딱 맞는 향수는? 간단한 테스트로 알아보는 퍼스널 향기 찾기! 비누향, 우디향, 플로럴향, 시트러스향, 머스크향 추천."
+                keywords="향수테스트, 향기테스트, 퍼스널향수, 향수추천, 심리테스트"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -269,16 +295,16 @@ const PersonalScent = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 퍼스널 향기 테스트에 대하여</h3>
-                    <p>
-                        퍼스널 향기 테스트는 개인의 취향, 성격, 라이프스타일을 분석하여 가장 잘 어울리는 향기 계열을 추천해주는 서비스입니다.
-                        내가 좋아하는 계절, 옷 스타일, 휴식 공간 등을 통해 비누향, 우디향, 플로럴향, 시트러스향, 머스크향 등 대표적인 5가지 향기 타입 중 하나를 찾아드립니다.
-                        나에게 딱 맞는 향수를 찾고 싶거나 나의 분위기를 알고 싶을 때 이용해보세요.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="나만의 향기 테스트 안내"
+                    intro="나의 분위기와 성격에 딱 맞는 향수는? 간단한 테스트로 알아보는 퍼스널 향기 찾기! 비누향, 우디향, 플로럴향, 시트러스향, 머스크향 추천."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

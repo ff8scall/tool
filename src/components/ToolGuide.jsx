@@ -12,8 +12,8 @@ const ToolGuide = ({ title, intro, steps, tips, faqs }) => {
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-background to-secondary/5 border border-primary/10 p-8 md:p-12">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
                 <div className="relative z-10 max-w-2xl">
-                    <h2 className="text-3xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
-                        {title} 완벽 가이드
+                    <h2 className="text-3xl font-black mb-4 text-foreground">
+                        {title}
                     </h2>
                     <p className="text-lg text-muted-foreground leading-relaxed">
                         {intro}

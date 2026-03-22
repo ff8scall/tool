@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Heart, Activity, Cigarette, Beer, Moon, AlertTriangle, RefreshCw, Share2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const LifeExpectancy = () => {
     const [step, setStep] = useState(0);
@@ -138,12 +140,37 @@ const LifeExpectancy = () => {
         }
     ];
 
+    
+    const toolFaqs = [
+        {
+            "q": "이 기대 수명 계산기는 의학적으로 정확한가요?",
+            "a": "기본적인 통계 자료(식습관, 흡연, 음주, 운동 등)를 바탕으로 수명을 예측하는 알고리즘이나, 전문적인 의료 기기나 의사의 진단을 대체할 수는 없는 참고용 테스트입니다."
+        },
+        {
+            "q": "수명이 짧게 나오면 어떻게 고칠 수 있나요?",
+            "a": "운동량을 늘리고 식습관을 개선한 뒤 다시 테스트해보세요. 긍정적인 생활 변화에 따라 증가하는 기대 수명을 즉시 확인할 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "평소의 음주 빈도, 흡연 여부, 주간 운동 시간 등을 정직하게 입력합니다.",
+        "수면 시간과 스트레스 정도 등의 생활 패턴을 선택합니다.",
+        "계산 버튼을 눌러 나의 남은 예상 수명과 건강 점수 및 조언을 확인합니다."
+    ];
+    const toolTips = [
+        "수명이 너무 짧게 나왔다면 뜨끔하시고 오늘부터 바로 조깅이라도 시작해보는 것을 추천합니다!",
+        "결과창에 제공되는 '건강을 개선하기 위한 작은 습관' 팁들을 실생활에 적용해 보세요."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
-            <Helmet>
-                <title>기대 수명 계산기 - Tool Hive</title>
-                <meta name="description" content="나의 생활 습관을 분석하여 기대 수명과 남은 시간을 계산해보세요." />
-            </Helmet>
+            <SEO
+                title="기대 수명 계산기"
+                description="나의 생활 습관을 분석하여 기대 수명과 남은 시간을 계산해보세요."
+                keywords=""
+                category="건강"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 min-h-[400px] flex flex-col items-center justify-center text-center transition-all duration-300">
                 {step < questions.length ? (
@@ -256,6 +283,16 @@ const LifeExpectancy = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="기대 수명 계산기 안내"
+                    intro="나의 생활 습관을 분석하여 기대 수명과 남은 시간을 계산해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

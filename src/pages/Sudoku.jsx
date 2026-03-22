@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Share2, RotateCcw, Lightbulb, Trophy, Home as HomeIcon, ChevronRight } from 'lucide-react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import useShareCanvas from '../hooks/useShareCanvas';
 
 // Sudoku Logical Helpers
@@ -338,20 +339,31 @@ const Sudoku = () => {
                 </div>
             </div>
 
-            {/* Guide Section */}
-            <div className="mt-12 card p-8 border-none bg-slate-50 dark:bg-slate-900/30">
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">스도쿠 규칙</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-muted-foreground leading-relaxed">
-                    <div className="space-y-4">
-                        <p>1. 각 가로(Row)와 세로(Column) 줄에는 <strong>1부터 9까지의 숫자</strong>가 한 번씩만 들어가야 합니다.</p>
-                        <p>2. 굵은 선으로 구분된 <strong>3x3 박스</strong> 안에도 1부터 9까지의 숫자가 중복 없이 들어가야 합니다.</p>
-                    </div>
-                    <div className="space-y-4">
-                        <p>3. 이미 배치된 숫자(회색)는 변경할 수 없으며, 비어있는 칸을 논리적으로 추론하여 채워야 합니다.</p>
-                        <p>4. 팁: 숫자를 선택하면 같은 줄과 칸, 그리고 같은 숫자들이 하이라이트 되어 추론을 돕습니다.</p>
-                    </div>
-                </div>
-            </div>
+            <ToolGuide
+                title="스도쿠 규칙 및 퍼즐 공략 가이드"
+                intro="가로, 세로, 그리고 3x3 격자 안에 1부터 9까지의 숫자를 중복 없이 채워 넣는 클래식 논리 퍼즐입니다. 논리적 사고력과 집중력을 기르는 데 탁월한 두뇌 게임입니다."
+                steps={[
+                    "게임의 난이도(쉬움, 보통, 어려움)를 선택하여 퍼즐을 생성합니다.",
+                    "빈 칸을 클릭하고 하단의 숫자 패드나 키보드를 이용해 1~9 사이의 숫자를 입력합니다.",
+                    "모든 가로/세로 줄과 3x3 박스에 숫자가 중복되지 않도록 채워나갑니다.",
+                    "막힐 때는 '힌트' 버튼을 눌러 정답 숫자를 확인하거나, '삭제' 버튼으로 잘못된 숫자를 지웁니다."
+                ]}
+                tips={[
+                    "한 줄이나 박스에 숫자가 많이 채워진 곳부터 공략하는 것이 유리합니다.",
+                    "특정 칸에 들어갈 수 있는 숫자가 단 하나뿐인 '싱글' 포인트를 먼저 찾아보세요.",
+                    "숫자를 클릭하면 해당 숫자와 같은 행/열이 하이라이트 되어 추론을 돕습니다."
+                ]}
+                faqs={[
+                    {
+                        q: "난이도별 차이가 무엇인가요?",
+                        a: "'쉬움'은 힌트 숫자가 많고, '어려움'으로 갈수록 비어있는 칸이 많아져 복합적인 논리 추론이 필요합니다."
+                    },
+                    {
+                        q: "게임 도중 실수를 하면 어떻게 하나요?",
+                        a: "잘못 입력한 숫자는 빨간색으로 표시되거나, 힌트와 대조하여 직접 수정할 수 있습니다."
+                    }
+                ]}
+            />
         </div>
     );
 };

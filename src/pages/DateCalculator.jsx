@@ -3,6 +3,7 @@ import { Calendar, Clock, ArrowRight, Briefcase } from 'lucide-react';
 import { format, addDays, subDays, differenceInDays, parseISO, eachDayOfInterval, isWeekend } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const DateCalculator = () => {
     const [activeTab, setActiveTab] = useState('dday'); // 'dday', 'calc', or 'business'
@@ -293,6 +294,30 @@ const DateCalculator = () => {
                     </div>
                 )}
             </div>
+            <ToolGuide
+                title="날짜 및 D-Day 계산 활용 가이드"
+                intro="기념일, 시험일 등 중요한 날짜까지 남은 시간을 확인하거나, 특정 날짜로부터 며칠 전후를 계산할 수 있는 도구입니다. 직장인을 위한 근무일 계산 기능도 제공합니다."
+                steps={[
+                    "D-Day: 확인하고 싶은 목표 날짜를 선택하면 오늘로부터 남은 일수가 즉시 계산됩니다.",
+                    "날짜 더하기/빼기: 기준일과 일수를 입력하고 '더하기' 또는 '빼기'를 선택하여 결과 날짜를 구합니다.",
+                    "근무일 계산: 두 날짜 사이의 주말(토, 일)을 제외한 실제 영업일수를 계산하여 프로젝트 마감일 산출 등에 활용합니다."
+                ]}
+                tips={[
+                    "커플들의 기념일(100일, 1년 등)을 미리 계산하여 일정을 계획해보세요.",
+                    "전역일, 출산 예정일, 시험 디데이 등을 홈 화면에 바로가기로 추가해두면 편리합니다.",
+                    "공문서 작성 시 날짜 계산이 필요할 때 정확한 기준을 제공합니다."
+                ]}
+                faqs={[
+                    {
+                        q: "날짜 계산 시 시작일도 포함되나요?",
+                        a: "D-Day 계산의 경우 오늘을 기준으로 상대적인 차이를 보여주며, 날짜 더하기/빼기는 입력한 일수만큼 이동한 날짜를 보여줍니다."
+                    },
+                    {
+                        q: "근무일 계산에 법정 공휴일도 포함되나요?",
+                        a: "현재 계산기는 토요일과 일요일만 제외하며, 변동이 잦은 법정 공휴일은 포함되어 계산됩니다."
+                    }
+                ]}
+            />
         </div>
     );
 };

@@ -5,9 +5,9 @@ import { useLocation } from 'react-router-dom';
 const SEO = ({ title, description, keywords, image, schema, category, faqs, steps }) => {
     const location = useLocation();
     const siteTitle = 'Tool Hive';
-    const siteUrl = 'https://tool-hive.vercel.app';
+    const siteUrl = 'https://tool.lego-sia.com';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-    const defaultDescription = '편리한 웹 도구 모음: 사주팔자, MBTI, 로또, 길이 변환, 무게 변환, 대출 계산, 날짜 계산, 글자수 세기, 환율 변환 등 다양한 무료 도구.';
+    const defaultDescription = '편리한 웹 도구 모음: 사주팔자, MBTI, 로또, 길이 변환, 무게 변환, 대출 계산, 날짜 계산, 글자수 세기, 환율 변환 등 134가지 이상의 무료 도구를 지금 체험해보세요.';
     const metaDescription = description || defaultDescription;
     const metaKeywords = keywords ? `${keywords}, 유틸리티, 도구, 계산기, 변환기` : '유틸리티, 도구, 계산기, 변환기, 웹 툴';
 

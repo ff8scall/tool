@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Circle, MousePointer2, Volume2, VolumeX } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const BubbleWrap = () => {
     const [bubbles, setBubbles] = useState([]);
@@ -63,13 +65,37 @@ const BubbleWrap = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "무한 뽁뽁이 게임의 목적은 무엇인가요?",
+            "a": "뽁뽁이(에어캡)를 터뜨리는 시각적, 청각적 경험을 통해 스트레스를 해소하고 심리적 안정을 얻는 것입니다."
+        },
+        {
+            "q": "소리가 나지 않아요.",
+            "a": "기기의 볼륨이 켜져 있는지 확인해 주시고, 간혹 브라우저 정책상 화면을 한 번 클릭해야 소리가 재생될 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "화면에 표시된 뽁뽁이들을 자유롭게 클릭합니다.",
+        "터지는 소리와 애니메이션을 즐기며 스트레스를 날립니다.",
+        "모두 터뜨렸다면 새로고침 버튼으로 초기화할 수 있습니다."
+    ];
+    const toolTips = [
+        "스트레스 받는 날, 머리를 식힐 때 아무 생각 없이 터뜨려 보세요.",
+        "모바일 환경에서도 터치로 재미있게 즐길 수 있습니다."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>무한 뽁뽁이 | 온라인 뽁뽁이 게임 for 스트레스 해소 - Utility Hub</title>
-                <meta name="description" content="뽁! 뽁! 소리 나는 무한 뽁뽁이로 스트레스를 날려버리세요. 언제 어디서나 즐기는 무료 온라인 뽁뽁이 시뮬레이션." />
-                <meta name="keywords" content="뽁뽁이, 무한뽁뽁이, 스트레스해소, 피젯토이, 팝잇, popit" />
-            </Helmet>
+            <SEO
+                title="무한 뽁뽁이 | 온라인 뽁뽁이 게임 for 스트레스 해소"
+                description="뽁! 뽁! 소리 나는 무한 뽁뽁이로 스트레스를 날려버리세요. 언제 어디서나 즐기는 무료 온라인 뽁뽁이 시뮬레이션."
+                keywords="뽁뽁이, 무한뽁뽁이, 스트레스해소, 피젯토이, 팝잇, popit"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -132,16 +158,16 @@ const BubbleWrap = () => {
                 </button>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 무한 뽁뽁이 효과</h3>
-                    <p>
-                        반복적인 단순 행동은 뇌의 긴장을 완화하고 심리적 안정감을 줍니다.
-                        뽁뽁이를 터뜨리는 감각적인 피드백은 불안감을 해소하고 집중력을 높이는 데 도움을 줄 수 있습니다.
-                        스트레스를 받을 때, 심심할 때, 무언가에 집중하고 싶을 때 무한 뽁뽁이를 즐겨보세요.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="무한 뽁뽁이 안내"
+                    intro="뽁! 뽁! 소리 나는 무한 뽁뽁이로 스트레스를 날려버리세요. 언제 어디서나 즐기는 무료 온라인 뽁뽁이 시뮬레이션."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

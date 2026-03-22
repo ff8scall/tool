@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Mic2, Star, Music, Users } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const IdolPositionTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -138,13 +140,37 @@ const IdolPositionTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "아이돌 포지션 테스트가 무엇인가요?",
+            "a": "본인의 성격, 특기, 대인관계 성향을 바탕으로 K-POP 아이돌 그룹 내에서 어떤 포지션(메인보컬, 댄서, 예능캐 등)에 어울릴지 알려줍니다."
+        },
+        {
+            "q": "노래나 춤을 못해도 되나요?",
+            "a": "성향과 매력을 통해 가상의 포지션을 부여하는 심리테스트이므로 실제 실력과는 무관하게 누구나 즐길 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "팀 프로젝트나 단체 생활에서 본인의 역할을 묻는 질문들에 솔직하게 답합니다.",
+        "대중들에게 어떻게 보이고 싶은지 등 매력 관련 질문에 응답합니다.",
+        "나에게 찰떡인 아이돌 데뷔 포지션과 매력 포인트를 확인합니다."
+    ];
+    const toolTips = [
+        "케이팝 팬이라면, 본인의 결과가 최애 멤버의 포지션과 일치하는지 확인해보는 소소한 재미가 있습니다.",
+        "자신의 매력을 어필해야 히는 자기소개 자리에서 참고 용도로 활용해도 좋습니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>아이돌 포지션 테스트 | 나는 메보? 센터? - Utility Hub</title>
-                <meta name="description" content="내가 K-POP 아이돌로 데뷔한다면 어떤 포지션일까? 메인보컬, 댄서, 비주얼 등 나에게 딱 맞는 역할을 찾아보세요." />
-                <meta name="keywords" content="아이돌테스트, 아이돌포지션, kpop, 데뷔, 심리테스트" />
-            </Helmet>
+            <SEO
+                title="아이돌 포지션 테스트 | 나는 메보? 센터?"
+                description="내가 K-POP 아이돌로 데뷔한다면 어떤 포지션일까? 메인보컬, 댄서, 비주얼 등 나에게 딱 맞는 역할을 찾아보세요."
+                keywords="아이돌테스트, 아이돌포지션, kpop, 데뷔, 심리테스트"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -234,6 +260,16 @@ const IdolPositionTest = () => {
                     </div>
                 );
             })()}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="아이돌 포지션 테스트 안내"
+                    intro="내가 K-POP 아이돌로 데뷔한다면 어떤 포지션일까? 메인보컬, 댄서, 비주얼 등 나에게 딱 맞는 역할을 찾아보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

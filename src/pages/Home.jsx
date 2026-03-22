@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { tools } from '../data/tools';
 import SEO from '../components/SEO';
-import { Sparkles, TrendingUp, Zap, Star, Search, X, Grid, ListFilter, Gamepad2, Brain, PenTool, LayoutTemplate, BookOpen } from 'lucide-react';
+import { Sparkles, TrendingUp, Zap, Star, Search, X, Grid, ListFilter, Gamepad2, Brain, PenTool, LayoutTemplate, BookOpen, Ruler, DollarSign, Type, Code, Activity, Heart } from 'lucide-react';
 import useUserPreferences from '../hooks/useUserPreferences';
 import useToolAnalytics from '../hooks/useToolAnalytics';
 
@@ -25,14 +25,19 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Tabs Configuration
+    // Tabs Configuration (Korean)
     const tabs = [
         { id: 'all', label: '전체', icon: LayoutTemplate },
-        { id: 'best', label: '인기', icon: TrendingUp },
-        { id: 'test', label: '심리/운세', icon: Brain },
-        { id: 'game', label: '게임', icon: Gamepad2 },
-        { id: 'trivia', label: '상식/퀴즈', icon: BookOpen },
+        { id: 'best', label: '인기/추천', icon: TrendingUp },
+        { id: 'unit', label: '단위변환', icon: Ruler },
+        { id: 'finance', label: '생활/금융', icon: DollarSign },
+        { id: 'text', label: '텍스트', icon: Type },
+        { id: 'dev', label: '개발도구', icon: Code },
         { id: 'utility', label: '유틸리티', icon: Zap },
+        { id: 'health', label: '건강', icon: Activity },
+        { id: 'games', label: '미니게임', icon: Gamepad2 },
+        { id: 'fun', label: '운세/재미', icon: Heart },
+        { id: 'trivia', label: '상식 테스트', icon: BookOpen },
     ];
 
     // Tool Filtering Logic
@@ -40,19 +45,11 @@ const Home = () => {
         let result = tools;
 
         // 1. Tab Filter
-        if (activeTab === 'test') {
-            result = result.filter(t => ['fun', 'health', 'love'].includes(t.category) || t.keywords?.includes('테스트'));
-        } else if (activeTab === 'game') {
-            result = result.filter(t => t.category === 'games');
-        } else if (activeTab === 'trivia') {
-            result = result.filter(t => t.category === 'trivia');
-        } else if (activeTab === 'utility') {
-            result = result.filter(t => ['utility', 'finance', 'dev', 'unit', 'text'].includes(t.category));
-        } else if (activeTab === 'best') {
-            // "Best" logic: Manually picked popular items + Favorites
-            // For now, let's pick some specific popular IDs and combine with user favorites
-            const popularIds = ['mental-age', 'personal-color', 'lotto-sim', 'mandalart', 'brain-structure', 'saju', 'tarot', 'speed-math'];
+        if (activeTab === 'best') {
+            const popularIds = ['lotto', 'mandalart', 'mbti', 'saju', 'tarot', 'snake-game', 'suika-game', 'typing-test', 'qr-gen', 'loan', 'currency'];
             result = result.filter(t => popularIds.includes(t.id) || favorites.includes(t.id));
+        } else if (activeTab !== 'all') {
+            result = result.filter(t => t.category === activeTab);
         }
 
         // 2. Search Filter
@@ -73,13 +70,8 @@ const Home = () => {
         tools.filter(tool => favorites.includes(tool.id)),
         [favorites]);
 
-    const recentToolsList = useMemo(() =>
-        recentTools.map(id => tools.find(tool => tool.id === id)).filter(Boolean),
-        [recentTools]);
-
     const newToolsList = useMemo(() => {
-        // Assume simplified logic for "New": items added recently (ID based or manual list for now)
-        const newIds = ['mandalart', 'life-expectancy', 'lotto-sim', 'zodiac-fortune'];
+        const newIds = ['lotto', 'mandalart', 'suika-game', 'snake-game', 'currency', 'json-formatter'];
         return tools.filter(t => newIds.includes(t.id));
     }, []);
 
@@ -87,6 +79,7 @@ const Home = () => {
     // Helper Components
     const ToolCard = ({ tool, isFavorite, minimal = false }) => {
         const Icon = tool.icon;
+        if (!tool) return null;
         return (
             <Link
                 to={tool.path}
@@ -111,18 +104,18 @@ const Home = () => {
                     </button>
                 </div>
 
-                <h3 className={`font-bold text-gray-900 dark:text-white mb-1 ${minimal ? 'text-sm' : 'text-lg'}`}>
-                    {tool.title}
+                <h3 className={`font-bold text-gray-900 dark:text-white mb-1 ${minimal ? 'text-[13px]' : 'text-lg'}`}>
+                    {tool.title.split('|')[0].trim()}
                 </h3>
-                <p className={`text-gray-500 dark:text-gray-400 line-clamp-2 ${minimal ? 'text-xs' : 'text-sm'}`}>
+                <p className={`text-gray-500 dark:text-gray-400 line-clamp-2 ${minimal ? 'text-[11px]' : 'text-sm'}`}>
                     {tool.description}
                 </p>
 
-                {!minimal && tool.badges && (
-                    <div className="flex gap-1 mt-3">
-                        {tool.badges?.map(badge => (
-                            <span key={badge} className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] font-bold rounded-md">
-                                {badge}
+                {!minimal && tool.keywords && (
+                    <div className="flex flex-wrap gap-1 mt-3">
+                        {tool.keywords?.slice(0, 3).map(keyword => (
+                            <span key={keyword} className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-[10px] font-medium rounded-md uppercase tracking-tighter">
+                                #{keyword}
                             </span>
                         ))}
                     </div>
@@ -134,17 +127,17 @@ const Home = () => {
     return (
         <div className="min-h-screen">
             <SEO
-                title="Tool Hive - 세상의 모든 유용한 도구"
-                description="심리테스트, 미니게임, 유틸리티 도구를 한 곳에서 즐기세요."
+                title="Tool Hive | 일상을 편리하게 만드는 134가지 이상의 도구"
+                description="길이변환, 환율계산기, 글자수세기, JSON포매터, 간단 미니게임까지! 134개 이상의 모든 실생활 유틸리티를 한곳에서 무료로 즐기세요."
             />
 
-            {/* Hero Section - Simplified */}
-            <section className="relative pt-8 pb-6 px-4 text-center">
+            {/* Hero Section */}
+            <section className="relative pt-12 pb-8 px-4 text-center">
                 <div className="max-w-3xl mx-auto space-y-6">
-                    <h1 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-                        무엇이 필요하신가요?
-                        <span className="block text-2xl md:text-3xl mt-2 font-normal text-gray-500">
-                            <span className="text-indigo-600 font-bold">{tools.length}+</span>개의 도구가 준비되어 있습니다
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+                        오늘 당신에게 필요한 도구는?
+                        <span className="block text-2xl md:text-3xl mt-4 font-medium text-gray-500">
+                            약 <span className="text-indigo-600 font-bold">{tools.length}개</span>의 생산성 도구를 만나보세요
                         </span>
                     </h1>
 
@@ -157,8 +150,8 @@ const Home = () => {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="block w-full h-14 pl-12 pr-12 rounded-2xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg shadow-sm focus:border-indigo-500 focus:ring-0 transition-all outline-none"
-                            placeholder="도구 검색..."
+                            className="block w-full h-16 pl-14 pr-12 rounded-2xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg shadow-xl focus:border-indigo-500 focus:ring-0 transition-all outline-none placeholder:text-gray-300"
+                            placeholder="도구 이름을 입력하세요 (예: 단위, JSON, 사주)..."
                         />
                         {searchQuery && (
                             <button
@@ -173,9 +166,9 @@ const Home = () => {
             </section>
 
             {/* Sticky Navigation Tabs */}
-            <div className={`sticky top-0 z-30 transition-all duration-200 ${isSticky ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
+            <div className={`sticky top-0 z-30 transition-all duration-300 ${isSticky ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-6'}`}>
                 <div className="max-w-6xl mx-auto px-4">
-                    <div className="flex overflow-x-auto pb-2 md:pb-0 hide-scrollbar gap-2 md:justify-center">
+                    <div className="flex flex-wrap gap-2 justify-center px-2">
                         {tabs.map((tab) => {
                             const Icon = tab.icon;
                             const isActive = activeTab === tab.id;
@@ -184,18 +177,15 @@ const Home = () => {
                                     key={tab.id}
                                     onClick={() => {
                                         setActiveTab(tab.id);
-                                        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll top on tab change usually better UX here? Or keep position?
-                                        // keeping position is better if sticky. But if sticky, maybe scroll to top of list?
-                                        // Let's just keep position for now.
                                     }}
-                                    className={`flex items-center flex-shrink-0 px-4 py-2.5 rounded-full font-bold text-sm md:text-base transition-all scale-100 active:scale-95 border
+                                    className={`flex items-center flex-shrink-0 px-5 py-3 rounded-2xl font-bold text-sm md:text-base transition-all scale-100 active:scale-95 border
                                         ${isActive
-                                            ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900 border-transparent shadow-lg'
-                                            : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                                            ? 'bg-indigo-600 text-white border-transparent shadow-lg shadow-indigo-600/30 ring-2 ring-indigo-600 ring-offset-2 dark:ring-offset-gray-900'
+                                            : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-800'
                                         }
                                     `}
                                 >
-                                    <Icon className={`w-4 h-4 mr-2 ${isActive ? '' : 'text-gray-400'}`} />
+                                    <Icon className={`w-4 h-4 mr-2 ${isActive ? 'text-white' : 'text-gray-400'}`} />
                                     {tab.label}
                                 </button>
                             );
@@ -205,37 +195,36 @@ const Home = () => {
             </div>
 
             {/* Content Area */}
-            <div className="max-w-7xl mx-auto px-4 pb-20 mt-4">
+            <div className="max-w-7xl mx-auto px-4 pb-20 mt-8">
 
-                {/* Special Layout for "All" Tab without search */}
                 {activeTab === 'all' && !searchQuery ? (
-                    <div className="space-y-12">
+                    <div className="space-y-16">
 
                         {/* 1. New & Trending */}
                         <section>
-                            <div className="flex items-center justify-between mb-4 px-2">
-                                <h2 className="text-xl font-bold flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5 text-indigo-500" />
-                                    따끈따끈 신규 도구
+                            <div className="flex items-center justify-between mb-6 px-2">
+                                <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
+                                    <Sparkles className="w-6 h-6 text-indigo-500 animate-pulse" />
+                                    새로 추가된 도구
                                 </h2>
                             </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                 {newToolsList.map(tool => (
                                     <ToolCard key={tool.id} tool={tool} isFavorite={favorites.includes(tool.id)} />
                                 ))}
                             </div>
                         </section>
 
-                        {/* 2. Favorites (if exists) */}
+                        {/* 2. Favorites */}
                         {favoriteToolsList.length > 0 && (
                             <section>
-                                <div className="flex items-center justify-between mb-4 px-2">
-                                    <h2 className="text-xl font-bold flex items-center gap-2">
-                                        <Star className="w-5 h-5 text-amber-500" />
-                                        즐겨찾기
+                                <div className="flex items-center justify-between mb-6 px-2">
+                                    <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
+                                        <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
+                                        즐겨찾는 도구
                                     </h2>
                                 </div>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                     {favoriteToolsList.map(tool => (
                                         <ToolCard key={tool.id} tool={tool} isFavorite={true} minimal={true} />
                                     ))}
@@ -245,12 +234,12 @@ const Home = () => {
 
                         {/* 3. All Tools Grid */}
                         <section>
-                            <div className="flex items-center justify-between mb-4 px-2">
-                                <h2 className="text-xl font-bold">
-                                    전체 도구 ({tools.length})
+                            <div className="flex items-center justify-between mb-6 px-2 border-b border-gray-100 dark:border-gray-800 pb-4">
+                                <h2 className="text-2xl font-black text-gray-900 dark:text-white">
+                                    모든 도구 둘러보기 ({tools.length})
                                 </h2>
                             </div>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                                 {tools.map(tool => (
                                     <ToolCard
                                         key={tool.id}
@@ -262,13 +251,13 @@ const Home = () => {
                         </section>
                     </div>
                 ) : (
-                    // Filtered View for other tabs or search
+                    // Filtered View
                     <div className="animate-fade-in-up">
-                        <div className="mb-4 px-2 text-gray-500 font-medium">
-                            {filteredTools.length}개의 도구
+                        <div className="mb-6 px-2 text-gray-500 font-bold uppercase tracking-wider text-sm">
+                            {filteredTools.length}개의 도구가 발견되었습니다
                         </div>
                         {filteredTools.length > 0 ? (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                                 {filteredTools.map(tool => (
                                     <ToolCard
                                         key={tool.id}
@@ -278,14 +267,15 @@ const Home = () => {
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-center py-20">
-                                <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                                <p className="text-gray-500 text-lg">찾으시는 도구가 없네요...</p>
+                            <div className="text-center py-32 bg-gray-50 dark:bg-gray-800/50 rounded-3xl border-2 border-dashed border-gray-200 dark:border-gray-700">
+                                <Search className="w-20 h-20 mx-auto text-gray-300 mb-6" />
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">검색 결과가 없습니다</h3>
+                                <p className="text-gray-500 max-w-xs mx-auto mb-8">다른 키워드로 검색하거나 카테고리를 변경해 보세요.</p>
                                 <button
                                     onClick={() => { setSearchQuery(''); setActiveTab('all'); }}
-                                    className="mt-4 text-indigo-600 font-bold hover:underline"
+                                    className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20"
                                 >
-                                    전체 목록 보기
+                                    모든 도구 보기
                                 </button>
                             </div>
                         )}
@@ -293,13 +283,18 @@ const Home = () => {
                 )}
             </div>
 
-            {/* Footer / Info Section (Simplified) */}
-            <footer className="mt-20 py-10 text-center text-gray-400 text-sm border-t border-gray-100 dark:border-gray-800">
-                <p>Tool Hive © 2025. All rights reserved.</p>
-                <div className="flex justify-center gap-4 mt-2">
-                    <Link to="/about" className="hover:text-gray-600">소개</Link>
-                    <Link to="/contact" className="hover:text-gray-600">문의</Link>
-                    <Link to="/privacy" className="hover:text-gray-600">개인정보처리방침</Link>
+            {/* Footer */}
+            <footer className="mt-20 py-16 text-center border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
+                <div className="max-w-2xl mx-auto px-4">
+                    <p className="text-gray-800 dark:text-gray-200 font-bold text-lg mb-2">Tool Hive (툴 하이브)</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-8">당신의 일상을 더 편리하게 만드는 무료 온라인 도구 모음입니다.</p>
+                    <div className="flex justify-center flex-wrap gap-x-8 gap-y-4 mb-8">
+                        <Link to="/about" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">서비스 소개</Link>
+                        <Link to="/contact" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">문의하기</Link>
+                        <Link to="/privacy" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">개인정보처리방침</Link>
+                        <Link to="/terms" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">이용약관</Link>
+                    </div>
+                    <p className="text-xs text-gray-300 dark:text-gray-600 italic">© {new Date().getFullYear()} Tool Hive. All rights reserved.</p>
                 </div>
             </footer>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import { Timer, Play, Pause, RotateCcw, Coffee, Briefcase, Settings, Volume2, VolumeX, Vibrate, VibrateOff, History, Target, CheckCircle, X, Moon } from 'lucide-react';
 
 const PomodoroTimer = () => {
@@ -442,6 +443,32 @@ const PomodoroTimer = () => {
                     </div>
                 </div>
             )}
+
+            <ToolGuide
+                title="효율적인 시간 관리를 위한 포모도로 가이드"
+                intro="프란체스코 시릴로가 제안한 포모도로 기법은 집중력을 극대화하는 시간 관리법입니다. 25분 집중과 5분 휴식을 반복하여 업무 효율을 높여보세요."
+                steps={[
+                    "수행할 작업을 정하고 타이머를 25분으로 설정합니다.",
+                    "타이머가 작동하는 동안 오직 해당 작업에만 완전히 몰입합니다.",
+                    "25분이 지나 알람이 울리면 5분 동안 짧은 휴식을 취합니다.",
+                    "이 과정을 4번 반복한 후, 15~30분 정도의 긴 휴식을 가집니다."
+                ]}
+                tips={[
+                    "집중 시간에는 스마트폰 알림 등 모든 방해 요소를 차단하세요.",
+                    "5분 휴식 시에는 화면을 보지 않고 스트레칭이나 물 마시기를 권장합니다.",
+                    "자신의 컨디션에 따라 집중 시간을 50분, 휴식을 10분으로 조정해 보세요."
+                ]}
+                faqs={[
+                    {
+                        q: "25분이 너무 짧은 것 같아요.",
+                        a: "뇌의 집중 한계 시간을 고려한 설정입니다. 필요시 설정을 통해 시간을 늘릴 수 있습니다."
+                    },
+                    {
+                        q: "휴식 시간에 업무 메일을 확인해도 되나요?",
+                        a: "휴식은 뇌를 쉬게 하는 시간입니다. 업무와 관련된 활동은 피하는 것이 좋습니다."
+                    }
+                ]}
+            />
         </div>
     );
 };

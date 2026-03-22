@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import { QrCode, Download, Wifi, User, Link as LinkIcon, Palette, Copy, Check } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
 import QRCode from 'qrcode';
@@ -343,6 +344,32 @@ END:VCARD`;
             <ShareButtons
                 title="QR 코드 생성기"
                 description="텍스트, URL, WiFi, 명함을 QR 코드로 쉽게 변환하세요!"
+            />
+
+            <ToolGuide
+                title="스마트한 QR 코드 생성 및 활용 가이드"
+                intro="URL, 텍스트, WiFi 연결 정보, 연락처(vCard) 등을 담은 QR 코드를 즉석에서 생성할 수 있습니다. 마케팅, 정보 공유, 이벤트 등 다양한 용도로 활용해 보세요."
+                steps={[
+                    "생성하고자 하는 정보의 유형(URL, WiFi, 명함)을 선택합니다.",
+                    "선택한 유형에 맞는 텍스트나 상세 정보를 입력란에 작성합니다.",
+                    "'QR 코드 생성' 버튼을 클릭하여 이미지를 생성합니다.",
+                    "원하는 크기로 조절한 후 다운로드하거나 복사하여 사용합니다."
+                ]}
+                tips={[
+                    "WiFi QR 코드를 만들어 카페나 거실에 부치면 매번 비밀번호를 말해줄 필요가 없습니다.",
+                    "URL 입력 시에는 가급적 모바일 최적화된 페이지 링크를 사용하는 것이 좋습니다.",
+                    "QR 코드의 해상도를 높게 설정하면 인쇄물에서도 선명하게 스캔됩니다."
+                ]}
+                faqs={[
+                    {
+                        q: "생성된 QR 코드에 유효 기간이 있나요?",
+                        a: "아니요, 이 서비스에서 생성된 QR 코드는 영구적이며 별도의 만료 기간이 없습니다."
+                    },
+                    {
+                        q: "상업적 용도로 사용해도 되나요?",
+                        a: "네, 무료로 생성하여 상업적 홍보물이나 제품에 제한 없이 사용 가능합니다."
+                    }
+                ]}
             />
         </div>
     );

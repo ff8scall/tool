@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Eye, Play, ArrowRight, Zap } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const DynamicAcuity = () => {
     const [gameState, setGameState] = useState('start'); // start, ready, moving, input, result
@@ -42,7 +44,28 @@ const DynamicAcuity = () => {
                 setGameState('input');
                 setTimeout(() => inputRef.current?.focus(), 100);
             }, animationDuration);
-            return () => clearTimeout(timer);
+            
+    const toolFaqs = [
+        {
+            "q": "동체 시력이란 무엇인가요?",
+            "a": "움직이는 물체를 정확하고 빠르게 쫓아 식별하는 시각 능력을 말합니다. 스포츠 선수들에게 특히 중요합니다."
+        },
+        {
+            "q": "숫자가 너무 빨라서 안 보여요.",
+            "a": "단계가 올라갈수록 속도가 빨라지며, 눈동자를 빠르게 움직이는 연습을 통해 시력을 트레이닝 할 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "화면에 순식간에 지나가는 숫자 시퀀스를 포착합니다.",
+        "본인이 본 숫자를 정확하게 입력란에 타이핑합니다.",
+        "성공 시 속도가 더욱 빨라진 다음 단계에 도전합니다."
+    ];
+    const toolTips = [
+        "화면 중앙에 시선을 고정하고 시야를 넓게 가지면 순간적으로 지나가는 글자를 포착하기 쉽습니다.",
+        "눈이 피로해질 수 있으니 적당히 휴식을 취하며 플레이하세요."
+    ];
+
+    return () => clearTimeout(timer);
         }
     }, [gameState, animationDuration]);
 
@@ -103,11 +126,14 @@ const DynamicAcuity = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>동체 시력 테스트 | 순식간에 지나가는 숫자를 맞춰라 - Utility Hub</title>
-                <meta name="description" content="화면을 빠르게 지나가는 숫자를 읽을 수 있나요? 야구 선수, 카레이서에게 필요한 동체 시력을 테스트해보세요." />
-                <meta name="keywords" content="동체시력, 시력테스트, 눈건강, 순발력, 게임, visual acuity" />
-            </Helmet>
+            <SEO
+                title="동체 시력 테스트 | 순식간에 지나가는 숫자를 맞춰라"
+                description="화면을 빠르게 지나가는 숫자를 읽을 수 있나요? 야구 선수, 카레이서에게 필요한 동체 시력을 테스트해보세요."
+                keywords="동체시력, 시력테스트, 눈건강, 순발력, 게임, visual acuity"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -247,15 +273,16 @@ const DynamicAcuity = () => {
                 }
             `}</style>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 동체 시력(Dynamic Visual Acuity)이란?</h3>
-                    <p>
-                        움직이는 물체를 정확하고 빠르게 인지하는 능력입니다. 운전 중 위험 요소를 발견하거나, 스포츠 경기에서 공의 궤적을 쫓는 데 필수적인 능력입니다.
-                        일반적으로 시력 검사표로 측정하는 '정지 시력'과는 다릅니다. 꾸준한 훈련을 통해 향상시킬 수 있다고 알려져 있습니다.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="동체 시력 테스트 안내"
+                    intro="화면을 빠르게 지나가는 숫자를 읽을 수 있나요? 야구 선수, 카레이서에게 필요한 동체 시력을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Music, Play, Volume2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const PitchTest = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, result
@@ -112,13 +114,37 @@ const PitchTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "절대음감 테스트는 어떻게 진행되나요?",
+            "a": "피아노 건반 소리 등 특정 음고(Pitch)를 들려주면, 아무런 기준 음 도움 없이 그 소리가 어떤 계이름인지 맞추는 테스트입니다."
+        },
+        {
+            "q": "모바일 환경에서도 잘 되나요?",
+            "a": "네, 오디오 재생이 가능한 스마트폰 환경이라면 누구나 이어폰을 꽂고 테스트를 즐길 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "볼륨을 적절히 조절하고 플레이 버튼을 눌러 첫 번째 음을 듣습니다.",
+        "도, 레, 미, 파, 솔, 라, 시 중 방금 들은 음과 똑같다고 생각하는 건반 버튼을 누릅니다.",
+        "정답 여부와 해설을 확인하고 점점 어려워지는 다음 라운드에 도전합니다."
+    ];
+    const toolTips = [
+        "소음에 방해받지 않도록 조용한 환경에서 혹은 이어폰을 착용하고 테스트에 임하세요.",
+        "화음이 들려올 때는 가장 베이스가 되는 밑음이나 가장 높은 탑노트를 집중해서 들어보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>절대음감 테스트 | 도레미파솔라시도 맞추기 - Utility Hub</title>
-                <meta name="description" content="들려주는 음의 계이름을 맞춰보세요. 나는 절대음감일까 상대음감일까? 재미있는 음감 테스트 게임." />
-                <meta name="keywords" content="절대음감, 상대음감, 음감테스트, 청음, 계이름맞추기, pitch test" />
-            </Helmet>
+            <SEO
+                title="절대음감 테스트 | 도레미파솔라시도 맞추기"
+                description="들려주는 음의 계이름을 맞춰보세요. 나는 절대음감일까 상대음감일까? 재미있는 음감 테스트 게임."
+                keywords="절대음감, 상대음감, 음감테스트, 청음, 계이름맞추기, pitch test"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -231,16 +257,16 @@ const PitchTest = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 절대음감이란?</h3>
-                    <p>
-                        어떤 음을 들었을 때 다른 음과 비교하지 않고도 고유의 음 높이를 즉시 판별할 수 있는 청각 능력을 말합니다.
-                        반면, 기준음이 주어져야 다른 음을 판별할 수 있는 능력은 '상대음감'이라고 합니다.
-                        이 테스트를 통해 당신이 절대음감인지 확인해보세요!
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="절대음감 테스트 안내"
+                    intro="들려주는 음의 계이름을 맞춰보세요. 나는 절대음감일까 상대음감일까? 재미있는 음감 테스트 게임."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

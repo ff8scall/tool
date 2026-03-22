@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Cookie, Sparkles } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const FortuneCookie = () => {
     const [isCracked, setIsCracked] = useState(false);
@@ -62,13 +64,37 @@ const FortuneCookie = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "포춘 쿠키 메시지는 매일 바뀌나요?",
+            "a": "네, 수백 개의 긍정적인 명언, 조언, 행운의 문구 중 랜덤으로 하나를 뽑아 보여드립니다."
+        },
+        {
+            "q": "원하는 내용이 안 나오면 다시 뽑아도 되나요?",
+            "a": "물론입니다! 기분이 좋아질 때까지 행운의 쿠키를 마음껏 열어보세요."
+        }
+    ];
+    const toolSteps = [
+        "화면 중앙에 있는 바삭한 포춘 쿠키 일러스트를 터치합니다.",
+        "쿠키가 갈라지는 귀여운 애니메이션을 감상합니다.",
+        "쿠키 속에서 나온 오늘의 행운 메시지나 조언을 읽으며 활기찬 하루를 시작합니다."
+    ];
+    const toolTips = [
+        "아침에 눈을 떠서 하루 일과를 시작하기 전, 가벼운 마음으로 하나씩 뽑아보며 소소한 힐링을 느껴보세요.",
+        "좋은 문구가 나왔다면 친구들에게 공유하여 행운을 나눠보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>포춘 쿠키 | 오늘의 행운 메시지 뽑기 - Utility Hub</title>
-                <meta name="description" content="매일매일 확인하는 오늘의 행운 메시지! 포춘 쿠키를 깨서 당신을 위한 긍정적인 조언과 행운의 문구를 확인해보세요." />
-                <meta name="keywords" content="포춘쿠키, 운세, 행운, 명언, 좋은글, 오늘의메시지" />
-            </Helmet>
+            <SEO
+                title="포춘 쿠키 | 오늘의 행운 메시지 뽑기"
+                description="매일매일 확인하는 오늘의 행운 메시지! 포춘 쿠키를 깨서 당신을 위한 긍정적인 조언과 행운의 문구를 확인해보세요."
+                keywords="포춘쿠키, 운세, 행운, 명언, 좋은글, 오늘의메시지"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -148,17 +174,7 @@ const FortuneCookie = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 포춘 쿠키란?</h3>
-                    <p>
-                        포춘 쿠키(Fortune Cookie)는 미국 중국 음식점에서 후식으로 나누어 주는 과자로, 안에는 운세가 적힌 종이가 들어있습니다.
-                        바삭한 과자를 깨뜨려 그 안에 숨겨진 희망찬 메시지나 조언을 읽는 재미가 있죠.
-                        여기서는 언제 어디서나 포춘 쿠키를 열어 오늘의 행운을 점쳐볼 수 있습니다.
-                    </p>
-                </div>
-            </div>
+            
 
             <style>{`
                 @keyframes shake {
@@ -170,6 +186,16 @@ const FortuneCookie = () => {
                     animation: shake 0.5s ease-in-out infinite;
                 }
             `}</style>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="포춘 쿠키 안내"
+                    intro="매일매일 확인하는 오늘의 행운 메시지! 포춘 쿠키를 깨서 당신을 위한 긍정적인 조언과 행운의 문구를 확인해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

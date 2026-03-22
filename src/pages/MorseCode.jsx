@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Copy, Volume2, RotateCcw, ArrowRightLeft, Radio } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const MorseCode = () => {
     const [input, setInput] = useState('');
@@ -106,13 +108,37 @@ const MorseCode = () => {
         setOutput(input);
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "모스 부호 번역기는 한글도 지원하나요?",
+            "a": "국제 표준 규격에 따라 주로 영어 알파벳과 숫자를 모스 부호로 변환합니다."
+        },
+        {
+            "q": "소리로 재생 가능한가요?",
+            "a": "네! 번역된 모스 부호를 '삐-' 하는 비프음(Beep) 소리로 직접 들어보는 오디오 재생 기능을 지원합니다."
+        }
+    ];
+    const toolSteps = [
+        "알파벳이나 숫자 텍스트를 상단 박스에 입력합니다.",
+        "자동으로 점(.)과 선(-)으로 이루어진 모스 부호로 하단에 변환됩니다.",
+        "스피커 아이콘을 눌러 모스 부호의 길고 짧은 박자를 소리로 직접 들어봅니다."
+    ];
+    const toolTips = [
+        "SOS (... --- ...) 와 같이 영화나 실생활에서 쓰이는 구조 신호를 모스 부호와 소리로 익혀두면 유용합니다.",
+        "친구끼리 비밀 메시지를 모스 부호 텍스트로 바꾸어 전송하는 암호 편지 놀이를 해보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>모스 부호 번역기 | Morse Code Translator - Utility Hub</title>
-                <meta name="description" content="텍스트를 모스 부호로, 모스 부호를 텍스트로 변환하세요. 소리로 들어볼 수도 있습니다. SOS 구조 신호부터 비밀 메시지까지." />
-                <meta name="keywords" content="모스부호, morse code, 변환기, 번역기, sos, cw, 전신" />
-            </Helmet>
+            <SEO
+                title="모스 부호 번역기 | 텍스트 ↔ 모스 부호 변환 및 사운드 재생 도구"
+                description="영문 텍스트를 모스 부호로 즉시 변환하거나, 모스 부호를 다시 텍스트로 복구하세요. 실제 비프음 사운드 재생 기능을 통해 모스 부호를 직접 들어보고 익힐 수 있습니다."
+                keywords="모스부호번역기, morse code translator, 모스부호변환, SOS부호, CW통신, 암호문만들기, 모스부호듣기"
+                category="text"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -199,16 +225,16 @@ const MorseCode = () => {
                 </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 모스 부호(Morse Code)란?</h3>
-                    <p>
-                        점(Dot)과 선(Dash)의 조합으로 알파벳과 숫자를 표기하는 전신 부호입니다. 1844년 새뮤얼 모스가 발명했습니다.
-                        가장 널리 알려진 신호는 SOS(... --- ...)이며, 비상 시 소리나 빛(손전등)으로 구조 요청을 할 때 매우 유용합니다.
-                        '사랑해'의 모스 부호는 L(...-..) O(---) V(...-) E(.) 를 조합하여 만들 수 있습니다.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="모스 부호 번역기 안내"
+                    intro="텍스트를 모스 부호로, 모스 부호를 텍스트로 변환하세요. 소리로 들어볼 수도 있습니다. SOS 구조 신호부터 비밀 메시지까지."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

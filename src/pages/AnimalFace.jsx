@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Share2, RefreshCw, Dog, Cat, Fish, Rabbit } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const AnimalFace = () => {
     const [step, setStep] = useState(0);
@@ -193,13 +194,35 @@ const AnimalFace = () => {
         }
     };
 
+    const animalFaqs = [
+        { q: "동물상 테스트의 원리가 무엇인가요?", a: "기본적인 관상학 요소와 현대적인 심리테스트 방식을 결합하여, 사용자가 선택한 외모 특징과 성향을 분석해 가장 어울리는 동물을 매칭해 줍니다." },
+        { q: "결과에 나온 '강아지상'은 무슨 의미인가요?", a: "보통 눈꼬리가 살짝 쳐져 있고 순한 인상을 말하며, 성격적으로는 다정하고 사람을 잘 따르는 긍정적인 이미지를 뜻합니다." },
+        { q: "실제 제 얼굴과 다르게 나올 수 있나요?", a: "네! 이 테스트는 본인이 느끼는 주관적인 이미지와 성격을 테스트하는 것이므로 실제 외모뿐만 아니라 내면의 성향이 반영됩니다." }
+    ];
+
+    const animalSteps = [
+        "눈매, 얼굴형 등 거울을 보며 나의 외모 특징에 가장 가까운 답변을 선택하세요.",
+        "평소 친구들에게 자주 듣는 이미지나 나의 연애 스타일을 솔직하게 고릅니다.",
+        "선택이 끝나면 나의 매력을 찰떡같이 비유한 동물상 결과를 확인합니다.",
+        "결과 화면에 나타난 나의 매력 포인트 해시태그와 환상의 짝꿍을 확인하세요!"
+    ];
+
+    const animalTips = [
+        "애매한 질문이 있다면 친구나 가족에게 나를 어떻게 생각하는지 물어보고 선택하면 더 정확합니다.",
+        "결과에 나온 '환상의 짝꿍' 동물상을 가진 친구를 찾아 결과를 공유해보세요.",
+        "마지막 결과 페이지의 귀여운 동물 일러스트와 나의 매력 포인트를 캡처하여 프로필로 활용해보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>동물상 테스트 | 나는 강아지상? 고양이상? - Utility Hub</title>
-                <meta name="description" content="간단한 테스트로 알아보는 나의 동물상! 강아지상, 고양이상, 여우상, 토끼상, 곰상 중 나는 어떤 스타일일까요?" />
-                <meta name="keywords" content="동물상테스트, 강아지상, 고양이상, 여우상, 관상테스트, 인상테스트" />
-            </Helmet>
+            <SEO
+                title="동물상 테스트 | 나는 강아지상? 고양이상?"
+                description="간단한 테스트로 알아보는 나의 동물상! 강아지상, 고양이상, 여우상, 토끼상, 곰상 중 나는 어떤 스타일일까요?"
+                keywords="동물상테스트, 강아지상, 고양이상, 여우상, 관상테스트, 인상테스트"
+                category="운세/재미"
+                faqs={animalFaqs}
+                steps={animalSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -286,17 +309,14 @@ const AnimalFace = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 동물상 테스트에 대하여</h3>
-                    <p>
-                        동물상 테스트는 얼굴의 특징과 성격적 성향을 종합하여 가장 유사한 동물 이미지를 찾아주는 심리/관상 테스트입니다.
-                        강아지상은 귀엽고 사랑스러운 매력을, 고양이상은 도도하고 세련된 매력을 상징합니다.
-                        그 외에도 여우상, 토끼상, 곰상 등 다양한 매력을 가진 동물 유형을 확인해보세요.
-                        이 테스트는 재미를 위해 제작되었으며, 정확한 관상학적 결과와는 차이가 있을 수 있습니다.
-                    </p>
-                </div>
+            <div className="mt-12">
+                <ToolGuide
+                    title="동물상 테스트 안내"
+                    intro="동물상 테스트는 내 얼굴의 특징과 평소 성향을 종합하여 나와 가장 닮은 동물 이미지를 찾아주는 재미있는 심리/관상 테스트입니다. 나는 사랑스러운 토끼상일까요, 듬직한 곰상일까요?"
+                    steps={animalSteps}
+                    tips={animalTips}
+                    faqs={animalFaqs}
+                />
             </div>
         </div>
     );

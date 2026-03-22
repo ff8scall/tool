@@ -40,17 +40,14 @@ const TemperatureConverter = () => {
             fahrenheit: type === 'fahrenheit' ? value : f.toFixed(2).replace(/\.00$/, ''),
             kelvin: type === 'kelvin' ? value : k.toFixed(2).replace(/\.00$/, '')
         });
-    };
-
+};
     const handleChange = (e) => {
         const { name, value } = e.target;
         convert(name, value);
-    };
-
+};
     const reset = () => {
         setValues({ celsius: '', fahrenheit: '', kelvin: '' });
-    };
-
+};
     const faqs = [
         { q: '섭씨(°C)와 화씨(°F) 변환 공식이 궁금합니다.', a: '섭씨→화씨: (°C × 9/5) + 32 = °F\n화씨→섭씨: (°F − 32) × 5/9 = °C\n예: 36.5°C(정상 체온) = 97.7°F, 100°F = 37.78°C' },
         { q: '켈빈(K)이란 무엇인가요?', a: '켈빈은 절대 온도 단위로, 과학 분야에서 주로 사용됩니다. 0K는 이론상 가장 낮은 온도인 절대 영도(-273.15°C)입니다. 섭씨→켈빈: °C + 273.15 = K' },
@@ -170,5 +167,4 @@ const TemperatureConverter = () => {
         </div>
     );
 };
-
 export default TemperatureConverter;

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { RotateCcw, Play, Utensils, Share2 } from 'lucide-react';
 import Matter from 'matter-js';
 import useShareCanvas from '../hooks/useShareCanvas';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const CACHE_BUST = Date.now();
 const FRUITS = [
@@ -291,7 +293,28 @@ const TanghuluGame = () => {
             });
         });
 
-        return () => {
+        
+    const toolFaqs = [
+        {
+            "q": "탕후루 만들기 게임은 어떤 게임인가요?",
+            "a": "위에서 떨어지는 포도, 딸기, 귤 등 귀여운 과일들을 꼬치에 순서대로 꽂아 맛있는 과일 탕후루 조합을 완성하는 캐주얼 미니 게임입니다."
+        },
+        {
+            "q": "어떻게 해야 고득점을 하나요?",
+            "a": "레시피에 제시된 과일 순서와 똑같이 맞추어 꼬치를 끼우거나, 같은 과일을 연속으로 끼울 때 콤보 점수 코팅 보너스를 받을 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "화면 상단에서 좌우로 흔들리는 과일의 타이밍을 지켜봅니다.",
+        "원하는 위치에 과일이 왔을 때 화면을 탭하거나 스페이스바를 눌러 과일을 밑의 꼬치로 떨어뜨립니다.",
+        "3~4개의 과일이 예쁘게 꽂히면 설탕 코팅 애니메이션과 함께 하나의 탕후루가 완성됩니다."
+    ];
+    const toolTips = [
+        "타이밍이 생명입니다! 생각보다 떨어지는 시간차가 있으니 과일이 핀 포인트에 오기 살짝 전에 미리 클릭하는 기술을 익혀보세요.",
+        "집에서 입이 심심할 때 당 충전 대리 만족을 위한 ASMR용으로 즐겨도 좋습니다."
+    ];
+
+    return () => {
             Render.stop(render);
             Runner.stop(runner);
             Composite.clear(engine.world);
@@ -402,10 +425,14 @@ const TanghuluGame = () => {
 
     return (
         <div className="container mx-auto px-4 py-8 max-w-4xl">
-            <Helmet>
-                <title>탕후루 만들기 | Utility Hub</title>
-                <meta name="description" content="과일 탕후루 게임" />
-            </Helmet>
+            <SEO
+                title="탕후루 만들기 | Utility Hub"
+                description="과일 탕후루 게임"
+                keywords=""
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="flex flex-col items-center gap-6">
                 <div className="text-center">
@@ -461,6 +488,16 @@ const TanghuluGame = () => {
                         )}
                     </div>
                 </div>
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="탕후루 만들기 안내"
+                    intro="과일 탕후루 게임"
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

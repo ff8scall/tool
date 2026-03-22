@@ -143,18 +143,15 @@ const CurrencyConverter = () => {
         const converted = valInKrw * rateTo;
 
         setResult(converted);
-    };
-
+};
     const formatNumber = (num) => {
         if (!num) return '';
         return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
-    };
-
+};
     const swapCurrencies = () => {
         setFromCurrency(toCurrency);
         setToCurrency(fromCurrency);
-    };
-
+};
     // Manual Edit Functions
     const startEdit = () => {
         // Prepare edit rates: Show as "1 Foreign = x KRW" for easier editing
@@ -167,8 +164,7 @@ const CurrencyConverter = () => {
         });
         setEditRates(userFriendlyRates);
         setEditMode(true);
-    };
-
+};
     const saveRates = () => {
         const newRates = { KRW: 1 };
         Object.keys(editRates).forEach(code => {
@@ -182,8 +178,7 @@ const CurrencyConverter = () => {
             timestamp: Date.now() // Treat as fresh
         }));
         setLastUpdate('사용자 지정');
-    };
-
+};
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             <SEO
@@ -350,7 +345,6 @@ const CurrencyConverter = () => {
                 )}
             </div>
 
-
             <ToolGuide
                 title="실시간 환율 계산기 사용 가이드"
                 intro="실시간 환율 계산기는 달러(USD), 엔화(JPY), 유로(EUR), 위안(CNY), 파운드(GBP) 등 세계 주요 통화의 최신 환율 정보를 바탕으로 즉시 환전 금액을 계산해 드립니다. 해외여행 경비 계획, 해외 송금, 해외 직구 금액 확인 등에 활용하세요."
@@ -379,5 +373,4 @@ const CurrencyConverter = () => {
         </div>
     );
 };
-
 export default CurrencyConverter;

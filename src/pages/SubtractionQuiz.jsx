@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Minus, Calculator, Trophy, RefreshCw, ChevronLeft, Delete, X, Check } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const SubtractionQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -28,7 +30,28 @@ const SubtractionQuiz = () => {
                     return prev - 1;
                 });
             }, 1000);
-            return () => clearInterval(timer);
+            
+    const toolFaqs = [
+        {
+            "q": "뺄셈 퀴즈의 난이도는 어떤가요?",
+            "a": "받아내림이 필요한 두 자리, 세 자리 수의 실생활 필수 뺄셈(거스름돈 계산 수준)부터 두뇌 트레이닝용 복합 뺄셈까지 존재합니다."
+        },
+        {
+            "q": "음수(마이너스) 결과도 나오나요?",
+            "a": "주로 양수 결과가 나오는 문제들로 세팅되어 초보자나 어린이도 재미있고 쉽게 접근할 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "목표인 10문제 연속 맞추기 등 난이도를 선택합니다.",
+        "화면에 제시되는 뺄셈을 머릿속으로 빠르게 계산하여 정답란에 숫자를 입력합니다.",
+        "정확도와 속도별로 측정된 나의 뺄셈 두뇌 점수를 확인합니다."
+    ];
+    const toolTips = [
+        "일상생활에서 현금 거스름돈을 계산하는 캐시어 알바생이 되었다는 마인드로 플레이하면 스피드가 비약적으로 상승합니다.",
+        "어린이들의 수학적 감각과 흥미를 높이기 위한 홈스쿨링 교보재로 부모님이 옆에서 아이와 함께 진행해도 아주 훌륭합니다."
+    ];
+
+    return () => clearInterval(timer);
         }
     }, [gameState, timeLimit]);
 
@@ -126,10 +149,14 @@ const SubtractionQuiz = () => {
 
     return (
         <div className="max-w-md mx-auto px-4 py-8">
-            <Helmet>
-                <title>간단 뺄셈 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다." />
-            </Helmet>
+            <SEO
+                title="간단 뺄셈 퀴즈 | 간단 상식 테스트"
+                description="1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다."
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center p-3 bg-red-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -331,6 +358,16 @@ const SubtractionQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="간단 뺄셈 퀴즈 안내"
+                    intro="1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

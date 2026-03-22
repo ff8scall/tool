@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Smartphone, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const SmartphoneAddiction = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -75,13 +77,37 @@ const SmartphoneAddiction = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "스몸비가 무슨 뜻인가요?",
+            "a": "스마트폰(Smartphone)과 좀비(Zombie)의 합성어로, 이동 중에도 스마트폰에 시선을 고정한 채 걷는 사람들을 의미합니다."
+        },
+        {
+            "q": "스마트폰 중독 자가진단의 신뢰도는 어느 정도인가요?",
+            "a": "일반적인 디지털 중독 진단 척도 문항을 베이스로 사용자가 간단히 체크할 수 있게 구성한 것으로, 자신의 현 상태를 객관적으로 점검하는 훌륭한 참고 지표가 됩니다."
+        }
+    ];
+    const toolSteps = [
+        "화장실에 갈 때 폰을 지참하는지, 폰이 없으면 불안한지 등의 체크리스트 항목을 확인합니다.",
+        "해당되는 사항에 모두 '네' 혹은 체크박스를 표시합니다.",
+        "총점을 기준으로 정상/주의/위험군 중 나의 의존도 상태를 확인합니다."
+    ];
+    const toolTips = [
+        "결과가 위험군으로 나왔다면 하루 1시간 '스마트폰 없는 시간(디지털 디톡스)'을 의도적으로 가져보세요.",
+        "잠들기 전 알람만 맞추고 폰을 멀리 두는 습관 하나만으로도 중독 수치를 현저하게 낮출 수 있습니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>스마트폰 중독 테스트 | 디지털 디톡스 자가진단 - Utility Hub</title>
-                <meta name="description" content="혹시 나도 스몸비? 스마트폰 중독 자가진단표를 통해 나의 의존도를 확인하고 디지털 건강을 챙겨보세요." />
-                <meta name="keywords" content="스마트폰중독, 디지털디톡스, 스몸비, 자가진단, 중독테스트, smartphone addiction" />
-            </Helmet>
+            <SEO
+                title="스마트폰 중독 테스트 | 디지털 디톡스 자가진단"
+                description="혹시 나도 스몸비? 스마트폰 중독 자가진단표를 통해 나의 의존도를 확인하고 디지털 건강을 챙겨보세요."
+                keywords="스마트폰중독, 디지털디톡스, 스몸비, 자가진단, 중독테스트, smartphone addiction"
+                category="건강"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -183,6 +209,16 @@ const SmartphoneAddiction = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="스마트폰 중독 테스트 안내"
+                    intro="혹시 나도 스몸비? 스마트폰 중독 자가진단표를 통해 나의 의존도를 확인하고 디지털 건강을 챙겨보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

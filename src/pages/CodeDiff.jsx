@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const CodeDiff = () => {
     const [text1, setText1] = useState('');
@@ -125,14 +126,31 @@ const CodeDiff = () => {
                 </div>
             )}
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 안내</h3>
-                <ul className="space-y-1 list-disc list-inside">
-                    <li>두 텍스트를 입력하면 줄 단위로 차이점을 비교합니다.</li>
-                    <li>초록색: 추가된 줄, 빨간색: 삭제된 줄, 노란색: 수정된 줄</li>
-                    <li>코드 리뷰, 문서 비교 등 다양한 용도로 활용할 수 있습니다.</li>
-                </ul>
-            </div>
+            <ToolGuide
+                title="효율적인 코드 및 텍스트 비교(Diff) 가이드"
+                intro="두 개의 텍스트나 소스 코드를 나란히 비교하여 추가, 삭제, 수정된 부분을 한눈에 파악할 수 있는 도구입니다. 버전 관리나 문서 검토 시 유용하게 사용할 수 있습니다."
+                steps={[
+                    "'원본 텍스트' 영역에 기준이 되는 코드를 입력하거나 붙여넣습니다.",
+                    "'비교할 텍스트' 영역에 변경 사항이 포함된 코드를 입력합니다.",
+                    "하단의 '비교 결과' 영역에서 줄 단위로 강조된 차이점을 확인합니다.",
+                    "추가된 줄은 녹색, 삭제된 줄은 빨간색, 수정된 줄은 노란색으로 표시되는 통계를 확인합니다."
+                ]}
+                tips={[
+                    "소스 코드뿐만 아니라 일반 문서의 초안과 수정안을 비교할 때도 효과적입니다.",
+                    "가로 폭이 넓은 화면에서 비교하면 두 코드를 더 쾌적하게 대조할 수 있습니다.",
+                    "코드 리뷰 전, 자신이 수정한 내용을 최종적으로 점검하는 습관을 들여보세요."
+                ]}
+                faqs={[
+                    {
+                        q: "대소문자나 공백 차이도 인식하나요?",
+                        a: "네, 현재 도구는 문자열이 완벽하게 일치하지 않으면 차이가 있는 것으로 인식합니다."
+                    },
+                    {
+                        q: "비교할 수 있는 텍스트 길이에 제한이 있나요?",
+                        a: "브라우저 성능에 따라 수천 줄 이상의 방대한 데이터는 로딩이 지연될 수 있으나, 일반적인 코드 파일은 무리 없이 처리 가능합니다."
+                    }
+                ]}
+            />
         </div>
     );
 };

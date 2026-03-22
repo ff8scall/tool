@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Palette, Lightbulb, Users, PenTool, Mic } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const HiddenTalent = () => {
     const [step, setStep] = useState(0);
@@ -175,13 +177,37 @@ const HiddenTalent = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "숨겨진 재능 테스트는 어떤 것을 알아볼 수 있나요?",
+            "a": "내가 평소에 인지하지 못했던 무의식적인 성향을 평가하여, 예술성, 리더십, 관찰력 등의 잠재적 재능을 도출해냅니다."
+        },
+        {
+            "q": "나온 재능을 직업으로 삼아야 하나요?",
+            "a": "이 테스트는 흥미 위주의 심리테스트로, 진로 결정보다는 취미나 장점을 가볍게 발굴하는 데 참고만 해주세요."
+        }
+    ];
+    const toolSteps = [
+        "다양한 일상적 상황에서 내가 어떻게 반응할지 묻는 질문들을 꼼꼼히 읽습니다.",
+        "가장 내 모습에 가까운 보기를 선택합니다.",
+        "모든 응답 완료 후, 나에게 숨겨진 특별한 1급 재능 타이틀을 확인합니다."
+    ];
+    const toolTips = [
+        "의식적으로 '좋아 보이는' 답변보다는 솔직한 행동 패턴을 골라야 정확한 잠재력을 알 수 있습니다.",
+        "결과에 나온 재능을 발휘할 수 있는 새로운 취미 활동을 시작해보는 것은 어떨까요?"
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>숨겨진 재능 테스트 | 나의 잠재력 발견하기 - Utility Hub</title>
-                <meta name="description" content="나도 모르는 나의 숨겨진 재능은 무엇일까요? 창의력, 리더십, 공감능력 등 당신 안에 잠들어 있는 보석 같은 재능을 찾아드립니다." />
-                <meta name="keywords" content="재능테스트, 적성검사, 잠재력, 심리테스트, 강점찾기, 진로탐색" />
-            </Helmet>
+            <SEO
+                title="숨겨진 재능 테스트 | 나의 잠재력 발견하기"
+                description="나도 모르는 나의 숨겨진 재능은 무엇일까요? 창의력, 리더십, 공감능력 등 당신 안에 잠들어 있는 보석 같은 재능을 찾아드립니다."
+                keywords="재능테스트, 적성검사, 잠재력, 심리테스트, 강점찾기, 진로탐색"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -268,16 +294,16 @@ const HiddenTalent = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 숨겨진 재능 테스트에 대하여</h3>
-                    <p>
-                        누구나 자신만의 특별한 재능을 가지고 있습니다. 하지만 바쁜 일상 속에서 나의 재능을 모르고 지나치는 경우가 많죠.
-                        이 테스트는 당신의 평소 행동, 사고방식, 선호도를 분석하여 당신 안에 잠들어 있는 숨겨진 재능을 찾아드립니다.
-                        창의적인 아이디어 뱅크일 수도, 사람을 이끄는 리더일 수도, 섬세한 장인일 수도 있습니다. 지금 바로 확인해보세요!
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="숨겨진 재능 테스트 안내"
+                    intro="나도 모르는 나의 숨겨진 재능은 무엇일까요? 창의력, 리더십, 공감능력 등 당신 안에 잠들어 있는 보석 같은 재능을 찾아드립니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

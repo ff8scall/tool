@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Undo2, HelpCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const Hangman = () => {
     const categories = {
@@ -118,7 +120,28 @@ const Hangman = () => {
             }
         };
         window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        
+    const toolFaqs = [
+        {
+            "q": "행맨 게임은 어떻게 이기나요?",
+            "a": "숨겨진 영단어의 알파벳을 하나씩 추측하여, 주어진 기회 (보통 6~7회) 안에 단어를 완성하면 승리합니다."
+        },
+        {
+            "q": "틀리면 어떻게 되나요?",
+            "a": "틀린 알파벳을 고를 때마다 행맨(교수대 그림)의 요소가 하나씩 추가되며, 그림이 완성되면 게임 오버됩니다."
+        }
+    ];
+    const toolSteps = [
+        "빈 칸의 개수로 단어의 길이를 파악합니다.",
+        "모음(A,E,I,O,U)이나 자주 쓰이는 자음을 먼저 눌러 단어를 유추합니다.",
+        "기회가 모두 소진되기 전까지 나머지 알파벳을 맞혀 단어를 완성합니다."
+    ];
+    const toolTips = [
+        "영어 단어 공부에도 매우 효과적인 게임입니다.",
+        "E, T, A, O, I, N 순서대로 영어에서 가장 자주 쓰이는 알파벳이므로 이 순서로 찍어보는 것이 좋습니다."
+    ];
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
     }, [gameState, handleGuess]);
 
     const shareResult = () => {
@@ -136,11 +159,14 @@ const Hangman = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>행맨 게임 | 영어 단어 맞추기 - Utility Hub</title>
-                <meta name="description" content="교수대 그림이 완성되기 전에 영어 단어를 맞추세요! 스릴 넘치는 단어 추리 게임. 영어 공부도 하고 게임도 즐기세요." />
-                <meta name="keywords" content="행맨, hangman, 영어단어, 단어게임, 추리게임, 영어공부" />
-            </Helmet>
+            <SEO
+                title="행맨 게임 | 영어 단어 맞추기"
+                description="교수대 그림이 완성되기 전에 영어 단어를 맞추세요! 스릴 넘치는 단어 추리 게임. 영어 공부도 하고 게임도 즐기세요."
+                keywords="행맨, hangman, 영어단어, 단어게임, 추리게임, 영어공부"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -260,16 +286,16 @@ const Hangman = () => {
                 </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 행맨(Hangman) 게임이란?</h3>
-                    <p>
-                        서양에서 유래한 고전 단어 맞추기 게임입니다. 술래가 단어를 생각하면, 플레이어가 알파벳을 하나씩 추측합니다.
-                        틀린 알파벳을 말할 때마다 교수형대의 그림이 하나씩 그려지며, 그림이 완성되기 전에 단어를 맞추면 승리합니다.
-                        단어 학습과 추리력을 동시에 기를 수 있는 유익한 게임입니다.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="행맨 게임 안내"
+                    intro="교수대 그림이 완성되기 전에 영어 단어를 맞추세요! 스릴 넘치는 단어 추리 게임. 영어 공부도 하고 게임도 즐기세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

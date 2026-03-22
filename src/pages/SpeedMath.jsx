@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Calculator, Trophy, Timer, Zap, Play } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const SpeedMath = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
@@ -94,7 +96,28 @@ const SpeedMath = () => {
                 });
             }, 1000);
         }
-        return () => clearInterval(timer);
+        
+    const toolFaqs = [
+        {
+            "q": "암산 챌린지에 시간 제한이 있나요?",
+            "a": "네, 각 문제당 주어지는 시간이 타임 스크롤 형태로 감소하여, 스피디하게 암산하고 숫자를 입력해야 하는 긴장감 넘치는 게임입니다."
+        },
+        {
+            "q": "중간에 멈추면 어떻게 되나요?",
+            "a": "시간이 모두 소진되면 게임 오버되며 그때까지 맞춘 문제 수에 기반하여 점수가 기록됩니다."
+        }
+    ];
+    const toolSteps = [
+        "게임 시작 버튼을 누르면 즉시 덧셈, 뺄셈 등 산수 문제가 표시됩니다.",
+        "눈으로 문제를 보자마자 암산하여 화면 아래 숫자 키패드나 키보드로 정답을 입력합니다.",
+        "시간 내에 맞추어 보너스 점수를 획득하고 랭킹(최고 점수) 갱신에 도전합니다."
+    ];
+    const toolTips = [
+        "키보드의 텐키(우측 숫자 패드)를 활용하면 훨씬 더 빠르게 정답을 입력할 수 있습니다.",
+        "매일 아침 잠을 깨기 위해, 뇌를 워밍업하고 싶을 때 플레이하면 두뇌 회전 보조제로 제격입니다."
+    ];
+
+    return () => clearInterval(timer);
     }, [gameState]);
 
     const getRank = (finalScore) => {
@@ -120,11 +143,14 @@ const SpeedMath = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>암산 챌린지 | 두뇌 회전 스피드 게임 - Utility Hub</title>
-                <meta name="description" content="잠든 뇌를 깨우는 스피드 암산 게임! 제한 시간 내에 최대한 많은 산수 문제를 풀어보세요. 당신의 순발력과 암산 실력을 테스트해보세요." />
-                <meta name="keywords" content="암산게임, 수학게임, 두뇌게임, 산수, 더하기빼기, 스피드게임" />
-            </Helmet>
+            <SEO
+                title="암산 챌린지 | 두뇌 회전 스피드 게임"
+                description="잠든 뇌를 깨우는 스피드 암산 게임! 제한 시간 내에 최대한 많은 산수 문제를 풀어보세요. 당신의 순발력과 암산 실력을 테스트해보세요."
+                keywords="암산게임, 수학게임, 두뇌게임, 산수, 더하기빼기, 스피드게임"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -245,15 +271,16 @@ const SpeedMath = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 암산 챌린지 효과</h3>
-                    <p>
-                        간단한 사칙연산을 빠르게 푸는 훈련은 두뇌의 전두엽을 자극하여 집중력과 인지 능력을 향상시킵니다.
-                        매일 1분만 투자해도 굳어진 뇌를 말랑말랑하게 만들 수 있습니다. 최고 기록에 도전하며 두뇌 피트니스를 즐겨보세요!
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="암산 챌린지 안내"
+                    intro="잠든 뇌를 깨우는 스피드 암산 게임! 제한 시간 내에 최대한 많은 산수 문제를 풀어보세요. 당신의 순발력과 암산 실력을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

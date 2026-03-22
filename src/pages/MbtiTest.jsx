@@ -304,8 +304,7 @@ const MbtiTest = () => {
                 calculateResult();
             }
         }, 300);
-    };
-
+};
     const calculateResult = () => {
         // 상태 업데이트가 비동기이므로, 마지막 문제의 점수가 반영된 후 실행되어야 함.
         // 하지만 setScores 안에서 해결하거나, useEffect로 처리해야 함.
@@ -363,15 +362,13 @@ const MbtiTest = () => {
                 return newScores;
             });
         }, 300);
-    };
-
+};
     const resetTest = () => {
         setCurrentQuestion(0);
         setScores({ E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 });
         setResult(null);
         setFadeIn(true);
-    };
-
+};
     const mbtiFaqs = [
         { q: "MBTI 테스트는 무료인가요?", a: "네, 본 사이트에서 제공하는 모든 테스트와 도구는 별도의 비용이나 회원가입 없이 100% 무료로 이용 가능합니다." },
         { q: "정식 검사와 결과가 같은가요?", a: "기본적인 알고리즘은 유사하지만, 본 테스트는 웹에서 간편하게 즐길 수 있도록 제작된 약식 형태입니다. 더 전문적인 상담은 전문가를 통해 받으시길 권장합니다." }
@@ -642,5 +639,4 @@ const MbtiTest = () => {
         </div>
     );
 };
-
 export default MbtiTest;

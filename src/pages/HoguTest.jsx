@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Hand, ShieldAlert, Award, HelpingHand } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const HoguTest = () => {
     const [step, setStep] = useState('intro');
@@ -132,13 +134,37 @@ const HoguTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "호구 성향 테스트의 '호구'가 무슨 뜻인가요?",
+            "a": "거절을 잘 못하고, 남에게 맞춰주느라 금전적이거나 심리적인 손해를 자주 보는 착한 성격을 유머러스하게 일컫는 말입니다."
+        },
+        {
+            "q": "결과가 너무 뼈 때려요(팩트 폭격).",
+            "a": "타인을 배려하는 성격이 결코 나쁜 것은 아닙니다! 다만 나 스스로를 더 사랑하라는 의미의 유쾌한 조언으로 받아들여주세요."
+        }
+    ];
+    const toolSteps = [
+        "친구의 무리한 부탁, 직장 생활 등 호구가 되기 쉬운 상황 문항들을 읽습니다.",
+        "평소 나의 대처 방식과 가장 똑같은 항목을 선택합니다.",
+        "선택 완료 후, 나의 글로벌 호구 등급(?)과 처방전을 확인합니다."
+    ];
+    const toolTips = [
+        "본인이 착한 아이 증후군이 있다면, 결과 페이지에 나온 극복 팁을 실생활에 꼭 적용해 보세요.",
+        "자신을 옭아매는 무리한 부탁엔 'No'라고 말하는 연습이 필요합니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>호구 성향 테스트 | 내가 호구라고? - Utility Hub</title>
-                <meta name="description" content="혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트." />
-                <meta name="keywords" content="호구테스트, 거절못하는성격, 심리테스트, 호구자가진단, pushover test" />
-            </Helmet>
+            <SEO
+                title="호구 성향 테스트 | 내가 호구라고?"
+                description="혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."
+                keywords="호구테스트, 거절못하는성격, 심리테스트, 호구자가진단, pushover test"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -230,6 +256,16 @@ const HoguTest = () => {
                     </div>
                 );
             })()}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="호구 성향 테스트 안내"
+                    intro="혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

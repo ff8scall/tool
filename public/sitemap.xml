@@ -5,7 +5,7 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://tool.lego-sia.com/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,25 +13,25 @@
   <!-- Unit Converters -->
   <url>
     <loc>https://tool.lego-sia.com/length/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/weight/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/currency/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/temperature-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -39,13 +39,13 @@
   <!-- Health Tools -->
   <url>
     <loc>https://tool.lego-sia.com/bmi/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/bmr/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -53,55 +53,55 @@
   <!-- Games -->
   <url>
     <loc>https://tool.lego-sia.com/one-to-fifty/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/cps-test/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/aim-trainer/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/number-memory/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/number-baseball/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/minesweeper/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/roulette/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/ladder-game/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/typing-test/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -109,37 +109,37 @@
   <!-- Finance/Life Calculators -->
   <url>
     <loc>https://tool.lego-sia.com/loan/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/salary-calc/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/compound-interest/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/work-hours/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/age-calc/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/date/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -147,31 +147,31 @@
   <!-- Text Tools -->
   <url>
     <loc>https://tool.lego-sia.com/word-count/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/unicode/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/string-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/base64/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/html-encoder/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -179,97 +179,97 @@
   <!-- Developer Tools -->
   <url>
     <loc>https://tool.lego-sia.com/base-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/json-formatter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/markdown-editor/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/html-view/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/diff/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/web-editor/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/hash-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/uuid-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/ascii-art/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/ascii-table/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/special-char/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/cron-generator/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/csv-json/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/url-encoder/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/jwt-decoder/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/regex-tester/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -277,73 +277,73 @@
   <!-- Utility Tools -->
   <url>
     <loc>https://tool.lego-sia.com/qr-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/barcode-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/password-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/color-picker/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/image-base64/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/ip-address/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/timer/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/pomodoro-timer/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/checklist/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/flashlight/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/image-resize/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/youtube-thumbnail/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -351,85 +351,85 @@
   <!-- Fun/Fortune Tools -->
   <url>
     <loc>https://tool.lego-sia.com/blood-type/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/mbti/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/saju/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/zodiac-fortune/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/horoscope/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/dream-interpretation/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/name-analysis/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/biorhythm/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/birth-gen/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/tarot/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/lotto/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/discount-calculator/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/color-extractor/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/qr-generator/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -437,19 +437,19 @@
   <!-- New Unit Converters -->
   <url>
     <loc>https://tool.lego-sia.com/area-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/volume-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/speed-converter/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -457,199 +457,199 @@
   <!-- New Utility Tools -->
   <url>
     <loc>https://tool.lego-sia.com/world-clock/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/percent-calculator/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/fraction-calculator/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/encryption-tool/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/dice-roller/</loc>
-    <lastmod>2025-11-21</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/lunch-recommender/</loc>
-    <lastmod>2025-11-23</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 <url>
   <loc>https://tool.lego-sia.com/flappy-bird/</loc>
-  <lastmod>2026-01-14</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/suika-game/</loc>
-  <lastmod>2026-01-14</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/missile-dodge/</loc>
-  <lastmod>2026-01-14</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/snake-game/</loc>
-  <lastmod>2026-01-16</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/sudoku/</loc>
-  <lastmod>2026-01-16</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/tower-stacker/</loc>
-  <lastmod>2026-01-16</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/hearing-test/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/spelling-quiz/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/time-sense/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/pitch-test/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/capital-quiz/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/typing-defense/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/vocabulary-test/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/dynamic-acuity/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/hangman/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://tool.lego-sia.com/morse-code/</loc>
-  <lastmod>2026-01-29</lastmod>
+  <lastmod>2026-03-21</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
   <url>
     <loc>https://tool.lego-sia.com/smile-dating-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/dating-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/stress-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/brain-type/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/eq-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/smartphone-addiction/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/kkondae-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/hogu-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/debate-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/idol-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tool.lego-sia.com/resilience-test/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

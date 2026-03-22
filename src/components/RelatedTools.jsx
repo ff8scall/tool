@@ -57,10 +57,6 @@ const RelatedTools = () => {
                             className="group flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:bg-accent/50 hover:border-primary/30 transition-all duration-200"
                         >
                             <div className={`p-2 rounded-lg ${tool.color} bg-opacity-10 text-opacity-100`}>
-                                {/* Note: We use the color class for bg but with opacity, or text color. 
-                                   Since tool.color is like 'bg-red-500', we need to handle it carefully for icons.
-                                   Let's just use the tool.color for the icon background with low opacity.
-                                */}
                                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white ${tool.color} shadow-sm group-hover:scale-110 transition-transform`}>
                                     <Icon className="w-5 h-5" />
                                 </div>

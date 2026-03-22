@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, PenTool, CheckCircle2, XCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const SpellingQuiz = () => {
     const [step, setStep] = useState(0);
@@ -209,13 +211,37 @@ const SpellingQuiz = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "맞춤법 퀴즈는 어떤 단어들이 나오나요?",
+            "a": "되/돼, 낫/낳/낮, 어이/어의 등 성인들도 메신저에서 자주 틀려 곤란해지는 실생활 헷갈리는 맞춤법들이 주로 출제됩니다."
+        },
+        {
+            "q": "정답 해설도 제공되나요?",
+            "a": "문제를 푸신 뒤, 왜 이 단어가 맞는 표현인지 국어사전 기준의 깔끔한 설명과 올바른 예문을 제공하여 학습에 도움을 줍니다."
+        }
+    ];
+    const toolSteps = [
+        "문장 안에서 비어 있는 괄호나 밑줄 친 부분에 알맞은 단어를 보기 두어 개 중에서 고릅니다.",
+        "모든 문제를 풀었다면 채점 버튼을 눌러 점수를 확인합니다.",
+        "틀린 문제의 오답 노트와 해설 지문을 꼼꼼히 읽어 맞춤법을 완전히 내 것으로 만듭니다."
+    ];
+    const toolTips = [
+        "자격증 시험 준비가 아닙니다! 친구 카톡을 볼 때 불편함 없이 바로 지적해줄 수 있는 '맞춤법 경찰'이 되기 위한 테스트라고 생각하고 가볍게 푸세요.",
+        "헷갈렸던 문제들은 캡처하여 스마트폰 메모장에 따로 저장해두면 실생활 글쓰기에 아주 유용합니다."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>한국어 맞춤법 능력 고사 | 헷갈리는 맞춤법 퀴즈 - Utility Hub</title>
-                <meta name="description" content="안돼? 안되? 봬요? 뵈요? 자주 틀리는 한국어 맞춤법 퀴즈로 당신의 국어 실력을 테스트해보세요." />
-                <meta name="keywords" content="맞춤법퀴즈, 한글맞춤법, 띄어쓰기, 국어문법, 맞춤법검사, 한국어테스트" />
-            </Helmet>
+            <SEO
+                title="한국어 맞춤법 능력 고사 | 헷갈리는 맞춤법 퀴즈"
+                description="안돼? 안되? 봬요? 뵈요? 자주 틀리는 한국어 맞춤법 퀴즈로 당신의 국어 실력을 테스트해보세요."
+                keywords="맞춤법퀴즈, 한글맞춤법, 띄어쓰기, 국어문법, 맞춤법검사, 한국어테스트"
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -331,15 +357,16 @@ const SpellingQuiz = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 자주 틀리는 맞춤법</h3>
-                    <p>
-                        한국어는 모국어 화자에게도 꽤 어려운 언어입니다. 특히 '되/돼', '안/않' 구별은 많은 사람들이 혼동하는 부분이죠.
-                        이 퀴즈를 통해 몰랐던 맞춤법 지식을 채우고, 친구들과 점수를 비교해보세요. 올바른 맞춤법 사용은 신뢰감을 높여줍니다.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="한국어 맞춤법 능력 고사 안내"
+                    intro="안돼? 안되? 봬요? 뵈요? 자주 틀리는 한국어 맞춤법 퀴즈로 당신의 국어 실력을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

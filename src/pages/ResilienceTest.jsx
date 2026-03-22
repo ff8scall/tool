@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Shield, Zap, TrendingUp, Anchor } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const ResilienceTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -132,13 +134,37 @@ const ResilienceTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "회복 탄력성이 무엇인가요?",
+            "a": "크고 작은 시련이나 역경, 극심한 스트레스를 경험한 후에 이를 극복하고 툭툭 털어내어 본래의 안정된 심리 상태로 되돌아오는 마음의 근력(멘탈 강도)을 뜻합니다."
+        },
+        {
+            "q": "결과 점수가 낮으면 큰일인가요?",
+            "a": "전혀 아닙니다! 신체 근육처럼 마음의 근육인 회복탄력성도 후천적인 연습과 마인드 컨트롤을 통해 충분히 키울 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "갑작스러운 실패, 인간관계의 갈등 상황 등 시련과 관련된 질문을 읽어봅니다.",
+        "그 상황을 겪었을 때 평소 내가 회복하는 속도와 마음가짐을 가장 잘 나타내는 보기를 선택합니다.",
+        "테스트 완료 후 나의 멘탈 회복 탄력성 지수와 이를 높이는 전문적인 조언을 읽어봅니다."
+    ];
+    const toolTips = [
+        "최근 한 달 동안 본인이 스트레스를 받았던 사건을 떠올리며 풀면 더욱 정확한 진단이 가능합니다.",
+        "결과에 나오는 '긍정 언어 사용하기', '작은 성공 경험하기' 등의 회복 솔루션을 일상에서 실천해보세요."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>회복 탄력성 테스트 | 멘탈 강도 측정 - Utility Hub</title>
-                <meta name="description" content="시련을 이겨내는 마음의 근력, 회복 탄력성! 당신의 멘탈은 유리일까요 강철일까요? 지금 확인해보세요." />
-                <meta name="keywords" content="회복탄력성, 멘탈테스트, 유리멘탈, 쿠크다스, 심리테스트, resilience" />
-            </Helmet>
+            <SEO
+                title="회복 탄력성 테스트 | 멘탈 강도 측정"
+                description="시련을 이겨내는 마음의 근력, 회복 탄력성! 당신의 멘탈은 유리일까요 강철일까요? 지금 확인해보세요."
+                keywords="회복탄력성, 멘탈테스트, 유리멘탈, 쿠크다스, 심리테스트, resilience"
+                category="건강"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -233,6 +259,16 @@ const ResilienceTest = () => {
                     </div>
                 );
             })()}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="회복 탄력성 테스트 안내"
+                    intro="시련을 이겨내는 마음의 근력, 회복 탄력성! 당신의 멘탈은 유리일까요 강철일까요? 지금 확인해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

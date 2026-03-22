@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Plus, Calculator, Trophy, RefreshCw, ChevronLeft, Delete, X, Check } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const AdditionQuiz = () => {
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
@@ -28,7 +30,28 @@ const AdditionQuiz = () => {
                     return prev - 1;
                 });
             }, 1000);
-            return () => clearInterval(timer);
+            
+    const toolFaqs = [
+        {
+            "q": "덧셈 퀴즈는 어떤 방식인가요?",
+            "a": "화면에 제시되는 두 숫자의 합을 제한 시간 내에 빠르게 입력하는 방식입니다."
+        },
+        {
+            "q": "난이도 조절이 가능한가요?",
+            "a": "네, 1단계부터 3단계까지 자리수와 난이지가 달라집니다."
+        }
+    ];
+    const toolSteps = [
+        "원하는 난이도를 선택합니다.",
+        "화면에 나오는 덧셈 문제를 풉니다.",
+        "정답을 제출하고 점수를 확인합니다."
+    ];
+    const toolTips = [
+        "암산 능력을 키우기 위해 매일 꾸준히 풀어보세요.",
+        "제한 시간을 두고 풀면 두뇌 트레이닝에 효과적입니다."
+    ];
+
+    return () => clearInterval(timer);
         }
     }, [gameState, timeLimit]);
 
@@ -125,10 +148,14 @@ const AdditionQuiz = () => {
 
     return (
         <div className="max-w-md mx-auto px-4 py-8">
-            <Helmet>
-                <title>간단 덧셈 퀴즈 | 간단 상식 테스트</title>
-                <meta name="description" content="1단계부터 3단계까지 난이도 별로 즐기는 간단 덧셈 퀴즈입니다." />
-            </Helmet>
+            <SEO
+                title="간단 덧셈 퀴즈 | 간단 상식 테스트"
+                description="1단계부터 3단계까지 난이도 별로 즐기는 간단 덧셈 퀴즈입니다."
+                keywords=""
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center p-3 bg-blue-500 rounded-2xl text-white mb-4 shadow-lg">
@@ -330,6 +357,16 @@ const AdditionQuiz = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="간단 덧셈 퀴즈 안내"
+                    intro="1단계부터 3단계까지 난이도 별로 즐기는 간단 덧셈 퀴즈입니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

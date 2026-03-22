@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Heart, MessageCircle, User } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const EqTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -130,13 +132,37 @@ const EqTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "EQ(감성 지수)란 무엇인가요?",
+            "a": "자신과 타인의 감정을 이해하고 조절하며, 공감할 수 있는 정서적 지능 지수를 의미합니다."
+        },
+        {
+            "q": "이 테스트로 진짜 저의 공감 능력을 알 수 있나요?",
+            "a": "전문적인 심리 검사는 아니지만, 일상적인 대화 상황에서 타인의 감정을 얼마나 잘 캐치하는지 대략적인 수준을 알아볼 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "속상함, 슬픔, 기쁨 등 다양한 타인의 감정이 담긴 대화 상황을 읽습니다.",
+        "그 상황에서 내가 건넬 법한 위로나 답변을 선택합니다.",
+        "모든 선택이 끝나면 분석된 나의 공감 능력 수치와 성향을 확인합니다."
+    ];
+    const toolTips = [
+        "'내가 무엇을 해야 맞을까?' 보다 평소 나의 진짜 성격대로 답해야 정확한 결과가 나옵니다.",
+        "일명 'T(사고형)' 와 'F(감정형)' 친구들이 함께 해보면 결과가 극명하게 갈려 더욱 재미있습니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>EQ 공감 능력 테스트 | 감정 지능 측정 - Utility Hub</title>
-                <meta name="description" content="타인의 감정을 얼마나 잘 이해하고 있나요? 다양한 상황극을 통해 나의 공감 능력을 테스트해보세요." />
-                <meta name="keywords" content="eq테스트, 공감능력, 감정지능, 심리테스트, emotional intelligence" />
-            </Helmet>
+            <SEO
+                title="EQ 공감 능력 테스트 | 감정 지능 측정"
+                description="타인의 감정을 얼마나 잘 이해하고 있나요? 다양한 상황극을 통해 나의 공감 능력을 테스트해보세요."
+                keywords="eq테스트, 공감능력, 감정지능, 심리테스트, emotional intelligence"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -225,6 +251,16 @@ const EqTest = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="EQ 공감 능력 테스트 안내"
+                    intro="타인의 감정을 얼마나 잘 이해하고 있나요? 다양한 상황극을 통해 나의 공감 능력을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

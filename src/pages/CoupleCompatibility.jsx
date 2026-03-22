@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Heart, User, Sparkles } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const CoupleCompatibility = () => {
     const [names, setNames] = useState({ person1: '', person2: '' });
@@ -64,13 +66,37 @@ const CoupleCompatibility = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "이름 궁합의 원리가 무엇인가요?",
+            "a": "전통적인 한글 이름의 획수를 기반으로 두 사람 이름의 획수를 더해가며 최종 확률(%)을 계산하는 재미 위주의 궁합 공식입니다."
+        },
+        {
+            "q": "점수가 너무 낮게 나왔어요!",
+            "a": "이름 획수만으로 계산하는 단순한 유희거리이므로, 실제 두 사람의 애정 전선이나 운명과는 전혀 무관하니 재미로만 즐겨주세요."
+        }
+    ];
+    const toolSteps = [
+        "본인의 이름과 상대방(연인, 썸남/썸녀, 최애 등)의 이름을 각각 입력합니다.",
+        "결과 확인 버튼을 누릅니다.",
+        "애니메이션과 함께 도출된 우리 두 사람의 궁합 점수(%)를 확인합니다."
+    ];
+    const toolTips = [
+        "현실 연인 뿐만 아니라, 연예인이나 좋아하는 캐릭터의 이름을 넣어보는 것도 재미있습니다.",
+        "결과 이미지를 카카오톡으로 공유하여 상대방의 반응을 살펴보세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>커플 궁합 테스트 | 우리 사이 몇 점일까? - Utility Hub</title>
-                <meta name="description" content="재미로 보는 커플 이름 궁합 테스트! 좋아하는 사람, 썸남썸녀, 연인과의 궁합 점수를 확인해보세요. 이름만 입력하면 바로 결과가 나옵니다." />
-                <meta name="keywords" content="궁합테스트, 이름궁합, 커플궁합, 연애운, 속궁합, 썸궁합" />
-            </Helmet>
+            <SEO
+                title="커플 궁합 테스트 | 우리 사이 몇 점일까?"
+                description="재미로 보는 커플 이름 궁합 테스트! 좋아하는 사람, 썸남썸녀, 연인과의 궁합 점수를 확인해보세요. 이름만 입력하면 바로 결과가 나옵니다."
+                keywords="궁합테스트, 이름궁합, 커플궁합, 연애운, 속궁합, 썸궁합"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -203,16 +229,16 @@ const CoupleCompatibility = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 커플 궁합 테스트 원리</h3>
-                    <p>
-                        이 테스트는 두 사람의 이름 획수나 조합을 분석하는 고전적인 이름 궁합 알고리즘을 현대적으로 재해석하여 만든 재미 위주의 궁합 서비스입니다.
-                        0점부터 100점까지의 점수로 두 사람의 애정 척도를 확인해보세요. 점수가 낮게 나와도 너무 실망하지 마세요! 사랑은 서로 노력하며 만들어가는 것이니까요.
-                        친구, 연인, 짝사랑하는 사람과 함께 재미로 즐겨보세요.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="커플 궁합 테스트 안내"
+                    intro="재미로 보는 커플 이름 궁합 테스트! 좋아하는 사람, 썸남썸녀, 연인과의 궁합 점수를 확인해보세요. 이름만 입력하면 바로 결과가 나옵니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

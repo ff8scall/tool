@@ -296,11 +296,14 @@ const TowerStacker = () => {
                             </div>
                         </div>
                     )}
+                
+            
+
                 </div>
+
             </div>
 
-            <ToolGuide
-                title="탑 쌓기 (Tower Stacker)"
+            <ToolGuide title="탑 쌓기 (Tower Stacker)"
                 intro="탑 쌓기는 고도의 집중력과 타이밍이 필요한 클래식 아케이드 게임입니다. 단순해 보이지만 층수가 높아질수록 빨라지는 속도와 좁아지는 블록 사이에서 한계에 도전해보세요. 친구들과 최고 기록을 공유하며 누가 가장 높은 건물을 올렸는지 내기하기에도 좋습니다."
                 steps={[
                     "게임 시작 버튼을 누르거나 화면을 클릭하여 첫 번째 블록을 배치합니다.",
@@ -324,5 +327,4 @@ const TowerStacker = () => {
         </div>
     );
 };
-
 export default TowerStacker;

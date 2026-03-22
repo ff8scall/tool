@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import { Divide } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
 
@@ -71,7 +72,6 @@ const FractionCalculator = () => {
 
         return simplify(resultNum, resultDen);
     };
-
     // 소수를 분수로 변환
     const decimalToFraction = () => {
         if (!decimal) return { num: 0, den: 1 };
@@ -81,16 +81,15 @@ const FractionCalculator = () => {
         const numerator = dec * denominator;
         return simplify(Math.round(numerator), denominator);
     };
-
     const result = calculate();
     const decResult = decimalToFraction();
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             <SEO
-                title="분수 계산기 - 분수 사칙연산, 기약분수 변환"
-                description="분수 덧셈, 뺄셈, 곱셈, 나눗셈 계산 및 기약분수 변환, 소수를 분수로 변환하는 온라인 계산기입니다."
-                keywords={['분수', '계산기', '기약분수', 'fraction', 'calculator']}
+                title="분수 계산기 | 분수 사칙연산, 기약분수 변환, 소수 변환"
+                description="분수 덧셈·뺄셈·곱셈·나눗셈 계산, 기약분수 자동 변환, 소수를 분수로 변환하는 계산기입니다. 수학 숙제, 요리 재료 계량 분수 계산에 활용하세요."
+                keywords="분수계산기, 기약분수변환, 소수분수변환, 분수덧셈, 분수곱셈, 분수나눗셈, 분수사칙연산"
                 path="/fraction-calculator"
             />
 
@@ -225,12 +224,34 @@ const FractionCalculator = () => {
                     </div>
                 </div>
 
-                <div className="mt-8">
-                    <ShareButtons />
-                </div>
+                <div className="mt-8"><ShareButtons />
+                <ToolGuide
+                    title="분수 계산기 사용 가이드"
+                    intro="분수 계산기는 두 분수의 덧셈·뺄셈·곱셈·나눗셈을 계산하고, 결과를 자동으로 기약분수로 변환합니다. 소수를 분수로 변환하는 기능도 제공합니다."
+                    steps={[
+                        '"분수 사칙연산" 섹션에서 첫 번째 분수(분자/분모)를 입력합니다.',
+                        '연산자(+, −, ×, ÷)를 선택합니다.',
+                        '두 번째 분수(분자/분모)를 입력합니다.',
+                        '결과가 자동으로 기약분수로 표시됩니다.',
+                        '"소수 → 분수 변환" 에서 소수(예: 0.75)를 입력하면 분수(3/4)로 변환됩니다.',
+                    ]}
+                    tips={[
+                        '1/2 + 1/3을 입력하면 자동으로 5/6으로 계산됩니다.',
+                        '음수 분수는 분자에 마이너스를 입력하면 됩니다. (예: 분자 -1, 분모 3 = -1/3)',
+                        '소수 0.5 = 1/2, 0.25 = 1/4, 0.75 = 3/4, 0.333... = 1/3.',
+                        '요리 레시피에서 재료를 절반으로 줄이거나 두 배로 늘릴 때 분수 계산이 유용합니다.',
+                    ]}
+                    faqs={[
+                        { q: '기약분수란 무엇인가요?', a: '분자와 분모의 공약수가 1인 분수입니다. 예: 4/8 → 1/2 (최대공약수 4로 약분). 이 계산기는 결과를 자동으로 기약분수로 변환합니다.' },
+                        { q: '분수를 소수로 바꾸려면?', a: '분자 ÷ 분모 = 소수. 예: 3/4 = 0.75. 결과 분수 아래 소수값이 자동으로 표시됩니다.' },
+                        { q: '대분수(1과 2분의 1)는 어떻게 입력하나요?', a: '이 계산기는 가분수 형태로 입력해야 합니다. 1과 1/2 = 3/2. 분자에 3, 분모에 2를 입력하세요.' },
+                    ]}
+                />
             </div>
+        </div>
         </div>
     );
 };
-
 export default FractionCalculator;
+
+

@@ -109,6 +109,7 @@ const Layout = ({ children }) => {
                         <button
                             className="md:hidden p-2 rounded-md hover:bg-accent"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="메뉴 열기"
                         >
                             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
@@ -168,7 +169,7 @@ const Layout = ({ children }) => {
                             <div key={category.title} className="space-y-4">
                                 <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">{category.title}</h4>
                                 <ul className="space-y-2">
-                                    {category.items.slice(0, 8).map((item) => (
+                                    {category.items.slice(0, 10).map((item) => (
                                         <li key={item.path}>
                                             <Link
                                                 to={item.path}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Keyboard, Heart, Play, Trophy, Crosshair } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const TypingDefense = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
@@ -103,7 +105,28 @@ const TypingDefense = () => {
 
         gameLoopRef.current = requestAnimationFrame(loop);
 
-        return () => cancelAnimationFrame(gameLoopRef.current);
+        
+    const toolFaqs = [
+        {
+            "q": "타자 디펜스(베네치아/산성비) 게임은 어떤 규칙인가요?",
+            "a": "하늘에서 내려오는 각종 단어들이 바닥 유리에 닿기 전에, 그 단어를 키보드로 정확히 입력하고 엔터를 쳐서 박살내는 추억의 게임입니다."
+        },
+        {
+            "q": "단어의 난이도는 어떻게 조절되나요?",
+            "a": "레벨이 상승함에 따라 단어의 글자 수가 길어지고(사자성어, 긴 영어 단어 등), 단어가 쏟아지는 속도가 점점 더 잔인하게 빨라집니다."
+        }
+    ];
+    const toolSteps = [
+        "게임을 시작하고 내려오는 단어 하나를 타겟팅합니다.",
+        "입력창에 오타 없이 단어를 타이핑 한 뒤 엔터(Enter) 키로 발사합니다.",
+        "바닥에 단어가 닿아 생명력이 닳기 전 모든 단어를 격추하여 베네치아를 수호하세요."
+    ];
+    const toolTips = [
+        "여러 단어가 동시에 내려올 경우 가장 바닥에 근접한 단어부터 최우선으로 타겟팅하는 침착함이 생명입니다.",
+        "독수리 타법보다는 양손을 키보드 기준선에 가지런히 올리는 정석 타건 연습을 하기 가장 좋은 훌륭한 교육용 소프트웨어입니다."
+    ];
+
+    return () => cancelAnimationFrame(gameLoopRef.current);
     }, [gameState, score]); // lives is handled inside local scope or ref check if needed, but setState function form is safe
 
     const handleInput = (e) => {
@@ -144,11 +167,14 @@ const TypingDefense = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>타자 디펜스 게임 | 떨어지는 단어를 파괴하라! - Utility Hub</title>
-                <meta name="description" content="단어가 바닥에 닿기 전에 입력해서 파괴하세요! 스릴 넘치는 타자 연습 게임. 당신의 타자 속도와 순발력을 테스트해보세요." />
-                <meta name="keywords" content="타자게임, 한컴타자, 베네치아, 산성비, 타자연습, typing game" />
-            </Helmet>
+            <SEO
+                title="타자 디펜스 게임 | 떨어지는 단어를 파괴하라!"
+                description="단어가 바닥에 닿기 전에 입력해서 파괴하세요! 스릴 넘치는 타자 연습 게임. 당신의 타자 속도와 순발력을 테스트해보세요."
+                keywords="타자게임, 한컴타자, 베네치아, 산성비, 타자연습, typing game"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-6">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -263,16 +289,16 @@ const TypingDefense = () => {
                 </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 추억의 타자 게임 (베네치아, 산성비)</h3>
-                    <p>
-                        하늘에서 떨어지는 단어를 맞춰서 없애는 방식의 게임은 90년대 컴퓨터실에서 즐겨하던 '베네치아', '산성비'와 유사합니다.
-                        단순히 타자 속도만 빠르다고 되는 것이 아니라, 위기 상황에서 침착하게 오타 없이 입력하는 정확도가 중요합니다.
-                        어린 시절 추억을 떠올리며 타자 연습도 하고 스트레스도 날려보세요!
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="타자 디펜스 게임 안내"
+                    intro="단어가 바닥에 닿기 전에 입력해서 파괴하세요! 스릴 넘치는 타자 연습 게임. 당신의 타자 속도와 순발력을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

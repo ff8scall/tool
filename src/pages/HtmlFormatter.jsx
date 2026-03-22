@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const HtmlFormatter = () => {
     const [input, setInput] = useState('');
@@ -131,15 +132,31 @@ const HtmlFormatter = () => {
                 </div>
             </div>
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 사용 방법</h3>
-                <ul className="space-y-1 list-disc list-inside">
-                    <li>왼쪽에 HTML 코드를 입력하세요.</li>
-                    <li>"포맷팅" 버튼: 들여쓰기를 추가하여 코드를 보기 좋게 정렬합니다.</li>
-                    <li>"압축" 버튼: 불필요한 공백을 제거하여 코드를 압축합니다.</li>
-                    <li>결과를 복사하여 사용할 수 있습니다.</li>
-                </ul>
-            </div>
+            <ToolGuide
+                title="깨끗한 코드를 위한 HTML 포맷터 활용 가이드"
+                intro="가독성이 떨어지는 HTML 소스 코드를 표준 들여쓰기 규칙에 맞춰 예쁘게 정렬하거나, 웹사이트 로딩 속도 최적화를 위해 불필요한 공백을 제거(압축)하는 도구입니다."
+                steps={[
+                    "'HTML 코드 입력'란에 작업 중인 소스 코드를 붙여넣습니다.",
+                    "코드를 예쁘게 정렬하고 싶다면 '포맷팅' 버튼을 클릭합니다.",
+                    "파일 용량을 줄이고 싶다면 '압축' 버튼을 클릭하여 공백을 제거합니다.",
+                    "결과물 구성이 완료되면 우측 상단의 '복사' 버튼을 눌러 프로젝트에 적용합니다."
+                ]}
+                tips={[
+                    "다른 사람의 코드를 분석할 때 '포맷팅' 기능을 사용하면 구조를 파악하기 훨씬 수월해집니다.",
+                    "실제 서비스 배포 시에는 '압축'된 코드를 사용하여 네트워크 트래픽을 절약할 수 있습니다.",
+                    "복잡한 중첩 구조(Div hell)를 정렬하여 태그 닫힘 누락 오류를 쉽게 찾아보세요."
+                ]}
+                faqs={[
+                    {
+                        q: "스크립트(JS)나 스타일(CSS) 태그 안의 내용도 정렬되나요?",
+                        a: "현재 도구는 HTML 태그 구조를 중심으로 정렬하며, 내부의 복잡한 스크립트 논리는 원본을 최대한 유지합니다."
+                    },
+                    {
+                        q: "포맷팅 후 코드가 깨질 위험은 없나요?",
+                        a: "단순 공백과 들여쓰기만 조정하므로 실행 로직에는 영향을 주지 않지만, 중요한 코드는 항상 백업 후 작업하시길 권장합니다."
+                    }
+                ]}
+            />
         </div>
     );
 };

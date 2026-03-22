@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { TrendingUp } from 'lucide-react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import RelatedTools from '../components/RelatedTools';
 
 const CompoundInterestCalculator = () => {
@@ -39,9 +40,9 @@ const CompoundInterestCalculator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="복리 계산기 - Utility Hub"
-                description="복리 이자를 계산하세요. 원금, 이율, 기간을 입력하면 복리로 불어난 금액을 확인할 수 있습니다."
-                keywords="복리 계산기, 복리 이자, 투자 계산, 복리 마법, 이자 계산"
+                title="복리 계산기 | 원금, 이율, 기간으로 복리 이자 계산"
+                description="원금, 연이율, 투자 기간을 입력하면 복리로 불어난 최종 금액을 즉시 계산합니다. 단리와 복리 비교, 복리 효과를 한눈에 확인하세요."
+                keywords="복리계산기, 복리이자계산, 단리복리비교, 투자수익계산, 72법칙, 장기투자계산, 예금이자계산"
             />
 
             <header className="text-center space-y-2">
@@ -293,11 +294,36 @@ const CompoundInterestCalculator = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            
 
-            <RelatedTools relatedIds={['salary-calc', 'currency', 'loan']} />
-        </div>
+
+        
+            </div>
+            <ToolGuide
+                title="복리 계산기 사용 가이드"
+                intro="복리 계산기는 A = P(1 + r/n)^(nt) 공식을 사용해 원금이 복리로 불어난 최종 금액을 계산합니다. 예금, 적금, 장기 투자 계획 수립에 활용하세요. 단리와의 비교를 통해 복리의 강력한 효과를 직접 확인할 수 있습니다."
+                steps={[
+                    '"원금(원)"에 초기 투자금을 입력합니다.',
+                    '"연 이율(%)"에 연간 이자율을 입력합니다. (예: 정기예금 3.5%)',
+                    '"기간(년)"에 투자 기간을 입력합니다.',
+                    '"복리 주기"를 선택합니다. (월복리가 가장 일반적)',
+                    '결과 카드에서 복리 최종금액, 총 이자, 단리와의 차이를 확인합니다.',
+                ]}
+                tips={[
+                    '"72의 법칙": 72 ÷ 연이율(%) = 원금이 2배가 되는 기간(년). 연 6%라면 약 12년 후 2배.',
+                    '같은 이율이라도 복리 주기가 많을수록(일복리 > 월복리 > 연복리) 최종 수익이 늘어납니다.',
+                    '20대에 1,000만 원을 연 7%로 30년 투자하면 약 7,612만 원이 됩니다. 시작이 빠를수록 유리합니다.',
+                    '이자소득세(15.4%)를 포함한 실제 수익은 이 계산기 결과보다 줄어드니 참고하세요.',
+                ]}
+                faqs={[
+                    { q: '복리와 단리의 차이는 무엇인가요?', a: '단리는 원금에만 이자가 붙습니다. 복리는 원금+이자에 다시 이자가 붙어 기하급수적으로 증가합니다. 기간이 길수록 복리와 단리의 차이는 커집니다.' },
+                    { q: '72의 법칙이란?', a: '72를 연이율(%)로 나누면 원금이 2배가 되는 대략적인 기간(년)이 나옵니다. 연 6% → 72÷6 = 12년 후 2배. 연 8% → 9년 후 2배.' },
+                    { q: '은행 정기예금과 이 계산기를 비교할 수 있나요?', a: '주요 시중은행 정기예금은 2025년 기준 연 3~4%대입니다. 원금에 이 이율을 입력하고 복리 주기를 "월복리"로 설정하면 예상 수령액을 계산할 수 있습니다. 단, 실제 세후 수익은 이자소득세(15.4%) 차감 후입니다.' },
+                ]}
+            />
+            </div>
     );
 };
-
 export default CompoundInterestCalculator;
+
+

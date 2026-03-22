@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Share2, RefreshCw, MessageSquare, Users, ThumbsUp, ThumbsDown } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const DebateTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -108,13 +109,35 @@ const DebateTest = () => {
         }
     };
 
+    const debateFaqs = [
+        { q: "친구의 패딩 지퍼를 올려주는 게 왜 문제가 되나요?", a: "연인 외의 이성에게 불필요한 스킨십이나 과도한 친절을 베푸는 것은 오해를 불러일으킬 수 있다는 입장이 많습니다. 물론 사람마다 허용 범위는 다릅니다!" },
+        { q: "이런 논쟁으로 진짜 싸우는 커플이 있나요?", a: "생각보다 많습니다. 각자의 가치관과 질투의 기준이 다르기 때문에, 평소 대화를 통해 서로의 '선'을 맞춰가는 과정이 중요합니다." },
+        { q: "결과에 나온 '유교걸/유교보이'는 무슨 뜻인가요?", a: "한국의 전통적인 유교 사상처럼 보수적이고 엄격한 도덕적 기준(특히 남녀 관계에서)을 가진 사람을 재미있게 부르는 밈(Meme)입니다." }
+    ];
+
+    const debateSteps = [
+        "6가지의 대표적인 연애 논쟁 상황(깻잎, 새우깡, 패딩 등)을 확인합니다.",
+        "각 상황에서 나는 어떻게 반응할지, 허용 가능한 선인지 솔직하게 선택합니다.",
+        "나의 선택을 바탕으로 분석된 나의 '유교력(보수성)' 등급을 확인합니다.",
+        "다른 사람들의 평균 선택 데이터(다수파/소수파)와 나의 의견을 비교해봅니다."
+    ];
+
+    const debateTips = [
+        "정답이 없는 문제이니 연인과 함께 테스트하며 서로의 생각을 공유해보세요.",
+        "결과가 다르다고 싸우지 말고, 서로의 가치관 차이를 이해하는 재미 요소로 즐겨주세요.",
+        "친구들과 단톡방에 결과를 공유하고 누가 가장 보수적인지 알아보는 것도 좋습니다!"
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>깻잎 논쟁 테스트 | 연애 논쟁 모음 - Utility Hub</title>
-                <meta name="description" content="깻잎 논쟁, 새우깡 논쟁 등 핫한 연애 논쟁! 과연 당신의 선택은? 다수결 결과와 비교해보세요." />
-                <meta name="keywords" content="깻잎논쟁, 패딩논쟁, 연애논쟁, 밸런스게임, debate test" />
-            </Helmet>
+            <SEO
+                title="깻잎 논쟁 테스트 | 연애 논쟁 밸런스 게임"
+                description="깻잎 논쟁, 새우깡 논쟁 등 핫한 연애 논쟁! 과연 당신의 선택은? 다수결 결과와 내 선택을 비교하고 나의 유교력을 테스트해보세요."
+                keywords="깻잎논쟁, 패딩논쟁, 연애논쟁, 밸런스게임, 커플논쟁, debate test"
+                category="운세/재미"
+                faqs={debateFaqs}
+                steps={debateSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -231,6 +254,14 @@ const DebateTest = () => {
                     </div>
                 </div>
             )}
+
+            <ToolGuide
+                title="깻잎 논쟁 테스트 안내"
+                intro="연인 사이에서 흔히 일어나는, 하지만 정답은 없는 핫한 연애 논쟁들을 모아봤습니다. 나의 관대한 정도(유교력)를 테스트해보고 다른 사람들의 평균적인 생각과 비교해보세요."
+                steps={debateSteps}
+                tips={debateTips}
+                faqs={debateFaqs}
+            />
         </div>
     );
 };

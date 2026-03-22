@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Eye, Play, Trophy, Timer } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const ColorTest = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
@@ -76,7 +78,28 @@ const ColorTest = () => {
                 });
             }, 1000);
         }
-        return () => clearInterval(timer);
+        
+    const toolFaqs = [
+        {
+            "q": "색감 테스트의 만점은 몇 점인가요?",
+            "a": "무한대로 진행되며, 난이도가 갈수록 기하급수적으로 높아집니다. 보통 20단계를 넘으면 상위권입니다."
+        },
+        {
+            "q": "색각 이상자도 플레이할 수 있나요?",
+            "a": "명도와 채도 차이를 구분하는 게임이므로, 누구나 자신의 시각적 구분 능력을 테스트해 볼 수 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "화면에 여러 개의 동일한 색상 사각형이 나타납니다.",
+        "그 중 미세하게 색상이 다른 단 하나의 사각형을 빠르게 클릭하세요.",
+        "시간 제한 안에 최대한 높은 단계까지 도달하세요."
+    ];
+    const toolTips = [
+        "화면의 밝기를 최대로 높이면 미세한 색상 차이를 찾는 데 도움이 됩니다.",
+        "화면과 눈의 거리를 약간 멀리 하면 다른 색깔이 한눈에 들어올 수 있습니다."
+    ];
+
+    return () => clearInterval(timer);
     }, [gameState]);
 
     const getTier = (finalScore) => {
@@ -104,11 +127,14 @@ const ColorTest = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>색감 능력 테스트 | 다른 색깔 찾기 게임 - Utility Hub</title>
-                <meta name="description" content="나의 색감 능력은 상위 몇 프로일까? 미세하게 다른 색깔을 찾아내는 색감 테스트 게임. 단계가 올라갈수록 점점 어려워집니다!" />
-                <meta name="keywords" content="색감테스트, 다른색찾기, 색맹테스트, 시력테스트, 게임, 미니게임" />
-            </Helmet>
+            <SEO
+                title="색감 능력 테스트 | 다른 색깔 찾기 게임"
+                description="나의 색감 능력은 상위 몇 프로일까? 미세하게 다른 색깔을 찾아내는 색감 테스트 게임. 단계가 올라갈수록 점점 어려워집니다!"
+                keywords="색감테스트, 다른색찾기, 색맹테스트, 시력테스트, 게임, 미니게임"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -213,21 +239,21 @@ const ColorTest = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 색감 능력 테스트 팁</h3>
-                    <p>
-                        초반 스테이지는 누구나 쉽게 맞출 수 있지만, 레벨이 올라갈수록 색깔 차이가 미세해집니다.
-                        화면 밝기를 높이고, 주변 조명을 어둡게 하면 더 잘 보일 수 있습니다.
-                        너무 오래 고민하면 시간이 부족해지니 직감을 믿고 빠르게 클릭하세요!
-                    </p>
-                </div>
-            </div>
+            
 
             {/* Sparkles Component for re-use if needed */}
             <div style={{ display: 'none' }}>
                 <Sparkles />
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="색감 능력 테스트 안내"
+                    intro="나의 색감 능력은 상위 몇 프로일까? 미세하게 다른 색깔을 찾아내는 색감 테스트 게임. 단계가 올라갈수록 점점 어려워집니다!"
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

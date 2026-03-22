@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Volume2, Ear, Play, Square, AlertTriangle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const HearingTest = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -24,7 +26,28 @@ const HearingTest = () => {
     ];
 
     useEffect(() => {
-        return () => stopSound();
+        
+    const toolFaqs = [
+        {
+            "q": "청력 나이 테스트는 정확한가요?",
+            "a": "주파수(Hz)에 따른 가청 범위를 확인하는 원리입니다. 다만 스마트폰 기기나 이어폰의 성능에 따라 정확도가 달라질 수 있습니다."
+        },
+        {
+            "q": "아무 소리도 들리지 않아요.",
+            "a": "볼륨이 작거나 스피커 성능 한계일 수 있습니다. 본인의 실제 귀 나이가 주파수를 듣지 못하는 나이대일 수도 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "주변 소음이 적은 조용한 곳으로 이동하여 이어폰 혹은 헤드셋을 착용합니다.",
+        "가장 낮은 주파수부터 재생 버튼을 눌러 소리가 들리는지 확인합니다.",
+        "들리지 않는 주파수가 나오면 멈추고 해당 주파수에 해당하는 청력 나이를 확인합니다."
+    ];
+    const toolTips = [
+        "갑자기 큰 소리가 날 수 있으니 기기 볼륨을 30~50% 정도로 먼저 설정 후 테스트하세요.",
+        "정확한 청력 검사는 반드시 이비인후과 전문의를 통해 진행해야 합니다."
+    ];
+
+    return () => stopSound();
     }, []);
 
     const startSound = (hz) => {
@@ -109,11 +132,14 @@ const HearingTest = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>청력 나이 테스트 | 내 귀는 몇 살일까? - Utility Hub</title>
-                <meta name="description" content="고주파 소리로 측정하는 나의 신체 나이! 10대만 들을 수 있는 소리가 있다? 재미로 보는 청력 테스트." />
-                <meta name="keywords" content="청력테스트, 귀나이, 고주파테스트, 신체나이, 청력나이, hearing test" />
-            </Helmet>
+            <SEO
+                title="청력 나이 테스트 | 내 귀는 몇 살일까?"
+                description="고주파 소리로 측정하는 나의 신체 나이! 10대만 들을 수 있는 소리가 있다? 재미로 보는 청력 테스트."
+                keywords="청력테스트, 귀나이, 고주파테스트, 신체나이, 청력나이, hearing test"
+                category="건강"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -213,6 +239,16 @@ const HearingTest = () => {
                         </div>
                     </div>
                 )}
+            </div>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="청력 나이 테스트 안내"
+                    intro="고주파 소리로 측정하는 나의 신체 나이! 10대만 들을 수 있는 소리가 있다? 재미로 보는 청력 테스트."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

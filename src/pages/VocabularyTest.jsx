@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, BookOpen, Scroll, CheckCircle2, XCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const VocabularyTest = () => {
     const [gameState, setGameState] = useState('start'); // start, playing, result
@@ -124,13 +126,37 @@ const VocabularyTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "문해력(어휘력) 테스트는 왜 필요한가요?",
+            "a": "인터넷과 유튜브 쇼츠 등 텍스트보다는 영상 매체에 친숙해진 현대인들에게, 실생활에 자주 쓰이는 사자성어나 한자어의 정확한 쓰임새 점검은 커뮤니케이션 오류를 막아주는 필수 교양이기 때문입니다."
+        },
+        {
+            "q": "요즘 논란이 되었던 단어들도 나오나요?",
+            "a": "'심심한 사과', '사흘', '금일', '가제' 등 SNS상에서 큰 논란이 되었던 필수 문해력 단어들이 골고루 포함되어 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "뉴스 기사나 일상 대화의 한 구절에서 빈칸으로 처리된 알쏭달쏭한 단어를 확인합니다.",
+        "문맥상 가장 올바른 의미를 가진 어휘를 보기 4개 중에서 심사숙고하여 선택합니다.",
+        "채점 완료 후, 본인의 어휘력 수준이 상위 몇%에 속하는지, 그리고 올바른 표준어 뜻은 무엇인지 오답 해설을 탐독합니다."
+    ];
+    const toolTips = [
+        "문제를 풀 때 포털 사이트 국어사전의 도움을 받지 않고 오직 나의 감각과 독서량만으로 승부해야 본인의 진짜 단어 레벨을 뼈저리게 확인할 수 있습니다.",
+        "이 테스트에서 만점을 받으셨다면, 인터넷 키배(키보드 배틀)나 직장 내 이메일 소통에서 어휘력으로 무시당할 일은 평생 없다고 자부하셔도 좋습니다!"
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>문해력 테스트 | 사자성어 어휘력 퀴즈 - Utility Hub</title>
-                <meta name="description" content="심심한 사과? 금일? 사흘? 알쏭달쏭한 어휘력 퀴즈. 나의 문해력 수준을 테스트해보세요." />
-                <meta name="keywords" content="문해력, 어휘력, 사자성어, 한국어퀴즈, 문해력테스트, vocabulary test" />
-            </Helmet>
+            <SEO
+                title="문해력 테스트 | 사자성어 어휘력 퀴즈"
+                description="심심한 사과? 금일? 사흘? 알쏭달쏭한 어휘력 퀴즈. 나의 문해력 수준을 테스트해보세요."
+                keywords="문해력, 어휘력, 사자성어, 한국어퀴즈, 문해력테스트, vocabulary test"
+                category="간단 상식 테스트"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -267,16 +293,16 @@ const VocabularyTest = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 문해력 키우기</h3>
-                    <p>
-                        문해력(Literacy)은 글을 읽고 이해하는 능력입니다.
-                        최근 스마트폰 영상 매체의 발달로 인해 긴 글을 읽기 어려워하는 현상이 늘어나고 있습니다.
-                        정확한 어휘 사용은 소통의 오해를 줄이고 자신의 생각을 풍부하게 표현하는 데 도움을 줍니다.
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="문해력 테스트 안내"
+                    intro="심심한 사과? 금일? 사흘? 알쏭달쏭한 어휘력 퀴즈. 나의 문해력 수준을 테스트해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 import { Trophy, RefreshCw, Play, Timer, History, Trash2, Share2 } from 'lucide-react';
 import useShareCanvas from '../hooks/useShareCanvas';
 
@@ -266,6 +267,33 @@ const OneToFifty = () => {
                     </div>
                 </div>
             )}
+
+            <ToolGuide
+                title="1 to 50 게임 완벽 가이드"
+                intro="1부터 50까지 숫자를 순서대로 빠르게 클릭하여 자신의 순발력과 집중력을 테스트하는 게임입니다. 전 세계적으로 인기 있는 뇌 운동 게임으로, 기록 단축을 통해 성취감을 느낄 수 있습니다."
+                steps={[
+                    "'게임 시작' 버튼을 눌러 게임을 개시합니다.",
+                    "화면에 무작위로 배치된 1부터 25까지의 숫자 중 1을 찾아 클릭합니다.",
+                    "클릭된 숫자 자리에 26부터 50까지의 숫자가 새롭게 나타납니다.",
+                    "50까지 모든 숫자를 순서대로 클릭하면 게임이 종료되고 최종 기록이 표시됩니다."
+                ]}
+                tips={[
+                    "다음 숫자가 어디에 있는지 눈으로 미리 훑어보는 '주변시' 활용이 중요합니다.",
+                    "일정한 리듬을 유지하며 클릭하면 실수를 줄이고 속도를 높일 수 있습니다.",
+                    "매일 5분씩 연습하면 뇌의 반응 속도 향상에 도움이 됩니다."
+                ]}
+                faqs={[
+                    {
+                        q: "보통 몇 초 정도 나오면 잘하는 건가요?",
+                        a: "일반적인 성인은 30~40초대, 숙련자는 20초대 이하의 기록을 냅니다."
+                    },
+                    {
+                        q: "기록이 저장되나요?",
+                        a: "네, 브라우저의 로컬 스토리지를 통해 최근 기록 10위까지 자동으로 저장됩니다."
+                    }
+                ]}
+            />
+
         </div>
     );
 };

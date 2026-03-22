@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Heart, GraduationCap, CheckCircle2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const DatingTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -126,13 +128,37 @@ const DatingTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "연애 능력 고사가 뭔가요?",
+            "a": "연애나 썸 상황에서 발생할 수 있는 다양하고 난감한 에피소드들에 대해 본인이 어떻게 대처할지를 묻는 상황극 퀴즈입니다."
+        },
+        {
+            "q": "결과에 나오는 티어(등급)는 어떻게 나뉘나요?",
+            "a": "선택한 대답의 센스 점수를 종합하여, 모태솔로 수준부터 연애 고수(마스터) 수준까지 다양한 등급으로 결과를 판별해 줍니다."
+        }
+    ];
+    const toolSteps = [
+        "제시되는 연애 관련 상황극 문항을 주의 깊게 읽습니다.",
+        "보기 중 가장 나의 평소 성향과 맞거나 올바르다고 생각되는 대처법을 고릅니다.",
+        "모든 문항 완료 후 나의 연애 능력 등급과 해설을 확인합니다."
+    ];
+    const toolTips = [
+        "너무 깊게 계산하기보다는, 상황을 마주했을 때 직관적으로 할 것 같은 행동을 고르세요.",
+        "연인이나 썸 타는 사람과 함께 풀어보고 서로의 연애 가치관을 비교해 보는 것을 추천합니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>연애 능력 고사 | 나의 연애 센스 점수는? - Utility Hub</title>
-                <meta name="description" content="난감한 연애 상황 퀴즈! 당신의 대처 능력은? 연애 티어를 측정해드립니다." />
-                <meta name="keywords" content="연애능력고사, 연애퀴즈, 연애센스, 연애고수, 심리테스트" />
-            </Helmet>
+            <SEO
+                title="연애 능력 고사 | 나의 연애 센스 점수는?"
+                description="난감한 연애 상황 퀴즈! 당신의 대처 능력은? 연애 티어를 측정해드립니다."
+                keywords="연애능력고사, 연애퀴즈, 연애센스, 연애고수, 심리테스트"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -239,6 +265,16 @@ const DatingTest = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="연애 능력 고사 안내"
+                    intro="난감한 연애 상황 퀴즈! 당신의 대처 능력은? 연애 티어를 측정해드립니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

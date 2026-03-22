@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Briefcase, Frown, ThumbsUp, AlertCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const KkondaeTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -132,13 +134,37 @@ const KkondaeTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "꼰대 테스트는 직장인만 할 수 있나요?",
+            "a": "조직 생활 문항이 일부 포함되어 있으나, 후배나 어린 친구들을 대하는 보편적인 태도에 대한 퀴즈이므로 학생이나 프리랜서도 재미있게 참여할 수 있습니다."
+        },
+        {
+            "q": "너무 심한 꼰대라고 나오면 어떡하죠?",
+            "a": "시대가 변하면서 가치관이 변한 것일 뿐입니다! 스스로를 되돌아보는 계기로 유쾌하게 받아들여주시면 됩니다."
+        }
+    ];
+    const toolSteps = [
+        "후배의 복장, 회식 자리 예절 등 직장 및 일상에서 흔히 겪는 갈등 상황에 대한 질문을 읽습니다.",
+        "본인이 속으로 혹은 겉으로 할법한 생각을 선택합니다.",
+        "나의 꼰대력(%)과 진단 결과 레벨을 확인합니다."
+    ];
+    const toolTips = [
+        "머리로 '이게 정답이겠지' 하는 대답 말고, 속마음에 가장 가까운 것을 골라야 나의 진짜 꼰대력을 알 수 있습니다.",
+        "직장 동료들과 점심시간에 링크를 공유하여 서로의 꼰대 성향을 웃으며 진단해보세요."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>꼰대 성향 테스트 | 르네상스 꼰대 자가진단 - Utility Hub</title>
-                <meta name="description" content="Latte is horse... 혹시 나도 꼰대? 직장 및 사회생활에서의 꼰대력을 측정해드립니다." />
-                <meta name="keywords" content="꼰대테스트, 꼰대자가진단, 라떼는말이야, 직장인테스트, kkondae test" />
-            </Helmet>
+            <SEO
+                title="꼰대 성향 테스트 | 르네상스 꼰대 자가진단"
+                description="Latte is horse... 혹시 나도 꼰대? 직장 및 사회생활에서의 꼰대력을 측정해드립니다."
+                keywords="꼰대테스트, 꼰대자가진단, 라떼는말이야, 직장인테스트, kkondae test"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -228,6 +254,16 @@ const KkondaeTest = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="꼰대 성향 테스트 안내"
+                    intro="Latte is horse... 혹시 나도 꼰대? 직장 및 사회생활에서의 꼰대력을 측정해드립니다."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

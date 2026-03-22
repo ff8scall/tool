@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Heart, Sparkles, Coffee, Sun, BookOpen } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const IdealType = () => {
     const [step, setStep] = useState(0);
@@ -175,13 +177,37 @@ const IdealType = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "이상형 찾기 테스트는 어떤 로직인가요?",
+            "a": "본인의 평소 데이트 성향, 연락 빈도, 애정 표현 방식을 분석하여 이를 가장 잘 보완해주거나 잘 맞는 이성 타입을 매칭해주는 로직입니다."
+        },
+        {
+            "q": "결과에 나온 이상형과 제 현실 애인이 다르면 어떡하죠?",
+            "a": "연애에는 정답이 없습니다! 서로 부족한 점을 맞춰가는 과정이 더 중요하니, 재미있는 테스트 결과로만 즐겨주세요."
+        }
+    ];
+    const toolSteps = [
+        "내가 선호하는 데이트 장소, 카톡 답장 스타일, 기념일 챙기는 방식 등에 대한 질문에 답합니다.",
+        "모든 문항을 마치고 버튼을 누릅니다.",
+        "나에게 가장 잘 조화되는 '운명의 이상형'의 묘사와 특징 해시태그를 확인합니다."
+    ];
+    const toolTips = [
+        "연인과 함께 서로의 이상형을 테스트해 보고, 각자가 원하는 연애 스타일을 대화로 나눠보는 좋은 기회로 삼으세요.",
+        "친구들과 어떤 이상형 결과를 받았는지 서로 비교해 보는 것도 흥미롭습니다."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>이상형 찾기 테스트 | 나에게 딱 맞는 이상형은? - Utility Hub</title>
-                <meta name="description" content="나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요." />
-                <meta name="keywords" content="이상형테스트, 연애테스트, 이상형찾기, 심리테스트, 연애스타일" />
-            </Helmet>
+            <SEO
+                title="이상형 찾기 테스트 | 나에게 딱 맞는 이상형은?"
+                description="나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."
+                keywords="이상형테스트, 연애테스트, 이상형찾기, 심리테스트, 연애스타일"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -263,16 +289,16 @@ const IdealType = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 이상형 찾기 테스트에 대하여</h3>
-                    <p>
-                        본 테스트는 당신의 연애 성향과 가치관을 분석하여 가장 잘 맞는 이상형 타입을 추천해드립니다.
-                        다정다감한 스타일, 리드하는 카리스마 스타일, 편안한 친구 같은 스타일 등 다양한 유형 중 당신의 심장이 반응하는 운명의 상대를 확인해보세요.
-                        이 결과는 재미를 위한 참고용이며, 실제 연애에서는 의외의 매력을 가진 사람에게 끌릴 수도 있답니다!
-                    </p>
-                </div>
+            
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="이상형 찾기 테스트 안내"
+                    intro="나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
             </div>
         </div>
     );

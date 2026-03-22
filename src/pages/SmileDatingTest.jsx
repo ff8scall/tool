@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Smile, Heart, MessageCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const SmileDatingTest = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -172,13 +174,37 @@ const SmileDatingTest = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "스마일 연애 테스트는 MBTI랑 관련이 있나요?",
+            "a": "네, 대중적으로 잘 알려진 성격 유형 16가지 로직을 바탕으로, 연애 관계에서 나타나는 특성만 쏙쏙 뽑아 귀여운 스마일 캐릭터들에 비유해 주는 테스트입니다."
+        },
+        {
+            "q": "색깔별 스마일은 어떤 의미인가요?",
+            "a": "레드 스마일은 열정적, 블루 스마일은 차분하고 이성적 등, 색상과 표정 디자인을 통해 직관적으로 상대방에게 느껴지는 본인의 연애 아우라를 표현합니다."
+        }
+    ];
+    const toolSteps = [
+        "데이트 약속을 잡는 방식, 애인이 우울할 때 위로하는 방식 등 연애 상황극 문항을 읽습니다.",
+        "본인의 연애 스타일에 가장 부합하는(혹은 과거 연애에서 실제로 그랬던) 답변을 찾아 클릭합니다.",
+        "분석이 끝나면 나를 꼭 닮은 컬러 스마일 캐릭터 결과와 연애 장단점을 확인합니다."
+    ];
+    const toolTips = [
+        "현재 썸을 타고 있거나 솔로라면, 맘에 드는 이성에게 링크를 보내 상대방의 스마일 컬러를 확인한 후 궁합을 맞춰보세요.",
+        "지나치게 이상적인 내 모습보다는, 현실 연애에서 보여주는 솔직한 내 모습을 베이스로 답변해야 더욱 소름 돋는 결과가 나옵니다."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>스마일 연애 테스트 | 나의 연애 성향 알아보기 - Utility Hub</title>
-                <meta name="description" content="나의 연애 스타일을 스마일 캐릭터로 알아보세요. MBTI 기반의 재미있는 심리 테스트!" />
-                <meta name="keywords" content="연애테스트, 심리테스트, MBTI연애, 스마일테스트, smile dating test" />
-            </Helmet>
+            <SEO
+                title="스마일 연애 테스트 | 나의 연애 성향 알아보기"
+                description="나의 연애 스타일을 스마일 캐릭터로 알아보세요. MBTI 기반의 재미있는 심리 테스트!"
+                keywords="연애테스트, 심리테스트, MBTI연애, 스마일테스트, smile dating test"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -287,6 +313,16 @@ const SmileDatingTest = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="스마일 연애 테스트 안내"
+                    intro="나의 연애 스타일을 스마일 캐릭터로 알아보세요. MBTI 기반의 재미있는 심리 테스트!"
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Share2, RefreshCw, Scale, ArrowRight, CheckCircle2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const BalanceGame = () => {
     const [step, setStep] = useState(0);
@@ -115,13 +116,35 @@ const BalanceGame = () => {
         }
     };
 
+    const balanceFaqs = [
+        { q: "밸런스 게임이 무엇인가요?", a: "두 개의 매우 극단적이거나 고르기 힘든 선택지 중 하나를 무조건 선택해야 하는 게임입니다. 사람들의 극단적인 가치관과 취향을 알아보는 용도로 많이 쓰입니다." },
+        { q: "정답이 있는 게임인가요?", a: "아닙니다! 오답이나 정답은 없으며 오로지 플레이어의 개인적인 선호도와 가치관을 알아보기 위한 재미 콘텐츠입니다." },
+        { q: "화면에 나오는 % 수치는 실제 사람들의 선택인가요?", a: "현재 버전은 각 답변이 완료된 후 재미를 위해 무작위(가상) 대중 선택 비율을 제공하여 쫄깃한 긴장감을 더합니다." }
+    ];
+
+    const balanceSteps = [
+        "화면에 제시되는 극강의 밸런스 질문 두 가지(A, B)를 확인합니다.",
+        "둘 중 어느 것이 나에게 더 중요한지, 혹은 덜 최악인지 고민 후 하나를 클릭합니다.",
+        "클릭 즉시 나타나는 % 수치를 통해 나의 의견이 대중적인지 혹은 소수파인지 확인합니다.",
+        "10개의 질문이 끝나면 기록을 확인하고 친구에게 링크를 공유하여 논쟁을 시작합니다!"
+    ];
+
+    const balanceTips = [
+        "절대 고를 수 없는 문제라도 직관적으로 '3초' 안에 고르는 것이 이 게임의 묘미입니다.",
+        "친구, 연인과 함께 모여서 동시에 하나 둘 셋! 을 외치고 선택해보세요.",
+        "결과 화면을 캡처하여 인스타그램이나 카카오톡 단톡방에 올리면 아주 뜨거운 토론이 열립니다."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>밸런스 게임 | 황금밸런스 질문 모음 - Utility Hub</title>
-                <meta name="description" content="인생 최대의 난제! 짜장 vs 짬뽕부터 상상 초월 밸런스 게임까지. 친구, 연인과 함께 즐기는 재밌는 밸런스 게임 질문 모음." />
-                <meta name="keywords" content="밸런스게임, 밸런스질문, vs게임, 심리테스트, 재미있는게임, 커플밸런스게임" />
-            </Helmet>
+            <SEO
+                title="밸런스 게임 | 황금밸런스 질문 모음"
+                description="인생 최대의 난제! 짜장 vs 짬뽕부터 상상 초월 밸런스 게임까지. 친구, 연인과 함께 즐기는 재밌는 밸런스 게임 질문 모음."
+                keywords="밸런스게임, 밸런스질문, vs게임, 심리테스트, 재미있는게임, 커플밸런스게임"
+                category="운세/재미"
+                faqs={balanceFaqs}
+                steps={balanceSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -255,16 +278,14 @@ const BalanceGame = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 밸런스 게임이란?</h3>
-                    <p>
-                        밸런스 게임은 두 가지 극단적이고 난처한 선택지 중 하나를 반드시 선택해야 하는 게임입니다.
-                        '평생 라면만 먹기 vs 평생 탄산 끊기'처럼 고르기 힘든 질문들을 통해 친구나 연인의 가치관과 취향을 알아보세요.
-                        술자리 게임이나 아이스브레이킹용으로도 아주 좋습니다.
-                    </p>
-                </div>
+            <div className="mt-12">
+                <ToolGuide
+                    title="밸런스 게임 안내"
+                    intro="인생 최대의 난제 모음! 도저히 하나를 포기할 수 없거나, 둘 다 최악인 황금 밸런스 상황에서 당신의 선택을 테스트합니다. 친해지고 싶은 사람과 함께 플레이하며 다양한 가치관을 확인해보세요."
+                    steps={balanceSteps}
+                    tips={balanceTips}
+                    faqs={balanceFaqs}
+                />
             </div>
         </div>
     );

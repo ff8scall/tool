@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Brain, Lightbulb, PenTool } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const BrainType = () => {
     const [step, setStep] = useState('intro'); // intro, test, result
@@ -122,13 +124,37 @@ const BrainType = () => {
         }
     };
 
+    
+    const toolFaqs = [
+        {
+            "q": "좌뇌 우뇌 테스트는 과학적인가요?",
+            "a": "무의식적인 신체 습관(팔짱 끼기 등)을 통해 주로 사용하는 뇌의 성향을 파악하는 간단하고 재미있는 심리테스트입니다."
+        },
+        {
+            "q": "좌뇌형과 우뇌형의 차이는 무엇인가요?",
+            "a": "일반적으로 좌뇌형은 논리적, 분석적 성향이 강하며, 우뇌형은 감각적이고 직관적인 성향이 강하다고 알려져 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "평소 습관대로 편안하게 팔짱을 껴봅니다.",
+        "어느 쪽 팔이나 손가락이 위로 올라오는지 확인합니다.",
+        "두 가지 간단한 질문에 답하고 결과를 확인합니다."
+    ];
+    const toolTips = [
+        "너무 오래 생각하지 말고 무의식적인 첫 행동을 기준으로 선택하세요.",
+        "결과를 친구들과 공유해 서로의 성향을 비교해보세요."
+    ];
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>좌뇌 우뇌 테스트 | 나의 뇌 유형은? - Utility Hub</title>
-                <meta name="description" content="간단한 동작과 질문으로 알아보는 좌뇌형/우뇌형 테스트. 나는 논리적인 좌뇌형일까, 감각적인 우뇌형일까?" />
-                <meta name="keywords" content="좌뇌우뇌테스트, 뇌유형, 심리테스트, 두뇌테스트, left right brain" />
-            </Helmet>
+            <SEO
+                title="좌뇌 우뇌 테스트 | 나의 뇌 유형은?"
+                description="간단한 동작과 질문으로 알아보는 좌뇌형/우뇌형 테스트. 나는 논리적인 좌뇌형일까, 감각적인 우뇌형일까?"
+                keywords="좌뇌우뇌테스트, 뇌유형, 심리테스트, 두뇌테스트, left right brain"
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             {step === 'intro' && (
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
@@ -227,6 +253,16 @@ const BrainType = () => {
                     </div>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="좌뇌 우뇌 테스트 안내"
+                    intro="간단한 동작과 질문으로 알아보는 좌뇌형/우뇌형 테스트. 나는 논리적인 좌뇌형일까, 감각적인 우뇌형일까?"
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

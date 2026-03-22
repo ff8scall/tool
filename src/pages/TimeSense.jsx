@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { Share2, RefreshCw, Timer, Play, Pause, Trophy, Clock } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const TimeSense = () => {
     const [gameState, setGameState] = useState('idle'); // idle, running, stopped
@@ -73,7 +75,28 @@ const TimeSense = () => {
             animationFrame = requestAnimationFrame(tick);
         }
 
-        return () => cancelAnimationFrame(animationFrame);
+        
+    const toolFaqs = [
+        {
+            "q": "절대 시간 감각 테스트의 목표는 무엇인가요?",
+            "a": "타이머 화면을 보지 않고 마음속으로 초를 세어 정확히 10.00초에 버튼을 정지시켜, 생체 시계의 오차율을 알아보는 게임입니다."
+        },
+        {
+            "q": "소수점 몇 째 자리까지 나오나요?",
+            "a": "밀리초 단위인 소수점 둘째 자리(예: 10.03초, 9.87초)까지 측정되어 엄청난 집중력을 요구합니다."
+        }
+    ];
+    const toolSteps = [
+        "화면 중앙의 거대한 '시작' 버튼을 누름과 동시에 마음속으로 속으로 1초, 2초 카운트를 속으로 셉니다.",
+        "화면의 타이머 숫자는 가려지게 됩니다.",
+        "정확히 10초가 되었다고 직감하는 순간 '정지' 버튼을 빠르게 누르고 결과를 확인합니다."
+    ];
+    const toolTips = [
+        "'일, 이, 삼, 사' 같이 세는 것보다 '천 일, 천 이, 천 삼' 형식으로 네 글자로 세면 인간의 심장 박동과 비슷하게 1초 템포를 좀 더 일정하게 유지할 수 있습니다.",
+        "친구들과 내기할 때, 화면을 보지 않고 10.00에 가장 가깝게 멈춘 사람이 밥값 내기 등을 진행하면 폭발적인 인기를 끕니다."
+    ];
+
+    return () => cancelAnimationFrame(animationFrame);
     }, [gameState]);
 
     const handleStop = () => {
@@ -156,11 +179,14 @@ const TimeSense = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-            <Helmet>
-                <title>절대 시간 감각 테스트 | 10초 맞추기 게임 - Utility Hub</title>
-                <meta name="description" content="시계 없이 정확히 10.00초를 맞춰보세요! 당신의 체감 시간은 실제 시간과 얼마나 다를까요? 초정밀 시간 감각 테스트." />
-                <meta name="keywords" content="시간감각, 10초맞추기, 타이머게임, 절대시간, 시간맞추기, 감각테스트" />
-            </Helmet>
+            <SEO
+                title="절대 시간 감각 테스트 | 10초 맞추기 게임"
+                description="시계 없이 정확히 10.00초를 맞춰보세요! 당신의 체감 시간은 실제 시간과 얼마나 다를까요? 초정밀 시간 감각 테스트."
+                keywords="시간감각, 10초맞추기, 타이머게임, 절대시간, 시간맞추기, 감각테스트"
+                category="게임"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
@@ -252,17 +278,7 @@ const TimeSense = () => {
                 )}
             </div>
 
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {/* SEO Content Section */}
-                <div className="md:col-span-3 bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 text-sm text-gray-600 dark:text-gray-400">
-                    <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-2">💡 절대 시간 감각(Absolute Time Sense)이란?</h3>
-                    <p>
-                        시계나 외부의 도움 없이 시간의 흐름을 정확하게 인지하는 능력을 말합니다.
-                        일반적으로 사람들은 10초를 짐작할 때 실제보다 빠르게 세거나 느리게 세는 경향이 있습니다.
-                        이 테스트를 통해 자신의 바이오리듬과 시간 감각이 얼마나 정확한지 확인해보세요. 집중력 향상에도 도움이 됩니다.
-                    </p>
-                </div>
-            </div>
+            
 
             <style>{`
                 @keyframes spin-slow {
@@ -273,6 +289,16 @@ const TimeSense = () => {
                     animation: spin-slow 10s linear infinite;
                 }
             `}</style>
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="절대 시간 감각 테스트 안내"
+                    intro="시계 없이 정확히 10.00초를 맞춰보세요! 당신의 체감 시간은 실제 시간과 얼마나 다를까요? 초정밀 시간 감각 테스트."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

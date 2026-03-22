@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+
 import { RefreshCw, Play, Pause, AlertCircle, Share2 } from 'lucide-react';
+import SEO from '../components/SEO';
+import ToolGuide from '../components/ToolGuide';
 
 const LottoSimulator = () => {
     const [isRunning, setIsRunning] = useState(false);
@@ -123,7 +125,28 @@ const LottoSimulator = () => {
                 // For simplified visualisation, we check wins inside the loop and direct update
             }, SIMULATION_INTERVAL);
         }
-        return () => clearInterval(interval);
+        
+    const toolFaqs = [
+        {
+            "q": "로또 시뮬레이터란 무엇인가요?",
+            "a": "실제 로또 1등 당첨 확률(약 814만 분의 1)을 코드 상에 그대로 구현하여, 내가 가상으로 매주 로또를 살 때 1등 당첨까지 얼마나 많은 돈과 시간이 드는지 돌려보는 시뮬레이터입니다."
+        },
+        {
+            "q": "이걸 돌려서 나온 번호로 실제로 당첨될 수 있나요?",
+            "a": "확률은 매우 희박하지만, 시뮬레이터가 무작위로 생성한 행운의 번호를 실제 로또 구매에 참고용으로 사용해보실 수는 있습니다."
+        }
+    ];
+    const toolSteps = [
+        "자동 버튼이나 수동으로 번호 6개를 선택하여 로또를 1회 구매해봅니다.",
+        "'1등 당첨될 때까지 무한 구매' 버튼을 눌러 시뮬레이션을 돌립니다.",
+        "1등 당첨까지 소모된 시간(수만 년)과 투자한 금액을 보며 현타(현실 자각 타임)를 느낍니다."
+    ];
+    const toolTips = [
+        "로또에 인생을 걸기보다는, 확률이 얼마나 희박한지 재미있게 체감하며 건전한 로또 문화를 즐기는 용도로 사용하세요.",
+        "그래도 꿈에 특별한 번호가 나왔다면, 확률 따위 무시하고 시뮬레이터에 돌려보세요!"
+    ];
+
+    return () => clearInterval(interval);
     }, [isRunning, speed]); // Depend on stats causess infinite loop if not careful. 
     // Actually, setInterval closure traps 'stats'. Using functional update is better, but local loop variables are needed.
     // Refactoring to purely functional updates for safety.
@@ -184,10 +207,14 @@ const LottoSimulator = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
-            <Helmet>
-                <title>로또 당첨 시뮬레이터 - Tool Hive</title>
-                <meta name="description" content="매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요." />
-            </Helmet>
+            <SEO
+                title="로또 당첨 시뮬레이터"
+                description="매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."
+                keywords=""
+                category="운세/재미"
+                faqs={toolFaqs}
+                steps={toolSteps}
+            />
 
             <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
@@ -306,6 +333,16 @@ const LottoSimulator = () => {
                     </p>
                 </div>
             )}
+        
+            <div className="mt-12">
+                <ToolGuide
+                    title="로또 당첨 시뮬레이터 안내"
+                    intro="매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };
