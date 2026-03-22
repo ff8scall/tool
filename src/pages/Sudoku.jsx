@@ -3,6 +3,7 @@ import { Share2, RotateCcw, Lightbulb, Trophy, Home as HomeIcon, ChevronRight } 
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 // Sudoku Logical Helpers
 const isValidMove = (board, row, col, num) => {
@@ -39,10 +40,8 @@ const solveSudoku = (board) => {
 };
 
 const generateSudoku = (difficulty) => {
-    // Start with empty board
     const board = Array(9).fill(null).map(() => Array(9).fill(0));
 
-    // Fill diagonal 3x3 blocks (they are independent)
     const fillDiagonal = () => {
         for (let i = 0; i < 9; i += 3) {
             fillBlock(i, i);
@@ -64,7 +63,6 @@ const generateSudoku = (difficulty) => {
 
     const solution = board.map(row => [...row]);
 
-    // Remove numbers based on difficulty
     let attempts = difficulty === 'easy' ? 30 : difficulty === 'medium' ? 45 : 60;
     while (attempts > 0) {
         const row = Math.floor(Math.random() * 9);
@@ -79,6 +77,8 @@ const generateSudoku = (difficulty) => {
 };
 
 const Sudoku = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [board, setBoard] = useState(Array(9).fill(null).map(() => Array(9).fill(0)));
     const [initialBoard, setInitialBoard] = useState(Array(9).fill(null).map(() => Array(9).fill(0)));
     const [solution, setSolution] = useState(Array(9).fill(null).map(() => Array(9).fill(0)));
@@ -109,7 +109,6 @@ const Sudoku = () => {
         startNewGame();
     }, []);
 
-    // Timer logic
     useEffect(() => {
         if (!isWon && !isPaused) {
             timerRef.current = setInterval(() => {
@@ -140,7 +139,6 @@ const Sudoku = () => {
         newBoard[selected.row][selected.col] = num;
         setBoard(newBoard);
 
-        // Check if won
         if (checkWin(newBoard)) {
             setIsWon(true);
         }
@@ -169,11 +167,10 @@ const Sudoku = () => {
         }
     };
 
-    // Keyboard support
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key >= '1' && e.key <= '9') handleNumberInput(parseInt(e.key));
-            if (e.key === '0' || e.key === 'Backspace') handleNumberInput(0);
+            if (e.key === '0' || e.key === 'Backspace' || e.key === 'Delete') handleNumberInput(0);
             if (e.key === 'ArrowUp') setSelected(prev => ({ ...prev, row: Math.max(0, prev.row - 1) }));
             if (e.key === 'ArrowDown') setSelected(prev => ({ ...prev, row: Math.min(8, prev.row + 1) }));
             if (e.key === 'ArrowLeft') setSelected(prev => ({ ...prev, col: Math.max(0, prev.col - 1) }));
@@ -183,32 +180,42 @@ const Sudoku = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [selected, board, solution, isWon]);
 
+    const toolFaqs = isEn ? [
+        { q: "How do I play Sudoku?", a: "Fill the 9x9 grid so that each row, each column, and each of the nine 3x3 subgrids contain all of the digits from 1 to 9." },
+        { q: "What's the difference between difficulties?", a: "Easy puzzles provide more initial numbers, while Medium and Hard puzzles require more complex logic strategies to solve with fewer starters." },
+        { q: "Is there a penalty for wrong numbers?", a: "In this version, incorrect numbers are highlighted in red to help you learn, but there is no score penalty other than the time spent." }
+    ] : [
+        { q: "난이도별 차이가 무엇인가요?", a: "'쉬움'은 힌트 숫자가 많고, '어려움'으로 갈수록 비어있는 칸이 많아져 복합적인 논리 추론이 필요합니다." },
+        { q: "게임 도중 실수를 하면 어떻게 하나요?", a: "잘못 입력한 숫자는 빨간색으로 표시되거나, 힌트와 대조하여 직접 수정할 수 있습니다." },
+        { q: "스도쿠의 기본 규칙은 무엇인가요?", a: "가로 9칸, 세로 9칸, 그리고 3x3 작은 상자 9개 안에 1부터 9까지의 숫자가 중복 없이 들어가야 합니다." }
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title="스도쿠 - 클래식 로직 퍼즐"
-                description="다양한 난이도의 클래식 스도쿠를 즐겨보세요. 두뇌를 단련하고 기록을 세워 공유해보세요!"
-                keywords="스도쿠, sudoku, 로직퍼즐, 퍼즐게임, 두뇌게임, 무료게임"
-                category="게임"
+                title={isEn ? "Play Sudoku - Online Logic Puzzle | Tool Hive" : "스도쿠 (Sudoku) - 클래식 로직 퍼즐 | Tool Hive"}
+                description={isEn ? "Challenge your brain with free online Sudoku puzzles. Choose your difficulty level, track your time, and improve your logical thinking skills." : "다양한 난이도의 클래식 스도쿠를 즐겨보세요. 두뇌를 단련하고 기록을 세워 공유해보세요!"}
+                keywords={isEn ? "sudoku online, logic puzzle, brain training, daily sudoku, free puzzle games" : "스도쿠, sudoku, 로직퍼즐, 퍼즐게임, 두뇌게임, 무료게임"}
+                faqs={toolFaqs}
             />
 
             <div className="flex flex-col md:flex-row items-start gap-8" ref={containerRef}>
                 {/* Left Side: Information and Controls */}
                 <div className="w-full md:w-64 space-y-6">
                     <div className="space-y-2">
-                        <h1 className="text-3xl font-bold">스도쿠</h1>
-                        <p className="text-muted-foreground text-sm">클래식 숫자 로직 퍼즐</p>
+                        <h1 className="text-3xl font-bold">{isEn ? 'Sudoku' : '스도쿠'}</h1>
+                        <p className="text-muted-foreground text-sm">{isEn ? 'Classic Number Logic Puzzle' : '클래식 숫자 로직 퍼즐'}</p>
                     </div>
 
                     <div className="bg-card border border-border rounded-2xl p-4 shadow-sm space-y-4">
                         <div className="flex justify-between items-center text-sm font-medium">
-                            <span className="text-muted-foreground">난이도</span>
+                            <span className="text-muted-foreground">{isEn ? 'Difficulty' : '난이도'}</span>
                             <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-md uppercase text-xs font-bold">
-                                {difficulty === 'easy' ? '쉬움' : difficulty === 'medium' ? '보통' : '어려움'}
+                                {isEn ? difficulty.toUpperCase() : (difficulty === 'easy' ? '쉬움' : difficulty === 'medium' ? '보통' : '어려움')}
                             </span>
                         </div>
                         <div className="flex justify-between items-center">
-                            <span className="text-muted-foreground text-sm font-medium">시간</span>
+                            <span className="text-muted-foreground text-sm font-medium">{isEn ? 'Time' : '시간'}</span>
                             <span className="text-xl font-mono font-bold">{formatTime(timer)}</span>
                         </div>
                     </div>
@@ -218,19 +225,19 @@ const Sudoku = () => {
                             onClick={() => startNewGame('easy')}
                             className={`py-2 rounded-xl text-sm font-bold transition-all ${difficulty === 'easy' ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-muted/80'}`}
                         >
-                            쉬움
+                            {isEn ? 'EASY' : '쉬움'}
                         </button>
                         <button
                             onClick={() => startNewGame('medium')}
                             className={`py-2 rounded-xl text-sm font-bold transition-all ${difficulty === 'medium' ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-muted/80'}`}
                         >
-                            보통
+                            {isEn ? 'MEDIUM' : '보통'}
                         </button>
                         <button
                             onClick={() => startNewGame('hard')}
                             className={`py-2 rounded-xl text-sm font-bold transition-all ${difficulty === 'hard' ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-muted/80'}`}
                         >
-                            어려움
+                            {isEn ? 'HARD' : '어려움'}
                         </button>
                     </div>
 
@@ -239,14 +246,14 @@ const Sudoku = () => {
                             onClick={() => startNewGame()}
                             className="w-full py-3 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-colors flex items-center justify-center gap-2"
                         >
-                            <RotateCcw size={18} /> 새 게임
+                            <RotateCcw size={18} /> {isEn ? 'New Game' : '새 게임'}
                         </button>
                         <button
                             onClick={useHint}
                             className={`w-full py-3 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 ${hints > 0 ? 'bg-yellow-500 hover:bg-yellow-600 text-black' : 'bg-muted text-muted-foreground shadow-none'}`}
                             disabled={hints <= 0}
                         >
-                            <Lightbulb size={18} /> 힌트 ({hints})
+                            <Lightbulb size={18} /> {isEn ? 'Hint' : '힌트'} ({hints})
                         </button>
                     </div>
                 </div>
@@ -307,7 +314,7 @@ const Sudoku = () => {
                             onClick={() => handleNumberInput(0)}
                             className="h-12 md:h-14 bg-slate-200 dark:bg-slate-800 col-span-2 md:col-span-1 border border-border rounded-xl font-bold text-sm md:text-xs hover:bg-rose-500 hover:text-white transition-colors"
                         >
-                            삭제
+                            {isEn ? 'DEL' : '삭제'}
                         </button>
                     </div>
 
@@ -317,21 +324,25 @@ const Sudoku = () => {
                             <div className="w-24 h-24 bg-yellow-500/20 rounded-full flex items-center justify-center mb-6">
                                 <Trophy size={48} className="text-yellow-500" />
                             </div>
-                            <h2 className="text-4xl font-black text-white mb-2">축하합니다!</h2>
-                            <p className="text-slate-400 mb-8">{difficulty.toUpperCase()} 난이도를 {formatTime(timer)} 만에 해결하셨습니다!</p>
+                            <h2 className="text-4xl font-black text-white mb-2">{isEn ? 'Congratulations!' : '축하합니다!'}</h2>
+                            <p className="text-slate-400 mb-8">
+                                {isEn 
+                                    ? `You solved ${difficulty.toUpperCase()} difficulty in ${formatTime(timer)}!` 
+                                    : `${difficulty.toUpperCase()} 난이도를 ${formatTime(timer)} 만에 해결하셨습니다!`}
+                            </p>
 
                             <div className="flex flex-col gap-3 w-full max-w-[280px]">
                                 <button
                                     onClick={() => startNewGame()}
                                     className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2"
                                 >
-                                    <RotateCcw size={18} /> 새로운 퍼즐 도전
+                                    <RotateCcw size={18} /> {isEn ? 'Challenge New Puzzle' : '새로운 퍼즐 도전'}
                                 </button>
                                 <button
-                                    onClick={() => shareCanvas(containerRef.current, '스도쿠', formatTime(timer))}
+                                    onClick={() => shareCanvas(containerRef.current, 'Sudoku', formatTime(timer))}
                                     className="w-full py-3 bg-slate-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
                                 >
-                                    <Share2 size={18} /> 결과 공유하기
+                                    <Share2 size={18} /> {isEn ? 'Share Result' : '결과 공유하기'}
                                 </button>
                             </div>
                         </div>
@@ -340,29 +351,31 @@ const Sudoku = () => {
             </div>
 
             <ToolGuide
-                title="스도쿠 규칙 및 퍼즐 공략 가이드"
-                intro="가로, 세로, 그리고 3x3 격자 안에 1부터 9까지의 숫자를 중복 없이 채워 넣는 클래식 논리 퍼즐입니다. 논리적 사고력과 집중력을 기르는 데 탁월한 두뇌 게임입니다."
-                steps={[
+                title={isEn ? "Sudoku Basic Rules & Strategy Guide" : "스도쿠 규칙 및 퍼즐 공략 가이드"}
+                intro={isEn ? "Sudoku is a logic-based, combinatorial number-placement puzzle. In classic Sudoku, the objective is to fill a 9×9 grid with digits so that each column, each row, and each of the nine 3×3 subgrids that compose the grid contain all of the digits from 1 to 9." : "가로, 세로, 그리고 3x3 격자 안에 1부터 9까지의 숫자를 중복 없이 채워 넣는 클래식 논리 퍼즐입니다. 논리적 사고력과 집중력을 기르는 데 탁월한 두뇌 게임입니다."}
+                steps={isEn ? [
+                    "Choose a difficulty level (Easy, Medium, Hard) to generate a new puzzle.",
+                    "Click on an empty cell and use the numeric pad or keyboard to enter digits 1-9.",
+                    "Fill all rows, columns, and 3x3 blocks without repeating numbers.",
+                    "Use the 'Hint' button if you're stuck, or 'DEL' to clear an incorrect entry."
+                ] : [
                     "게임의 난이도(쉬움, 보통, 어려움)를 선택하여 퍼즐을 생성합니다.",
                     "빈 칸을 클릭하고 하단의 숫자 패드나 키보드를 이용해 1~9 사이의 숫자를 입력합니다.",
                     "모든 가로/세로 줄과 3x3 박스에 숫자가 중복되지 않도록 채워나갑니다.",
                     "막힐 때는 '힌트' 버튼을 눌러 정답 숫자를 확인하거나, '삭제' 버튼으로 잘못된 숫자를 지웁니다."
                 ]}
-                tips={[
+                tips={isEn ? [
+                    "Start with segments that are already mostly filled with numbers.",
+                    "Look for 'Single' points where only one specific number can possibly fit.",
+                    "Clicking a cell highlights its row and column to help you cross-reference.",
+                    "Practice regularly to recognize patterns and improve your solving time."
+                ] : [
                     "한 줄이나 박스에 숫자가 많이 채워진 곳부터 공략하는 것이 유리합니다.",
                     "특정 칸에 들어갈 수 있는 숫자가 단 하나뿐인 '싱글' 포인트를 먼저 찾아보세요.",
-                    "숫자를 클릭하면 해당 숫자와 같은 행/열이 하이라이트 되어 추론을 돕습니다."
+                    "숫자를 클릭하면 해당 숫자와 같은 행/열이 하이라이트 되어 추론을 돕습니다.",
+                    "자주 연습할수록 숫자 패턴이 눈에 들어와 해결 시간이 단축됩니다."
                 ]}
-                faqs={[
-                    {
-                        q: "난이도별 차이가 무엇인가요?",
-                        a: "'쉬움'은 힌트 숫자가 많고, '어려움'으로 갈수록 비어있는 칸이 많아져 복합적인 논리 추론이 필요합니다."
-                    },
-                    {
-                        q: "게임 도중 실수를 하면 어떻게 하나요?",
-                        a: "잘못 입력한 숫자는 빨간색으로 표시되거나, 힌트와 대조하여 직접 수정할 수 있습니다."
-                    }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { Binary, ArrowRightLeft } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Binary, Copy, Check } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const BaseConverter = () => {
-    const [inputValue, setInputValue] = useState('');
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
+    // Added default 10 to ensure binary conversions start logically immediately
+    const [inputValue, setInputValue] = useState('10');
     const [inputBase, setInputBase] = useState(10);
     const [results, setResults] = useState({});
+    const [copiedKey, setCopiedKey] = useState(null);
+
+    useEffect(() => {
+        convertBase(inputValue, inputBase);
+        // eslint-disable-next-line
+    }, []);
 
     const convertBase = (value, fromBase) => {
         if (!value.trim()) {
@@ -15,11 +26,12 @@ const BaseConverter = () => {
         }
 
         try {
-            // 입력값을 10진수로 변환
-            const decimal = parseInt(value, fromBase);
+            // Remove spaces from input
+            const cleanValue = value.replace(/\s+/g, '');
+            const decimal = parseInt(cleanValue, fromBase);
 
             if (isNaN(decimal)) {
-                setResults({ error: '유효하지 않은 입력값입니다' });
+                setResults({ error: isEn ? 'Invalid input sequence strictly targeting chosen base type' : '유효하지 않은 입력값입니다' });
                 return;
             }
 
@@ -30,7 +42,7 @@ const BaseConverter = () => {
                 hexadecimal: decimal.toString(16).toUpperCase()
             });
         } catch (error) {
-            setResults({ error: '변환 중 오류가 발생했습니다' });
+            setResults({ error: isEn ? 'Math execution payload broken' : '변환 중 오류가 발생했습니다' });
         }
     };
 
@@ -46,45 +58,86 @@ const BaseConverter = () => {
         }
     };
 
-    const copyToClipboard = (text) => {
+    const copyToClipboard = (text, key) => {
         navigator.clipboard.writeText(text);
+        setCopiedKey(key);
+        setTimeout(() => setCopiedKey(null), 1500);
     };
+
+    const titleText = isEn ? t('tools.base-converter.title') : "진법 변환기 (2진수, 8진수, 10진수, 16진수) - Numeric Base";
+    const descText = isEn 
+        ? t('tools.base-converter.description')
+        : "2진수, 8진수, 10진수, 16진수를 서로 일괄 변환하세요. 실시간 진법 변환 계산기입니다.";
+    const keywordsText = isEn ? "binary converter, hex to binary, base translator, base calculator, octal converter" : "진법 변환, 2진수 변환, 16진수 변환, 진법 계산기, binary converter";
+
+    const faqs = isEn ? [
+        {
+            q: "Can I enter spaced sequences like '1010 1100' instead explicitly?",
+            a: "Yes. Our input natively strips out arbitrary white spatial bytes dynamically calculating accurate roots easily perfectly."
+        },
+        {
+            q: "Why does the app cap excessively massive inputs typically?",
+            a: "Standard Javascript numerical limits top roughly out safely strictly avoiding architecture precision buffer overflows during translation."
+        }
+    ] : [
+        { "q": "띄어쓰기가 포함된 값도 입력 가능한가요?", "a": "네, 공백이나 여백이 섞여 있어도 자동으로 제거하고 순수 숫자값만으로 로직을 수행합니다." },
+        { "q": "결과에 오류가 뜨는 이유는 무엇인가요?", "a": "현재 선택한 진수 체계에서 유효하지 않은 문자(예: 2진수인데 3을 입력)를 포함할 경우 에러가 발생합니다." }
+    ];
+
+    const steps = isEn ? [
+        "Pick exactly the numeric system base belonging currently firmly corresponding closely to your initial input.",
+        "Insert character inputs natively inside the core centered textbox simply.",
+        "Explore immediately translated multi-formatted results simultaneously popping precisely beneath your field.",
+        "Copy securely clicking any relevant result box strictly."
+    ] : [
+        "입력하려는 숫자가 현재 몇 진수인지 목록에서 선택하세요.",
+        "입력창에 실제 숫자를 기입합니다 (선택한 진수에 맞는 문자만 지원합니다).",
+        "별도 버튼 없이 실시간으로 변환된 4가지 결과가 노출됩니다.",
+        "원하는 결과 우측의 복사 버튼을 눌러 결과값을 가져갑니다."
+    ];
 
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="진법 변환기 (2진수, 8진수, 10진수, 16진수) - Utility Hub"
-                description="2진수, 8진수, 10진수, 16진수를 서로 변환하세요. 온라인 진법 변환 계산기."
-                keywords="진법 변환, 2진수 변환, 16진수 변환, 진법 계산기, binary converter"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
+                category="dev"
+                faqs={faqs}
+                steps={steps}
             />
 
-            <header className="text-center space-y-2">
+            <header className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center p-3 bg-purple-100 dark:bg-purple-900/30 rounded-2xl text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-800">
+                    <Binary className="w-8 h-8" />
+                </div>
                 <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
-                    <Binary className="w-8 h-8 text-primary" />
-                    진법 변환기
+                    {isEn ? 'Numeric Base Converter' : '진법 변환기'}
                 </h1>
                 <p className="text-muted-foreground">
-                    2진수, 8진수, 10진수, 16진수 변환
+                    {isEn ? 'Convert strictly between natively Binary, Octal, Decimal, Hex values freely.' : '2진수, 8진수, 10진수, 16진수 통합 상호 변환'}
                 </p>
             </header>
 
             {/* Input */}
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+            <div className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
                 <div>
-                    <label className="block text-sm font-medium mb-2">입력 진법</label>
-                    <div className="grid grid-cols-4 gap-2">
+                    <label className="block text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                        {isEn ? 'Select Origin Base' : '입력 진법 선택'}
+                    </label>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                         {[
-                            { base: 2, label: '2진수' },
-                            { base: 8, label: '8진수' },
-                            { base: 10, label: '10진수' },
-                            { base: 16, label: '16진수' }
+                            { base: 2, label: isEn ? 'Binary(2)' : '2진수' },
+                            { base: 8, label: isEn ? 'Octal(8)' : '8진수' },
+                            { base: 10, label: isEn ? 'Decimal(10)' : '10진수' },
+                            { base: 16, label: isEn ? 'Hex(16)' : '16진수' }
                         ].map(({ base, label }) => (
                             <button
                                 key={base}
                                 onClick={() => handleBaseChange(base)}
-                                className={`px-4 py-2 rounded-lg font-medium transition-all ${inputBase === base
-                                        ? 'bg-primary text-primary-foreground'
-                                        : 'bg-secondary hover:bg-accent'
+                                className={`px-4 py-3 rounded-xl font-bold transition-all shadow-sm active:scale-95 border ${inputBase === base
+                                        ? 'bg-purple-600 text-white border-purple-500'
+                                        : 'bg-secondary hover:bg-secondary/80 text-muted-foreground border-border/50'
                                     }`}
                             >
                                 {label}
@@ -94,49 +147,55 @@ const BaseConverter = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-2">입력값</label>
+                    <label className="block text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                        {isEn ? 'Data Input String' : '입력값 기입'}
+                    </label>
                     <input
                         type="text"
                         value={inputValue}
                         onChange={(e) => handleInputChange(e.target.value)}
                         placeholder={
-                            inputBase === 2 ? '예: 1010' :
-                                inputBase === 8 ? '예: 12' :
-                                    inputBase === 10 ? '예: 10' :
-                                        '예: A'
+                            inputBase === 2 ? (isEn ? 'Example: 101011' : '예: 1010') :
+                                inputBase === 8 ? (isEn ? 'Example: 7321' : '예: 12') :
+                                    inputBase === 10 ? (isEn ? 'Example: 902' : '예: 10') :
+                                        (isEn ? 'Example: A3F2' : '예: A')
                         }
-                        className="w-full px-4 py-3 text-xl bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-mono"
+                        className="w-full px-6 py-5 text-2xl font-black bg-background border-2 border-border/80 focus:border-purple-500 rounded-xl font-mono tracking-widest shadow-inner placeholder:font-sans placeholder:text-lg placeholder:tracking-normal placeholder:font-medium transition-colors outline-none"
                     />
                 </div>
             </div>
 
             {/* Results */}
             {results.error ? (
-                <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-6 text-center">
-                    <p className="text-red-600 dark:text-red-400">{results.error}</p>
+                <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-2xl p-6 text-center animate-in fade-in zoom-in-95 duration-200 shadow-sm">
+                    <p className="text-red-600 dark:text-red-400 font-bold flex items-center justify-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                        {results.error}
+                    </p>
                 </div>
             ) : Object.keys(results).length > 0 && (
-                <div className="space-y-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-300">
                     {[
-                        { key: 'binary', label: '2진수 (Binary)', color: 'bg-blue-500' },
-                        { key: 'octal', label: '8진수 (Octal)', color: 'bg-green-500' },
-                        { key: 'decimal', label: '10진수 (Decimal)', color: 'bg-yellow-500' },
-                        { key: 'hexadecimal', label: '16진수 (Hexadecimal)', color: 'bg-purple-500' }
-                    ].map(({ key, label, color }) => (
-                        <div key={key} className="bg-card border border-border rounded-xl p-4">
-                            <div className="flex items-center justify-between mb-2">
-                                <div className="flex items-center gap-2">
-                                    <div className={`w-3 h-3 rounded-full ${color}`} />
-                                    <span className="font-bold text-sm">{label}</span>
+                        { key: 'binary', label: isEn ? 'Binary / Base 2' : '2진수 (Binary)', color: 'bg-blue-500', border: 'border-blue-200 dark:border-blue-900' },
+                        { key: 'octal', label: isEn ? 'Octal / Base 8' : '8진수 (Octal)', color: 'bg-emerald-500', border: 'border-emerald-200 dark:border-emerald-900' },
+                        { key: 'decimal', label: isEn ? 'Decimal / Base 10' : '10진수 (Decimal)', color: 'bg-amber-500', border: 'border-amber-200 dark:border-amber-900' },
+                        { key: 'hexadecimal', label: isEn ? 'Hexadecimal / Base 16' : '16진수 (Hexadecimal)', color: 'bg-rose-500', border: 'border-rose-200 dark:border-rose-900' }
+                    ].map(({ key, label, color, border }) => (
+                        <div key={key} className={`bg-card border ${border} rounded-2xl p-5 hover:shadow-md transition-shadow`}>
+                            <div className="flex items-center justify-between mb-4">
+                                <div className="flex items-center gap-3">
+                                    <div className={`w-3 h-3 rounded-full ${color} shadow-sm`} />
+                                    <span className="font-bold text-foreground tracking-tight">{label}</span>
                                 </div>
                                 <button
-                                    onClick={() => copyToClipboard(results[key])}
-                                    className="text-xs px-3 py-1 bg-secondary hover:bg-accent rounded-md transition-colors"
+                                    onClick={() => copyToClipboard(results[key], key)}
+                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs transition-all ${copiedKey === key ? 'bg-green-500 text-white shadow-sm' : 'bg-background border border-border hover:bg-secondary text-muted-foreground'}`}
                                 >
-                                    복사
+                                    {copiedKey === key ? <Check size={14} /> : <Copy size={14} />}
+                                    {copiedKey === key ? (isEn ? 'Copied' : '복사됨') : (isEn ? 'Copy' : '복사')}
                                 </button>
                             </div>
-                            <div className="p-3 bg-background rounded-lg font-mono text-lg break-all">
+                            <div className="px-4 py-3 bg-secondary/30 border border-border/50 rounded-xl font-mono text-xl font-black text-foreground break-all tracking-wider shadow-inner">
                                 {results[key]}
                             </div>
                         </div>
@@ -144,34 +203,47 @@ const BaseConverter = () => {
                 </div>
             )}
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 진법이란?</h3>
-                <ul className="space-y-1 list-disc list-inside">
-                    <li><strong>2진수:</strong> 0과 1만 사용 (컴퓨터의 기본 언어)</li>
-                    <li><strong>8진수:</strong> 0~7까지 사용</li>
-                    <li><strong>10진수:</strong> 0~9까지 사용 (우리가 일상적으로 사용)</li>
-                    <li><strong>16진수:</strong> 0~9, A~F까지 사용 (색상 코드 등에 사용)</li>
+            <div className="bg-secondary/40 border border-border/50 rounded-2xl p-6 text-sm text-foreground space-y-4">
+                <h3 className="font-black text-lg flex items-center gap-2">
+                    <span className="w-2 h-6 bg-purple-500 rounded-full inline-block"></span>
+                    💡 {isEn ? 'Understanding the Math Bases' : '진수(Base) 개념 안내'}
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-medium text-muted-foreground list-none">
+                    <li className="flex gap-2 bg-background p-3 rounded-xl border border-border shadow-sm">
+                        <strong className="text-foreground shrink-0 w-16 text-blue-600 dark:text-blue-400">{isEn ? 'Binary:' : '2진수:'}</strong> 
+                        <span>{isEn ? 'Zeros & Ones. The purest foundational language interpreted actively natively entirely utilizing logic gates.' : '0과 1로만 기입 (디지털 정보 저장의 기초)'}</span>
+                    </li>
+                    <li className="flex gap-2 bg-background p-3 rounded-xl border border-border shadow-sm">
+                        <strong className="text-foreground shrink-0 w-16 text-emerald-600 dark:text-emerald-400">{isEn ? 'Octal:' : '8진수:'}</strong> 
+                        <span>{isEn ? 'Digits 0-7. Historically heavily deployed handling 3-bit chunk intervals across Unix native networking permissions mapping.' : '0~7 사용 (권한 설정 등 특수 목적용)'}</span>
+                    </li>
+                    <li className="flex gap-2 bg-background p-3 rounded-xl border border-border shadow-sm">
+                        <strong className="text-foreground shrink-0 w-16 text-amber-600 dark:text-amber-500">{isEn ? 'Decimal:' : '10진수:'}</strong> 
+                        <span>{isEn ? 'Standard numeric format (0-9). The global baseline structurally scaling entirely human mathematical comprehension.' : '0~9 사용 (인간이 일상적으로 쓰는 기본 체계)'}</span>
+                    </li>
+                    <li className="flex gap-2 bg-background p-3 rounded-xl border border-border shadow-sm">
+                        <strong className="text-foreground shrink-0 w-16 text-rose-600 dark:text-rose-400">{isEn ? 'Hex:' : '16진수:'}</strong> 
+                        <span>{isEn ? 'Digits 0-9 & letters strictly A-F natively. Widely implemented coloring CSS values efficiently.' : '0~F 사용 (색상 코드 및 데이터 압축 표기용)'}</span>
+                    </li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="진법 변환기"
-                intro="2진수, 8진수, 10진수, 16진수 변환"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+            
+            <ToolGuide
+                title={isEn ? "Base Conversion Master Guide" : "진법 변환기 활용 가이드"}
+                intro={isEn 
+                    ? "Effortlessly cross-multiply integers precisely scaling natively between Hex and Binary entirely instantly within safe browser borders dynamically." 
+                    : "개발 및 코딩 시 필수적인 다양한 진수 체계를 서로 바꿀 수 있는 유용한 도구입니다. 리눅스나 데이터 통신 등 여러 분야에서 사용됩니다."}
+                steps={steps}
+                tips={isEn ? [
+                    "Remember strictly hexadecimal identifiers intrinsically require alphabetical variants actively mapping towards integers exceeding natively size 10 limits.",
+                    "Binary representations drastically inherently span extremely massive visual spaces visually due to possessing completely binary size structures.",
+                    "Hex formats massively inherently structure optimal spacing specifically compressing massive byte arrays locally!"
+                ] : [
+                    "16진수에는 A부터 F까지의 알파벳이 포함됩니다. 코드 작성 시 접두사 0x와 함께 쓰이는 경우가 많습니다.",
+                    "2진수 출력 결과가 너무 길어 보인다면 16진수로 변환하여 콤팩트하게 관리하는 것이 효율적입니다.",
+                    "입력값의 범위가 너무 크면 자바스크립트의 숫자 정밀도 한계로 인해 정확하지 않을 수 있으니 주의하세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={faqs}
             />
         </div>
     );

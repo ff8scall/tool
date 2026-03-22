@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, FileCode } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const AsciiTable = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [copiedCode, setCopiedCode] = useState('');
 
     const copyToClipboard = (text) => {
@@ -12,7 +16,6 @@ const AsciiTable = () => {
         setTimeout(() => setCopiedCode(''), 1500);
     };
 
-    // ASCII 코드 범위: 32-126 (출력 가능한 문자)
     const asciiCodes = [];
     for (let i = 32; i <= 126; i++) {
         asciiCodes.push({
@@ -24,38 +27,47 @@ const AsciiTable = () => {
     }
 
     function getCharDescription(code) {
-        if (code === 32) return 'Space';
-        if (code >= 48 && code <= 57) return 'Digit';
-        if (code >= 65 && code <= 90) return 'Uppercase';
-        if (code >= 97 && code <= 122) return 'Lowercase';
-        return 'Symbol';
+        if (code === 32) return isEn ? 'Space' : '공백';
+        if (code >= 48 && code <= 57) return isEn ? 'Digit' : '숫자';
+        if (code >= 65 && code <= 90) return isEn ? 'Uppercase' : '대문자';
+        if (code >= 97 && code <= 122) return isEn ? 'Lowercase' : '소문자';
+        return isEn ? 'Symbol' : '기호';
     }
+
+    const titleText = isEn ? t('tools.ascii-table.title') : "아스키 코드표 - ASCII Reference Table";
+    const descText = isEn 
+        ? t('tools.ascii-table.description')
+        : "ASCII 코드표를 확인하고 복사할 수 있습니다. 10진수, 16진수, 문자를 한눈에 볼 수 있습니다.";
+    const keywordsText = isEn ? "ascii table, character codes, hex to ascii, decimal to ascii, ascii chart" : "ASCII, 아스키코드, 문자코드, 16진수, 10진수";
 
     return (
         <div className="max-w-5xl mx-auto space-y-6">
             <SEO
-                title="아스키 코드표 - Utility Hub"
-                description="ASCII 코드표를 확인하고 복사할 수 있습니다. 10진수, 16진수, 문자를 한눈에 볼 수 있습니다."
-                keywords="ASCII, 아스키코드, 문자코드, 16진수, 10진수"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
             />
 
             <header className="text-center space-y-2">
-                <h1 className="text-3xl font-bold">아스키 코드표</h1>
+                <h1 className="text-3xl font-bold flex items-center justify-center gap-3">
+                    <FileCode className="w-8 h-8 text-lime-600" />
+                    {isEn ? 'ASCII Table Reference' : '아스키 코드표'}
+                </h1>
                 <p className="text-muted-foreground">
-                    ASCII 코드와 문자 대응표
+                    {isEn ? 'Complete list of printable ASCII characters and their numeric representatives.' : 'ASCII 코드와 문자 대응표'}
                 </p>
             </header>
 
-            <div className="bg-card border border-border rounded-xl overflow-hidden">
+            <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead className="bg-muted">
                             <tr>
-                                <th className="px-4 py-3 text-left font-bold">10진수</th>
-                                <th className="px-4 py-3 text-left font-bold">16진수</th>
-                                <th className="px-4 py-3 text-left font-bold">문자</th>
-                                <th className="px-4 py-3 text-left font-bold">설명</th>
-                                <th className="px-4 py-3 text-left font-bold">복사</th>
+                                <th className="px-4 py-3 text-left font-bold">{isEn ? 'DEC' : '10진수'}</th>
+                                <th className="px-4 py-3 text-left font-bold">{isEn ? 'HEX' : '16진수'}</th>
+                                <th className="px-4 py-3 text-center font-bold">{isEn ? 'CHAR' : '문자'}</th>
+                                <th className="px-4 py-3 text-left font-bold">{isEn ? 'Description' : '설명'}</th>
+                                <th className="px-4 py-3 text-left font-bold">{isEn ? 'Copy' : '복사'}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-border">
@@ -71,7 +83,7 @@ const AsciiTable = () => {
                                         <button
                                             onClick={() => copyToClipboard(item.char)}
                                             className="p-2 hover:bg-secondary rounded-md transition-colors"
-                                            title="문자 복사"
+                                            title={isEn ? "Copy Char" : "문자 복사"}
                                         >
                                             {copiedCode === item.char ? (
                                                 <Check className="w-4 h-4 text-green-500" />
@@ -87,33 +99,47 @@ const AsciiTable = () => {
                 </div>
             </div>
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 안내</h3>
+            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground border border-border">
+                <h3 className="font-bold text-foreground mb-2">💡 {isEn ? 'What is ASCII?' : '아스키 코드 안내'}</h3>
                 <ul className="space-y-1 list-disc list-inside">
-                    <li>ASCII 코드는 0-127까지 정의되어 있으며, 32-126은 출력 가능한 문자입니다.</li>
-                    <li>10진수: 일반적으로 사용하는 숫자 체계</li>
-                    <li>16진수: 프로그래밍에서 자주 사용하는 숫자 체계 (0x 접두사)</li>
-                    <li>복사 버튼을 클릭하면 해당 문자가 클립보드에 복사됩니다.</li>
+                    <li>{isEn ? 'ASCII stands for American Standard Code for Information Interchange.' : 'ASCII는 정보 교환을 위한 미국 표준 기호 체계를 의미합니다.'}</li>
+                    <li>{isEn ? 'This table focuses on characters 32-126, which are common printable symbols.' : '본 표는 32번부터 126번까지의 일반적인 출력 가능 문자를 보여줍니다.'}</li>
+                    <li>{isEn ? 'DEC column shows standard integers while HEX shows hexadecimal programming values.' : '10진수(DEC)와 16진수(HEX)를 통해 프로그래밍에 필요한 값을 쉽게 찾을 수 있습니다.'}</li>
+                    <li>{isEn ? 'Click the copy icon to quickly grab the literal character symbol.' : '복사 버튼을 클릭하면 해당 문자가 클립보드에 복사됩니다.'}</li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="아스키 코드표"
-                intro="ASCII 코드 참조표"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "ASCII Table Guide" : "아스키 코드표 활용 가이드"}
+                intro={isEn 
+                    ? "Comprehensive lookup for the ASCII character set. Reference standard decimal and hexadecimal codes used in low-level programming."
+                    : "개발자 및 학생들을 위한 ASCII 문자 및 코드 대응 참조표입니다."}
+                steps={isEn ? [
+                    "Scroll through the table or use browser search (Ctrl+F) to find a specific character.",
+                    "Look up the corresponding Decimal or Hexadecimal value in the left columns.",
+                    "Click the copy icon to copy the character to your clipboard.",
+                    "Paste it directly into your source code or documentation."
+                ] : [
+                    "표를 스크롤하거나 브라우저 검색(Ctrl+F)을 통해 원하는 문자를 찾습니다.",
+                    "좌측 열에서 해당 문자의 10진수 및 16진수 값을 확인합니다.",
+                    "필요한 경우 우측의 복사 버튼을 눌러 문자를 클립보드에 담습니다.",
+                    "학습용이나 실제 프로그래밍 소스 코드 작성 시 참고 자료로 활용하세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Control characters (0-31) are not shown here as they are invisible non-printable characters like NEWLINE or TAB.",
+                    "Hexadecimal codes are usually prefixed with '0x' in languages like C, C++, and JavaScript.",
+                    "The character 'A' is always 65 (DEC) and 0x41 (HEX)."
+                ] : [
+                    "0~31번까지의 제어 문자(줄바꿈, 탭 등)는 화면에 출력되지 않으므로 본 표에서는 제외되었습니다.",
+                    "프로그래밍 언어에서 16진수를 사용할 때는 보통 앞에 '0x'를 붙여 표기합니다.",
+                    "문자 'A'는 10진수 65번, 16진수 0x41이라는 점을 기억해두면 편리합니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
+                faqs={isEn ? [
+                    { q: "What is the range of ASCII?", a: "The standard ASCII character set uses 7 bits and includes values from 0 to 127." },
+                    { q: "Is Unicode the same as ASCII?", a: "ASCII is a subset of Unicode. The first 128 characters of Unicode (UTF-8) are identical to the standard ASCII table." }
+                ] : [
+                    { "q": "아스키 코드의 범위는 어디까지인가요?", "a": "표준 아스키 코드는 7비트로 구성되어 0번부터 127번까지 총 128개의 문자를 포함합니다." },
+                    { "q": "확장 아스키 코드와는 무엇이 다른가요?", "a": "확장 아스키 코드는 8비트를 사용하여 255번까지 정의하며, 국가별 특수 기호나 그래픽 문자를 추가로 포함합니다." }
                 ]}
             />
         </div>

@@ -4,23 +4,41 @@ import { tools, toolCategoryData, toolCategories } from '../data/tools';
 import SEO from '../components/SEO';
 import { Star } from 'lucide-react';
 import useUserPreferences from '../hooks/useUserPreferences';
+import { useLanguage } from '../context/LanguageContext';
 
 const CategoryPage = () => {
     const { categoryId } = useParams();
     const { favorites, toggleFavorite } = useUserPreferences();
+    const { t, getLocalizedPath, lang } = useLanguage();
 
-    const categoryInfo = toolCategoryData[categoryId];
-    const categoryName = toolCategories[categoryId];
+    // Get base data from static source first
+    const staticInfo = toolCategoryData[categoryId];
+    
+    // Merge with translated text if available
+    const categoryInfo = useMemo(() => {
+        if (!staticInfo) return null;
+        return {
+            ...staticInfo,
+            title: t(`categoryData.${categoryId}.title`, { defaultValue: staticInfo.title }),
+            description: t(`categoryData.${categoryId}.description`, { defaultValue: staticInfo.description }),
+        };
+    }, [categoryId, t, staticInfo]);
+
+    const categoryName = t(`common.categories.${categoryId}`, { defaultValue: toolCategories[categoryId] });
 
     const categoryTools = useMemo(() => {
-        return tools.filter(tool => tool.category === categoryId);
-    }, [categoryId]);
+        let result = tools.filter(tool => tool.category === categoryId);
+        if (lang === 'en') {
+            result = result.filter(tool => tool.translated);
+        }
+        return result;
+    }, [categoryId, lang]);
 
     if (!categoryInfo) {
         return (
             <div className="text-center py-20">
-                <h1 className="text-2xl font-bold">카테고리를 찾을 수 없습니다.</h1>
-                <Link to="/" className="text-primary hover:underline mt-4 inline-block">홈으로 돌아가기</Link>
+                <h1 className="text-2xl font-bold">{t('category.notFound')}</h1>
+                <Link to={getLocalizedPath('/')} className="text-primary hover:underline mt-4 inline-block">{t('category.backToHome')}</Link>
             </div>
         );
     }
@@ -52,25 +70,28 @@ const CategoryPage = () => {
 
                 <div className="flex justify-center gap-4 text-sm font-medium pt-4">
                     <span className="px-4 py-2 bg-primary/5 rounded-full border border-primary/10 text-primary">
-                        총 {categoryTools.length}개의 도구
+                        {t('category.totalTools').replace('{count}', categoryTools.length)}
                     </span>
                     <span className="px-4 py-2 bg-secondary/50 rounded-full border border-border">
-                        100% 무료 사용
+                        {t('category.freeToUse')}
                     </span>
                 </div>
             </header>
 
             {/* Tools Grid */}
             <section className="space-y-6">
-                <h2 className="text-2xl font-bold px-2">모든 {categoryName} 도구</h2>
+                <h2 className="text-2xl font-bold px-2">{t('category.allCategoryTools').replace('{name}', categoryName)}</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                     {categoryTools.map((tool) => {
                         const ToolIcon = tool.icon;
                         const isFavorite = favorites.includes(tool.id);
+                        const translatedTitle = t(`tools.${tool.id}.title`, { defaultValue: tool.title });
+                        const translatedDesc = t(`tools.${tool.id}.description`, { defaultValue: tool.description });
+
                         return (
                             <Link
                                 key={tool.id}
-                                to={tool.path}
+                                to={getLocalizedPath(tool.path)}
                                 className="group relative bg-card border border-border rounded-2xl p-6 hover:shadow-xl hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center"
                             >
                                 <button
@@ -90,10 +111,10 @@ const CategoryPage = () => {
                                 </div>
 
                                 <h3 className="font-bold text-base mb-2 group-hover:text-primary transition-colors line-clamp-1">
-                                    {tool.title.split('|')[0].trim()}
+                                    {translatedTitle.split('|')[0].trim()}
                                 </h3>
                                 <p className="text-xs text-muted-foreground line-clamp-2">
-                                    {tool.description}
+                                    {translatedDesc}
                                 </p>
                             </Link>
                         );
@@ -103,11 +124,9 @@ const CategoryPage = () => {
 
             {/* Keyword block for SEO at bottom */}
             <section className="bg-muted/30 rounded-3xl p-10 border border-border/50 text-center space-y-6 max-w-4xl mx-auto mt-20">
-                <h3 className="text-xl font-bold">왜 Tool Hive에서 {categoryName}를 사용해야 하나요?</h3>
+                <h3 className="text-xl font-bold">{t('category.whyUse').replace('{name}', categoryName)}</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                    Tool Hive의 {categoryName} 도구들은 복잡한 설치나 번거로운 광고 없이 웹 브라우저에서 즉시 실행 가능합니다.
-                    사용자의 소중한 데이터는 서버에 저장되지 않고 브라우저 내에서만 처리되어 보안 걱정 없이 안심하고 사용할 수 있습니다.
-                    매주 업데이트되는 최신 알고리즘과 직관적인 디자인으로 최상의 사용자 경험을 약속드립니다.
+                    {t('category.whyUseDesc').replace('{name}', categoryName)}
                 </p>
             </section>
         </div>

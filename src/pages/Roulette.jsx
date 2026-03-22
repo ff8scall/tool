@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Disc, Plus, Trash2, RotateCw, Trophy } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Roulette = () => {
-    const [items, setItems] = useState(['짜장면', '짬뽕', '볶음밥', '탕수육']);
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
+    const [items, setItems] = useState(isEn ? ['Pizza', 'Burger', 'Tacos', 'Sushi'] : ['짜장면', '짬뽕', '볶음밥', '탕수육']);
     const [newItem, setNewItem] = useState('');
     const [isSpinning, setIsSpinning] = useState(false);
     const [winner, setWinner] = useState(null);
@@ -66,11 +69,10 @@ const Roulette = () => {
         ctx.stroke();
 
         // Draw pointer
-        // Draw pointer (pointing left from the right edge)
         ctx.beginPath();
-        ctx.moveTo(centerX + radius - 10, centerY); // Tip pointing left (inwards)
-        ctx.lineTo(centerX + radius + 10, centerY - 10); // Top right
-        ctx.lineTo(centerX + radius + 10, centerY + 10); // Bottom right
+        ctx.moveTo(centerX + radius - 10, centerY); 
+        ctx.lineTo(centerX + radius + 10, centerY - 10);
+        ctx.lineTo(centerX + radius + 10, centerY + 10);
         ctx.fillStyle = '#333';
         ctx.fill();
     };
@@ -81,9 +83,9 @@ const Roulette = () => {
         setIsSpinning(true);
         setWinner(null);
 
-        const spinDuration = 3000; // 3 seconds
+        const spinDuration = 3000;
         const startRotation = rotation;
-        const totalRotation = startRotation + (Math.random() * 10 + 10) * Math.PI; // Random spins
+        const totalRotation = startRotation + (Math.random() * 10 + 10) * Math.PI;
         const startTime = Date.now();
 
         const animate = () => {
@@ -91,7 +93,6 @@ const Roulette = () => {
             const elapsed = now - startTime;
 
             if (elapsed < spinDuration) {
-                // Ease out cubic
                 const t = elapsed / spinDuration;
                 const easeOut = 1 - Math.pow(1 - t, 3);
                 const currentRotation = startRotation + (totalRotation - startRotation) * easeOut;
@@ -111,19 +112,8 @@ const Roulette = () => {
     const calculateWinner = (finalRotation) => {
         const total = items.length;
         const arc = (2 * Math.PI) / total;
-
-        // Normalize rotation to 0-2PI
         const normalizedRotation = finalRotation % (2 * Math.PI);
 
-        // The pointer is at 0 degrees (right side), but we draw starting from 0.
-        // We need to find which segment intersects with angle 0.
-        // Actually, simpler logic: 
-        // The wheel rotates clockwise. The pointer is fixed at 0 (3 o'clock).
-        // We need to find the index where:
-        // (index * arc + rotation) % 2PI contains 0 (or 2PI)
-
-        // Let's use a simpler visual check logic or just math
-        // Angle of pointer relative to wheel start = -rotation
         let pointerAngle = (2 * Math.PI - normalizedRotation) % (2 * Math.PI);
         if (pointerAngle < 0) pointerAngle += 2 * Math.PI;
 
@@ -146,43 +136,55 @@ const Roulette = () => {
         }
     };
 
+    const toolFaqs = isEn ? [
+        { q: "How many choices can I add to the wheel?", a: "You can add between 2 and 12 items to be spun." },
+        { q: "Can I save my wheel configuration?", a: "Currently, the setup resets if you reload the page. We are working on a persistence feature for future updates." },
+        { q: "Is the wheel outcome truly random?", a: "Yes, the winning segment is calculated based on a random spin force and arc math, ensuring an unbiased result." }
+    ] : [
+        { q: "항목은 최대 몇 개까지 추가할 수 있나요?", a: "최소 2개에서 최대 12개까지 항목을 설정하여 돌릴 수 있습니다." },
+        { q: "한글 입력 시 글자 제한이 있나요?", a: "각 항목당 최대 10자까지 입력 가능하며, 긴 단어보다는 짧고 명확한 단어를 추천합니다." },
+        { q: "추첨 결과가 정말 무작위인가요?", a: "네, 각도 연산과 렌덤 함수를 결합하여 매번 돌릴 때마다 공정한 확률로 당첨자가 결정됩니다." }
+    ];
+
     return (
-        <div className="max-w-4xl mx-auto space-y-6 select-none">
+        <div className="max-w-4xl mx-auto space-y-8 select-none px-4 pb-20 mt-8">
             <SEO
-                title="돌림판 돌리기 - 랜덤 추첨 게임"
-                description="점심 메뉴, 벌칙 정하기 등 결정이 필요할 때 돌림판을 돌려보세요! 쉽고 간편한 온라인 룰렛 게임입니다."
-                keywords={['돌림판', '룰렛', 'roulette', '랜덤', '추첨', '복불복']}
+                title={isEn ? "Spin the Wheel - Random Decision Maker | Tool Hive" : "돌림판 돌리기 - 랜덤 추첨 게임 | Tool Hive"}
+                description={isEn ? "Need to make a quick decision? Use our Spin the Wheel tool to randomly pick items, names, or food choices. Easy to use and fun!" : "점심 메뉴, 벌칙 정하기 등 결정이 필요할 때 돌림판을 돌려보세요! 쉽고 간편한 온라인 룰렛 게임입니다."}
+                keywords={isEn ? "spin the wheel, wheel spinner, random picker, online roulette, decision maker" : "돌림판, 룰렛, roulette, 랜덤, 추첨, 복불복"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center space-y-4">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-3">
-                    <Disc className="w-8 h-8 text-purple-500" />
-                    돌림판 돌리기
+                <div className="inline-flex items-center justify-center p-4 bg-purple-100 dark:bg-purple-900/30 rounded-3xl mb-2">
+                    <Disc className="w-10 h-10 text-purple-600 dark:text-purple-400" />
+                </div>
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white flex items-center justify-center gap-4 italic tracking-tighter uppercase">
+                    {isEn ? 'Spin the Wheel' : '돌림판 돌리기'}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                    무엇을 고를지 고민될 때 돌려보세요!
+                <p className="text-muted-foreground font-medium">
+                    {isEn ? 'Stuck with a choice? Let the wheel decide!' : '무엇을 고를지 고민될 때 돌려보세요!'}
                 </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="grid md:grid-cols-2 gap-10 items-start">
                 {/* Wheel Section */}
-                <div className="card p-6 flex flex-col items-center space-y-6">
-                    <div className="relative">
+                <div className="bg-card border-2 border-border/50 p-10 rounded-[2.5rem] shadow-2xl flex flex-col items-center space-y-8 transition-all hover:border-purple-500/30">
+                    <div className="relative group">
+                        <div className="absolute -inset-4 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-purple-500/10 transition-all" />
                         <canvas
                             ref={canvasRef}
                             width={320}
                             height={320}
-                            className="max-w-full"
+                            className="max-w-full relative drop-shadow-2xl"
                         />
-                        {/* Pointer Triangle (CSS fallback if canvas drawing fails, but canvas has it) */}
-                        <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[20px] border-r-gray-800 rotate-180 hidden" />
                     </div>
 
                     {winner && !isSpinning && (
-                        <div className="text-center animate-bounce">
-                            <div className="text-gray-500 text-sm mb-1">당첨!</div>
-                            <div className="text-3xl font-bold text-purple-600 flex items-center justify-center gap-2">
-                                <Trophy className="w-6 h-6" />
+                        <div className="text-center animate-in zoom-in duration-300">
+                            <div className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">{isEn ? 'WINNER!' : '당첨!'}</div>
+                            <div className="text-4xl font-black text-purple-600 flex items-center justify-center gap-3 drop-shadow-sm italic">
+                                <Trophy className="w-8 h-8 text-yellow-500" />
                                 {winner}
                             </div>
                         </div>
@@ -191,85 +193,103 @@ const Roulette = () => {
                     <button
                         onClick={spin}
                         disabled={isSpinning || items.length < 2}
-                        className="btn btn-primary btn-lg w-full flex items-center justify-center gap-2"
+                        className={`w-full py-5 rounded-2xl font-black text-xl transition-all flex items-center justify-center gap-3 shadow-xl ${isSpinning 
+                            ? 'bg-gray-400 opacity-80 cursor-not-allowed' 
+                            : 'bg-primary text-primary-foreground hover:scale-105 active:scale-95 shadow-primary/30'}`}
                     >
                         <RotateCw className={`w-6 h-6 ${isSpinning ? 'animate-spin' : ''}`} />
-                        {isSpinning ? '돌아가는 중...' : '돌리기!'}
+                        {isSpinning ? (isEn ? 'SPINNING...' : '돌아가는 중...') : (isEn ? 'SPIN NOW' : '돌리기!')}
                     </button>
                 </div>
 
                 {/* Controls Section */}
-                <div className="card p-6 space-y-6">
-                    <h3 className="font-bold text-lg">항목 설정 ({items.length}/12)</h3>
+                <div className="bg-card border-2 border-border/50 p-10 rounded-[2.5rem] shadow-2xl space-y-8 h-full">
+                    <div>
+                        <h3 className="text-sm font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-6">
+                             {isEn ? 'Configure Options' : '항목 설정'} ({items.length}/12)
+                        </h3>
 
-                    <form onSubmit={addItem} className="flex gap-2">
-                        <input
-                            type="text"
-                            value={newItem}
-                            onChange={(e) => setNewItem(e.target.value)}
-                            placeholder="항목 추가 (예: 치킨)"
-                            className="input flex-1"
-                            maxLength={10}
-                            disabled={items.length >= 12}
-                        />
-                        <button
-                            type="submit"
-                            className="btn btn-secondary"
-                            disabled={!newItem.trim() || items.length >= 12}
-                        >
-                            <Plus className="w-5 h-5" />
-                        </button>
-                    </form>
+                        <form onSubmit={addItem} className="flex gap-2 mb-8">
+                            <input
+                                type="text"
+                                value={newItem}
+                                onChange={(e) => setNewItem(e.target.value)}
+                                placeholder={isEn ? "Add item (e.g. Tacos)" : "항목 추가 (예: 치킨)"}
+                                className="w-full bg-muted/50 border-2 border-border/50 rounded-xl px-5 py-3 font-bold focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all"
+                                maxLength={10}
+                                disabled={items.length >= 12}
+                            />
+                            <button
+                                type="submit"
+                                className="bg-secondary hover:bg-secondary/80 p-3 rounded-xl transition-all active:scale-90"
+                                disabled={!newItem.trim() || items.length >= 12}
+                            >
+                                <Plus className="w-6 h-6" />
+                            </button>
+                        </form>
 
-                    <div className="space-y-2 max-h-[300px] overflow-y-auto">
-                        {items.map((item, idx) => (
-                            <div key={idx} className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
-                                <div className="flex items-center gap-3">
-                                    <div
-                                        className="w-4 h-4 rounded-full"
-                                        style={{ backgroundColor: colors[idx % colors.length] }}
-                                    />
-                                    <span className="font-medium">{item}</span>
+                        <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-700">
+                            {items.map((item, idx) => (
+                                <div key={idx} className="flex items-center justify-between bg-muted/30 p-4 rounded-xl border border-transparent hover:border-border transition-all">
+                                    <div className="flex items-center gap-4">
+                                        <div
+                                            className="w-4 h-4 rounded-full shadow-inner"
+                                            style={{ backgroundColor: colors[idx % colors.length] }}
+                                        />
+                                        <span className="font-black text-gray-700 dark:text-gray-200">{item}</span>
+                                    </div>
+                                    {items.length > 2 && (
+                                        <button
+                                            onClick={() => removeItem(idx)}
+                                            className="text-gray-400 hover:text-rose-500 hover:rotate-90 transition-all p-1"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
+                                    )}
                                 </div>
-                                {items.length > 2 && (
-                                    <button
-                                        onClick={() => removeItem(idx)}
-                                        className="text-gray-400 hover:text-red-500 transition-colors"
-                                    >
-                                        <Trash2 className="w-4 h-4" />
-                                    </button>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    {items.length < 2 && (
-                        <div className="text-red-500 text-sm text-center">
-                            최소 2개의 항목이 필요합니다.
+                            ))}
                         </div>
-                    )}
+
+                        {items.length < 2 && (
+                            <div className="text-rose-500 text-xs font-black text-center mt-6 animate-pulse uppercase tracking-widest">
+                                {isEn ? 'Minimum 2 items required' : '최소 2개의 항목이 필요합니다.'}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        \n            <ToolGuide
-                title="돌림판 돌리기"
-                intro="랜덤 추첨을 위한 룰렛 게임"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
-                ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
-            />
+
+            <div className="mt-12">
+                <ToolGuide
+                    title={isEn ? "How to Use the Wheel Spinner" : "돌림판 돌리기 이용 안내"}
+                    intro={isEn ? "The Wheel Spinner (Roulette) is the ultimate decision-making tool. Whether it is choosing a lunch menu, picking a lucky winner, or assigning chores, our virtual wheel provides a fair and fun way to randomize outcomes." : "어떤 결정을 내려야 할지 막막할 때 가장 재미있게 고를 수 있는 방법, 바로 돌림판 룰렛입니다. 점심 메뉴 고르기부터 벌칙 당첨자 추첨까지, 다양한 상황에서 공정하고 재미있게 활용해 보세요."}
+                    steps={isEn ? [
+                        "Enter the choices you want to decide between in the 'Add item' field.",
+                        "Add up to 12 items. You can remove items using the trash icon.",
+                        "Once ready, click the 'SPIN NOW' button to start the wheel.",
+                        "Wait for the wheel to slow down and reveal the winner segment at the pointer.",
+                        "Celebrate the decision and spin again if needed!"
+                    ] : [
+                        "오른쪽 설정 칸에 고민 중인 선택지들을 하나하나 입력합니다.",
+                        "최대 12개까지 입력 가능하며, 잘못 입력한 경우 휴지통 아이콘으로 삭제할 수 있습니다.",
+                        "항목 입력이 끝나면 왼쪽의 '돌리기!' 버튼을 눌러 돌림판을 회전시킵니다.",
+                        "회전이 멈추면 화살표가 가리키는 최종 당첨 항목이 화면에 나타납니다.",
+                        "결과가 마음에 들지 않는다면 항목을 수정하고 다시 돌려보세요!"
+                    ]}
+                    tips={isEn ? [
+                        "Visual Fun: The wheel automatically assigns vibrant colors to each segment.",
+                        "Quick Decisions: Use it for party games, office chores, or just choosing a restaurant.",
+                        "Mobile Friendly: Works great on smartphones; just tap the spin button at your dinner table.",
+                        "Fairness: Every segment has an equal chance based on its arc percentage."
+                    ] : [
+                        "결정 장애가 있는 친구들과 모였을 때 스마트폰으로 함께 즐기기 좋습니다.",
+                        "글자 수가 너무 길면 돌림판에서 잘릴 수 있으니 가급적 핵심 단어만 입력하세요.",
+                        "색상이 자동으로 배정되어 시각적으로 구분하기 매우 편리합니다.",
+                        "새로운 결정을 원할 때마다 무제한으로 돌림판 내용을 바꿔가며 사용할 수 있습니다."
+                    ]}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

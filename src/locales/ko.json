@@ -1,0 +1,647 @@
+{
+  "common": {
+    "home": "홈",
+    "categories": {
+      "unit": "단위변환",
+      "finance": "생활/금융",
+      "text": "텍스트",
+      "dev": "개발도구",
+      "utility": "유틸리티",
+      "health": "건강",
+      "games": "미니게임",
+      "fun": "운세/재미",
+      "trivia": "상식 테스트"
+    },
+    "search": "도구 검색",
+    "searchPlaceholder": "어떤 도구가 필요하신가요? (예: 환율, JSON, BMI)...",
+    "searchInstruction": "찾고 싶은 도구의 이름을 입력하세요.",
+    "menuOpen": "메뉴 열기",
+    "menuClose": "메뉴 닫기",
+    "select": "선택",
+    "navigate": "이동",
+    "close": "닫기",
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "contact": "문의하기",
+    "sitemap": "사이트맵",
+    "footerDescription": "\"당신의 일상을 더 편리하게 만드는 138가지 이상의 무료 온라인 도구 모음\"",
+    "tabs": {
+      "all": "전체",
+      "best": "인기/추천"
+    },
+    "skipToContent": "본문으로 건너뛰기"
+  },
+  "tools": {
+    "2048": {
+      "title": "2048",
+      "description": "숫자를 합쳐 2048을 만드는 레전드 퍼즐"
+    },
+    "length": {
+      "title": "길이 변환기 | 미터, 피트, 인치 단위 계산",
+      "description": "다양한 길이 단위를 즉시 변환하세요. 미터(m), 피트(ft), 인치(in), 센티미터(cm) 등 모든 길이 단위를 지원하는 정확한 무료 온라인 변환 도구입니다."
+    },
+    "weight": {
+      "title": "무게 변환기 | 킬로그램, 파운드, 온스 계산",
+      "description": "킬로그램(kg), 파운드(lb), 온스(oz), 그람(g) 등 무게 단위를 간편하게 변환하세요. 정밀한 변환 공식을 사용하는 무료 온라인 무게 계산기입니다."
+    },
+    "currency": {
+      "title": "실시간 환율 계산기 | 오늘 달러 엔화 유로 환율 변환",
+      "description": "전 세계 주요 통화의 실시간 환율을 확인하고 변환하세요. 달러(USD), 엔화(JPY), 유로(EUR) 등 최신 환율 정보를 기반으로 한 정확한 계산기."
+    },
+    "temperature-converter": {
+      "title": "온도 변환기",
+      "description": "섭씨, 화씨, 켈빈 온도 변환"
+    },
+    "area-converter": {
+      "title": "면적 변환기",
+      "description": "제곱미터, 평, 에이커 단위 변환"
+    },
+    "volume-converter": {
+      "title": "부피 변환기",
+      "description": "리터, 갤런, 세제곱미터 변환"
+    },
+    "speed-converter": {
+      "title": "속도 변환기",
+      "description": "km/h, mph, m/s 변환"
+    },
+    "loan": {
+      "title": "대출금 계산기",
+      "description": "원리금 균등상환 방식의 대출 이자 계산"
+    },
+    "salary": {
+      "title": "연봉 실수령액",
+      "description": "4대 보험과 세금을 제외한 실수령액 계산"
+    },
+    "severance": {
+      "title": "퇴직금 계산기",
+      "description": "입사일과 퇴사일로 예상 퇴직금 계산"
+    },
+    "minimum-wage": {
+      "title": "최저임금 계산기",
+      "description": "2024/2025년 최저임금 확인 및 계산"
+    },
+    "compound-interest": {
+      "title": "복리 계산기",
+      "description": "복리 이자 및 투자 수익 계산"
+    },
+    "percent-calculator": {
+      "title": "퍼센트 계산기",
+      "description": "비율, 증감, 할인가 계산"
+    },
+    "discount-calculator": {
+      "title": "할인 계산기",
+      "description": "할인율과 최종 가격 계산"
+    },
+    "work-hours": {
+      "title": "근무시간 계산기",
+      "description": "근무 시간 및 급여 계산"
+    },
+    "age-calc": {
+      "title": "나이 계산기",
+      "description": "만 나이, 연 나이 계산"
+    },
+    "date": {
+      "title": "날짜 계산기",
+      "description": "날짜 차이 및 D-day 계산"
+    },
+    "lunch-recommender": {
+      "title": "점심 메뉴 추천",
+      "description": "오늘 뭐 먹지? 결정 장애를 위한 점심 메뉴 랜덤 추천기"
+    },
+    "word-count": {
+      "title": "글자 수 세기",
+      "description": "글자, 단어, 문장 수 계산"
+    },
+    "unicode": {
+      "title": "유니코드 변환기",
+      "description": "텍스트와 유니코드 상호 변환"
+    },
+    "string-converter": {
+      "title": "문자열 변환기",
+      "description": "대소문자, 카멜케이스 등 변환"
+    },
+    "base64": {
+      "title": "Base64 도구",
+      "description": "Base64 인코딩 및 디코딩"
+    },
+    "html-encoder": {
+      "title": "HTML 인코더",
+      "description": "HTML 엔티티 인코딩/디코딩"
+    },
+    "morse-code": {
+      "title": "모스 부호 변환기",
+      "description": "텍스트를 모스 부호로 변환"
+    },
+    "base-converter": {
+      "title": "진법 변환기",
+      "description": "2진수, 8진수, 10진수, 16진수 변환"
+    },
+    "json-formatter": {
+      "title": "JSON 포맷터",
+      "description": "JSON 데이터 정리 및 검증"
+    },
+    "markdown-editor": {
+      "title": "마크다운 에디터",
+      "description": "실시간 미리보기 마크다운 편집기"
+    },
+    "html-view": {
+      "title": "HTML 포맷터",
+      "description": "HTML 코드 정리 및 미리보기"
+    },
+    "diff": {
+      "title": "코드 비교",
+      "description": "두 텍스트/코드의 차이점 비교"
+    },
+    "web-editor": {
+      "title": "웹 에디터",
+      "description": "HTML/CSS/JS 실시간 편집 및 미리보기"
+    },
+    "hash-gen": {
+      "title": "해시 생성기",
+      "description": "MD5, SHA-1, SHA-256 등 해시 생성"
+    },
+    "uuid-gen": {
+      "title": "UUID 생성기",
+      "description": "UUID v4 생성"
+    },
+    "url-encoder": {
+      "title": "URL 인코더/디코더",
+      "description": "URL 인코딩 및 디코딩"
+    },
+    "jwt-decoder": {
+      "title": "JWT 디코더",
+      "description": "JWT 토큰 디코딩 및 확인"
+    },
+    "regex-tester": {
+      "title": "정규식 테스터",
+      "description": "정규표현식 테스트 및 검증"
+    },
+    "ascii-art": {
+      "title": "아스키아트",
+      "description": "텍스트를 아스키 아트로 변환"
+    },
+    "ascii-table": {
+      "title": "아스키 코드표",
+      "description": "ASCII 코드 참조표"
+    },
+    "special-char": {
+      "title": "특수문자표",
+      "description": "자주 쓰는 특수문자 모음"
+    },
+    "cron-generator": {
+      "title": "CRON 표현식 생성기",
+      "description": "CRON 스케줄링 표현식 생성"
+    },
+    "csv-json": {
+      "title": "CSV ↔ JSON 변환기",
+      "description": "CSV와 JSON 상호 변환"
+    },
+    "fraction-calculator": {
+      "title": "분수 계산기",
+      "description": "분수의 사칙연산 계산"
+    },
+    "encryption-tool": {
+      "title": "암호화/복호화 도구",
+      "description": "AES 알고리즘을 이용한 텍스트 암호화"
+    },
+    "qr-gen": {
+      "title": "QR코드 생성기",
+      "description": "URL이나 텍스트를 QR코드로 변환"
+    },
+    "barcode-gen": {
+      "title": "바코드 생성기",
+      "description": "숫자를 바코드로 변환"
+    },
+    "password-gen": {
+      "title": "비밀번호 생성기",
+      "description": "안전한 랜덤 비밀번호 생성"
+    },
+    "color-picker": {
+      "title": "색상표",
+      "description": "컬러 피커 및 색상 코드 변환"
+    },
+    "image-base64": {
+      "title": "이미지 Base64",
+      "description": "이미지를 Base64로 인코딩"
+    },
+    "ip-address": {
+      "title": "IP 주소 확인",
+      "description": "내 IP 주소 및 위치 정보 확인"
+    },
+    "timer": {
+      "title": "타이머/스톱워치",
+      "description": "온라인 타이머 및 스톱워치"
+    },
+    "pomodoro-timer": {
+      "title": "포모도로 타이머",
+      "description": "25분 집중/5분 휴식 타이머"
+    },
+    "checklist": {
+      "title": "체크리스트",
+      "description": "간단한 할 일 목록"
+    },
+    "flashlight": {
+      "title": "손전등",
+      "description": "화면을 밝게 켜서 손전등으로 사용"
+    },
+    "image-resize": {
+      "title": "이미지 리사이즈",
+      "description": "이미지 크기 조절 및 압축"
+    },
+    "youtube-thumbnail": {
+      "title": "유튜브 썸네일",
+      "description": "유튜브 영상 썸네일 다운로드"
+    },
+    "mandalart": {
+      "title": "만다라트 플래너",
+      "description": "오타니 쇼헤이의 목표 달성 기법을 이용한 비주얼 플래너"
+    },
+    "color-extractor": {
+      "title": "이미지 색상 추출",
+      "description": "이미지에서 주요 색상 팔레트 추출"
+    },
+    "world-clock": {
+      "title": "세계 시간",
+      "description": "주요 도시의 현재 시간 확인"
+    },
+    "bmi": {
+      "title": "BMI 계산기",
+      "description": "비만도 및 체질량 지수 측정"
+    },
+    "bmr": {
+      "title": "BMR 계산기 (기초대사량)",
+      "description": "자신의 기초대사량을 계산하고 일일 권장 칼로리를 확인하세요."
+    },
+    "biorhythm": {
+      "title": "바이오리듬 확인",
+      "description": "신체, 감성, 지성 주기를 통해 오늘의 상태를 확인하세요."
+    },
+    "life-expectancy": {
+      "title": "기대 수명 테스트",
+      "description": "생활 습관을 통해 나의 예상 수명을 알아보세요."
+    },
+    "reaction-test": {
+      "title": "반응속도 테스트",
+      "description": "나의 순발력은 몇 ms? 반응속도 측정 게임"
+    },
+    "typing-test": {
+      "title": "타자 속도 테스트",
+      "description": "한글/영어 타자 속도(WPM)와 정확도 측정"
+    },
+    "1to50": {
+      "title": "1 to 50",
+      "description": "1부터 50까지 빠르게 터치하기"
+    },
+    "cps-test": {
+      "title": "CPS 테스트",
+      "description": "초당 마우스 클릭 속도 측정"
+    },
+    "aim-trainer": {
+      "title": "에임 트레이너",
+      "description": "마우스 정확도 및 반응속도 훈련"
+    },
+    "number-memory": {
+      "title": "숫자 기억하기",
+      "description": "순간 기억력 테스트 (침팬지 테스트)"
+    },
+    "number-baseball": {
+      "title": "숫자 야구",
+      "description": "숫자와 위치를 맞추는 추리 게임"
+    },
+    "minesweeper": {
+      "title": "지뢰찾기",
+      "description": "지뢰를 피해 모든 칸을 여는 퍼즐"
+    },
+    "roulette": {
+      "title": "돌림판 돌리기",
+      "description": "랜덤 추첨을 위한 룰렛 게임"
+    },
+    "suika-game": {
+      "title": "수박 게임",
+      "description": "과일을 합쳐서 가장 큰 수박을 만드는 머지 퍼즐 게임"
+    },
+    "ladder-game": {
+      "title": "사다리 타기",
+      "description": "내기할 때 좋은 사다리 게임"
+    },
+    "tanghulu-maker": {
+      "title": "탕후루 만들기",
+      "description": "과일을 쌓아 나만의 탕후루 만들기"
+    },
+    "missile-dodge": {
+      "title": "미사일 피하기",
+      "description": "날아오는 미사일을 피해서 살아남으세요!"
+    },
+    "flappy-bird": {
+      "title": "파닥파닥 버드",
+      "description": "장애물을 피해 최대한 멀리 날아가세요!"
+    },
+    "snake-game": {
+      "title": "스네이크 게임",
+      "description": "사과를 먹고 길어지는 고전 뱀 게임"
+    },
+    "sudoku": {
+      "title": "스도쿠",
+      "description": "9x9 칸에 숫자를 채우는 논리 퍼즐"
+    },
+    "tower-stacker": {
+      "title": "타워 쌓기",
+      "description": "높게 높게 타워를 쌓아보세요"
+    },
+    "dice-roller": {
+      "title": "주사위 굴리기",
+      "description": "랜덤 주사위 굴리기 도구"
+    },
+    "time-sense": {
+      "title": "시간 감각 테스트",
+      "description": "정확히 10초를 맞춰보세요"
+    },
+    "pitch-test": {
+      "title": "절대음감 테스트",
+      "description": "소리를 듣고 음을 맞춰보세요"
+    },
+    "capital-quiz": {
+      "title": "세계 수도 퀴즈",
+      "description": "나라별 수도를 맞춰보세요"
+    },
+    "typing-defense": {
+      "title": "산성비 (타자 디펜스)",
+      "description": "내려오는 단어를 입력해 방어하세요"
+    },
+    "hangman": {
+      "title": "행맨",
+      "description": "단어를 추측해 글자를 맞춰보세요"
+    },
+    "speed-math": {
+      "title": "암산 게임",
+      "description": "빠르게 계산하여 뇌를 활성화시키세요"
+    },
+    "bubble-wrap": {
+      "title": "뾱뾱이 터뜨리기",
+      "description": "무한으로 즐기는 스트레스 해소 뾱뾱이"
+    },
+    "dynamic-acuity": {
+      "title": "동체시력 테스트",
+      "description": "움직이는 물체를 잡아내는 시력을 측정하세요"
+    },
+    "lotto": {
+      "title": "로또 번호 생성기",
+      "description": "오늘의 행운 번호를 정교한 알고리즘으로 추출하세요."
+    },
+    "lotto-sim": {
+      "title": "로또 시뮬레이터",
+      "description": "내가 로또를 계속 사면 얼마를 벌까요? 결과 확인!"
+    },
+    "tarot": {
+      "title": "오늘의 타로 운세",
+      "description": "22장의 메이저 타로 카드로 당신의 운명을 점쳐보세요."
+    },
+    "blood-type": {
+      "title": "혈액형 성격",
+      "description": "혈액형별 성격 분석"
+    },
+    "mbti": {
+      "title": "MBTI 테스트",
+      "description": "간단한 MBTI 성격 유형 검사"
+    },
+    "saju": {
+      "title": "만세력/사주",
+      "description": "생년월일로 사주팔자 확인"
+    },
+    "zodiac-fortune": {
+      "title": "띠별 운세",
+      "description": "12띠 오늘의 운세"
+    },
+    "horoscope": {
+      "title": "별자리 운세",
+      "description": "12별자리 오늘의 운세"
+    },
+    "dream-interpretation": {
+      "title": "꿈해몽",
+      "description": "꿈 내용으로 해몽 검색"
+    },
+    "birth-gen": {
+      "title": "우주 탄생석/꽃 탄생일",
+      "description": "당신의 생일에 어울리는 탄생석과 꽃을 찾아보세요."
+    },
+    "name-analysis": {
+      "title": "이름 풀이 (작명)",
+      "description": "이름에 담긴 의미와 운세를 분석합니다."
+    },
+    "personal-color": {
+      "title": "색채 심리 테스트",
+      "description": "나에게 어울리는 색상과 그 의미를 분석합니다."
+    },
+    "past-life": {
+      "title": "전생 알아보기",
+      "description": "당신은 전생에 어떤 사람이었을까요?"
+    },
+    "pet-mbti": {
+      "title": "반려동물 MBTI",
+      "description": "우리 강아지, 고양이의 성격을 MBTI로 분석하세요."
+    },
+    "mental-age": {
+      "title": "정신 연령 테스트",
+      "description": "나의 생각과 태도로 정신 연령을 측정합니다."
+    },
+    "brain-structure": {
+      "title": "뇌 구조 분석",
+      "description": "지금 당신의 머릿속에는 어떤 생각이 가득한가요?"
+    },
+    "joseon-job": {
+      "title": "조선시대 직업 테스트",
+      "description": "내가 조선시대에 태어났다면 어떤 직업이었을까요?"
+    },
+    "if-i-am-god": {
+      "title": "내가 신이라면?",
+      "description": "당신이 세상을 만든 신이라면 어떤 모습일까요?"
+    },
+    "life-bgm": {
+      "title": "내 인생의 BGM",
+      "description": "지금 이 순간 당신의 인생에 어울리는 배경음악은?"
+    },
+    "first-impression-color": {
+      "title": "첫인상 색상 테스트",
+      "description": "타인에게 비쳐지는 나의 첫인상 색깔은?"
+    },
+    "animal-face": {
+      "title": "동물상 테스트",
+      "description": "나는 어떤 동물을 닮았을까요?"
+    },
+    "personal-scent": {
+      "title": "나의 향기 테스트",
+      "description": "나의 분위기와 성격에 어울리는 향기를 찾아보세요."
+    },
+    "ideal-type": {
+      "title": "이상형 월드컵 (기본)",
+      "description": "내가 선호하는 스타일을 분석해 드립니다."
+    },
+    "couple-compatibility": {
+      "title": "커플 궁합",
+      "description": "우리 둘의 연애 스타일과 조화도는?"
+    },
+    "hidden-talent": {
+      "title": "내 안의 숨은 재능",
+      "description": "아직 발견하지 못한 당신만의 특별한 능력을 확인하세요."
+    },
+    "balance-game": {
+      "title": "밸런스 게임",
+      "description": "최악의 선택지 중 하나를 고르는 짜릿한 게임"
+    },
+    "fortune-cookie": {
+      "title": "포춘 쿠키",
+      "description": "오늘 당신에게 전하는 짧고 강렬한 한마디"
+    },
+    "color-test": {
+      "title": "색채 예민도 테스트",
+      "description": "섬세한 색상 차이를 구별할 수 있나요?"
+    },
+    "hearing-test": {
+      "title": "청력 나이 테스트",
+      "description": "가청 주파수를 측정해 청력 나이를 알아보세요."
+    },
+    "smile-dating-test": {
+      "title": "스마일 연애 테스트",
+      "description": "나의 연애 스타일은 어떤 스마일일까요?"
+    },
+    "dating-test": {
+      "title": "연애 성향 검사",
+      "description": "나의 연애 스타일과 가치관을 분석합니다."
+    },
+    "stress-test": {
+      "title": "스트레스 지수 측정",
+      "description": "현재 당신의 마음은 얼마나 힘든가요?"
+    },
+    "brain-type": {
+      "title": "좌뇌 우뇌 테스트",
+      "description": "어느 쪽 뇌를 더 많이 사용하는지 확인하세요."
+    },
+    "eq-test": {
+      "title": "감성 지수(EQ) 테스트",
+      "description": "공감 능력과 감성 지수를 분석합니다."
+    },
+    "smartphone-addiction": {
+      "title": "스마트폰 중독 테스트",
+      "description": "나의 스마트폰 의존도를 측정해 보세요."
+    },
+    "kkondae-test": {
+      "title": "꼰대 테스트 (정밀)",
+      "description": "당신의 꼰대 지수는 몇 점인가요? (익명 보장)"
+    },
+    "hogu-test": {
+      "title": "호구 성향 테스트",
+      "description": "나만 당하고 사는 건 아닐까? 호구 지수 확인!"
+    },
+    "debate-test": {
+      "title": "토론 능력 검사",
+      "description": "나의 논리와 언변 능력을 측정합니다."
+    },
+    "idol-test": {
+      "title": "아이돌 포지션 테스트",
+      "description": "내가 아이돌 그룹이라면 어떤 포지션일까요?"
+    },
+    "resilience-test": {
+      "title": "회복탄력성 검사",
+      "description": "어려움을 극복하는 나의 내면 에너지를 확인하세요."
+    },
+    "initial-sound-quiz": {
+      "title": "초성 퀴즈",
+      "description": "제시된 초성을 보고 단어를 맞춰보세요"
+    },
+    "food-quiz": {
+      "title": "음식/맛집 퀴즈",
+      "description": "당신은 얼마나 많은 음식을 알고 있나요?"
+    },
+    "association-quiz": {
+      "title": "연상 퀴즈",
+      "description": "주어진 단어들을 보고 정답을 연상하세요."
+    },
+    "spelling-quiz": {
+      "title": "맞춤법 퀴즈",
+      "description": "자주 틀리는 우리말 맞춤법, 얼마나 알고 계신가요?"
+    },
+    "vocabulary-test": {
+      "title": "어휘력 테스트",
+      "description": "당신의 어휘 수준을 등급으로 확인하세요."
+    },
+    "simple-math": {
+      "title": "기초 연상 퀴즈 (사칙연산)",
+      "description": "더하기, 빼기, 곱하기를 빠르게 풀어보세요."
+    }
+  },
+  "categoryData": {
+    "unit": {
+      "title": "단위 변환기 모음",
+      "description": "길이, 무게, 환율, 온도, 면적 등 모든 단위를 한곳에서 즉시 변환하세요. 실시간 환율 정보와 정확한 단위 변환 공식을 제공합니다."
+    },
+    "finance": {
+      "title": "생활 및 금융 계산기 모음",
+      "description": "대출 이자, 연봉 실수령액, 퇴직금, 최저임금 등 실생활에 꼭 필요한 금융 계산기들을 사용해보세요. 정확한 법정 산식과 최신 데이터를 반영합니다."
+    },
+    "text": {
+      "title": "텍스트 변환 및 분석 도구",
+      "description": "글자수 세기, 대소문자 변환, 유니코드 변환 등 텍스트 편집에 필요한 유용한 도구들입니다. 복사 붙여넣기만으로 간편하게 사용하세요."
+    },
+    "dev": {
+      "title": "개발자 필수 온라인 도구 모음",
+      "description": "JSON 포매터, Base64 인코더, 해시 생성기, URL 인코더 등 개발 생산성을 극대화하는 전문 도구들을 별도의 설치 없이 브라우저에서 사용하세요."
+    },
+    "utility": {
+      "title": "편리한 생활 유틸리티 도구",
+      "description": "QR코드 생성기, 바코드 생성, 비밀번호 생성, 세계 시계 등 일상의 번거로움을 해결해주는 다양한 유틸리티 도구 모음입니다."
+    },
+    "health": {
+      "title": "건강 및 신체 지수 계산기",
+      "description": "BMI(비만도), BMR(기초대사량), 바이오리듬 등 자신의 건강 상태를 체크할 수 있는 전문적인 건강 지수 계산기를 제공합니다."
+    },
+    "games": {
+      "title": "미니 게임 모음",
+      "description": "수박 게임, 2048, 스도쿠, 스네이크 등 별도의 설치 없이 바로 즐길 수 있는 중독성 만점 미니 게임들을 한곳에서 플레이하세요."
+    },
+    "fun": {
+      "title": "재미있는 운세와 심리 테스트 무더기",
+      "description": "정통 사주팔자부터 MBTI 성격 테스트, 오늘의 운세, 타로 카드까지! 당신의 운세와 심리를 알아보는 즐거운 콘텐츠가 가득합니다."
+    },
+    "trivia": {
+      "title": "간단 상식 테스트 모음",
+      "description": "초성 퀴즈, 상식 문제 등 재미있게 지식을 쌓을 수 있는 퀴즈 모음입니다."
+    }
+  },
+  "home": {
+    "recent": "최근 사용한 도구",
+    "favorites": "즐겨찾는 도구",
+    "new": "새롭게 추가된 도구 ✨",
+    "allTools": "모든 도구 보러가기",
+    "searchResult": "검색 결과",
+    "noResult": "검색 결과가 없습니다.",
+    "foundTools": "{count}개의 도구가 발견되었습니다",
+    "tryDiff": "다른 키워드로 검색하거나 카테고리를 변경해 보세요.",
+    "viewAll": "모든 도구 보기",
+    "allToolsTotal": "모든 도구 둘러보기 ({count})",
+    "searchPrompt": "도구 이름을 입력하세요 (예: 단위, JSON, 사주)...",
+    "newDesc": "새로 추가된 도구 ✨",
+    "fav": "즐겨찾기",
+    "heroTitle": "오늘 당신에게 필요한 도구는?",
+    "heroSubtitle": "약 {count}개의 생산성 도구를 만나보세요",
+    "aboutUs": "서비스 소개",
+    "footerTitle": "툴 하이브 (Tool Hive)",
+    "footerDesc": "당신의 일상을 더 편리하게 만드는 무료 온라인 도구 모음입니다."
+  },
+  "error": {
+    "notFound": "페이지를 찾을 수 없습니다.",
+    "backToHome": "홈으로 돌아가기"
+  },
+  "category": {
+    "notFound": "카테고리를 찾을 수 없습니다.",
+    "backToHome": "홈으로 돌아가기",
+    "totalTools": "총 {count}개의 도구",
+    "freeToUse": "100% 무료 사용",
+    "allCategoryTools": "모든 {name} 도구",
+    "whyUse": "왜 Tool Hive에서 {name}를 사용해야 하나요?",
+    "whyUseDesc": "Tool Hive의 {name} 도구들은 복잡한 설치나 번거로운 광고 없이 웹 브라우저에서 즉시 실행 가능합니다. 사용자의 데이터는 서버에 저장되지 않고 브라우저 내에서만 처리되어 안심하고 사용할 수 있습니다."
+  },
+  "related": {
+    "title": "함께 보면 좋은 도구",
+    "viewAll": "전체 보기"
+  }
+}

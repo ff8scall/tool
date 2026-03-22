@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Share2, MessageCircle, Facebook, Twitter, Link2, Check } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const ShareButtons = ({ title, description, url }) => {
     const [copied, setCopied] = useState(false);
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
 
     // Use current page URL if not provided
     const shareUrl = url || window.location.href;
@@ -56,7 +59,7 @@ const ShareButtons = ({ title, description, url }) => {
         <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-muted-foreground flex items-center gap-1">
                 <Share2 className="w-4 h-4" />
-                공유하기:
+                {isEn ? 'Share:' : '공유하기:'}
             </span>
 
             {/* Native Share (Mobile/Supported) */}
@@ -64,10 +67,10 @@ const ShareButtons = ({ title, description, url }) => {
                 <button
                     onClick={handleShare}
                     className="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg text-sm font-medium transition-colors"
-                    title="공유하기"
+                    title={isEn ? 'Share' : '공유하기'}
                 >
                     <Share2 className="w-4 h-4" />
-                    <span className="hidden sm:inline">공유</span>
+                    <span className="hidden sm:inline">{isEn ? 'Share' : '공유'}</span>
                 </button>
             )}
 
@@ -78,20 +81,20 @@ const ShareButtons = ({ title, description, url }) => {
                     <button
                         onClick={handleFacebookShare}
                         className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
-                        title="페이스북으로 공유"
+                        title={isEn ? 'Share on Facebook' : '페이스북으로 공유'}
                     >
                         <Facebook className="w-4 h-4" />
-                        <span className="hidden sm:inline">페북</span>
+                        <span className="hidden sm:inline">{isEn ? 'FB' : '페북'}</span>
                     </button>
 
                     {/* Twitter */}
                     <button
                         onClick={handleTwitterShare}
                         className="flex items-center gap-1.5 px-3 py-1.5 bg-sky-500 hover:bg-sky-600 text-white rounded-lg text-sm font-medium transition-colors"
-                        title="트위터로 공유"
+                        title={isEn ? 'Share on Twitter' : '트위터로 공유'}
                     >
                         <Twitter className="w-4 h-4" />
-                        <span className="hidden sm:inline">트위터</span>
+                        <span className="hidden sm:inline">{isEn ? 'Twitter' : '트위터'}</span>
                     </button>
                 </>
             )}
@@ -103,17 +106,17 @@ const ShareButtons = ({ title, description, url }) => {
                     ? 'bg-green-600 text-white'
                     : 'bg-muted hover:bg-muted/80 text-foreground'
                     }`}
-                title="링크 복사"
+                title={isEn ? 'Copy Link' : '링크 복사'}
             >
                 {copied ? (
                     <>
                         <Check className="w-4 h-4" />
-                        <span className="hidden sm:inline">복사됨!</span>
+                        <span className="hidden sm:inline">{isEn ? 'Copied!' : '복사됨!'}</span>
                     </>
                 ) : (
                     <>
                         <Link2 className="w-4 h-4" />
-                        <span className="hidden sm:inline">링크</span>
+                        <span className="hidden sm:inline">{isEn ? 'Link' : '링크'}</span>
                     </>
                 )}
             </button>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { Utensils, Trophy, RefreshCw, Check, X, ArrowRight, Share2, HelpCircle } from 'lucide-react';
 import { foodQuizData } from '../data/foodQuizData';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const FoodQuiz = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
     const [questionCount, setQuestionCount] = useState(10);
     const [questions, setQuestions] = useState([]);
@@ -20,7 +22,6 @@ const FoodQuiz = () => {
     const inputRef = useRef(null);
 
     const startGame = () => {
-        // Shuffle and slice
         const shuffled = [...foodQuizData].sort(() => 0.5 - Math.random());
         const selectedQuestions = shuffled.slice(0, Math.min(questionCount, shuffled.length));
 
@@ -54,14 +55,13 @@ const FoodQuiz = () => {
         if (feedback?.type === 'correct') return;
 
         const currentQuestion = questions[currentQuestionIndex];
-        // Clean answer string (remove spaces, case insensitive)
         const cleanUserAnswer = userAnswer.trim().replace(/\s+/g, '').toLowerCase();
         const cleanCorrectAnswer = currentQuestion.word.replace(/\s+/g, '').toLowerCase();
 
         if (cleanUserAnswer === cleanCorrectAnswer) {
             const points = possiblePoints;
             setScore(prev => prev + points);
-            setFeedback({ type: 'correct', message: `정답입니다! (+${points}점)` });
+            setFeedback({ type: 'correct', message: isEn ? `Correct! (+${points} pts)` : `정답입니다! (+${points}점)` });
 
             setUserAnswers(prev => [...prev, {
                 question: currentQuestion,
@@ -70,7 +70,6 @@ const FoodQuiz = () => {
                 pointsEarned: points
             }]);
 
-            // Auto advance after correct answer
             setTimeout(() => {
                 if (currentQuestionIndex < questions.length - 1) {
                     setCurrentQuestionIndex(prev => prev + 1);
@@ -80,8 +79,7 @@ const FoodQuiz = () => {
                 }
             }, 1500);
         } else {
-            setFeedback({ type: 'wrong', message: '오답입니다. 다시 시도해보세요!' });
-            // Clear wrong feedback after a moment so they can try again
+            setFeedback({ type: 'wrong', message: isEn ? 'Wrong! Try again.' : '오답입니다. 다시 시도해보세요!' });
             setTimeout(() => {
                 setFeedback(null);
                 if (inputRef.current) inputRef.current.focus();
@@ -90,88 +88,113 @@ const FoodQuiz = () => {
     };
 
     const handleShare = async () => {
+        const text = isEn ? `Food Quiz Challenge! My score is ${score}. (Max ${questions.length * 3})` : `음식 이름 퀴즈 도전 결과! 제 점수는 ${score}점입니다. (최대 ${questions.length * 3}점)`;
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: '음식 이름 퀴즈',
-                    text: `음식 이름 퀴즈 도전 결과! 제 점수는 ${score}점입니다. (최대 ${questions.length * 3}점)`,
+                    title: isEn ? 'Delicious Food Quiz' : '음식 이름 퀴즈',
+                    text: text,
                     url: window.location.href,
                 });
             } catch (error) {
                 console.log('Error sharing:', error);
             }
         } else {
-            alert('공유 기능을 지원하지 않는 브라우저입니다.');
+            alert(isEn ? 'Your browser does not support sharing.' : '공유 기능을 지원하지 않는 브라우저입니다.');
         }
     };
 
-    
-    const toolFaqs = [
-        {
-            "q": "음식 이름 퀴즈는 어떻게 하나요?",
-            "a": "재료, 맛, 원산지 등의 힌트를 보고 해당 음식의 정확한 이름을 맞추는 퀴즈입니다."
-        },
-        {
-            "q": "힌트는 몇 개까지 나오나요?",
-            "a": "단어의 난이도에 따라 다르지만 보통 3가지의 상세한 힌트가 순차적으로 제공됩니다."
-        }
+    const toolFaqs = isEn ? [
+        { q: "What is the Food Quiz?", a: "It's a game where you guess the name of a food based on ingredients, taste, and origin hints." },
+        { q: "How are points calculated?", a: "You get 3 points for answering on the 1st hint, 2 points on the 2nd, and 1 point on the 3rd." },
+        { q: "Is it mostly Korean food?", a: "The quiz includes a mix of international and Korean dishes, making it fun for everyone." }
+    ] : [
+        { q: "음식 이름 퀴즈는 어떻게 하나요?", a: "재료, 맛, 원산지 등의 힌트를 보고 해당 음식의 정확한 이름을 맞추는 퀴즈입니다." },
+        { q: "힌트는 몇 개까지 나오나요?", a: "단어의 난이도에 따라 다르지만 보통 3가지의 상세한 힌트가 순차적으로 제공됩니다." }
     ];
-    const toolSteps = [
+
+    const toolSteps = isEn ? [
+        "Predict the food from the first hint.",
+        "If unsure, unlock the next hint (but you'll earn fewer points).",
+        "Type the exact food name in the input box to submit.",
+        "See your total score and review your answers at the end."
+    ] : [
         "첫 번째 힌트를 보고 음식을 예상해 봅니다.",
         "잘 모르겠다면 다음 힌트를 확인하며 정답을 좁혀갑니다.",
-        "생각한 음식 이름을 입력하여 정답을 맞춥니다."
+        "생각한 음식 이름을 입력하여 정답을 맞춥니다.",
+        "퀴즈가 종료되면 전체 점수를 확인하고 결과 목록을 살펴봅니다."
     ];
-    const toolTips = [
+
+    const toolTips = isEn ? [
+        "Try to visualize the dish based on the ingredients mentioned.",
+        "Keep an eye on the points; sometimes guessing early pays off!",
+        "Don't play this on an empty stomach!"
+    ] : [
         "가장 좋아하는 음식 카테고리를 상상하며 풀면 더욱 쉽게 풀 수 있습니다.",
-        "야식이 생각나는 밤에 풀면 식욕을 자극할 수 있으니 주의하세요!"
+        "야식이 생각나는 밤에 풀면 식욕을 자극할 수 있으니 주의하세요!",
+        "최대한 힌트를 적게 보고 맞추는 연습을 하면 미식가 지수가 높아집니다."
     ];
 
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
             <SEO
-                title="음식 이름 퀴즈 | 간단 상식 테스트"
-                description="3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!"
-                keywords=""
-                category="간단 상식 테스트"
+                title={isEn ? "Foodie Quiz - Guess the Dish | Tool Hive" : "음식 이름 퀴즈 (Food Quiz) | 상식 테스트 | Tool Hive"}
+                description={isEn ? "Test your culinary knowledge with our Food Quiz. Guess the names of various dishes using 3-step hints. The fewer hints you use, the higher you score!" : "3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!"}
+                keywords={isEn ? "food quiz, culinary trivia, guess the dish, foodie games" : "음식퀴즈, 푸드상식, 맛집테스트, 요리퀴즈"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />
 
             <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl text-white mb-4 shadow-lg">
-                    <Utensils size={32} />
+                <div className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-rose-400 to-red-600 rounded-3xl text-white mb-6 shadow-xl transform hover:scale-110 transition-transform">
+                    <Utensils size={40} />
                 </div>
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">음식 이름 퀴즈</h1>
-                <p className="text-gray-600 dark:text-gray-300">설명을 보고 맛있는 음식의 이름을 맞춰보세요!</p>
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight uppercase italic">
+                    {isEn ? 'THE FOODIE QUIZ' : '음식 이름 퀴즈'}
+                </h1>
+                <p className="text-muted-foreground font-medium italic">
+                    {isEn ? 'Guess the delicious dishes from the hints!' : '설명을 보고 맛있는 음식의 이름을 맞춰보세요!'}
+                </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+            <div className="bg-card dark:bg-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden border-2 border-border/50 transition-all">
                 {gameState === 'menu' && (
-                    <div className="p-8">
-                        <div className="space-y-6">
-                            <div className="text-center bg-orange-50 dark:bg-orange-900/20 p-6 rounded-xl mb-6">
-                                <h3 className="font-bold text-lg text-orange-800 dark:text-orange-300 mb-2">게임 규칙</h3>
-                                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
-                                    <li>총 3단계의 힌트가 제공됩니다.</li>
-                                    <li>1단계 힌트만 보고 맞추면 <span className="font-bold text-red-500">3점</span></li>
-                                    <li>2단계 힌트까지 보고 맞추면 <span className="font-bold text-orange-500">2점</span></li>
-                                    <li>3단계 힌트까지 보고 맞추면 <span className="font-bold text-yellow-500">1점</span></li>
-                                </ul>
-                            </div>
+                    <div className="p-10 space-y-10">
+                        <div className="bg-rose-50 dark:bg-rose-900/20 p-8 rounded-[2rem] border-2 border-rose-100 dark:border-rose-900/30">
+                            <h3 className="font-black text-xl text-rose-800 dark:text-rose-300 mb-6 flex items-center gap-3">
+                                <Trophy size={24} />
+                                {isEn ? 'GAME RULES' : '게임 규칙'}
+                            </h3>
+                            <ul className="space-y-4">
+                                <li className="flex justify-between items-center text-rose-700/80 dark:text-rose-400/80 font-bold">
+                                    <span>{isEn ? 'Level 1 Hint' : '1단계 힌트 정답'}</span>
+                                    <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-black">+3 {isEn ? 'PTS' : '점'}</span>
+                                </li>
+                                <li className="flex justify-between items-center text-rose-700/80 dark:text-rose-400/80 font-bold">
+                                    <span>{isEn ? 'Level 2 Hint' : '2단계 힌트 정답'}</span>
+                                    <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-black">+2 {isEn ? 'PTS' : '점'}</span>
+                                </li>
+                                <li className="flex justify-between items-center text-rose-700/80 dark:text-rose-400/80 font-bold">
+                                    <span>{isEn ? 'Level 3 Hint' : '3단계 힌트 정답'}</span>
+                                    <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-black">+1 {isEn ? 'PTS' : '점'}</span>
+                                </li>
+                            </ul>
+                        </div>
 
+                        <div className="space-y-8">
                             <div>
-                                <label className="block text-gray-700 dark:text-gray-200 font-semibold mb-3 text-center">문제 수 선택</label>
-                                <div className="grid grid-cols-3 gap-3">
+                                <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground mb-4 text-center">{isEn ? 'Select Amount' : '문제 수 선택'}</label>
+                                <div className="grid grid-cols-3 gap-4">
                                     {[10, 20, 30].map((count) => (
                                         <button
                                             key={count}
                                             onClick={() => setQuestionCount(count)}
-                                            className={`p-4 rounded-xl border-2 transition-all ${questionCount === count
-                                                    ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 font-bold shadow-md'
-                                                    : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-orange-300'
+                                            className={`py-5 rounded-2xl border-4 transition-all font-black ${questionCount === count
+                                                    ? 'border-red-500 bg-red-500 text-white shadow-xl shadow-red-500/20 scale-105'
+                                                    : 'border-muted bg-muted/40 text-muted-foreground hover:border-red-300'
                                                 }`}
                                         >
-                                            {count}문제
+                                            {count} {isEn ? 'FOODS' : '문제'}
                                         </button>
                                     ))}
                                 </div>
@@ -179,38 +202,36 @@ const FoodQuiz = () => {
 
                             <button
                                 onClick={startGame}
-                                className="w-full py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-md hover:shadow-lg transform active:scale-95 transition-all mt-4"
+                                className="w-full py-6 text-2xl font-black text-white bg-gradient-to-r from-red-600 to-rose-500 rounded-3xl shadow-2xl hover:shadow-red-500/30 transform active:scale-95 transition-all uppercase tracking-tighter"
                             >
-                                퀴즈 시작하기
+                                {isEn ? 'START FEEDING' : '퀴즈 시작하기'}
                             </button>
                         </div>
                     </div>
                 )}
 
                 {gameState === 'playing' && questions.length > 0 && (
-                    <div className="p-6 md:p-8">
-                        {/* Header Info */}
-                        <div className="flex justify-between items-center mb-6">
-                            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-sm font-semibold text-gray-600 dark:text-gray-300">
-                                문제 {currentQuestionIndex + 1} / {questions.length}
+                    <div className="p-8 md:p-12 space-y-10">
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-muted/30 p-4 rounded-2xl">
+                            <span className="bg-white/50 dark:bg-slate-700 px-4 py-1.5 rounded-full text-xs font-black text-muted-foreground uppercase tracking-widest shadow-sm">
+                                {isEn ? 'DISH' : '문제'} {currentQuestionIndex + 1} / {questions.length}
                             </span>
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm text-gray-500">현재 획득 가능 점수:</span>
-                                <span className={`font-bold text-xl ${possiblePoints === 3 ? 'text-red-500' :
+                            <div className="flex items-center gap-3">
+                                <span className="text-xs font-black text-muted-foreground uppercase tracking-widest">{isEn ? 'Current Bounty' : '획득 가능 점수'}:</span>
+                                <span className={`font-black text-2xl italic ${possiblePoints === 3 ? 'text-red-500' :
                                         possiblePoints === 2 ? 'text-orange-500' : 'text-yellow-500'
                                     }`}>
-                                    {possiblePoints}점
+                                    {possiblePoints} {isEn ? 'PTS' : '점'}
                                 </span>
                             </div>
                         </div>
 
-                        {/* Hints Area */}
-                        <div className="space-y-4 mb-8">
+                        <div className="space-y-6">
                             {/* Hint 1 */}
-                            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-100 dark:border-blue-900/30 animate-fade-in-up">
-                                <div className="flex items-start gap-3">
-                                    <div className="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
-                                    <p className="text-lg text-gray-800 dark:text-gray-200 font-medium leading-relaxed">
+                            <div className="bg-blue-500/5 dark:bg-blue-500/10 p-6 rounded-[2rem] border-2 border-blue-500/20 shadow-inner group transition-all hover:bg-blue-500/10">
+                                <div className="flex items-start gap-4">
+                                    <div className="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-black shrink-0 shadow-lg">1</div>
+                                    <p className="text-xl text-foreground font-black italic leading-tight">
                                         {questions[currentQuestionIndex].hints[0]}
                                     </p>
                                 </div>
@@ -218,10 +239,10 @@ const FoodQuiz = () => {
 
                             {/* Hint 2 */}
                             {visibleHints >= 2 ? (
-                                <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-100 dark:border-green-900/30 animate-fade-in-up">
-                                    <div className="flex items-start gap-3">
-                                        <div className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</div>
-                                        <p className="text-lg text-gray-800 dark:text-gray-200 font-medium leading-relaxed">
+                                <div className="bg-emerald-500/5 dark:bg-emerald-500/10 p-6 rounded-[2rem] border-2 border-emerald-500/20 shadow-inner group transition-all hover:bg-emerald-500/10 animate-in slide-in-from-left-4 duration-300">
+                                    <div className="flex items-start gap-4">
+                                        <div className="bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-black shrink-0 shadow-lg">2</div>
+                                        <p className="text-xl text-foreground font-black italic leading-tight">
                                             {questions[currentQuestionIndex].hints[1]}
                                         </p>
                                     </div>
@@ -229,19 +250,19 @@ const FoodQuiz = () => {
                             ) : (
                                 <button
                                     onClick={showNextHint}
-                                    className="w-full py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
+                                    className="w-full py-4 bg-emerald-50 dark:bg-emerald-900/10 border-4 border-dashed border-emerald-500/30 rounded-[2rem] text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-widest text-sm hover:bg-emerald-500/5 transition-all flex items-center justify-center gap-3 group"
                                 >
-                                    <HelpCircle size={18} />
-                                    2단계 힌트 보기 (-1점)
+                                    <HelpCircle size={20} className="group-hover:rotate-12 transition-transform" />
+                                    {isEn ? 'Unlock Next Hint' : '2단계 힌트 보기'} (-1 {isEn ? 'PT' : '점'})
                                 </button>
                             )}
 
                             {/* Hint 3 */}
                             {visibleHints >= 3 ? (
-                                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-xl border border-yellow-100 dark:border-yellow-900/30 animate-fade-in-up">
-                                    <div className="flex items-start gap-3">
-                                        <div className="bg-yellow-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
-                                        <p className="text-lg text-gray-800 dark:text-gray-200 font-medium leading-relaxed">
+                                <div className="bg-amber-500/5 dark:bg-amber-500/10 p-6 rounded-[2rem] border-2 border-amber-500/20 shadow-inner group transition-all hover:bg-amber-500/10 animate-in slide-in-from-left-4 duration-300">
+                                    <div className="flex items-start gap-4">
+                                        <div className="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-black shrink-0 shadow-lg">3</div>
+                                        <p className="text-xl text-foreground font-black italic leading-tight">
                                             {questions[currentQuestionIndex].hints[2]}
                                         </p>
                                     </div>
@@ -250,49 +271,48 @@ const FoodQuiz = () => {
                                 <button
                                     onClick={showNextHint}
                                     disabled={visibleHints < 2}
-                                    className={`w-full py-3 border-2 border-dashed rounded-xl transition-colors flex items-center justify-center gap-2 ${visibleHints < 2
-                                            ? 'border-gray-200 dark:border-gray-800 text-gray-300 dark:text-gray-600 cursor-not-allowed'
-                                            : 'border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                                    className={`w-full py-4 border-4 border-dashed rounded-[2rem] font-black uppercase tracking-widest text-sm transition-all flex items-center justify-center gap-3 group ${visibleHints < 2
+                                            ? 'border-muted bg-muted/20 text-muted-foreground/50 cursor-not-allowed opacity-50'
+                                            : 'border-amber-500/30 bg-amber-50 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/5'
                                         }`}
                                 >
-                                    <HelpCircle size={18} />
-                                    3단계 힌트 보기 (-1점)
+                                    <HelpCircle size={20} className="group-hover:rotate-12 transition-transform" />
+                                    {isEn ? 'Unlock Final Hint' : '3단계 힌트 보기'} (-1 {isEn ? 'PT' : '점'})
                                 </button>
                             )}
                         </div>
 
-                        {/* Input Area */}
-                        <div className="relative mt-8">
+                        <div className="relative pt-6">
                             <form onSubmit={handleAnswerSubmit} className="relative">
                                 <input
                                     ref={inputRef}
                                     type="text"
                                     value={userAnswer}
                                     onChange={(e) => setUserAnswer(e.target.value)}
-                                    placeholder="정답을 입력하세요"
+                                    placeholder={isEn ? "What's the name?" : "정답을 입력하세요"}
                                     disabled={feedback?.type === 'correct'}
-                                    className={`w-full p-4 text-center text-xl font-bold border-2 rounded-xl outline-none transition-all ${feedback
+                                    className={`w-full p-6 text-center text-3xl font-black border-4 rounded-3xl outline-none transition-all shadow-xl font-mono uppercase tracking-[0.1em] ${feedback
                                             ? feedback.type === 'correct'
-                                                ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300'
-                                                : 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300'
-                                            : 'border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:bg-gray-700 dark:text-white'
+                                                ? 'border-green-500 bg-green-500/10 text-green-600'
+                                                : 'border-red-500 bg-red-500/10 text-red-600'
+                                            : 'border-border/50 focus:border-red-500 bg-muted/20'
                                         }`}
                                 />
                                 <button
                                     type="submit"
                                     disabled={feedback?.type === 'correct' || !userAnswer.trim()}
-                                    className="absolute right-2 top-2 bottom-2 px-4 bg-gray-900 dark:bg-gray-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-800 dark:hover:bg-gray-500 transition-colors"
+                                    className="absolute right-3 top-3 bottom-3 px-8 bg-slate-900 text-white rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-800 transition-all shadow-lg active:scale-95"
                                 >
-                                    <ArrowRight size={24} />
+                                    <ArrowRight size={32} />
                                 </button>
                             </form>
 
                             {feedback && (
-                                <div className={`mt-4 p-4 rounded-xl text-center font-bold text-lg animate-bounce-short ${feedback.type === 'correct'
-                                        ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300'
-                                        : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'
+                                <div className={`mt-6 p-6 rounded-2xl text-center font-black text-2xl animate-in fade-in zoom-in-95 duration-200 shadow-xl ${feedback.type === 'correct'
+                                        ? 'bg-green-100 text-green-700'
+                                        : 'bg-rose-100 text-rose-700'
                                     }`}>
-                                    {feedback.type === 'correct' ? <Check className="inline-block mr-2" /> : <X className="inline-block mr-2" />}
+                                    {feedback.type === 'correct' ? <Check className="inline-block mr-4 w-10 h-10" /> : <X className="inline-block mr-4 w-10 h-10" />}
                                     {feedback.message}
                                 </div>
                             )}
@@ -301,49 +321,62 @@ const FoodQuiz = () => {
                 )}
 
                 {gameState === 'result' && (
-                    <div className="p-8 text-center">
-                        <Trophy size={64} className="mx-auto text-yellow-500 mb-4 animate-bounce" />
-                        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">퀴즈 완료!</h2>
-
-                        <div className="my-8">
-                            <p className="text-gray-500 dark:text-gray-400 mb-2">최종 점수</p>
-                            <div className="text-5xl font-black text-orange-500 dark:text-orange-400">
-                                {score} <span className="text-2xl text-gray-400 font-medium">/ {questions.length * 3}</span>
+                    <div className="p-12 text-center space-y-12 animate-in zoom-in duration-500">
+                        <div className="relative inline-block">
+                            <Trophy size={120} className="text-yellow-500 drop-shadow-[0_0_20px_rgba(234,179,8,0.3)] animate-bounce" />
+                            <div className="absolute -top-4 -right-4 bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-black text-xl shadow-lg ring-4 ring-white dark:ring-slate-800">
+                                !
                             </div>
                         </div>
 
-                        <div className="flex gap-3 justify-center mb-8">
+                        <div className="space-y-4">
+                            <h2 className="text-5xl font-black text-foreground italic uppercase tracking-tighter">{isEn ? 'GOURMET FINISHED!' : '퀴즈 완료!'}</h2>
+                            <p className="text-muted-foreground font-black uppercase tracking-widest text-xs">{isEn ? 'Your Final Score' : '당신의 최종 점수는?'}</p>
+                        </div>
+
+                        <div className="text-9xl font-black text-red-500 drop-shadow-lg flex items-baseline justify-center gap-4 italic">
+                            {score} <span className="text-4xl text-muted font-bold tracking-tight">/ {questions.length * 3}</span>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center">
                             <button
                                 onClick={() => setGameState('menu')}
-                                className="flex items-center px-6 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-xl hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors"
+                                className="flex-1 flex items-center justify-center px-12 py-6 bg-slate-900 text-white rounded-[2rem] font-black text-xl hover:scale-105 transition-all shadow-2xl active:scale-95"
                             >
-                                <RefreshCw size={20} className="mr-2" />
-                                다시 하기
+                                <RefreshCw size={28} className="mr-4" />
+                                {isEn ? 'EAT AGAIN' : '다시 하기'}
                             </button>
                             <button
                                 onClick={handleShare}
-                                className="flex items-center px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors"
+                                className="flex-1 flex items-center justify-center px-12 py-6 bg-red-600 text-white rounded-[2rem] font-black text-xl hover:scale-105 transition-all shadow-2xl shadow-red-500/20 active:scale-95"
                             >
-                                <Share2 size={20} className="mr-2" />
-                                공유하기
+                                <Share2 size={28} className="mr-4" />
+                                {isEn ? 'SHARE' : '공유하기'}
                             </button>
                         </div>
 
-                        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-left max-h-96 overflow-y-auto">
-                            <h3 className="font-bold text-gray-700 dark:text-gray-200 mb-4 px-2">내 정답 목록</h3>
-                            <div className="space-y-3">
+                        <div className="bg-muted/30 rounded-[3rem] p-10 text-left space-y-8 shadow-inner border border-border/50">
+                            <h3 className="font-black text-muted-foreground uppercase tracking-widest text-xs px-2 flex items-center gap-3">
+                                <Utensils size={18} />
+                                {isEn ? 'Culinary History' : '내 정답 목록'}
+                            </h3>
+                            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 scrollbar-thin">
                                 {userAnswers.map((item, idx) => (
-                                    <div key={idx} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 flex justify-between items-center">
-                                        <div>
-                                            <div className="font-bold text-lg text-gray-800 dark:text-white mb-1">
+                                    <div key={idx} className="bg-card p-8 rounded-[2rem] shadow-sm border-2 border-border/50 hover:border-red-200 transition-all flex justify-between items-center group">
+                                        <div className="space-y-2">
+                                            <div className="font-black text-3xl text-foreground uppercase tracking-tight group-hover:text-red-500 transition-colors">
                                                 {item.question.word}
                                             </div>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-[200px]">
+                                            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest italic truncate max-w-[240px]">
                                                 {item.question.hints[0]}
                                             </p>
                                         </div>
-                                        <div className="font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-3 py-1 rounded-lg">
-                                            {item.pointsEarned}점
+                                        <div className="text-right">
+                                            <div className={`font-black text-3xl italic ${item.pointsEarned === 3 ? 'text-red-500' : 
+                                                item.pointsEarned === 2 ? 'text-orange-500' : 'text-yellow-500'}`}>
+                                                +{item.pointsEarned}
+                                            </div>
+                                            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-50">POINTS</div>
                                         </div>
                                     </div>
                                 ))}
@@ -352,11 +385,11 @@ const FoodQuiz = () => {
                     </div>
                 )}
             </div>
-        
-            <div className="mt-12">
+
+            <div className="mt-20">
                 <ToolGuide
-                    title="음식 이름 퀴즈 안내"
-                    intro="3단계 힌트를 보고 음식 이름을 맞추는 퀴즈 게임입니다. 적은 힌트로 맞출수록 높은 점수를 획득합니다!"
+                    title={isEn ? "The Foodie Challenge: Explained" : "음식 이름 퀴즈 완벽 가이드"}
+                    intro={isEn ? "Are you a true gourmet? Our Food Quiz challenges your culinary knowledge using a unique 3-tier hint system. Identify global and local dishes with as few clues as possible to climb the leaderboard." : "이 퀴즈는 여러분의 미식 상식과 추리력을 동시에 테스트하는 두뇌 게임입니다. 단순히 이름을 맞추는 것을 넘어, 재료와 유래 등 깊이 있는 음식 정보를 힌트로 제공하여 교육적인 재미까지 더했습니다."}
                     steps={toolSteps}
                     tips={toolTips}
                     faqs={toolFaqs}

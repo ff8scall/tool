@@ -4,8 +4,11 @@ import ToolGuide from '../components/ToolGuide';
 import { Bomb, Flag, RefreshCw, Trophy, AlertTriangle, Share2 } from 'lucide-react';
 import useShareCanvas from '../hooks/useShareCanvas';
 import { useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Minesweeper = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [grid, setGrid] = useState([]);
     const [gameState, setGameState] = useState('waiting'); // waiting, playing, won, lost
     const [mineCount, setMineCount] = useState(10);
@@ -69,14 +72,12 @@ const Minesweeper = () => {
             const r = Math.floor(Math.random() * rows);
             const c = Math.floor(Math.random() * cols);
 
-            // Don't place mine on first click or neighbors
             if (!newGrid[r][c].isMine && (Math.abs(r - firstRow) > 1 || Math.abs(c - firstCol) > 1)) {
                 newGrid[r][c].isMine = true;
                 minesPlaced++;
             }
         }
 
-        // Calculate neighbors
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
                 if (!newGrid[r][c].isMine) {
@@ -107,7 +108,6 @@ const Minesweeper = () => {
         }
 
         if (newGrid[r][c].isMine) {
-            // Game Over
             newGrid[r][c].isRevealed = true;
             revealAllMines(newGrid);
             setGameState('lost');
@@ -141,7 +141,7 @@ const Minesweeper = () => {
         if (grid[r][c].isRevealed) return;
 
         const newGrid = [...grid];
-        if (!newGrid[r][c].isFlagged && flagCount >= mineCount) return; // Limit flags
+        if (!newGrid[r][c].isFlagged && flagCount >= mineCount) return;
 
         newGrid[r][c].isFlagged = !newGrid[r][c].isFlagged;
         setGrid(newGrid);
@@ -167,7 +167,7 @@ const Minesweeper = () => {
 
         if (revealedCount === (rows * cols - mines)) {
             setGameState('won');
-            setFlagCount(mines); // Auto flag all mines
+            setFlagCount(mines);
         }
     };
 
@@ -179,64 +179,72 @@ const Minesweeper = () => {
         return colors[count] || '';
     };
 
+    const toolFaqs = isEn ? [
+        { q: "What do the numbers mean?", a: "Each number indicates how many mines are hiding in the 8 surrounding neighbor cells." },
+        { q: "How do I place a flag?", a: "Right-click on a cell (or long-press on mobile) to mark it as a containing mine." },
+        { q: "Does the first click matter?", a: "In this version, the first cell you click is guaranteed to be safe and will not contain a mine." }
+    ] : [
+        { q: "숫자들은 무엇을 의미하나요?", a: "해당 칸을 둘러싼 주변 8칸 내에 숨겨진 지뢰의 총 개수를 나타냅니다." },
+        { q: "깃발은 어떻게 꽂나요?", a: "지뢰가 확실시되는 칸에서 마우스 우클릭(또는 모바일 길게 누르기)을 하면 깃발을 꽂아 표시할 수 있습니다." },
+        { q: "첫 클릭에 바로 죽을 수도 있나요?", a: "이 게임 버전에서는 사용자의 첫 번째 클릭이 지뢰가 되지 않도록 안전하게 처리되었습니다." }
+    ];
+
     return (
-        <div className="max-w-4xl mx-auto space-y-6 select-none" ref={containerRef}>
+        <div className="max-w-4xl mx-auto space-y-6 select-none px-4" ref={containerRef}>
             <SEO
-                title="지뢰찾기 - 고전 명작 퍼즐"
-                description="지뢰를 피해 모든 칸을 열어보세요! 논리적인 추리로 지뢰의 위치를 찾아내는 고전 명작 게임입니다."
-                keywords={['지뢰찾기', 'minesweeper', '퍼즐', '두뇌게임', '고전게임']}
+                title={isEn ? "Play Minesweeper Online - Classic Logic Puzzle | Tool Hive" : "지뢰찾기 (Minesweeper) - 고전 명작 퍼즐 | Tool Hive"}
+                description={isEn ? "Play the classic Minesweeper puzzle game online. Use logic to flag mines and clear the grid. Multiple difficulty levels available for free." : "지뢰를 피해 모든 칸을 열어보세요! 논리적인 추리로 지뢰의 위치를 찾아내는 고전 명작 게임입니다."}
+                keywords={isEn ? "minesweeper online, logic puzzle games, classic windows games, free puzzles, brain games" : "지뢰찾기, minesweeper, 퍼즐, 두뇌게임, 고전게임"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center space-y-4">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-3">
-                    <Bomb className="w-8 h-8 text-gray-700 dark:text-gray-300" />
-                    지뢰찾기
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white flex items-center justify-center gap-4 italic tracking-tight">
+                    <Bomb className="w-10 h-10 text-rose-500" />
+                    {isEn ? 'MINESWEEPER' : '지뢰찾기'}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                    지뢰를 피해 모든 안전한 칸을 찾아내세요!
+                <p className="text-muted-foreground font-medium">
+                    {isEn ? 'Use logic to clear the grid without hitting a mine!' : '지뢰를 피해 모든 안전한 칸을 찾아내세요!'}
                 </p>
             </div>
 
-            {/* Difficulty Selector */}
-            <div className="flex justify-center gap-2">
+            <div className="flex justify-center flex-wrap gap-2">
                 {['beginner', 'intermediate', 'expert'].map((diff) => (
                     <button
                         key={diff}
                         onClick={() => setDifficulty(diff)}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${difficulty === diff
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                        className={`px-6 py-2 rounded-xl text-sm font-black uppercase tracking-widest transition-all ${difficulty === diff
+                            ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105'
+                            : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                             }`}
                     >
-                        {diff}
+                        {isEn ? diff : (diff === 'beginner' ? '초급' : diff === 'intermediate' ? '중급' : '고급')}
                     </button>
                 ))}
             </div>
 
-            <div className="flex flex-col items-center gap-6" ref={containerRef}>
-                <div className="card p-6 inline-block min-w-full md:min-w-0 overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
-                    <div className="flex flex-col items-center gap-4">
-                        {/* Header */}
-                        <div className="flex justify-between items-center w-full bg-gray-200 dark:bg-gray-700 p-3 rounded-lg border-b-4 border-gray-300 dark:border-gray-600">
-                            <div className="font-mono text-2xl text-red-500 bg-black px-2 py-1 rounded">
+            <div className="flex flex-col items-center gap-8">
+                <div className="p-8 bg-slate-200 dark:bg-slate-700 rounded-3xl shadow-2xl border-4 border-slate-300 dark:border-slate-600">
+                    <div className="flex flex-col items-center gap-6">
+                        <div className="flex justify-between items-center w-full bg-slate-800 p-4 rounded-xl border-t-4 border-l-4 border-slate-900 border-b-slate-600 border-r-slate-600 shadow-inner">
+                            <div className="font-mono text-3xl text-red-500 bg-black px-3 py-1 rounded-md border border-red-900/30">
                                 {String(mineCount - flagCount).padStart(3, '0')}
                             </div>
 
                             <button
                                 onClick={initGame}
-                                className="btn btn-ghost p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full"
+                                className="bg-slate-300 hover:bg-white p-2 rounded-lg border-b-4 border-slate-500 active:border-b-0 active:translate-y-1 transition-all text-3xl h-14 w-14 flex items-center justify-center"
                             >
                                 {gameState === 'won' ? '😎' : gameState === 'lost' ? '😵' : '🙂'}
                             </button>
 
-                            <div className="font-mono text-2xl text-red-500 bg-black px-2 py-1 rounded">
+                            <div className="font-mono text-3xl text-red-500 bg-black px-3 py-1 rounded-md border border-red-900/30">
                                 {String(Math.min(999, timer)).padStart(3, '0')}
                             </div>
                         </div>
 
-                        {/* Grid */}
                         <div
-                            className="bg-gray-300 dark:bg-gray-600 p-1 rounded select-none"
+                            className="bg-slate-400 dark:bg-slate-800 p-2 rounded-lg border-t-4 border-l-4 border-slate-500 dark:border-slate-900 border-b-slate-100 dark:border-slate-700 select-none overflow-auto max-w-full"
                             onContextMenu={(e) => e.preventDefault()}
                         >
                             {grid.map((row, r) => (
@@ -247,12 +255,12 @@ const Minesweeper = () => {
                                             onClick={() => revealCell(r, c)}
                                             onContextMenu={(e) => toggleFlag(e, r, c)}
                                             className={`
-                      w-8 h-8 md:w-9 md:h-9 flex items-center justify-center text-base md:text-lg font-bold cursor-pointer border
-                      ${cell.isRevealed
-                                                    ? 'bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700'
-                                                    : 'bg-gray-200 dark:bg-gray-500 border-t-white border-l-white border-b-gray-400 border-r-gray-400 hover:bg-gray-100 dark:hover:bg-gray-400'
+                                                w-8 h-8 md:w-9 md:h-9 flex items-center justify-center text-lg font-black cursor-pointer border
+                                                ${cell.isRevealed
+                                                    ? 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700'
+                                                    : 'bg-slate-300 dark:bg-slate-500 border-t-slate-50 border-l-slate-50 border-b-slate-500 border-r-slate-500 hover:bg-slate-200 dark:hover:bg-slate-400'
                                                 }
-                    `}
+                                            `}
                                         >
                                             {cell.isRevealed ? (
                                                 cell.isMine ? (
@@ -263,7 +271,7 @@ const Minesweeper = () => {
                                                     </span>
                                                 )
                                             ) : cell.isFlagged ? (
-                                                <Flag className="w-5 h-5 text-red-500 fill-current" />
+                                                <Flag className="w-5 h-5 text-rose-500 fill-current drop-shadow-sm" />
                                             ) : null}
                                         </div>
                                     ))}
@@ -274,42 +282,87 @@ const Minesweeper = () => {
                 </div>
 
                 {gameState === 'won' && (
-                    <div className="text-center animate-bounce p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-                        <div className="text-2xl font-bold text-green-500 mb-2">축하합니다! 성공하셨습니다! 🎉</div>
-                        <div className="text-gray-500 dark:text-gray-400 mb-4">기록: {timer}초</div>
+                    <div className="text-center animate-in zoom-in duration-300 p-8 rounded-3xl bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 shadow-xl max-w-sm w-full">
+                        <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+                        <h2 className="text-3xl font-black text-green-600 mb-2 uppercase tracking-tight">{isEn ? 'VICTORY!' : '성공하셨습니다!'}</h2>
+                        <p className="text-gray-500 dark:text-gray-400 font-bold mb-6">{isEn ? 'Record' : '기록'}: {timer}{isEn ? 's' : '초'}</p>
                         <button
-                            onClick={() => shareCanvas(containerRef.current, '지뢰찾기', `${timer}초`)}
-                            className="px-6 py-2 bg-slate-600 hover:bg-slate-700 text-white rounded-lg font-bold transition-colors shadow-md flex items-center justify-center gap-2 mx-auto"
+                            onClick={() => shareCanvas(containerRef.current, 'Minesweeper', `${timer}s`)}
+                            className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-black transition-all shadow-lg flex items-center justify-center gap-3"
                         >
-                            <Share2 size={18} /> 결과 공유하기
+                            <Share2 size={22} /> {isEn ? 'SHARE RECORD' : '결과 공유하기'}
+                        </button>
+                    </div>
+                )}
+
+                {gameState === 'lost' && (
+                    <div className="text-center animate-shake p-6 rounded-3xl bg-rose-50 dark:bg-rose-900/20 border-2 border-rose-200 dark:border-rose-800 shadow-xl max-w-sm w-full">
+                        <AlertTriangle className="w-16 h-16 text-rose-500 mx-auto mb-4" />
+                        <h2 className="text-3xl font-black text-rose-600 mb-6 uppercase tracking-tight">{isEn ? 'BOOM!' : '폭발했습니다!'}</h2>
+                        <button
+                            onClick={initGame}
+                            className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-black transition-all shadow-lg flex items-center justify-center gap-3"
+                        >
+                            <RefreshCw size={22} /> {isEn ? 'TRY AGAIN' : '다시 시도하기'}
                         </button>
                     </div>
                 )}
             </div>
 
-            <div className="text-center text-sm text-gray-500">
-                <p>좌클릭: 칸 열기 / 우클릭: 깃발 꽂기</p>
-                <p className="mt-1 text-xs text-gray-400">모바일에서는 길게 눌러서 깃발을 꽂을 수 있습니다 (브라우저 설정에 따라 다를 수 있음)</p>
+            <div className="bg-muted/30 p-8 rounded-3xl border border-border shadow-sm">
+                <h3 className="text-lg font-black mb-6 flex items-center gap-3">
+                    <RotateCcw size={22} className="text-primary" />
+                    {isEn ? "Controls" : "조작 방법"}
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-8 text-sm font-medium">
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                            <span className="px-3 py-1 bg-white dark:bg-slate-800 border rounded shadow-sm">L-Click</span>
+                            <span>{isEn ? "Reveal cell" : "칸 열기"}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <span className="px-3 py-1 bg-white dark:bg-slate-800 border rounded shadow-sm">R-Click</span>
+                            <span>{isEn ? "Place/Remove Flag" : "깃발 꽂기/해제"}</span>
+                        </div>
+                    </div>
+                    <div className="bg-white/50 dark:bg-slate-900/50 p-4 rounded-xl border border-dashed border-slate-300">
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                            {isEn 
+                                ? "💡 Mobile Tip: Long-press on a cell to place a flag. Note that some browsers may behave differently." 
+                                : "💡 모바일 팁: 칸을 길게 누르면(Long-press) 깃발을 꽂을 수 있습니다. 브라우저 설정에 따라 다를 수 있으니 확인해 보세요."}
+                        </p>
+                    </div>
+                </div>
             </div>
-        \n            <ToolGuide
-                title="지뢰찾기"
-                intro="지뢰를 피해 모든 칸을 여는 퍼즐"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Mastering Minesweeper: The Essential Guide" : "지뢰찾기 전략 및 게임 가이드"}
+                intro={isEn ? "Minesweeper is a classic single-player puzzle game. The objective is to clear a rectangular board containing hidden 'mines' without detonating any of them, with help from clues about the number of neighboring mines in each field." : "추억의 윈도우 기본 게임, 지뢰찾기(Minesweeper)를 웹에서 바로 즐겨보세요. 논리적인 추론을 통해 지뢰의 위치를 파악하고, 모든 안전한 구역을 확보해나가는 재미를 제공합니다. 초급부터 고급까지 다양한 난이도에서 자신의 순위권 기록에 도전해보세요."}
+                steps={isEn ? [
+                    "Choose between Beginner, Intermediate, or Expert difficulty.",
+                    "Click any cell to start the game. The first click is always safe.",
+                    "Look at the numbers to deduce where mines are hidden.",
+                    "Right-click suspicious cells to plant a flag (prevents accidental clicks).",
+                    "Clear all cells that don't contain mines to win the game!"
+                ] : [
+                    "자신의 숙련도에 맞는 난이도(초급, 중급, 고급)를 선택합니다.",
+                    "무작위로 칸을 하나 선택해 클릭하여 게임을 시작합니다. (첫 칸은 지뢰가 아닙니다)",
+                    "숫자가 나타나면 해당 숫자 주위 8개 칸에 숨겨진 지뢰 개수를 파악합니다.",
+                    "지뢰가 확실한 곳은 우클릭으로 깃발을 꽂아 실수로 누르지 않게 방지합니다.",
+                    "지뢰를 제외한 모든 빈 칸을 안전하게 열면 승리합니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Numbers are clues: A '1' means there is exactly one mine in the 8 neighbors.",
+                    "Use the corner strategy: Corners often provide key logic points for deduction.",
+                    "Flag carefully: Misplaced flags can lead to confusing logic errors later.",
+                    "When stuck, look for groups of cells that must contain a certain number of mines."
+                ] : [
+                    "숫자 활용: '1'은 주변 8칸 중 지뢰가 딱 하나 있다는 뜻입니다. 이를 교차 검증하며 위치를 찾으세요.",
+                    "절박한 상황에서 찍기: 모든 곳이 추론 불가능할 때는 확률적으로 빈 공간일 것 같은 곳을 선택해야 할 수도 있습니다.",
+                    "깃발 활용: 깃발은 숫자 계산을 훨씬 명확하게 만들어주므로 적극적으로 사용하세요.",
+                    "실수는 금물: 지뢰찾기는 단 한 번의 실수로 끝나기 때문에 매 클릭마다 신중해야 합니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

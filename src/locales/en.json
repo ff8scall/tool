@@ -1,0 +1,647 @@
+{
+  "common": {
+    "home": "Home",
+    "categories": {
+      "unit": "Unit Converters",
+      "finance": "Finance & Life",
+      "text": "Text Tools",
+      "dev": "Dev Tools",
+      "utility": "Utility",
+      "health": "Health",
+      "games": "Mini Games",
+      "fun": "Fun & Fortune",
+      "trivia": "Trivia & Quizzes"
+    },
+    "search": "Search Tools",
+    "searchPlaceholder": "Search for tools (e.g., unit, JSON, BMI)...",
+    "searchInstruction": "Type the name of the tool you want to find.",
+    "menuOpen": "Open Menu",
+    "menuClose": "Close Menu",
+    "select": "Select",
+    "navigate": "Navigate",
+    "close": "Close",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact": "Contact Us",
+    "sitemap": "Sitemap",
+    "footerDescription": "\"Over 138 free online tools to make your daily life easier\"",
+    "tabs": {
+      "all": "All",
+      "best": "Popular/Recommend"
+    },
+    "skipToContent": "Skip to Content"
+  },
+  "tools": {
+    "2048": {
+      "title": "2048",
+      "description": "The legendary puzzle game to reach the 2048 tile."
+    },
+    "length": {
+      "title": "Length Converter | Meters, Feet, Inches",
+      "description": "Convert between meters, feet, inches, centimeters, and miles easily."
+    },
+    "weight": {
+      "title": "Weight Converter | Kilograms, Pounds, Ounces",
+      "description": "Convert between kilograms, pounds, ounces, and grams accurately."
+    },
+    "currency": {
+      "title": "Currency Converter | Real-time Exchange Rates",
+      "description": "Real-time exchange rates for USD, EUR, JPY and more."
+    },
+    "temperature-converter": {
+      "title": "Temperature Converter",
+      "description": "Convert Celsius, Fahrenheit, and Kelvin."
+    },
+    "area-converter": {
+      "title": "Area Converter",
+      "description": "Convert square meters, acres, hectares, and pyeong."
+    },
+    "volume-converter": {
+      "title": "Volume Converter",
+      "description": "Convert liters, gallons, and cubic meters."
+    },
+    "speed-converter": {
+      "title": "Speed Converter",
+      "description": "Convert km/h, mph, and m/s."
+    },
+    "loan": {
+      "title": "Loan Calculator",
+      "description": "Calculate equal principal and interest loan payments."
+    },
+    "salary": {
+      "title": "Salary Net Pay",
+      "description": "Calculate net salary after taxes and insurance."
+    },
+    "severance": {
+      "title": "Severance Calculator",
+      "description": "Calculate your estimated severance pay."
+    },
+    "minimum-wage": {
+      "title": "Minimum Wage Calculator",
+      "description": "Check and calculate 2024/2025 minimum wage."
+    },
+    "compound-interest": {
+      "title": "Compound Interest",
+      "description": "Calculate compound interest and investment returns."
+    },
+    "percent-calculator": {
+      "title": "Percentage Calculator",
+      "description": "Calculate ratios, increase/decrease, and discounts."
+    },
+    "discount-calculator": {
+      "title": "Discount Calculator",
+      "description": "Calculate final prices after applying discount rates."
+    },
+    "work-hours": {
+      "title": "Work Hours Calculator",
+      "description": "Calculate working hours and wages."
+    },
+    "age-calc": {
+      "title": "Age Calculator",
+      "description": "Calculate chronological and international age."
+    },
+    "date": {
+      "title": "Date Calculator",
+      "description": "Calculate date differences and D-Days."
+    },
+    "lunch-recommender": {
+      "title": "Lunch Recommender",
+      "description": "Can't decide? Let us pick a random lunch menu for you!"
+    },
+    "word-count": {
+      "title": "Word Counter",
+      "description": "Count characters, words, and sentences."
+    },
+    "unicode": {
+      "title": "Unicode Converter",
+      "description": "Convert between text and unicode format."
+    },
+    "string-converter": {
+      "title": "String Format Converter",
+      "description": "Convert text case format like camelCase, PascalCase."
+    },
+    "base64": {
+      "title": "Base64 Encode/Decode",
+      "description": "Base64 encoder and decoder tool."
+    },
+    "html-encoder": {
+      "title": "HTML Entity Encoder",
+      "description": "Encode and decode HTML entities securely."
+    },
+    "morse-code": {
+      "title": "Morse Code Converter",
+      "description": "Translate text to Morse code and vice versa."
+    },
+    "base-converter": {
+      "title": "Numeric Base Converter",
+      "description": "Convert binary, octal, decimal, and hexadecimals."
+    },
+    "json-formatter": {
+      "title": "JSON Formatter",
+      "description": "Format and validate JSON data perfectly."
+    },
+    "markdown-editor": {
+      "title": "Markdown Editor",
+      "description": "Real-time preview markdown editor."
+    },
+    "html-view": {
+      "title": "HTML Formatter",
+      "description": "Format and preview HTML code cleanly."
+    },
+    "diff": {
+      "title": "Code Diff Checker",
+      "description": "Compare differences between two text or code files."
+    },
+    "web-editor": {
+      "title": "Web Editor",
+      "description": "Real-time HTML/CSS/JS editor and previewer."
+    },
+    "hash-gen": {
+      "title": "Hash Generator",
+      "description": "Generate MD5, SHA-1, SHA-256 hashes."
+    },
+    "uuid-gen": {
+      "title": "UUID Generator",
+      "description": "Generate secure UUID v4 tokens."
+    },
+    "url-encoder": {
+      "title": "URL Encoder/Decoder",
+      "description": "URL encoding and decoding tool."
+    },
+    "jwt-decoder": {
+      "title": "JWT Decoder",
+      "description": "Decode and inspect JSON Web Tokens."
+    },
+    "regex-tester": {
+      "title": "Regex Tester",
+      "description": "Test and validate regular expressions."
+    },
+    "ascii-art": {
+      "title": "ASCII Art Generator",
+      "description": "Convert text to ASCII art beautifully."
+    },
+    "ascii-table": {
+      "title": "ASCII Table Reference",
+      "description": "Comprehensive ASCII code table reference."
+    },
+    "special-char": {
+      "title": "Special Characters",
+      "description": "Collection of frequently used special symbols."
+    },
+    "cron-generator": {
+      "title": "CRON Generator",
+      "description": "Generate CRON scheduling expressions."
+    },
+    "csv-json": {
+      "title": "CSV to JSON Converter",
+      "description": "Convert between CSV and JSON data formats."
+    },
+    "fraction-calculator": {
+      "title": "Fraction Calculator",
+      "description": "Perform operations on fractions."
+    },
+    "encryption-tool": {
+      "title": "AES Encryption Tool",
+      "description": "Encrypt text utilizing AES algorithms securely."
+    },
+    "qr-gen": {
+      "title": "QR Code Generator",
+      "description": "Convert URL or text to QR code formats."
+    },
+    "barcode-gen": {
+      "title": "Barcode Generator",
+      "description": "Generate standard barcodes from numbers."
+    },
+    "password-gen": {
+      "title": "Password Generator",
+      "description": "Generate secure, random passwords instantly."
+    },
+    "color-picker": {
+      "title": "Color Picker & Palette",
+      "description": "Pick colors and convert HEX/RGB codes."
+    },
+    "image-base64": {
+      "title": "Image to Base64",
+      "description": "Encode images to Base64 data natively."
+    },
+    "ip-address": {
+      "title": "My IP Address",
+      "description": "Check your public IP and location information."
+    },
+    "timer": {
+      "title": "Timer & Stopwatch",
+      "description": "Online timer, stopwatch, and alarm tool."
+    },
+    "pomodoro-timer": {
+      "title": "Pomodoro Timer",
+      "description": "25-minute focus, 5-minute break timer."
+    },
+    "checklist": {
+      "title": "Checklist / Todo",
+      "description": "Simple task checklist manager."
+    },
+    "flashlight": {
+      "title": "Flashlight",
+      "description": "Use your screen display as a flashlight."
+    },
+    "image-resize": {
+      "title": "Image Resizer",
+      "description": "Resize and compress images quickly."
+    },
+    "youtube-thumbnail": {
+      "title": "YouTube Thumbnail Downloader",
+      "description": "Extract and download thumbnails from YouTube videos."
+    },
+    "mandalart": {
+      "title": "Mandalart Planner",
+      "description": "Visual planner mimicking Shohei Ohtani's achievement method."
+    },
+    "color-extractor": {
+      "title": "Image Color Extractor",
+      "description": "Extract major color palettes from images."
+    },
+    "world-clock": {
+      "title": "World Clock",
+      "description": "Check current time across major cities globally."
+    },
+    "bmi": {
+      "title": "BMI Calculator",
+      "description": "Measure obesity and body mass index."
+    },
+    "bmr": {
+      "title": "BMR Calculator",
+      "description": "Calculate your Basal Metabolic Rate and daily recommended calories."
+    },
+    "biorhythm": {
+      "title": "Biorhythm Tracker",
+      "description": "Check your physical, emotional, and intellectual cycles for today."
+    },
+    "life-expectancy": {
+      "title": "Life Expectancy Test",
+      "description": "Find out your estimated life expectancy based on lifestyle habits."
+    },
+    "reaction-test": {
+      "title": "Reaction Time Test",
+      "description": "What's your reflexes in ms? Test your reaction speed."
+    },
+    "typing-test": {
+      "title": "Typing Speed Test",
+      "description": "Measure your WPM and accuracy for English and Korean typing."
+    },
+    "1to50": {
+      "title": "1 to 50",
+      "description": "Touch from 1 to 50 as fast as you can!"
+    },
+    "cps-test": {
+      "title": "CPS Test",
+      "description": "Click Per Second: Measure your mouse clicking speed."
+    },
+    "aim-trainer": {
+      "title": "Aim Trainer",
+      "description": "Train your mouse accuracy and reaction time."
+    },
+    "number-memory": {
+      "title": "Number Memory",
+      "description": "Instant memory test (Chimpanzee memory benchmark)."
+    },
+    "number-baseball": {
+      "title": "Number Baseball",
+      "description": "A logic game of guessing numbers and positions."
+    },
+    "minesweeper": {
+      "title": "Minesweeper",
+      "description": "Classic puzzle to uncover all cells without detonating mines."
+    },
+    "roulette": {
+      "title": "Roulette Spinner",
+      "description": "Random drawing tool for decision making."
+    },
+    "suika-game": {
+      "title": "Fruit Merge Game",
+      "description": "Merge fruits to make the largest watermelon!"
+    },
+    "ladder-game": {
+      "title": "Ghost Leg (Ladder)",
+      "description": "Decision making ladder game for bets."
+    },
+    "tanghulu-maker": {
+      "title": "Tanghulu Maker",
+      "description": "Stack fruits to make your own Tanghulu."
+    },
+    "missile-dodge": {
+      "title": "Missile Dodge",
+      "description": "Survive as long as possible by dodging missiles!"
+    },
+    "flappy-bird": {
+      "title": "Flappy Bird",
+      "description": "Fly as far as you can dodging obstacles!"
+    },
+    "snake-game": {
+      "title": "Snake Game",
+      "description": "Classic snake game eating apples and growing longer."
+    },
+    "sudoku": {
+      "title": "Sudoku",
+      "description": "Classic logic puzzle to fill the 9x9 grid with numbers."
+    },
+    "tower-stacker": {
+      "title": "Tower Stacker",
+      "description": "Stack the blocks as high as you can!"
+    },
+    "dice-roller": {
+      "title": "Dice Roller",
+      "description": "Random dice rolling tool."
+    },
+    "time-sense": {
+      "title": "Time Sense Test",
+      "description": "Try to hit exactly 10 seconds!"
+    },
+    "pitch-test": {
+      "title": "Perfect Pitch Test",
+      "description": "Listen to the sounds and guess the correct musical note."
+    },
+    "capital-quiz": {
+      "title": "World Capitals Quiz",
+      "description": "Guess the capital city of each country."
+    },
+    "typing-defense": {
+      "title": "Typing Defense",
+      "description": "Defend by typing the falling words as fast as possible."
+    },
+    "hangman": {
+      "title": "Hangman",
+      "description": "Guess the hidden word letter by letter."
+    },
+    "speed-math": {
+      "title": "Mental Math Game",
+      "description": "Activate your brain with fast mental calculations."
+    },
+    "bubble-wrap": {
+      "title": "Bubble Wrap Pop",
+      "description": "Infinite stress relief by popping virtual bubble wrap."
+    },
+    "dynamic-acuity": {
+      "title": "Dynamic Visual Acuity",
+      "description": "Measure your ability to track moving objects clearly."
+    },
+    "lotto": {
+      "title": "Lotto Number Generator",
+      "description": "Extract today's lucky numbers with a sophisticated algorithm."
+    },
+    "lotto-sim": {
+      "title": "Lotto Simulator",
+      "description": "How much would you win if you kept buying lotto? Check results!"
+    },
+    "tarot": {
+      "title": "Daily Tarot Reading",
+      "description": "Predict your destiny with 22 Major Arcana tarot cards."
+    },
+    "blood-type": {
+      "title": "Blood Type Personality",
+      "description": "Personality analysis based on your blood type."
+    },
+    "mbti": {
+      "title": "MBTI Test",
+      "description": "Simple MBTI personality type test."
+    },
+    "saju": {
+      "title": "Four Pillars of Destiny",
+      "description": "Check your fortune based on your date and time of birth."
+    },
+    "zodiac-fortune": {
+      "title": "Daily Zodiac Fortune",
+      "description": "Today's fortune for all 12 zodiac animals."
+    },
+    "horoscope": {
+      "title": "Daily Horoscope",
+      "description": "Today's fortune for all 12 astrological signs."
+    },
+    "dream-interpretation": {
+      "title": "Dream Interpretation",
+      "description": "Search for meanings behind your dreams."
+    },
+    "birth-gen": {
+      "title": "Birthstone & Birthflower",
+      "description": "Find the birthstone and flower that match your birthday."
+    },
+    "name-analysis": {
+      "title": "Name Analysis",
+      "description": "Analyze the meaning and fortune hidden in your name."
+    },
+    "personal-color": {
+      "title": "Color Psychology Test",
+      "description": "Analyze the colors that suit you and their meanings."
+    },
+    "past-life": {
+      "title": "Past Life Finder",
+      "description": "What kind of person were you in your past life?"
+    },
+    "pet-mbti": {
+      "title": "Pet MBTI",
+      "description": "Analyze your dog or cat's personality using MBTI."
+    },
+    "mental-age": {
+      "title": "Mental Age Test",
+      "description": "Measure your mental age based on your thoughts and attitudes."
+    },
+    "brain-structure": {
+      "title": "Brain Structure Analysis",
+      "description": "What kind of thoughts are filling your head right now?"
+    },
+    "joseon-job": {
+      "title": "Joseon Dynasty Job Test",
+      "description": "What would your job be if you lived in the Joseon era?"
+    },
+    "if-i-am-god": {
+      "title": "If I Were God?",
+      "description": "What would you look like if you were the creator of the world?"
+    },
+    "life-bgm": {
+      "title": "BGM of My Life",
+      "description": "What background music suits your life at this very moment?"
+    },
+    "first-impression-color": {
+      "title": "First Impression Color",
+      "description": "What color is your first impression to others?"
+    },
+    "animal-face": {
+      "title": "Animal Face Test",
+      "description": "Which animal do you look like the most?"
+    },
+    "personal-scent": {
+      "title": "Personal Scent Finder",
+      "description": "Find the fragrance that matches your vibe and personality."
+    },
+    "ideal-type": {
+      "title": "Ideal Type World Cup",
+      "description": "Analyze your preferred style through a tournament."
+    },
+    "couple-compatibility": {
+      "title": "Couple Compatibility",
+      "description": "What is our dating style and harmony level?"
+    },
+    "hidden-talent": {
+      "title": "My Hidden Talent",
+      "description": "Check the special ability you haven't discovered yet."
+    },
+    "balance-game": {
+      "title": "Balance Game",
+      "description": "A thrilling game of choosing between two tough options."
+    },
+    "fortune-cookie": {
+      "title": "Fortune Cookie",
+      "description": "A short, powerful message for you today."
+    },
+    "color-test": {
+      "title": "Color Sensitivity Test",
+      "description": "Can you distinguish subtle color differences?"
+    },
+    "hearing-test": {
+      "title": "Hearing Age Test",
+      "description": "Measure your audio frequency range to find your hearing age."
+    },
+    "smile-dating-test": {
+      "title": "Smile Dating Test",
+      "description": "What kind of smile is your dating style?"
+    },
+    "dating-test": {
+      "title": "Dating Personality Quiz",
+      "description": "Analyze your dating style and values."
+    },
+    "stress-test": {
+      "title": "Stress Level Test",
+      "description": "How stressed is your heart right now?"
+    },
+    "brain-type": {
+      "title": "Left/Right Brain Test",
+      "description": "Find out which side of your brain you use more."
+    },
+    "eq-test": {
+      "title": "Emotional Quotient (EQ) Test",
+      "description": "Analyze your empathy and emotional intelligence."
+    },
+    "smartphone-addiction": {
+      "title": "Smartphone Addiction Test",
+      "description": "Measure your level of smartphone dependency."
+    },
+    "kkondae-test": {
+      "title": "Kkondae Test (Precise)",
+      "description": "Find out your stubbornness level (Anonymous results)."
+    },
+    "hogu-test": {
+      "title": "Pushover Level Test",
+      "description": "Am I being a pushover? Check your 'Hogu' index!"
+    },
+    "debate-test": {
+      "title": "Debate Skills Test",
+      "description": "Measure your logic and elocution abilities."
+    },
+    "idol-test": {
+      "title": "Idol Position Finder",
+      "description": "What position would you have in an idol group?"
+    },
+    "resilience-test": {
+      "title": "Resilience Test",
+      "description": "Check your inner energy to overcome difficulties."
+    },
+    "initial-sound-quiz": {
+      "title": "Initial Sound Quiz",
+      "description": "Guess the words from the given consonant initials."
+    },
+    "food-quiz": {
+      "title": "Food & Restaurant Quiz",
+      "description": "How much do you know about world cuisines?"
+    },
+    "association-quiz": {
+      "title": "Association Quiz",
+      "description": "Guess the answer by associating given keywords."
+    },
+    "spelling-quiz": {
+      "title": "Spelling Quiz",
+      "description": "How well do you know common spelling mistakes?"
+    },
+    "vocabulary-test": {
+      "title": "Vocabulary Level Test",
+      "description": "Check your vocabulary level by rating."
+    },
+    "simple-math": {
+      "title": "Mental Arithmetic Quiz",
+      "description": "Solve addition, subtraction, and multiplication fast."
+    }
+  },
+  "home": {
+    "recent": "Recently Used",
+    "favorites": "Favorites",
+    "new": "New Tools ✨",
+    "allTools": "View All Tools",
+    "searchResult": "Search Results",
+    "noResult": "No results found.",
+    "foundTools": "{count} tools found",
+    "tryDiff": "Try searching with different keywords or categories.",
+    "viewAll": "View All Tools",
+    "allToolsTotal": "View All Tools ({count})",
+    "searchPrompt": "Search tool names (e.g. Unit, JSON, Name)...",
+    "newDesc": "New Tools ✨",
+    "fav": "Favorites",
+    "heroTitle": "Which tool do you need today?",
+    "heroSubtitle": "Explore about {count} productivity tools",
+    "aboutUs": "About Us",
+    "footerTitle": "Tool Hive",
+    "footerDesc": "A collection of free online tools to make your daily life easier."
+  },
+  "categoryData": {
+    "unit": {
+      "title": "Unit Converters Collection",
+      "description": "Convert all units instantly in one place including length, weight, currency, temperature, and area. We provide real-time currency info and accurate conversion formulas."
+    },
+    "finance": {
+      "title": "Life & Finance Calculators",
+      "description": "Try essential financial calculators for loan interest, net salary, severance pay, and minimum wage. Reflects accurate legal formulas and latest data."
+    },
+    "text": {
+      "title": "Text Conversion & Analysis Tools",
+      "description": "Useful tools for text editing like word counters, case converters, and Unicode converters. Simply copy and paste to use."
+    },
+    "dev": {
+      "title": "Essential Online Tools for Developers",
+      "description": "Maximize productivity with professional tools like JSON formatters, Base64 encoders, hash generators, and URL encoders directly in your browser."
+    },
+    "utility": {
+      "title": "Convenient Life Utility Tools",
+      "description": "A collection of various utility tools that solve daily hassles, such as QR code generators, barcode generation, password creation, and world clocks."
+    },
+    "health": {
+      "title": "Health & Body Index Calculators",
+      "description": "Check your health status with professional body index calculators like BMI, BMR, and biorhythms."
+    },
+    "games": {
+      "title": "Mini Games Collection",
+      "description": "Play addictive mini-games like Suika Game, 2048, Sudoku, and Snake instantly without any installation."
+    },
+    "fun": {
+      "title": "Fun Fortune & Psychology Tests",
+      "description": "Full of fun content to see your luck and psychology, from MBTI tests and daily horoscopes to tarot cards!"
+    },
+    "trivia": {
+      "title": "Simple Trivia & Quizzes",
+      "description": "A collection of quizzes like initial sound games and general knowledge questions to build knowledge while having fun."
+    }
+  },
+  "error": {
+    "notFound": "Page Not Found",
+    "backToHome": "Back to Home"
+  },
+  "category": {
+    "notFound": "Category not found.",
+    "backToHome": "Back to Home",
+    "totalTools": "Total {count} tools",
+    "freeToUse": "100% Free to Use",
+    "allCategoryTools": "All {name} Tools",
+    "whyUse": "Why use {name} tools on Tool Hive?",
+    "whyUseDesc": "Tool Hive {name} tools run instantly in your web browser without complex installations or annoying ads. Your valuable data is not stored on servers, but processed entirely within your browser for complete privacy and security."
+  },
+  "related": {
+    "title": "Related Tools",
+    "viewAll": "View All"
+  }
+}

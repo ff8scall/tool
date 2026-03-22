@@ -1,15 +1,21 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const SEO = ({ title, description, keywords, image, schema, category, faqs, steps }) => {
     const location = useLocation();
+    const { lang, getLocalizedPath } = useLanguage();
     const siteTitle = 'Tool Hive';
     const siteUrl = 'https://tool.lego-sia.com';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-    const defaultDescription = '편리한 웹 도구 모음: 사주팔자, MBTI, 로또, 길이 변환, 무게 변환, 대출 계산, 날짜 계산, 글자수 세기, 환율 변환 등 134가지 이상의 무료 도구를 지금 체험해보세요.';
+    const defaultDescription = lang === 'en' 
+        ? 'A collection of convenient web tools: Fortune telling, MBTI, Lotto, unit converters, loan calculators, word counts, and more. Experience over 134 free tools now.'
+        : '편리한 웹 도구 모음: 사주팔자, MBTI, 로또, 길이 변환, 무게 변환, 대출 계산, 날짜 계산, 글자수 세기, 환율 변환 등 134가지 이상의 무료 도구를 지금 체험해보세요.';
     const metaDescription = description || defaultDescription;
-    const metaKeywords = keywords ? `${keywords}, 유틸리티, 도구, 계산기, 변환기` : '유틸리티, 도구, 계산기, 변환기, 웹 툴';
+    const metaKeywords = keywords 
+        ? `${keywords}, ${lang === 'en' ? 'utility, tools, calculator, converter' : '유틸리티, 도구, 계산기, 변환기'}` 
+        : (lang === 'en' ? 'utility, tools, calculator, converter, web tools' : '유틸리티, 도구, 계산기, 변환기, 웹 툴');
 
     // Default OG image
     const defaultImage = `${siteUrl}/og-image.png`;
@@ -17,6 +23,9 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
 
     // Current page URL
     const currentUrl = `${siteUrl}${location.pathname}${location.hash}`;
+    const cleanPath = location.pathname.replace(/^\/(?:ko|en)(?=\/|$)/, '');
+    const koUrl = `${siteUrl}${cleanPath}`.replace(/\/$/, '') || `${siteUrl}/`;
+    const enUrl = `${siteUrl}/en${cleanPath}`.replace(/\/$/, '') || `${siteUrl}/en`;
 
     // WebSite Schema
     const websiteSchema = {
@@ -40,7 +49,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
             {
                 "@type": "ListItem",
                 "position": 1,
-                "name": "홈",
+                "name": lang === 'en' ? 'Home' : '홈',
                 "item": siteUrl
             }
         ]
@@ -108,7 +117,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
         schemas.push({
             "@context": "https://schema.org",
             "@type": "HowTo",
-            "name": `${title} 사용 방법`,
+            "name": lang === 'en' ? `How to use ${title}` : `${title} 사용 방법`,
             "step": steps.map((step, index) => ({
                 "@type": "HowToStep",
                 "position": index + 1,
@@ -119,11 +128,15 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
 
     return (
         <Helmet>
+            <html lang={lang} />
             {/* Basic Meta Tags */}
             <title>{fullTitle}</title>
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
             <link rel="canonical" href={currentUrl} />
+            <link rel="alternate" hreflang="x-default" href={koUrl} />
+            <link rel="alternate" hreflang="ko" href={koUrl} />
+            <link rel="alternate" hreflang="en" href={enUrl} />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
@@ -134,7 +147,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:site_name" content={siteTitle} />
-            <meta property="og:locale" content="ko_KR" />
+            <meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'} />
 
             {/* Twitter Card */}
             <meta name="twitter:card" content="summary_large_image" />
@@ -145,7 +158,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
 
             {/* Additional Meta Tags */}
             <meta name="robots" content="index, follow" />
-            <meta name="language" content="Korean" />
+            <meta name="language" content={lang === 'ko' ? 'Korean' : 'English'} />
             <meta name="author" content="Tool Hive" />
 
             {/* Schema.org JSON-LD */}

@@ -2,14 +2,17 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { tools } from '../data/tools';
 import SEO from '../components/SEO';
-import { Sparkles, TrendingUp, Zap, Star, Search, X, Grid, ListFilter, Gamepad2, Brain, PenTool, LayoutTemplate, BookOpen, Ruler, DollarSign, Type, Code, Activity, Heart } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import useUserPreferences from '../hooks/useUserPreferences';
 import useToolAnalytics from '../hooks/useToolAnalytics';
+import { LayoutTemplate, TrendingUp, Ruler, DollarSign, Type, Code, Zap, Activity, Gamepad2, Heart, BookOpen, Star, Search, X, Sparkles } from 'lucide-react';
 
 const Home = () => {
     // User preferences & Analytics
     const { favorites, toggleFavorite, recentTools, addRecentTool } = useUserPreferences();
     const { trackToolClick } = useToolAnalytics();
+    const { t, getLocalizedPath, lang } = useLanguage();
+    const isEn = lang === 'en';
 
     // State
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,28 +28,36 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Tabs Configuration (Korean)
+    // Tabs Configuration
     const tabs = [
-        { id: 'all', label: '전체', icon: LayoutTemplate },
-        { id: 'best', label: '인기/추천', icon: TrendingUp },
-        { id: 'unit', label: '단위변환', icon: Ruler },
-        { id: 'finance', label: '생활/금융', icon: DollarSign },
-        { id: 'text', label: '텍스트', icon: Type },
-        { id: 'dev', label: '개발도구', icon: Code },
-        { id: 'utility', label: '유틸리티', icon: Zap },
-        { id: 'health', label: '건강', icon: Activity },
-        { id: 'games', label: '미니게임', icon: Gamepad2 },
-        { id: 'fun', label: '운세/재미', icon: Heart },
-        { id: 'trivia', label: '상식 테스트', icon: BookOpen },
+        { id: 'all', label: t('common.tabs.all'), icon: LayoutTemplate },
+        { id: 'best', label: t('common.tabs.best'), icon: TrendingUp },
+        { id: 'unit', label: t('common.categories.unit'), icon: Ruler },
+        { id: 'finance', label: t('common.categories.finance'), icon: DollarSign },
+        { id: 'text', label: t('common.categories.text'), icon: Type },
+        { id: 'dev', label: t('common.categories.dev'), icon: Code },
+        { id: 'utility', label: t('common.categories.utility'), icon: Zap },
+        { id: 'health', label: t('common.categories.health'), icon: Activity },
+        { id: 'games', label: t('common.categories.games'), icon: Gamepad2 },
+        { id: 'fun', label: t('common.categories.fun'), icon: Heart },
+        { id: 'trivia', label: t('common.categories.trivia'), icon: BookOpen },
     ];
 
     // Tool Filtering Logic
     const filteredTools = useMemo(() => {
         let result = tools;
+        
+        // Filter out non-translated tools for English language
+        if (lang === 'en') {
+            result = result.filter(tool => tool.translated);
+        }
 
         // 1. Tab Filter
         if (activeTab === 'best') {
-            const popularIds = ['lotto', 'mandalart', 'mbti', 'saju', 'tarot', 'snake-game', 'suika-game', 'typing-test', 'qr-gen', 'loan', 'currency'];
+            // Updated popular list to focus on translated ones if in English
+            const popularIds = isEn 
+                ? ['json-formatter', 'qr-gen', 'length', 'currency', 'word-count', 'password-gen', 'timer']
+                : ['lotto', 'mandalart', 'mbti', 'saju', 'tarot', 'snake-game', 'suika-game', 'typing-test', 'qr-gen', 'loan', 'currency'];
             result = result.filter(t => popularIds.includes(t.id) || favorites.includes(t.id));
         } else if (activeTab !== 'all') {
             result = result.filter(t => t.category === activeTab);
@@ -55,11 +66,13 @@ const Home = () => {
         // 2. Search Filter
         if (searchQuery.trim()) {
             const query = searchQuery.toLowerCase();
-            result = result.filter(tool =>
-                tool.title.toLowerCase().includes(query) ||
-                tool.description.toLowerCase().includes(query) ||
-                tool.keywords?.some(keyword => keyword.toLowerCase().includes(query))
-            );
+            result = result.filter(tool => {
+                const title = t(`tools.${tool.id}.title`) || tool.title;
+                const desc = t(`tools.${tool.id}.description`) || tool.description;
+                return title.toLowerCase().includes(query) ||
+                       desc.toLowerCase().includes(query) ||
+                       tool.keywords?.some(keyword => keyword.toLowerCase().includes(query));
+            });
         }
 
         return result;
@@ -67,22 +80,33 @@ const Home = () => {
 
     // Sub-lists for "All" tab view
     const favoriteToolsList = useMemo(() =>
-        tools.filter(tool => favorites.includes(tool.id)),
-        [favorites]);
+        tools.filter(tool => favorites.includes(tool.id) && (lang !== 'en' || tool.translated)),
+        [favorites, lang]);
 
     const newToolsList = useMemo(() => {
-        const newIds = ['lotto', 'mandalart', 'suika-game', 'snake-game', 'currency', 'json-formatter'];
+        // Highlighting recently translated or popular tools in English
+        const newIds = isEn 
+            ? ['json-formatter', 'image-base64', 'currency', 'web-editor', 'diff', 'morse-code']
+            : ['lotto', 'mandalart', 'suika-game', 'snake-game', 'currency', 'json-formatter'];
         return tools.filter(t => newIds.includes(t.id));
-    }, []);
+    }, [isEn]);
+
+    const availableToolsCount = useMemo(() => {
+        return lang === 'en' ? tools.filter(t => t.translated).length : tools.length;
+    }, [lang]);
 
 
     // Helper Components
     const ToolCard = ({ tool, isFavorite, minimal = false }) => {
         const Icon = tool.icon;
         if (!tool) return null;
+        
+        const translatedTitle = t(`tools.${tool.id}.title`, { defaultValue: tool.title });
+        const translatedDesc = t(`tools.${tool.id}.description`, { defaultValue: tool.description });
+
         return (
             <Link
-                to={tool.path}
+                to={getLocalizedPath(tool.path)}
                 onClick={() => {
                     addRecentTool(tool.id);
                     trackToolClick(tool.id);
@@ -105,10 +129,10 @@ const Home = () => {
                 </div>
 
                 <h3 className={`font-bold text-gray-900 dark:text-white mb-1 ${minimal ? 'text-[13px]' : 'text-lg'}`}>
-                    {tool.title.split('|')[0].trim()}
+                    {translatedTitle.split('|')[0].trim()}
                 </h3>
                 <p className={`text-gray-500 dark:text-gray-400 line-clamp-2 ${minimal ? 'text-[11px]' : 'text-sm'}`}>
-                    {tool.description}
+                    {translatedDesc}
                 </p>
 
                 {!minimal && tool.keywords && (
@@ -127,17 +151,19 @@ const Home = () => {
     return (
         <div className="min-h-screen">
             <SEO
-                title="Tool Hive | 일상을 편리하게 만드는 134가지 이상의 도구"
-                description="길이변환, 환율계산기, 글자수세기, JSON포매터, 간단 미니게임까지! 134개 이상의 모든 실생활 유틸리티를 한곳에서 무료로 즐기세요."
+                title={isEn ? "Tool Hive | Over 134+ Free Utilities for Everyday Life" : "Tool Hive | 일상을 편리하게 만드는 134가지 이상의 도구"}
+                description={isEn ? "Length converters, JSON formatters, currency calculators, games and more! Do everything simply in one place for free." : "길이변환, 환율계산기, 글자수세기, JSON포매터, 간단 미니게임까지! 134개 이상의 모든 실생활 유틸리티를 한곳에서 무료로 즐기세요."}
             />
 
             {/* Hero Section */}
             <section className="relative pt-12 pb-8 px-4 text-center">
                 <div className="max-w-3xl mx-auto space-y-6">
                     <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
-                        오늘 당신에게 필요한 도구는?
+                        {t('home.heroTitle')}
                         <span className="block text-2xl md:text-3xl mt-4 font-medium text-gray-500">
-                            약 <span className="text-indigo-600 font-bold">{tools.length}개</span>의 생산성 도구를 만나보세요
+                            {t('home.heroSubtitle').split('{count}')[0]}
+                            <span className="text-indigo-600 font-bold">{availableToolsCount}</span>
+                            {t('home.heroSubtitle').split('{count}')[1]}
                         </span>
                     </h1>
 
@@ -151,7 +177,7 @@ const Home = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="block w-full h-16 pl-14 pr-12 rounded-2xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 text-lg shadow-xl focus:border-indigo-500 focus:ring-0 transition-all outline-none placeholder:text-gray-300"
-                            placeholder="도구 이름을 입력하세요 (예: 단위, JSON, 사주)..."
+                            placeholder={t('home.searchPrompt')}
                         />
                         {searchQuery && (
                             <button
@@ -205,7 +231,7 @@ const Home = () => {
                             <div className="flex items-center justify-between mb-6 px-2">
                                 <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
                                     <Sparkles className="w-6 h-6 text-indigo-500 animate-pulse" />
-                                    새로 추가된 도구
+                                    {t('home.newDesc')}
                                 </h2>
                             </div>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -221,7 +247,7 @@ const Home = () => {
                                 <div className="flex items-center justify-between mb-6 px-2">
                                     <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
                                         <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
-                                        즐겨찾는 도구
+                                        {t('home.fav')}
                                     </h2>
                                 </div>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -236,11 +262,11 @@ const Home = () => {
                         <section>
                             <div className="flex items-center justify-between mb-6 px-2 border-b border-gray-100 dark:border-gray-800 pb-4">
                                 <h2 className="text-2xl font-black text-gray-900 dark:text-white">
-                                    모든 도구 둘러보기 ({tools.length})
+                                    {t('home.allToolsTotal').replace('{count}', availableToolsCount)}
                                 </h2>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                                {tools.map(tool => (
+                                {tools.filter(t => lang !== 'en' || t.translated).map(tool => (
                                     <ToolCard
                                         key={tool.id}
                                         tool={tool}
@@ -254,7 +280,7 @@ const Home = () => {
                     // Filtered View
                     <div className="animate-fade-in-up">
                         <div className="mb-6 px-2 text-gray-500 font-bold uppercase tracking-wider text-sm">
-                            {filteredTools.length}개의 도구가 발견되었습니다
+                            {t('home.foundTools').replace('{count}', filteredTools.length)}
                         </div>
                         {filteredTools.length > 0 ? (
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -269,13 +295,13 @@ const Home = () => {
                         ) : (
                             <div className="text-center py-32 bg-gray-50 dark:bg-gray-800/50 rounded-3xl border-2 border-dashed border-gray-200 dark:border-gray-700">
                                 <Search className="w-20 h-20 mx-auto text-gray-300 mb-6" />
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">검색 결과가 없습니다</h3>
-                                <p className="text-gray-500 max-w-xs mx-auto mb-8">다른 키워드로 검색하거나 카테고리를 변경해 보세요.</p>
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('home.noResult')}</h3>
+                                <p className="text-gray-500 max-w-xs mx-auto mb-8">{t('home.tryDiff')}</p>
                                 <button
                                     onClick={() => { setSearchQuery(''); setActiveTab('all'); }}
                                     className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20"
                                 >
-                                    모든 도구 보기
+                                    {t('home.viewAll')}
                                 </button>
                             </div>
                         )}
@@ -286,13 +312,13 @@ const Home = () => {
             {/* Footer */}
             <footer className="mt-20 py-16 text-center border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
                 <div className="max-w-2xl mx-auto px-4">
-                    <p className="text-gray-800 dark:text-gray-200 font-bold text-lg mb-2">Tool Hive (툴 하이브)</p>
-                    <p className="text-gray-500 dark:text-gray-400 mb-8">당신의 일상을 더 편리하게 만드는 무료 온라인 도구 모음입니다.</p>
+                    <p className="text-gray-800 dark:text-gray-200 font-bold text-lg mb-2">{t('home.footerTitle')}</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-8">{t('home.footerDesc')}</p>
                     <div className="flex justify-center flex-wrap gap-x-8 gap-y-4 mb-8">
-                        <Link to="/about" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">서비스 소개</Link>
-                        <Link to="/contact" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">문의하기</Link>
-                        <Link to="/privacy" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">개인정보처리방침</Link>
-                        <Link to="/terms" className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">이용약관</Link>
+                        <Link to={getLocalizedPath('/about')} className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">{t('home.aboutUs')}</Link>
+                        <Link to={getLocalizedPath('/contact')} className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">{t('common.contact')}</Link>
+                        <Link to={getLocalizedPath('/privacy')} className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">{t('common.privacy')}</Link>
+                        <Link to={getLocalizedPath('/terms')} className="text-sm text-gray-400 hover:text-indigo-600 font-medium underline-offset-4 hover:underline">{t('common.terms')}</Link>
                     </div>
                     <p className="text-xs text-gray-300 dark:text-gray-600 italic">© {new Date().getFullYear()} Tool Hive. All rights reserved.</p>
                 </div>

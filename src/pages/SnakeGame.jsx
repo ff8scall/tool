@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Share2, Trophy, RotateCcw, Play, Pause, ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
+import { Share2, Trophy, RotateCcw, Play, Pause, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Gamepad2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 const GRID_SIZE = 20;
 const INITIAL_SPEED = 150;
@@ -10,6 +11,8 @@ const MIN_SPEED = 60;
 const SPEED_INCREMENT = 2;
 
 const SnakeGame = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
@@ -42,7 +45,6 @@ const SnakeGame = () => {
                 x: Math.floor(Math.random() * GRID_SIZE),
                 y: Math.floor(Math.random() * GRID_SIZE)
             };
-            // Don't spawn food on snake body or head
             const isOnSnake = snake.some(segment => segment.x === newFood.x && segment.y === newFood.y);
             const isOnHead = head && head.x === newFood.x && head.y === newFood.y;
             if (!isOnSnake && !isOnHead) break;
@@ -150,8 +152,8 @@ const SnakeGame = () => {
         ctx.fillStyle = '#0f172a'; // slate-900
         ctx.fillRect(0, 0, width, height);
 
-        // Draw Grid (Subtle)
-        ctx.strokeStyle = '#1e293b'; // slate-800
+        // Draw Grid
+        ctx.strokeStyle = '#1e293b'; 
         ctx.lineWidth = 0.5;
         for (let i = 0; i <= GRID_SIZE; i++) {
             ctx.beginPath();
@@ -165,7 +167,7 @@ const SnakeGame = () => {
         }
 
         // Draw Food
-        ctx.fillStyle = '#f43f5e'; // rose-500
+        ctx.fillStyle = '#f43f5e'; 
         ctx.shadowBlur = 15;
         ctx.shadowColor = '#f43f5e';
         ctx.beginPath();
@@ -182,14 +184,13 @@ const SnakeGame = () => {
         // Draw Snake
         snake.forEach((segment, index) => {
             const isHead = index === 0;
-            ctx.fillStyle = isHead ? '#10b981' : '#34d399'; // emerald-500 : emerald-400
+            ctx.fillStyle = isHead ? '#10b981' : '#34d399'; 
 
             if (isHead) {
                 ctx.shadowBlur = 10;
                 ctx.shadowColor = '#10b981';
             }
 
-            // Body segments are rounded
             const r = cellSize / 4;
             const x = segment.x * cellSize + 1;
             const y = segment.y * cellSize + 1;
@@ -206,7 +207,6 @@ const SnakeGame = () => {
             ctx.fill();
             ctx.shadowBlur = 0;
 
-            // Draw Eyes on Head
             if (isHead) {
                 ctx.fillStyle = 'white';
                 const eyeSize = cellSize / 8;
@@ -237,60 +237,76 @@ const SnakeGame = () => {
         });
     }, [snake, food, direction]);
 
+    const toolFaqs = isEn ? [
+        { q: "How do I control the snake?", a: "On desktop, use your keyboard arrow keys or WASD. On mobile, use the on-screen directional buttons." },
+        { q: "Does the speed increase?", a: "Yes, every time you eat a piece of food (ruby), the snake grows longer and the speed increases slightly." },
+        { q: "What causes game over?", a: "The game ends if you hit the walls or collide with your own tail." }
+    ] : [
+        { q: "뱀은 어떻게 조종하나요?", a: "데스크톱에서는 키보드 방향키를 사용하고, 모바일에서는 화면 하단의 방향 버튼을 터치하여 조종할 수 있습니다." },
+        { q: "속도가 점점 빨라지나요?", a: "네, 먹이(루비)를 먹을수록 뱀의 길이가 길어지며 이동 속도가 조금씩 빨라집니다." },
+        { q: "벽에 닿으면 바로 죽나요?", a: "네, 상자 테두리 벽이나 자신의 몸통에 부딪히면 게임이 종료됩니다." }
+    ];
+
     return (
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-8 px-4">
             <SEO
-                title="스네이크 게임 - 클래식 뱀 게임"
-                description="먹이를 먹고 점점 길어지는 클래식 스네이크 게임을 즐겨보세요. 당신의 한계에 도전하고 기록을 공유하세요!"
-                keywords="스네이크게임, 뱀게임, 클래식게임, 미니게임, 무료게임, snake game"
+                title={isEn ? "Classic Snake Game - Play Online | Tool Hive" : "클래식 스네이크 게임 (Snake Game) - 뱀 게임 | Tool Hive"}
+                description={isEn ? "Play the timeless classic Snake Game online. Eat food, grow longer, and survive as long as you can! Challenge your high score and share with friends." : "먹이를 먹고 점점 길어지는 클래식 스네이크 게임을 즐겨보세요. 당신의 한계에 도전하고 기록을 공유하세요!"}
+                keywords={isEn ? "snake game, classic arcade, online games, mobile snake, free mini games" : "스네이크게임, 뱀게임, 클래식게임, 미니게임, 무료게임, snake game"}
+                faqs={toolFaqs}
             />
 
-            <div className="text-center space-y-2">
-                <h1 className="text-3xl font-bold">스네이크 게임</h1>
-                <p className="text-muted-foreground">키보드 방향키를 사용하여 뱀을 조종하세요</p>
+            <div className="text-center space-y-4">
+                <h1 className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-green-600 italic">
+                    {isEn ? 'Classic Snake' : '스네이크 게임'}
+                </h1>
+                <p className="text-muted-foreground font-medium">
+                    {isEn ? 'Use Arrow Keys to control the snake' : '키보드 방향키를 사용하여 뱀을 조종하세요'}
+                </p>
             </div>
 
-            <div className="flex justify-between items-center bg-card p-4 rounded-xl border border-border shadow-sm">
-                <div className="flex items-center gap-4">
+            <div className="flex justify-between items-center bg-card p-6 rounded-2xl border-2 border-border/50 shadow-xl">
+                <div className="flex items-center gap-6">
                     <div className="text-center">
-                        <div className="text-xs text-muted-foreground uppercase font-bold">SCORE</div>
-                        <div className="text-2xl font-mono font-bold text-primary">{score}</div>
+                        <div className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1">{isEn ? 'SCORE' : '점수'}</div>
+                        <div className="text-3xl font-mono font-black text-primary">{score}</div>
                     </div>
+                    <div className="w-px h-10 bg-border/50" />
                     <div className="text-center">
-                        <div className="text-xs text-muted-foreground uppercase font-bold flex items-center gap-1 justify-center">
-                            <Trophy size={12} className="text-yellow-500" /> BEST
+                        <div className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1 flex items-center gap-1 justify-center">
+                            <Trophy size={12} className="text-yellow-500" /> {isEn ? 'BEST' : '최고'}
                         </div>
-                        <div className="text-2xl font-mono font-bold">{highScore}</div>
+                        <div className="text-3xl font-mono font-black">{highScore}</div>
                     </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                     {gameState === 'playing' ? (
                         <button
                             onClick={() => setGameState('paused')}
-                            className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
+                            className="p-4 bg-secondary/50 hover:bg-secondary rounded-xl transition-all active:scale-95"
                         >
-                            <Pause size={20} />
+                            <Pause size={24} />
                         </button>
-                    ) : gameState === 'paused' ? (
+                    ) : (gameState === 'paused' || gameState === 'idle') ? (
                         <button
                             onClick={() => setGameState('playing')}
-                            className="p-3 bg-primary text-primary-foreground rounded-lg transition-colors"
+                            className="p-4 bg-primary text-primary-foreground rounded-xl transition-all active:scale-95 shadow-lg shadow-primary/20"
                         >
-                            <Play size={20} />
+                            <Play size={24} />
                         </button>
                     ) : null}
                     <button
                         onClick={initGame}
-                        className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
-                        title="새 게임"
+                        className="p-4 bg-secondary/50 hover:bg-secondary rounded-xl transition-all active:scale-95"
+                        title={isEn ? "New Game" : "새 게임"}
                     >
-                        <RotateCcw size={20} />
+                        <RotateCcw size={24} />
                     </button>
                 </div>
             </div>
 
             <div className="relative group flex flex-col items-center" ref={containerRef}>
-                <div className="relative bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800">
+                <div className="relative bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-[12px] border-slate-800 ring-4 ring-slate-700/50">
                     <canvas
                         ref={canvasRef}
                         width={400}
@@ -301,60 +317,64 @@ const SnakeGame = () => {
 
                     {/* Overlays */}
                     {gameState === 'idle' && (
-                        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-300">
-                            <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
-                                <Play size={40} className="text-emerald-500 ml-1" />
+                        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
+                            <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mb-8 animate-pulse border-4 border-emerald-500/30">
+                                <Play size={48} className="text-emerald-500 ml-2" />
                             </div>
-                            <h2 className="text-2xl font-bold mb-4">준비되셨나요?</h2>
+                            <h2 className="text-3xl font-black text-white mb-6 uppercase tracking-tighter italic">
+                                {isEn ? "Are you ready?" : "준비되셨나요?"}
+                            </h2>
                             <button
                                 onClick={initGame}
-                                className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
+                                className="px-12 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-emerald-500/40"
                             >
-                                시작하기
+                                {isEn ? "START GAME" : "시작하기"}
                             </button>
-                            <p className="mt-4 text-sm text-slate-400">또는 스페이스바를 누르세요</p>
+                            <p className="mt-6 text-xs font-bold text-slate-500 uppercase tracking-widest leading-loose">
+                                {isEn ? "Press SPACE to start" : "또는 스페이스바를 누르세요"}
+                            </p>
                         </div>
                     )}
 
                     {gameState === 'paused' && (
                         <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-200">
-                            <div className="p-4 bg-white/10 rounded-full mb-4">
-                                <Pause size={48} className="text-white" />
+                             <div className="p-6 bg-white/10 rounded-3xl mb-6 backdrop-blur-xl border border-white/20">
+                                <Pause size={48} className="text-white fill-white" />
                             </div>
-                            <h2 className="text-2xl font-bold text-white mb-6">일시 정지</h2>
+                            <h2 className="text-3xl font-black text-white mb-8 uppercase tracking-widest">{isEn ? "PAUSED" : "일시 정지"}</h2>
                             <button
                                 onClick={() => setGameState('playing')}
-                                className="px-8 py-3 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-100 transition-all"
+                                className="px-10 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-slate-100 transition-all hover:scale-110 active:scale-95"
                             >
-                                계속하기
+                                {isEn ? "CONTINUE" : "계속하기"}
                             </button>
                         </div>
                     )}
 
                     {gameState === 'gameover' && (
-                        <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in zoom-in duration-300">
-                            <h2 className="text-4xl font-black text-rose-500 mb-2">GAME OVER</h2>
-                            <p className="text-slate-400 mb-6">수고하셨습니다!</p>
+                         <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-xl flex flex-col items-center justify-center p-8 text-center animate-in zoom-in duration-300">
+                            <h2 className="text-5xl font-black text-rose-500 mb-2 italic tracking-tighter">{isEn ? 'GAME OVER' : '게임 종료'}</h2>
+                            <p className="text-slate-500 font-bold mb-8 uppercase tracking-widest">{isEn ? "Well Played!" : "수고하셨습니다!"}</p>
 
-                            <div className="bg-slate-800/50 rounded-2xl p-6 mb-8 w-full max-w-[240px]">
-                                <div className="text-xs text-slate-500 font-bold uppercase mb-1">최종 점수</div>
-                                <div className="text-4xl font-mono font-black text-white">{score}</div>
+                            <div className="bg-slate-800/40 border border-slate-700 rounded-3xl p-8 mb-10 w-full max-w-[260px] shadow-inner">
+                                <div className="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">{isEn ? "Final Score" : "최종 점수"}</div>
+                                <div className="text-6xl font-mono font-black text-white">{score}</div>
                             </div>
 
-                            <div className="flex flex-col gap-3 w-full max-w-[240px]">
+                            <div className="flex flex-col gap-4 w-full max-w-[260px]">
                                 <button
                                     onClick={initGame}
-                                    className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                                    className="w-full py-5 bg-emerald-500 hover:bg-emerald-600 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl shadow-emerald-500/40 hover:scale-105 active:scale-95"
                                 >
-                                    <RotateCcw size={20} />
-                                    다시 도전하기
+                                    <RotateCcw size={24} />
+                                    {isEn ? "TRY AGAIN" : "다시 도전하기"}
                                 </button>
                                 <button
-                                    onClick={() => shareCanvas(containerRef.current, '스네이크 게임', score)}
-                                    className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                                    onClick={() => shareCanvas(containerRef.current, 'Snake Game', score)}
+                                    className="w-full py-4 bg-slate-700 hover:bg-slate-600 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-3"
                                 >
-                                    <Share2 size={18} />
-                                    결과 공유하기
+                                    <Share2 size={20} />
+                                    {isEn ? "SHARE RESULT" : "결과 공유하기"}
                                 </button>
                             </div>
                         </div>
@@ -362,68 +382,89 @@ const SnakeGame = () => {
                 </div>
 
                 {/* Mobile Controls */}
-                <div className="grid grid-cols-3 gap-2 mt-8 md:hidden">
+                <div className="grid grid-cols-3 gap-3 mt-10 md:hidden">
                     <div />
                     <button
-                        onClick={() => direction !== 'DOWN' && setNextDirection('UP')}
-                        className="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center active:bg-slate-700"
+                        onMouseDown={() => direction !== 'DOWN' && setNextDirection('UP')}
+                        className="w-16 h-16 bg-slate-800 border-2 border-slate-700 rounded-2xl flex items-center justify-center active:bg-slate-700 shadow-lg"
                     >
-                        <ChevronUp size={32} />
+                        <ChevronUp size={40} className="text-white" />
                     </button>
                     <div />
                     <button
-                        onClick={() => direction !== 'RIGHT' && setNextDirection('LEFT')}
-                        className="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center active:bg-slate-700"
+                        onMouseDown={() => direction !== 'RIGHT' && setNextDirection('LEFT')}
+                        className="w-16 h-16 bg-slate-800 border-2 border-slate-700 rounded-2xl flex items-center justify-center active:bg-slate-700 shadow-lg"
                     >
-                        <ChevronLeft size={32} />
+                        <ChevronLeft size={40} className="text-white" />
                     </button>
                     <button
-                        onClick={() => direction !== 'UP' && setNextDirection('DOWN')}
-                        className="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center active:bg-slate-700"
+                        onMouseDown={() => direction !== 'UP' && setNextDirection('DOWN')}
+                        className="w-16 h-16 bg-slate-800 border-2 border-slate-700 rounded-2xl flex items-center justify-center active:bg-slate-700 shadow-lg"
                     >
-                        <ChevronDown size={32} />
+                        <ChevronDown size={40} className="text-white" />
                     </button>
                     <button
-                        onClick={() => direction !== 'LEFT' && setNextDirection('RIGHT')}
-                        className="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center active:bg-slate-700"
+                        onMouseDown={() => direction !== 'LEFT' && setNextDirection('RIGHT')}
+                        className="w-16 h-16 bg-slate-800 border-2 border-slate-700 rounded-2xl flex items-center justify-center active:bg-slate-700 shadow-lg"
                     >
-                        <ChevronRight size={32} />
+                        <ChevronRight size={40} className="text-white" />
                     </button>
                 </div>
             </div>
 
-            <div className="card p-6 bg-slate-50 dark:bg-slate-900/50">
-                <h3 className="font-bold mb-3 flex items-center gap-2">
-                    <RotateCcw size={18} className="text-primary" />
-                    게임 방법
+            <div className="bg-card border-2 border-border/30 rounded-3xl p-8 shadow-sm">
+                <h3 className="text-lg font-black mb-6 flex items-center gap-3">
+                    <Gamepad2 size={22} className="text-primary" />
+                    {isEn ? "How to Play" : "게임 방법"}
                 </h3>
-                <ul className="text-sm space-y-2 text-muted-foreground">
-                    <li>• <strong>방향키</strong>: 뱀의 이동 방향을 조종합니다.</li>
-                    <li>• <strong>먹이(빨간색 루비)</strong>: 먹이를 먹으면 점수가 10점 올라가고 몸이 길어집니다.</li>
-                    <li>• <strong>속도</strong>: 먹이를 먹을수록 뱀의 이동 속도가 조금씩 빨라집니다.</li>
-                    <li>• <strong>게임 오버</strong>: 벽에 부딪히거나 자신의 몸에 부딪히면 게임이 종료됩니다.</li>
-                    <li>• <strong>공유</strong>: 높은 점수를 기록하고 친구들에게 자랑해보세요!</li>
+                <ul className="grid sm:grid-cols-2 gap-4 text-sm font-medium text-muted-foreground">
+                    <li className="flex gap-3">
+                        <span className="text-primary font-bold">1.</span>
+                        {isEn ? "Use arrow keys or buttons to change the snake's direction." : "상하좌우 방향키 또는 하단 버튼을 눌러 뱀의 방향을 전환하세요."}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-primary font-bold">2.</span>
+                        {isEn ? "Eat red rubies to grow longer and earn 10 points each." : "빨간색 루비를 먹으면 몸이 길어지고 10점을 획득합니다."}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-primary font-bold">3.</span>
+                        {isEn ? "The speed increases slightly for every ruby consumed." : "루비를 먹을수록 뱀의 이동 속도가 조금씩 빨라집니다."}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-primary font-bold">4.</span>
+                        {isEn ? "The game ends if you hit the wall or your own body." : "벽에 부딪히거나 자신의 몸통에 닿으면 게임이 종료됩니다."}
+                    </li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="스네이크 게임"
-                intro="먹이를 먹고 점점 길어지는 클래식 뱀 게임"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Classic Snake Game Guide" : "스네이크 게임 완벽 가이드"}
+                intro={isEn ? "Enjoy the legendary classic Snake Game right in your browser. This version features smooth controls, progressive difficulty, and a sleek modern design, perfectly optimized for both desktop and mobile devices." : "추억의 고전 게임인 스네이크(Snake)를 최신 웹 기술로 재해석했습니다. 먹이를 먹으며 몸집을 불리고, 점점 빨라지는 속도에 맞춰 순발력을 테스트해보세요. 깔끔한 디자인과 부드러운 조작감을 무료로 즐기실 수 있습니다."}
+                steps={isEn ? [
+                    "Press the Start button or Spacebar to begin characters moving.",
+                    "Guide the snake to the red food items using Arrow Keys or WASD.",
+                    "Avoid hitting the dark blue walls of the grid.",
+                    "Be careful not to cross into your own tail as you grow longer.",
+                    "Check your high score and share with others when the game ends."
+                ] : [
+                    "시작하기 버튼이나 스페이스바를 눌러 게임을 시작합니다.",
+                    "방향키(↑, ↓, ←, →)를 이용해 뱀을 조종하여 빨간색 루비(먹이)를 얻으세요.",
+                    "상자 바깥 테두리 벽에 부딪히지 않도록 주의하세요.",
+                    "몸이 길어질수록 자신의 꼬리에 닿지 않도록 공간을 잘 활용해야 합니다.",
+                    "게임이 종료되면 최종 점수를 확인하고 친구들과 기록을 경쟁해보세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Try to stay near the center during early game to give yourself more space.",
+                    "Plan your path to avoid trapping yourself in a corner as the snake gets longer.",
+                    "Use short, precise taps for turning instead of holding the keys down.",
+                    "As speed increases, stay calm and keep your movements rhythmic."
+                ] : [
+                    "초반에는 중앙 근처에서 활동하며 방향 전환에 익숙해지는 것이 좋습니다.",
+                    "뱀의 몸집이 커질수록 구석진 공간보다는 중앙의 넓은 곳을 확보하세요.",
+                    "꼬리가 길어지면 자루처럼 말려들어가지 않도록 지그재그로 이동하는 법을 익히세요.",
+                    "속도가 빨라질수록 급격한 방향 전환보다는 미리 앞길을 예상하여 움직이세요."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

@@ -5,8 +5,11 @@ import ToolGuide from '../components/ToolGuide';
 import { RefreshCw, Trophy, AlertTriangle, Share2 } from 'lucide-react';
 import useUserPreferences from '../hooks/useUserPreferences';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 const SuikaGame = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const sceneRef = useRef(null);
     const containerRef = useRef(null);
     const engineRef = useRef(null);
@@ -63,11 +66,7 @@ const SuikaGame = () => {
         }
 
         // Setup Matter.js Engine
-        const Engine = Matter.Engine,
-            Runner = Matter.Runner,
-            Bodies = Matter.Bodies,
-            Composite = Matter.Composite,
-            Events = Matter.Events;
+        const { Engine, Runner, Bodies, Composite, Events } = Matter;
 
         const engine = Engine.create();
         engineRef.current = engine;
@@ -131,7 +130,6 @@ const SuikaGame = () => {
 
         // Helper to spawn a new dropper fruit
         const spawnDropper = () => {
-            // Safety reset
             isDropping = false;
 
             const fruitInfo = FRUITS[nextFruitIndex];
@@ -177,12 +175,10 @@ const SuikaGame = () => {
             ctx.stroke();
             ctx.setLineDash([]); // Reset dash
 
-            // Danger Label with background
-            const labelText = "⚠️ WARNING ⚠️";
+            // Danger Label
+            const labelText = isEn ? "⚠️ WARNING ⚠️" : "⚠️ 경고 ⚠️";
             ctx.font = "bold 14px Pretendard, sans-serif";
-            const textMetrics = ctx.measureText(labelText);
-
-            // Text Background
+            
             ctx.fillStyle = "rgba(255, 107, 107, 0.1)";
             ctx.fillRect(0, dangerY - 25, width, 25);
 
@@ -214,7 +210,6 @@ const SuikaGame = () => {
                 ctx.stroke();
 
                 if (body.label && body.label.startsWith('fruit_')) {
-                    // Safety: Remove bodies stuck at 0,0 (glitch)
                     if (Math.abs(body.position.x) < 1 && Math.abs(body.position.y) < 1) {
                         Composite.remove(engine.world, body);
                         return;
@@ -248,8 +243,7 @@ const SuikaGame = () => {
             const pairs = event.pairs;
             for (let i = 0; i < pairs.length; i++) {
                 const pair = pairs[i];
-                const bodyA = pair.bodyA;
-                const bodyB = pair.bodyB;
+                const { bodyA, bodyB } = pair;
 
                 if (bodyA.label && bodyB.label && bodyA.label.startsWith('fruit_') && bodyB.label.startsWith('fruit_')) {
                     const indexA = parseInt(bodyA.label.split('_')[1]);
@@ -264,10 +258,10 @@ const SuikaGame = () => {
                         Composite.remove(engine.world, [bodyA, bodyB]);
 
                         const nextIndex = indexA + 1;
-                        const nextFruit = FRUITS[nextIndex];
+                        const nxtFrt = FRUITS[nextIndex];
 
-                        const newBody = Bodies.circle(newMidPoint.x, newMidPoint.y, nextFruit.radius, {
-                            render: { fillStyle: nextFruit.color },
+                        const newBody = Bodies.circle(newMidPoint.x, newMidPoint.y, nxtFrt.radius, {
+                            render: { fillStyle: nxtFrt.color },
                             label: `fruit_${nextIndex}`,
                             restitution: 0.2,
                             collisionFilter: {
@@ -279,7 +273,7 @@ const SuikaGame = () => {
                         newBody.createdAt = Date.now();
                         Composite.add(engine.world, newBody);
 
-                        setScore(prev => prev + nextFruit.score);
+                        setScore(prev => prev + nxtFrt.score);
                     }
                 }
             }
@@ -293,7 +287,6 @@ const SuikaGame = () => {
 
             for (const fruit of fruits) {
                 if (fruit.position.y < 100 && Math.abs(fruit.velocity.y) < 0.2) {
-                    // Ignore fruits that were just spawned (give 2 seconds grace period)
                     if (fruit.createdAt && Date.now() - fruit.createdAt < 2000) continue;
 
                     if (!fruit.isStatic) {
@@ -308,7 +301,7 @@ const SuikaGame = () => {
         // Input Functions
         const handleInputMove = (clientX) => {
             const rect = canvas.getBoundingClientRect();
-            if (rect.width === 0) return; // Guard against hidden/unmounted canvas
+            if (rect.width === 0) return;
 
             const scaleX = width / rect.width;
             const x = (clientX - rect.left) * scaleX;
@@ -316,7 +309,6 @@ const SuikaGame = () => {
             if (currentDropper && !isDropping) {
                 if (!Number.isFinite(x) || isNaN(x)) return;
 
-                // Dynamic Clamping based on Fruit Radius
                 const radius = currentDropper.circleRadius || 20;
                 const safePadding = 5;
                 const minX = radius + safePadding;
@@ -332,23 +324,18 @@ const SuikaGame = () => {
             if (currentDropper && !isDropping) {
                 isDropping = true;
 
-                // 1. Calculate drop position safely
                 let dropX = currentDropper.position.x;
                 const dropY = 50;
 
-                // Safety check: if 0,0 assume error and center it
                 if (Math.abs(dropX) < 1) dropX = width / 2;
 
-                // Safety clamping
                 const radius = currentDropper.circleRadius || 20;
                 const minX = radius + 5;
                 const maxX = width - radius - 5;
                 dropX = Math.max(minX, Math.min(maxX, dropX));
 
-                // 2. Remove the static preview/dropper
                 Composite.remove(engine.world, currentDropper);
 
-                // 3. Create a NEW dynamic body for the game
                 const nextIndex = currentDropper.fruitIndex;
                 const fruitInfo = FRUITS[nextIndex];
 
@@ -368,13 +355,8 @@ const SuikaGame = () => {
                 fallingFruit.fruitIndex = nextIndex;
                 fallingFruit.createdAt = Date.now();
 
-                // 4. Add new body to world
                 Composite.add(engine.world, fallingFruit);
-
-                // Initial push
                 Matter.Body.setVelocity(fallingFruit, { x: 0, y: 5 });
-
-                console.log('Swapped and dropped fruit at:', dropX);
 
                 currentDropper = null;
                 setTimeout(() => {
@@ -385,24 +367,22 @@ const SuikaGame = () => {
 
         // Listeners
         const onMouseMove = (e) => handleInputMove(e.clientX);
-        const onMouseDown = (e) => handleInputMove(e.clientX); // Immediate update on click
         const onMouseUp = () => handleInputEnd();
 
         const onTouchMove = (e) => {
-            e.preventDefault();
+            if (e.cancelable) e.preventDefault();
             if (e.touches[0]) handleInputMove(e.touches[0].clientX);
         };
         const onTouchStart = (e) => {
-            e.preventDefault();
-            if (e.touches[0]) handleInputMove(e.touches[0].clientX); // Immediate update on touch
+            if (e.cancelable) e.preventDefault();
+            if (e.touches[0]) handleInputMove(e.touches[0].clientX);
         };
         const onTouchEnd = (e) => {
-            e.preventDefault();
+            if (e.cancelable) e.preventDefault();
             handleInputEnd();
         };
 
         window.addEventListener('mousemove', onMouseMove);
-        // Removed mousedown -> handleInputMove to prevent coordinate jumps. Mousemove is sufficient for positioning.
         window.addEventListener('mouseup', onMouseUp);
 
         canvas.addEventListener('touchmove', onTouchMove, { passive: false });
@@ -419,7 +399,6 @@ const SuikaGame = () => {
             if (renderRef.current && renderRef.current.cancel) cancelAnimationFrame(renderRef.current.frameId);
 
             window.removeEventListener('mousemove', onMouseMove);
-            // Removed mousedown cleanup
             window.removeEventListener('mouseup', onMouseUp);
             canvas.removeEventListener('touchmove', onTouchMove);
             canvas.removeEventListener('touchstart', onTouchStart);
@@ -434,10 +413,7 @@ const SuikaGame = () => {
     const restartGame = () => {
         setScore(0);
         setGameOver(false);
-        // initGame(); // REMOVED: useEffect will trigger initGame when gameOver changes
     };
-
-
 
     useEffect(() => {
         initGame();
@@ -451,104 +427,124 @@ const SuikaGame = () => {
         };
     }, [gameOver]);
 
+    const toolFaqs = isEn ? [
+        { q: "How do I make a watermelon?", a: "Merge two melons (🍈). Merging two fruits always results in the next level fruit. The final goal is to merge two watermelons for the max score." },
+        { q: "Is there a time limit?", a: "No, you can take as much time as you want to aim. Strategic placement is more important than speed." },
+        { q: "What happens if a fruit touches the line?", a: "If a fruit stays above the red dotted line for more than a few seconds, it's game over. Try to keep the stack low!" }
+    ] : [
+        { q: "수박은 어떻게 만드나요?", a: "멜론(🍈) 2개를 합치면 수박이 됩니다. 과일을 계속 합치다 보면 더 큰 과일이 되고 점수도 올라갑니다." },
+        { q: "시간 제한이 따로 있나요?", a: "아니요, 시간 제한은 없으므로 천천히 조준하여 과일을 떨어뜨릴 위치를 결정할 수 있습니다." },
+        { q: "빨간 선 위로 올라오면 무조건 종료인가요?", a: "과일이 빨간 점선 위로 올라온 채로 일정 시간이 지나면 게임 오버가 됩니다. 최대한 아래쪽 공간을 효율적으로 사용하세요." }
+    ];
+
     return (
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto space-y-8 px-4">
             <SEO
-                title="수박 게임 (Merge Puzzle) - Tool Hive"
-                description="같은 과일을 합쳐 더 큰 과일을 만드는 중독성 있는 퍼즐 게임. 최고 점수에 도전하세요!"
-                keywords="수박게임, 머지퍼즐, 게임, 퍼즐, 과일합치기, 웹게임"
+                title={isEn ? "Suika Game - Merge Fruit Puzzle | Play Free Online" : "수박 게임 (Suika Game) - 과일 합치기 퍼즐 | Utility Hub"}
+                description={isEn ? "Play the trending Suika Game (Watermelon Game) online for free! Merge identical fruits to create a giant watermelon. Challenge your high score in this addictive physics puzzle." : "같은 과일을 합쳐 더 큰 과일을 만드는 중독성 있는 퍼즐 게임. 최고 점수에 도전하세요!"}
+                keywords={isEn ? "suika game, watermelon game, fruit merge, physics puzzle, online games" : "수박게임, 머지퍼즐, 게임, 퍼즐, 과일합치기, 웹게임"}
+                faqs={toolFaqs}
             />
 
-            <div className="flex justify-center mb-4">
-                {/* Debug buttons removed */}
-            </div>
-
             <div className="flex flex-col items-center">
-                <h2 className="text-3xl font-bold mb-6 text-center">🍉 수박 게임 (Merge Puzzle)</h2>
+                <h1 className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 mb-8 py-2">
+                    {isEn ? 'Suika Game' : '수박 게임'}
+                </h1>
 
-                <div className="flex gap-8 mb-4">
-                    <div className="bg-card border border-border rounded-xl px-6 py-3 text-center shadow-sm">
-                        <div className="text-xs text-muted-foreground uppercase font-bold">현재 점수</div>
-                        <div className="text-2xl font-black text-primary">{score}</div>
+                <div className="flex flex-col sm:flex-row gap-6 mb-8 w-full max-w-md">
+                    <div className="flex-1 bg-card border-2 border-border/50 rounded-2xl px-6 py-4 text-center shadow-lg">
+                        <div className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1">{isEn ? 'Score' : '현재 점수'}</div>
+                        <div className="text-3xl font-black text-primary font-mono">{score}</div>
                     </div>
-                    <div className="bg-card border border-border rounded-xl px-6 py-3 text-center shadow-sm">
-                        <div className="text-xs text-muted-foreground uppercase font-bold flex items-center justify-center gap-1">
-                            <Trophy className="w-3 h-3 text-yellow-500" /> 최고 기록
+                    <div className="flex-1 bg-card border-2 border-border/50 rounded-2xl px-6 py-4 text-center shadow-lg">
+                        <div className="text-[10px] text-muted-foreground uppercase font-black tracking-widest mb-1 flex items-center justify-center gap-1">
+                            <Trophy className="w-3 h-3 text-yellow-500" /> {isEn ? 'High Score' : '최고 기록'}
                         </div>
-                        <div className="text-2xl font-black text-foreground">{highScore}</div>
+                        <div className="text-3xl font-black text-foreground font-mono">{highScore}</div>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
-                    <span>다음 과일:</span>
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-lg border border-border">
+                <div className="flex items-center gap-3 mb-6 bg-secondary/30 px-6 py-2 rounded-full border border-border/50 text-sm font-bold text-muted-foreground">
+                    <span>{isEn ? 'Next Fruit:' : '다음 과일:'}</span>
+                    <div className="w-10 h-10 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center text-xl shadow-inner border border-border">
                         {nextFruit ? nextFruit.emoji : '?'}
                     </div>
                 </div>
 
-                <div className="relative group" ref={containerRef}>
+                <div className="relative group w-fit" ref={containerRef}>
                     <div
                         ref={sceneRef}
-                        className="border-4 border-slate-300 rounded-lg overflow-hidden bg-slate-50 cursor-pointer shadow-inner touch-none select-none"
+                        className="border-8 border-slate-200 dark:border-slate-800 rounded-[2.5rem] overflow-hidden bg-slate-50 dark:bg-slate-900 cursor-pointer shadow-2xl touch-none select-none"
                         style={{ maxWidth: '100%', maxHeight: '80vh', minHeight: '650px' }}
                     ></div>
 
                     {gameOver && (
-                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-white rounded-lg animate-in fade-in">
-                            <AlertTriangle className="w-16 h-16 text-red-500 mb-4 animate-bounce" />
-                            <h3 className="text-3xl font-bold mb-2">게임 오버!</h3>
-                            <p className="text-slate-200 mb-8 text-lg">최종 점수: <span className="font-bold text-white">{score}</span></p>
-                            <button
-                                onClick={restartGame}
-                                className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-bold text-lg hover:bg-primary/90 transition-transform active:scale-95 shadow-lg"
-                            >
-                                <RefreshCw className="w-5 h-5" /> 다시 시작
-                            </button>
-                            <button
-                                onClick={() => shareCanvas(containerRef.current, '수박 게임', score)}
-                                className="flex items-center gap-2 px-8 py-4 bg-slate-700 text-white rounded-full font-bold text-lg hover:bg-slate-600 transition-transform active:scale-95 shadow-lg mt-3"
-                            >
-                                <Share2 className="w-5 h-5" /> 결과 공유하기
-                            </button>
+                        <div className="absolute inset-0 bg-black/70 backdrop-blur-md flex flex-col items-center justify-center p-8 text-white rounded-[2rem] animate-in zoom-in duration-300">
+                            <AlertTriangle className="w-20 h-20 text-red-500 mb-4 animate-bounce" />
+                            <h3 className="text-4xl font-black mb-4 uppercase italic tracking-tighter">{isEn ? 'Game Over!' : '게임 오버!'}</h3>
+                            <div className="text-center mb-10">
+                                <p className="text-gray-400 text-xs font-black uppercase tracking-widest mb-1">{isEn ? 'Final Result' : '최종 점수'}</p>
+                                <p className="text-6xl font-black text-white font-mono">{score}</p>
+                            </div>
+                            
+                            <div className="flex flex-col gap-4 w-full max-w-xs">
+                                <button
+                                    onClick={restartGame}
+                                    className="flex items-center justify-center gap-3 px-8 py-5 bg-primary text-white rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-xl"
+                                >
+                                    <RefreshCw className="w-6 h-6" /> {isEn ? 'Play Again' : '다시 시작'}
+                                </button>
+                                <button
+                                    onClick={() => shareCanvas(containerRef.current, 'Suika Game', score)}
+                                    className="flex items-center justify-center gap-3 px-8 py-5 bg-slate-700 text-white rounded-2xl font-black text-lg hover:bg-slate-600 transition-all shadow-xl"
+                                >
+                                    <Share2 className="w-6 h-6" /> {isEn ? 'Share Result' : '결과 공유하기'}
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
 
-                <div className="mt-8 max-w-lg text-center space-y-2 text-muted-foreground bg-muted/30 p-4 rounded-xl">
-                    <h4 className="font-bold text-foreground">게임 방법</h4>
-                    <p className="text-sm">👆 화면을 터치하거나 클릭하여 위치를 잡고 놓으세요.</p>
-                    <p className="text-sm">🔄 같은 과일끼리 닿으면 합쳐져서 더 큰 과일이 됩니다.</p>
-                    <p className="text-sm">⚠️ 과일이 상단 빨간 라인을 넘어가면 게임이 종료됩니다.</p>
-                </div>
-
-                <div className="mt-4 flex flex-wrap justify-center gap-2 max-w-lg">
+                <div className="mt-12 flex flex-wrap justify-center gap-4 max-w-xl">
                     {FRUITS.map((fruit, idx) => (
-                        <div key={idx} className="flex flex-col items-center">
-                            <span className="text-xl">{fruit.emoji}</span>
-                            {idx < FRUITS.length - 1 && <span className="text-muted-foreground/30">→</span>}
+                        <div key={idx} className="flex flex-col items-center group">
+                            <div className="text-2xl hover:scale-125 transition-transform cursor-help" title={fruit.label}>
+                                {fruit.emoji}
+                            </div>
+                            {idx < FRUITS.length - 1 && <span className="text-muted-foreground/20 font-black">→</span>}
                         </div>
                     ))}
                 </div>
             </div>
-        \n            <ToolGuide
-                title="수박 게임 (Suika Game) | 머지 퍼즐 게임"
-                intro="중독성 강한 수박 게임을 온라인에서 무료로 즐기세요! 과일을 합쳐서 가장 큰 수박을 만드는 머지 퍼즐 게임. 높은 점수에 도전하고 친구들과 공유하세요."
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Suika Game - Ultimate Guide" : "수박 게임 상세 가이드"}
+                intro={isEn ? "Suika Game (also known as Watermelon Game) is a viral physics-based merge puzzle. Your objective is simple: stack and merge identical fruits to create larger varieties, eventually reaching the giant watermelon without crossing the red danger line." : "수박 게임(Suika Game)은 중독성 강한 물리 기반 머지 퍼즐 게임입니다. 과일을 상단에서 떨어뜨려 공간을 효율적으로 채우고, 같은 과일을 합쳐 더 큰 과일을 만드는 것이 목표입니다. 최종 단계인 거대 수박을 만들어 최고 점수에 도전해 보세요!"}
+                steps={isEn ? [
+                    "Move your mouse (or finger) to adjust the fruit's position at the top.",
+                    "Click or tap to drop the fruit into the container.",
+                    "Fruits of the same type will automatically merge into a larger fruit upon contact.",
+                    "Strategize your drops to prevent smaller fruits from being trapped underneath larger ones.",
+                    "Monitor the top red dotted line; if a fruit crosses it and stays there, the game ends."
+                ] : [
+                    "마우스나 손가락을 좌우로 움직여 과일을 떨어뜨릴 위치를 정합니다.",
+                    "클릭하거나 손을 떼면 과일이 상자 안으로 떨어집니다.",
+                    "같은 종류의 과일끼리 닿으면 자동으로 다음 단계의 더 큰 과일로 합쳐집니다.",
+                    "과일이 계속 쌓여 상단 빨간 점선을 넘어가면 게임이 종료되니 주의하세요.",
+                    "작은 과일들이 큰 과일 사이에 갇히지 않도록 전략적으로 배치하는 것이 고득점의 비결입니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Physics is your friend: use the weight and roll of larger fruits to push smaller ones together.",
+                    "Keep the stack balanced: Avoid letting one side grow too much taller than the other.",
+                    "Think two steps ahead: Pay attention to the 'Next' fruit and plan where it will land.",
+                    "Wall bounces: You can sometimes use the side walls to roll fruits into tight spots."
+                ] : [
+                    "물리 법칙 활용: 과일의 굴러가는 반동을 이용해 멀리 있는 과일을 합칠 수 있습니다.",
+                    "무게 중심 잡기: 한쪽으로 과일이 치우치지 않게 골고루 쌓는 것이 안정적입니다.",
+                    "다음 과일 확인: 우측 상단에 표시되는 다음 과일을 미리 확인하고 낙하 지점을 결정하세요.",
+                    "틈새 공략: 작은 체리나 딸기 등을 구석에 몰아넣어 공간을 확보하는 것이 좋습니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

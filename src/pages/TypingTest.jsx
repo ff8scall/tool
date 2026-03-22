@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Keyboard, RefreshCw, Trophy, Timer, Globe, History, Trash2 } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
+import { useLanguage } from '../context/LanguageContext';
 
 const ENGLISH_SENTENCES = [
     "the quick brown fox jumps over the lazy dog",
@@ -51,7 +52,9 @@ const KOREAN_SENTENCES = [
 ];
 
 const TypingTest = () => {
-    const [language, setLanguage] = useState('korean');
+    const { lang, t: translate } = useLanguage();
+    const isEn = lang === 'en';
+    const [language, setLanguage] = useState(isEn ? 'english' : 'korean');
     const [text, setText] = useState('');
     const [input, setInput] = useState('');
     const [startTime, setStartTime] = useState(null);
@@ -60,10 +63,15 @@ const TypingTest = () => {
     const [isFinished, setIsFinished] = useState(false);
     const [scoreHistory, setScoreHistory] = useState([]);
     const [bestWpm, setBestWpm] = useState(() => {
-        return parseInt(localStorage.getItem(`typing-best-wpm-${language}`)) || 0;
+        return parseInt(localStorage.getItem(`typing-best-wpm-${isEn ? 'english' : 'korean'}`)) || 0;
     });
 
     const inputRef = useRef(null);
+
+    // Initial language sync
+    useEffect(() => {
+        setLanguage(isEn ? 'english' : 'korean');
+    }, [isEn]);
 
     // Load history
     useEffect(() => {
@@ -157,7 +165,7 @@ const TypingTest = () => {
             date: new Date().toLocaleString(),
             wpm: calculatedWpm,
             accuracy: finalAccuracy,
-            language: language === 'english' ? '영어' : '한글'
+            language: language === 'english' ? (isEn ? 'English' : '영어') : (isEn ? 'Korean' : '한글')
         };
 
         const newHistory = [newRecord, ...scoreHistory].slice(0, 50);
@@ -171,7 +179,8 @@ const TypingTest = () => {
     };
 
     const clearHistory = () => {
-        if (window.confirm('기록을 모두 삭제하시겠습니까?')) {
+        const confirmMsg = isEn ? 'Are you sure you want to clear your history?' : '기록을 모두 삭제하시겠습니까?';
+        if (window.confirm(confirmMsg)) {
             setScoreHistory([]);
             localStorage.removeItem('typingTestHistory');
         }
@@ -193,12 +202,23 @@ const TypingTest = () => {
         });
     };
 
+    const toolFaqs = isEn ? [
+        { q: "What is a good WPM score?", a: "The average typing speed is around 40 WPM. Professional typists usually score 70-120 WPM." },
+        { q: "How is WPM calculated for Korean?", a: "Since Korean uses characters (Jamo) structure, we use the standard conversion where 5 characters roughly equal 1 word for consistent measurement." },
+        { q: "My accuracy is low, what should I do?", a: "Slow down and focus on matching every character. Speed will naturally improve as your muscle memory develops with high accuracy." }
+    ] : [
+        { q: "좋은 타자 속도는 어느 정도인가요?", a: "일반인의 평균 속도는 40 WPM 정도로, 전문 타이피스트나 고수들은 보통 70~120 WPM(한글 기준 300~500타) 이상의 기록을 보입니다." },
+        { q: "한글 WPM은 어떻게 계산되나요?", a: "한국어는 문자 구조가 다르기 때문에, 표준 변환 방식에 따라 5글자를 1단어로 환산하여 영타와 비교 가능한 수치로 제공합니다." },
+        { q: "정확도가 낮게 나와요. 어떻게 해야 하나요?", a: "속도보다는 정확한 입력을 우선시하며 천천히 연습하세요. 정확한 타이핑 습관이 들면 속도는 자연스럽게 따라옵니다." }
+    ];
+
     return (
         <div className="max-w-3xl mx-auto space-y-8">
             <SEO
-                title="타자 속도 테스트 - 영어/한글 타자 연습 | Utility Hub"
-                description="나의 타자 속도(WPM)를 측정해보세요. 영어와 한글 모드를 지원하며 정확도와 속도를 실시간으로 분석해드립니다."
-                keywords="타자연습, 영타연습, 한타연습, WPM, 타자속도, 타이핑테스트"
+                title={isEn ? "Typing Speed Test - Test Your WPM Online" : "타자 속도 테스트 - 영어/한글 타자 연습 | Utility Hub"}
+                description={isEn ? "How fast can you type? Test your WPM (Words Per Minute) in English and Korean. Track your progress and improve accuracy." : "나의 타자 속도(WPM)를 측정해보세요. 영어와 한글 모드를 지원하며 정확도와 속도를 실시간으로 분석해드립니다."}
+                keywords={isEn ? "typing test, wpm test, typing speed, touch typing practice" : "타자연습, 영타연습, 한타연습, WPM, 타자속도, 타이핑테스트"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center space-y-4 py-6">
@@ -206,10 +226,10 @@ const TypingTest = () => {
                     <Keyboard className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">
-                    타자 속도 테스트
+                    {isEn ? 'Typing Speed Test' : '타자 속도 테스트'}
                 </h1>
                 <p className="text-muted-foreground">
-                    제시된 문장을 빠르고 정확하게 입력하여 WPM(분당 단어수)을 측정하세요.
+                    {isEn ? 'Measure your WPM by typing the sentences as fast and accurately as possible.' : '제시된 문장을 빠르고 정확하게 입력하여 WPM(분당 단어수)을 측정하세요.'}
                 </p>
             </div>
 
@@ -245,14 +265,14 @@ const TypingTest = () => {
                         <div className="text-3xl font-bold text-primary">{isFinished ? wpm : (startTime ? '...' : 0)}</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-sm text-muted-foreground font-medium mb-1">정확도</div>
+                        <div className="text-sm text-muted-foreground font-medium mb-1">{isEn ? 'Accuracy' : '정확도'}</div>
                         <div className={`text-3xl font-bold ${accuracy < 90 ? 'text-red-500' : 'text-green-500'}`}>
                             {accuracy}%
                         </div>
                     </div>
                     {bestWpm > 0 && (
                         <div className="text-center opacity-60">
-                            <div className="text-sm text-muted-foreground font-medium mb-1">최고 기록</div>
+                            <div className="text-sm text-muted-foreground font-medium mb-1">{isEn ? 'Best' : '최고 기록'}</div>
                             <div className="text-3xl font-bold">{bestWpm}</div>
                         </div>
                     )}
@@ -274,7 +294,7 @@ const TypingTest = () => {
                         onChange={isFinished ? undefined : handleChange}
                         onKeyDown={handleKeyDown}
                         className="input w-full text-lg text-center font-mono"
-                        placeholder={isFinished ? "완료! Enter를 눌러 다음 문장으로" : "여기에 입력하세요..."}
+                        placeholder={isFinished ? (isEn ? "Done! Press Enter for next" : "완료! Enter를 눌러 다음 문장으로") : (isEn ? "Type here..." : "여기에 입력하세요...")}
                         autoComplete="off"
                         spellCheck="false"
                         readOnly={isFinished}
@@ -284,19 +304,19 @@ const TypingTest = () => {
                         <div className="space-y-4">
                             <div className="p-6 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl text-center space-y-2">
                                 <Trophy className="w-12 h-12 mx-auto text-yellow-500" />
-                                <h3 className="text-2xl font-bold">완료!</h3>
+                                <h3 className="text-2xl font-bold">{isEn ? 'Finished!' : '완료!'}</h3>
                                 <p className="text-lg">
-                                    <span className="font-bold text-primary">{wpm} WPM</span> • <span className={accuracy >= 90 ? 'text-green-500' : 'text-red-500'}>{accuracy}% 정확도</span>
+                                    <span className="font-bold text-primary">{wpm} WPM</span> • <span className={accuracy >= 90 ? 'text-green-500' : 'text-red-500'}>{accuracy}% {isEn ? 'Accuracy' : '정확도'}</span>
                                 </p>
                                 {wpm > bestWpm && accuracy >= 90 && (
-                                    <p className="text-sm text-green-600 dark:text-green-400 font-medium">🎉 새로운 최고 기록!</p>
+                                    <p className="text-sm text-green-600 dark:text-green-400 font-medium">{isEn ? "🎉 New Personal Best!" : "🎉 새로운 최고 기록!"}</p>
                                 )}
-                                <p className="text-sm text-gray-500">Enter를 눌러 다음 문장으로</p>
+                                <p className="text-sm text-gray-500">{isEn ? "Press Enter for next sentence" : "Enter를 눌러 다음 문장으로"}</p>
                             </div>
 
                             <ShareButtons
-                                title={`타자 속도 테스트 결과: ${wpm} WPM (정확도 ${accuracy}%)`}
-                                text={`타자 속도 테스트에서 ${wpm} WPM을 기록했습니다! 당신도 도전해보세요!`}
+                                title={isEn ? `Typing Speed Result: ${wpm} WPM` : `타자 속도 테스트 결과: ${wpm} WPM (정확도 ${accuracy}%)`}
+                                text={isEn ? `I scored ${wpm} WPM on Typing Test! Challenge yourself!` : `타자 속도 테스트에서 ${wpm} WPM을 기록했습니다! 당신도 도전해보세요!`}
                             />
                         </div>
                     )}
@@ -307,7 +327,7 @@ const TypingTest = () => {
                             className="btn btn-ghost w-full flex items-center justify-center gap-2"
                         >
                             <RefreshCw className="w-5 h-5" />
-                            새 문장
+                            {isEn ? 'New Sentence' : '새 문장'}
                         </button>
                     )}
                 </div>
@@ -319,24 +339,24 @@ const TypingTest = () => {
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-bold flex items-center gap-2">
                             <History className="w-5 h-5" />
-                            최근 기록
+                            {isEn ? 'Recent History' : '최근 기록'}
                         </h3>
                         <button
                             onClick={clearHistory}
                             className="text-sm text-red-500 hover:text-red-600 flex items-center gap-1"
                         >
                             <Trash2 className="w-4 h-4" />
-                            기록 초기화
+                            {isEn ? 'Clear History' : '기록 초기화'}
                         </button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th className="px-4 py-3">시간</th>
-                                    <th className="px-4 py-3">언어</th>
+                                    <th className="px-4 py-3">{isEn ? 'Date' : '시간'}</th>
+                                    <th className="px-4 py-3">{isEn ? 'Language' : '언어'}</th>
                                     <th className="px-4 py-3">WPM</th>
-                                    <th className="px-4 py-3">정확도</th>
+                                    <th className="px-4 py-3">{isEn ? 'Accuracy' : '정확도'}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -344,7 +364,7 @@ const TypingTest = () => {
                                     <tr key={record.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td className="px-4 py-3">{record.date}</td>
                                         <td className="px-4 py-3">
-                                            <span className={`px-2 py-1 rounded text-xs font-bold ${record.language === '영어' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+                                            <span className={`px-2 py-1 rounded text-xs font-bold ${record.language === 'English' || record.language === '영어' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
                                                 }`}>
                                                 {record.language}
                                             </span>
@@ -361,33 +381,43 @@ const TypingTest = () => {
 
             {/* Info */}
             <div className="bg-muted/30 rounded-xl p-6 space-y-2 text-sm">
-                <h3 className="font-bold text-base">💡 팁</h3>
+                <h3 className="font-bold text-base">💡 {isEn ? 'Tips' : '팁'}</h3>
                 <ul className="space-y-1 text-muted-foreground list-disc list-inside">
-                    <li>정확도를 유지하면서 속도를 높이세요</li>
-                    <li>손가락 위치를 올바르게 유지하세요 (홈 포지션)</li>
-                    <li>화면을 보고 타이핑하세요 (키보드를 보지 마세요)</li>
-                    <li>완료 후 Enter를 눌러 바로 다음 문장으로 넘어갈 수 있습니다</li>
+                    <li>{isEn ? 'Maintain accuracy while increasing speed' : '정확도를 유지하면서 속도를 높이세요'}</li>
+                    <li>{isEn ? 'Keep your fingers in the correct home position' : '손가락 위치를 올바르게 유지하세요 (홈 포지션)'}</li>
+                    <li>{isEn ? 'Try not to look at the keyboard while typing' : '화면을 보고 타이핑하세요 (키보드를 보지 마세요)'}</li>
+                    <li>{isEn ? 'Press Enter to move to the next sentence immediately' : '완료 후 Enter를 눌러 바로 다음 문장으로 넘어갈 수 있습니다'}</li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="타자 속도 테스트"
-                intro="한글/영어 타자 속도(WPM)와 정확도 측정"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Master Your Typing Speed" : "타자 속도 테스트 가이드"}
+                intro={isEn ? "WPM stands for Words Per Minute. It is the global standard for measuring typing speed. This tool helps you measure both your speed and accuracy in English and Korean." : "WPM(분당 단어수)은 타자 속도를 측정하는 세계적인 표준 지표입니다. 이 도구를 통해 영어와 한글 모두에서 자신의 타이핑 실력을 객관적으로 확인해보세요."}
+                steps={isEn ? [
+                    "Choose between English and Korean language modes.",
+                    "The timer starts automatically when you type the first character.",
+                    "Match the text displayed in the colored box accurately.",
+                    "Correct errors immediately as highlighted in red to proceed.",
+                    "Finish the entire sentence to see your final WPM and accuracy."
+                ] : [
+                    "연습하고 싶은 언어(한국어/English)를 먼저 선택합니다.",
+                    "첫 글자를 입력하는 순간부터 타이머가 자동으로 시작됩니다.",
+                    "제시된 문장과 똑같이 입력하세요. 오타는 빨간색으로 표시됩니다.",
+                    "오타가 나면 수정한 후 다음 글자로 진행할 수 있습니다.",
+                    "문장 전체를 정확히 입력하면 최종 WPM과 정확도가 계산됩니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Proper posture and hand placement are key to long-term speed improvement.",
+                    "Practice 'Touch Typing' where you only look at the screen, not your hands.",
+                    "Don't sacrifice accuracy for speed; it's harder to unlearn bad habits.",
+                    "Consistent daily practice of even 10 minutes can yield significant results."
+                ] : [
+                    "바른 자세와 올바른 손가락 배치가 속도 향상의 지름길입니다.",
+                    "키보드를 보지 않고 화면만 보고 치는 '맹타' 연습을 병행하세요.",
+                    "속도에 눈이 멀어 정확도를 무시하면 오히려 실력이 정체될 수 있습니다.",
+                    "매일 조금씩이라도 꾸준히 연습하는 것이 가장 효과적입니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

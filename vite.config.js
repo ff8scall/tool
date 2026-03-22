@@ -15,28 +15,38 @@ const vitePrerender = require('vite-plugin-prerender')
 const getRoutes = () => {
   try {
     const toolsContent = fs.readFileSync(path.resolve(__dirname, 'src/data/tools.js'), 'utf-8');
-    const routes = ['/']; // Add root
-
-    // Add categories - dynamically extract from toolCategories object
+    const rawRoutes = ['/']; // Add root
+    
+    // Add categories
     const categoryBlockMatch = toolsContent.match(/export const toolCategories = \{([^}]+)\}/);
     if (categoryBlockMatch) {
       const categoryLines = categoryBlockMatch[1].split('\n');
       for (const line of categoryLines) {
         const idMatch = line.match(/^\s*(\w+):/);
         if (idMatch) {
-          routes.push(`/category/${idMatch[1]}`);
+          rawRoutes.push(`/category/${idMatch[1]}`);
         }
       }
     }
 
     const matches = toolsContent.matchAll(/path:\s*'([^']+)'/g);
     for (const match of matches) {
-      routes.push(match[1]);
+      const matchedPath = match[1].startsWith('/') ? match[1] : '/' + match[1];
+      rawRoutes.push(matchedPath);
     }
-    return routes;
+
+    const finalRoutes = ['/'];
+    rawRoutes.forEach(route => {
+      if (route === '/') return;
+      const cleanRoute = route.startsWith('/') ? route : '/' + route;
+      finalRoutes.push(cleanRoute); // Root (Korean)
+      finalRoutes.push(`/en${cleanRoute}`); // English
+    });
+
+    return finalRoutes;
   } catch (e) {
     console.warn('Failed to read tools.js for prerendering:', e);
-    return ['/'];
+    return ['/', '/ko', '/en'];
   }
 }
 

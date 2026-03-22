@@ -3,8 +3,11 @@ import { RefreshCw, Play, Trophy, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 const FlappyBird = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -14,12 +17,11 @@ const FlappyBird = () => {
     const { shareCanvas } = useShareCanvas();
 
     // Game constants
-    // Game constants
     const GRAVITY = 0.02;
-    const JUMP_STRENGTH = -1.5; // milder jump (kept)
-    const PIPE_SPEED = 1.5; // half speed (initial)
-    const PIPE_SPAWN_RATE = 1500; // original spawn rate
-    const PIPE_GAP = 208; // 1.3x gap (initial)
+    const JUMP_STRENGTH = -1.5; 
+    const PIPE_SPEED = 1.5; 
+    const PIPE_SPAWN_RATE = 1500; 
+    const PIPE_GAP = 208; 
     // mutable refs for dynamic difficulty
     const pipeSpeedRef = useRef(PIPE_SPEED);
     const pipeGapRef = useRef(PIPE_GAP);
@@ -42,7 +44,7 @@ const FlappyBird = () => {
 
         birdRef.current = {
             y: canvas.height * 0.4,
-            velocity: 0, // start stationary
+            velocity: 0, 
             radius: 12
         };
         // reset dynamic difficulty refs
@@ -61,7 +63,6 @@ const FlappyBird = () => {
         if (gameOver) return;
         if (!isPlaying) {
             resetGame();
-            // Do not apply jump automatically; wait for user input
             return;
         }
         birdRef.current.velocity = JUMP_STRENGTH;
@@ -69,18 +70,14 @@ const FlappyBird = () => {
 
     const updateGame = useCallback((time) => {
         if (!isPlaying || gameOver) {
-            // Animation loop for idle/game over state if needed, or just stop
             if (!gameOver) requestRef.current = requestAnimationFrame(updateGame);
             return;
         }
 
         const canvas = canvasRef.current;
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        const deltaTime = time - lastTimeRef.current;
-
-        // Normalize speed for frame drops (simple implementation)
-        // For this simple game, fixed step is okay, but let's just run logic per frame
-
+        
         // 1. Update Bird
         birdRef.current.velocity += GRAVITY;
         birdRef.current.y += birdRef.current.velocity;
@@ -93,10 +90,9 @@ const FlappyBird = () => {
         }
 
         // 2. Update Pipes
-        // Spawn new pipe
         if (pipesRef.current.length === 0 || canvas.width - pipesRef.current[pipesRef.current.length - 1].x > 300) {
             const minPipeHeight = 50;
-            const maxPipeHeight = canvas.height - pipeGapRef.current - minPipeHeight - 20; // -20 for floor
+            const maxPipeHeight = canvas.height - pipeGapRef.current - minPipeHeight - 20; 
             const topHeight = Math.floor(Math.random() * (maxPipeHeight - minPipeHeight + 1)) + minPipeHeight;
 
             pipesRef.current.push({
@@ -117,19 +113,17 @@ const FlappyBird = () => {
 
         // 3. Collision Detection & Scoring
         pipesRef.current.forEach(pipe => {
-            // Hitbox - Generous (smaller than visual)
-            const hitBoxPadding = 20; // very forgiving collision
+            const hitBoxPadding = 10; 
             const birdLeft = 50 - birdRef.current.radius + hitBoxPadding;
             const birdRight = 50 + birdRef.current.radius - hitBoxPadding;
             const birdTop = birdRef.current.y - birdRef.current.radius + hitBoxPadding;
             const birdBottom = birdRef.current.y + birdRef.current.radius - hitBoxPadding;
 
             const pipeLeft = pipe.x;
-            const pipeRight = pipe.x + 60; // Pipe width
+            const pipeRight = pipe.x + 60; 
             const topPipeBottom = pipe.topHeight;
             const bottomPipeTop = pipe.topHeight + pipeGapRef.current;
 
-            // Check overlap
             if (birdRight > pipeLeft && birdLeft < pipeRight) {
                 if (birdTop < topPipeBottom || birdBottom > bottomPipeTop) {
                     setGameOver(true);
@@ -138,15 +132,13 @@ const FlappyBird = () => {
                 }
             }
 
-            // Score
             if (!pipe.passed && birdLeft > pipeRight) {
                 pipe.passed = true;
                 scoreRef.current += 1;
                 setScore(curr => curr + 1);
-                // Dynamic difficulty: every 10 points adjust speed and gap
                 if (scoreRef.current % 10 === 0) {
-                    pipeSpeedRef.current *= 1.05; // increase speed by 5%
-                    pipeGapRef.current *= 0.9;   // reduce gap by 10%
+                    pipeSpeedRef.current *= 1.05; 
+                    pipeGapRef.current *= 0.95;   
                 }
             }
         });
@@ -156,64 +148,56 @@ const FlappyBird = () => {
         requestRef.current = requestAnimationFrame(updateGame);
     }, [isPlaying, gameOver]);
 
-    // Separate draw function to keep loop clean
     const draw = (ctx) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // Clear
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Background (Sky)
+        // Background
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient.addColorStop(0, '#60a5fa'); // sky-400
-        gradient.addColorStop(1, '#93c5fd'); // sky-300
+        gradient.addColorStop(0, '#60a5fa'); 
+        gradient.addColorStop(1, '#93c5fd'); 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Pipes
-        ctx.fillStyle = '#22c55e'; // green-500
-        ctx.strokeStyle = '#15803d'; // green-700
+        ctx.fillStyle = '#22c55e'; 
+        ctx.strokeStyle = '#15803d'; 
         ctx.lineWidth = 2;
 
         pipesRef.current.forEach(pipe => {
-            // Top Pipe
             ctx.fillRect(pipe.x, 0, 60, pipe.topHeight);
             ctx.strokeRect(pipe.x, 0, 60, pipe.topHeight);
 
-            // Bottom Pipe
-            ctx.fillRect(pipe.x, pipe.topHeight + PIPE_GAP, 60, canvas.height - (pipe.topHeight + PIPE_GAP) - 20); // -20 floor
-            ctx.strokeRect(pipe.x, pipe.topHeight + PIPE_GAP, 60, canvas.height - (pipe.topHeight + PIPE_GAP) - 20);
+            ctx.fillRect(pipe.x, pipe.topHeight + pipeGapRef.current, 60, canvas.height - (pipe.topHeight + pipeGapRef.current) - 20); 
+            ctx.strokeRect(pipe.x, pipe.topHeight + pipeGapRef.current, 60, canvas.height - (pipe.topHeight + pipeGapRef.current) - 20);
 
-            // Cap details (Top Pipe Cap)
-            ctx.fillStyle = '#4ade80'; // lighter green
+            ctx.fillStyle = '#4ade80'; 
             ctx.fillRect(pipe.x - 2, pipe.topHeight - 20, 64, 20);
             ctx.strokeRect(pipe.x - 2, pipe.topHeight - 20, 64, 20);
 
-            // (Bottom Pipe Cap)
-            ctx.fillRect(pipe.x - 2, pipe.topHeight + PIPE_GAP, 64, 20);
-            ctx.strokeRect(pipe.x - 2, pipe.topHeight + PIPE_GAP, 64, 20);
+            ctx.fillRect(pipe.x - 2, pipe.topHeight + pipeGapRef.current, 64, 20);
+            ctx.strokeRect(pipe.x - 2, pipe.topHeight + pipeGapRef.current, 64, 20);
 
-            ctx.fillStyle = '#22c55e'; // reset
+            ctx.fillStyle = '#22c55e'; 
         });
 
         // Floor
-        ctx.fillStyle = '#d97706'; // amber-600
+        ctx.fillStyle = '#d97706'; 
         ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
-        // Grass on top of floor
-        ctx.fillStyle = '#4ade80'; // green-400
+        ctx.fillStyle = '#4ade80'; 
         ctx.fillRect(0, canvas.height - 25, canvas.width, 5);
 
         // Bird
         ctx.beginPath();
         ctx.arc(50, birdRef.current.y, birdRef.current.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#fbbf24'; // amber-400
+        ctx.fillStyle = '#fbbf24'; 
         ctx.fill();
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // Bird Eye
         ctx.beginPath();
         ctx.arc(58, birdRef.current.y - 5, 5, 0, Math.PI * 2);
         ctx.fillStyle = '#fff';
@@ -223,18 +207,16 @@ const FlappyBird = () => {
         ctx.fillStyle = '#000';
         ctx.fill();
 
-        // Bird Wing
         ctx.beginPath();
         ctx.ellipse(45, birdRef.current.y + 5, 8, 5, -0.2, 0, Math.PI * 2);
         ctx.fillStyle = '#fff';
         ctx.fill();
 
-        // Bird Beak
         ctx.beginPath();
         ctx.moveTo(60, birdRef.current.y + 2);
         ctx.lineTo(70, birdRef.current.y + 5);
         ctx.lineTo(62, birdRef.current.y + 10);
-        ctx.fillStyle = '#ef4444'; // red-500
+        ctx.fillStyle = '#ef4444'; 
         ctx.fill();
     };
 
@@ -250,23 +232,18 @@ const FlappyBird = () => {
         return () => cancelAnimationFrame(requestRef.current);
     }, [updateGame]);
 
-    // Draw initial state when not playing
     useEffect(() => {
         if (!isPlaying && !gameOver && canvasRef.current) {
             const ctx = canvasRef.current.getContext('2d');
-            // Draw a simple preview frame
-            // Background
             const gradient = ctx.createLinearGradient(0, 0, 0, canvasRef.current.height);
             gradient.addColorStop(0, '#60a5fa');
             gradient.addColorStop(1, '#93c5fd');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-            // Floor
             ctx.fillStyle = '#d97706';
             ctx.fillRect(0, canvasRef.current.height - 20, canvasRef.current.width, 20);
 
-            // Bird (Centered for title screen)
             ctx.beginPath();
             ctx.arc(canvasRef.current.width / 2, canvasRef.current.height / 2, 20, 0, Math.PI * 2);
             ctx.fillStyle = '#fbbf24';
@@ -275,22 +252,20 @@ const FlappyBird = () => {
             ctx.lineWidth = 3;
             ctx.stroke();
 
-            // TEXT
             ctx.fillStyle = 'white';
             ctx.font = 'bold 30px sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText("파닥파닥 버드", canvasRef.current.width / 2, canvasRef.current.height / 2 - 50);
+            ctx.fillText(isEn ? "Flappy Bird" : "파닥파닥 버드", canvasRef.current.width / 2, canvasRef.current.height / 2 - 50);
 
             ctx.font = '20px sans-serif';
-            ctx.fillText("클릭해서 시작하기", canvasRef.current.width / 2, canvasRef.current.height / 2 + 50);
+            ctx.fillText(isEn ? "Click to Start" : "클릭해서 시작하기", canvasRef.current.width / 2, canvasRef.current.height / 2 + 50);
         }
-    }, [isPlaying, gameOver]);
+    }, [isPlaying, gameOver, isEn]);
 
-    // Event Listeners
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.code === 'Space') {
-                e.preventDefault(); // Stop scrolling
+                e.preventDefault(); 
                 jump();
             }
         };
@@ -299,34 +274,44 @@ const FlappyBird = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [jump]);
 
+    const toolFaqs = isEn ? [
+        { q: "Is the game free?", a: "Yes, Flappy Bird on Tool Hive is 100% free to play without any registration." },
+        { q: "Does the difficulty change?", a: "Yes, every 10 points, the pipe speed increases slightly and the gap becomes narrower." },
+        { q: "Are my high scores saved?", a: "Your personal best score is saved locally on your browser so you can challenge yourself next time." }
+    ] : [
+        { q: "게임은 무료인가요?", a: "네! 유틸리티 허브의 모든 게임은 별도의 가입 없이 100% 무료로 즐기실 수 있습니다." },
+        { q: "난이도가 점점 높아지나요?", a: "네, 10점을 획득할 때마다 장애물의 이동 속도가 빨라지거나 간격이 좁아질 수 있습니다." },
+        { q: "최고 기록이 저장되나요?", a: "네, 브라우저의 로컬 스토리지를 통해 본인의 최고 기록이 자동으로 저장됩니다." }
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title="파닥파닥 버드 - 유틸리티 허브"
-                description="중독성 있는 파닥파닥 버드 게임을 즐겨보세요! 얼마나 멀리 날아갈 수 있을까요?"
-                keywords="플래피버드, 게임, 미니게임, 파닥파닥, flappy bird"
+                title={isEn ? "Flappy Bird - Fast Reaction Game Online | Tool Hive" : "파닥파닥 버드 - 유틸리티 허브"}
+                description={isEn ? "Play the addictive Flappy Bird game online. Fly through gaps, avoid pipes, and challenge your friends to beat your high score!" : "중독성 있는 파닥파닥 버드 게임을 즐겨보세요! 얼마나 멀리 날아갈 수 있을까요?"}
+                keywords={isEn ? "flappy bird, arcade game, reaction game, online mini games, bird fly game" : "플래피버드, 게임, 미니게임, 파닥파닥, flappy bird"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center mb-6">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-                    파닥파닥 버드
+                    {isEn ? "Flappy Bird Challenge" : "파닥파닥 버드"}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300">
-                    화면을 클릭하거나 스페이스바를 눌러 새를 날리세요!
+                    {isEn ? "Click the screen or press SPACE to fly!" : "화면을 클릭하거나 스페이스바를 눌러 새를 날리세요!"}
                 </p>
             </div>
 
             <div className="flex flex-col items-center">
-                {/* Score Board */}
                 <div className="flex gap-8 mb-4">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg flex flex-col items-center min-w-[120px]">
-                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wider">Score</span>
+                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wider">{isEn ? 'Score' : '점수'}</span>
                         <span className="text-4xl font-black text-blue-500">{score}</span>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg flex flex-col items-center min-w-[120px]">
                         <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wider">
                             <Trophy size={14} className="text-yellow-500" />
-                            <span>Best</span>
+                            <span>{isEn ? 'Best' : '최고'}</span>
                         </div>
                         <span className="text-4xl font-black text-yellow-500">{bestScore}</span>
                     </div>
@@ -347,7 +332,7 @@ const FlappyBird = () => {
                             <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl text-center transform scale-110 transition-transform">
                                 <h2 className="text-3xl font-black text-gray-800 dark:text-white mb-2">GAME OVER</h2>
                                 <div className="flex flex-col gap-1 mb-6">
-                                    <span className="text-gray-500 dark:text-gray-400">Score</span>
+                                    <span className="text-gray-500 dark:text-gray-400">{isEn ? 'Final Score' : '최종 점수'}</span>
                                     <span className="text-5xl font-bold text-blue-500">{score}</span>
                                 </div>
 
@@ -356,14 +341,14 @@ const FlappyBird = () => {
                                     className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white rounded-xl font-bold text-lg transition-colors shadow-lg hover:shadow-blue-500/30"
                                 >
                                     <RefreshCw size={24} />
-                                    다시 시작
+                                    {isEn ? 'Try Again' : '다시 시작'}
                                 </button>
                                 <button
-                                    onClick={() => shareCanvas(containerRef.current, '파닥파닥 버드', score)}
+                                    onClick={() => shareCanvas(containerRef.current, 'Flappy Bird', score)}
                                     className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl font-bold text-lg transition-colors shadow-lg mt-3"
                                 >
                                     <Share2 size={24} />
-                                    결과 공유하기
+                                    {isEn ? 'Share Result' : '결과 공유하기'}
                                 </button>
                             </div>
                         </div>
@@ -379,28 +364,36 @@ const FlappyBird = () => {
                 </div>
 
                 <div className="mt-6 text-sm text-gray-500 dark:text-gray-400">
-                    Tip: PC에서는 <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md font-mono text-xs border border-gray-200 dark:border-gray-600">Space</kbd> 키를 사용할 수 있습니다.
+                    {isEn ? "Tip: You can use 'Space' key on PC." : "Tip: PC에서는 Space 키를 사용할 수 있습니다."}
                 </div>
             </div>
-        \n            <ToolGuide
-                title="파닥파닥 버드"
-                intro="장애물을 피해 최대한 멀리 날아가세요!"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Flappy Bird Master Guide" : "파닥파닥 버드 게임 가이드"}
+                intro={isEn ? "Survive as long as possible while flying through gaps between obstacles! This game tests your timing and focus in a simple but addictive arcade format." : "장애물을 피해 최대한 멀리 날아가세요! 간단한 조작으로 누구나 즐길 수 있지만, 높은 점수를 얻으려면 정교한 타이밍 조절이 필수인 중독성 강한 아케이드 게임입니다."}
+                steps={isEn ? [
+                    "Click the screen or press the Spacebar to make the bird flap its wings.",
+                    "Gravity will pull the bird down naturally, so keep clicking to stay airborne.",
+                    "Pass through the gaps between the green pipes to earn points.",
+                    "The game ends if the bird hits a pipe or the ground."
+                ] : [
+                    "화면을 클릭하거나 스페이스바를 눌러 새의 날개짓을 유도합니다.",
+                    "중력에 의해 아래로 떨어지므로, 적절한 타이밍에 클릭하여 고도를 유지하세요.",
+                    "파이프 사이의 좁은 틈을 안전하게 통과하면 점수가 올라갑니다.",
+                    "파이프에 부딪히거나 바닥에 닿으면 게임이 종료되니 주의하세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Try to maintain a steady rhythm rather than panic-clicking.",
+                    "Stay near the center of the gap to give yourself room for error.",
+                    "On mobile, use light taps for better control sensitivity.",
+                    "Remember that the bird falls faster the longer you wait between clicks."
+                ] : [
+                    "급하게 여러 번 누르는 것보다 일정한 리듬을 유지하며 날개짓하는 것이 유리합니다.",
+                    "파이프의 중앙 부분에 가깝게 위치하도록 미리 고도를 조절하세요.",
+                    "모바일 환경에서는 손가락 끝으로 가볍게 터치하여 반응 속도를 높이세요.",
+                    "점수가 높아질수록 장애물이 빨라지므로 더 높은 집중력이 요구됩니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

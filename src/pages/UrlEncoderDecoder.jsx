@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Link, ArrowRightLeft, Copy, Check } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const UrlEncoderDecoder = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [mode, setMode] = useState('encode'); // 'encode' or 'decode'
@@ -17,7 +21,7 @@ const UrlEncoderDecoder = () => {
                 setOutput(decodeURIComponent(input));
             }
         } catch (error) {
-            setOutput('Error: Invalid input for decoding');
+            setOutput(isEn ? 'Error: Invalid input for decoding' : '에러: 유효하지 않은 디코딩 입력입니다.');
         }
     };
 
@@ -34,108 +38,136 @@ const UrlEncoderDecoder = () => {
         setOutput('');
     };
 
+    const titleText = isEn ? t('tools.url-encoder.title') : "URL 인코더/디코더 - URL Encode & Decode";
+    const descText = isEn 
+        ? t('tools.url-encoder.description')
+        : "URL을 인코딩하거나 디코딩하는 무료 도구입니다. 특수 문자를 안전한 URL 형식으로 변환하세요.";
+    const keywordsText = isEn ? "url encoder, url decoder, encode uri, percent encoding, decode url" : "URL 인코더, URL 디코더, URL encode, URL decode, percent encoding";
+
+    const faqs = isEn ? [
+        {
+            q: "What is URL Encoding?",
+            a: "URL Encoding (Percent Encoding) is a mechanism for encoding information in a Uniform Resource Identifier (URI). It replaces unsafe ASCII characters with a '%' followed by two hexadecimal digits."
+        },
+        {
+            q: "Can I encode non-English letters?",
+            a: "Yes, this tool strictly follows modern UTF-8 standards and safely translates characters from all languages including emojis into valid percent-encoded URI strings."
+        }
+    ] : [
+        { "q": "URL 인코딩이 무엇인가요?", "a": "URL 인코딩은 웹 주소창에서 유효하지 않은 문자들을 %XX 형식으로 변환하여 안전하게 전송할 수 있게 만드는 기술입니다." },
+        { "q": "언제 사용하나요?", "a": "주소창에 한글이나 특수문자가 포함된 파라미터를 넘겨야 할 때, 혹은 그 반대로 암호화된 주소를 읽기 쉬운 텍스트로 바꾸고 싶을 때 사용합니다." }
+    ];
+
+    const steps = isEn ? [
+        "Select your desired mode by making sure the right button is toggled (Encode vs Decode).",
+        "Place your raw or encoded string into the leftmost text area.",
+        "Click the main 'Encode →' or 'Decode →' action button.",
+        "Your successfully converted result will appear on the right pane where you can click Copy."
+    ] : [
+        "가운데 화살표 버튼이나 텍스트를 이용해 인코딩/디코딩 모드를 선택합니다.",
+        "왼쪽 입력창에 변환할 텍스트나 URL 주소를 넣습니다.",
+        "인코딩/디코딩 실행 버튼을 클릭합니다.",
+        "오른쪽 결과창에 생성된 값을 확인하고 복사하여 사용하세요."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="URL 인코더/디코더 - URL Encode & Decode"
-                description="URL을 인코딩하거나 디코딩하는 무료 도구입니다. 특수 문자를 안전한 URL 형식으로 변환하세요."
-                keywords={['URL 인코더', 'URL 디코더', 'URL encode', 'URL decode', 'percent encoding']}
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
+                category="dev"
+                faqs={faqs}
+                steps={steps}
             />
 
             <div className="text-center space-y-4">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-3">
                     <Link className="w-8 h-8 text-blue-500" />
-                    URL 인코더/디코더
+                    {isEn ? 'URL Encoder / Decoder' : 'URL 인코더/디코더'}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                    URL을 안전한 형식으로 인코딩하거나 원래 형태로 디코딩하세요.
+                    {isEn ? 'Format URLs cleanly or reverse translate them safely.' : 'URL을 안전한 형식으로 인코딩하거나 원래 형태로 디코딩하세요.'}
                 </p>
             </div>
 
             <div className="grid md:grid-cols-[1fr,auto,1fr] gap-4 items-start">
-                {/* Input Section */}
-                <div className="card p-4 space-y-3 h-full">
+                <div className="card p-4 space-y-3 h-full mb-4 md:mb-0">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                        입력 ({mode === 'encode' ? 'Plain Text' : 'Encoded URL'})
+                        {isEn ? `Input (${mode === 'encode' ? 'Plain Text' : 'Encoded URL'})` : `입력 (${mode === 'encode' ? '텍스트' : '인코딩된 URL'})`}
                     </label>
                     <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder={mode === 'encode' ? '인코딩할 텍스트를 입력하세요...' : '디코딩할 URL을 입력하세요...'}
+                        placeholder={isEn ? (mode === 'encode' ? 'Type text to encode...' : 'Type URL to decode...') : (mode === 'encode' ? '인코딩할 텍스트를 입력하세요...' : '디코딩할 URL을 입력하세요...')}
                         className="input w-full h-48 resize-none font-mono text-sm"
                     />
                 </div>
 
-                {/* Controls */}
-                <div className="flex flex-col gap-3 justify-center h-full py-4">
+                <div className="flex flex-col gap-3 justify-center h-full py-4 mb-4 md:mb-0">
                     <button
                         onClick={handleConvert}
                         className="btn btn-primary whitespace-nowrap"
                     >
-                        {mode === 'encode' ? '인코딩 하기 →' : '디코딩 하기 →'}
+                        {isEn ? (mode === 'encode' ? 'Encode →' : 'Decode →') : (mode === 'encode' ? '인코딩 하기 →' : '디코딩 하기 →')}
                     </button>
 
                     <button
                         onClick={switchMode}
                         className="btn btn-secondary flex items-center justify-center gap-2"
-                        title="모드 전환"
+                        title={isEn ? "Switch Mode" : "모드 전환"}
                     >
                         <ArrowRightLeft className="w-4 h-4" />
-                        <span className="md:hidden">모드 전환</span>
+                        <span className="md:hidden">{isEn ? 'Switch Mode' : '모드 전환'}</span>
                     </button>
                 </div>
 
-                {/* Output Section */}
                 <div className="card p-4 space-y-3 h-full">
                     <div className="flex justify-between items-center">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            결과 ({mode === 'encode' ? 'Encoded URL' : 'Plain Text'})
+                            {isEn ? `Result (${mode === 'encode' ? 'Encoded URL' : 'Plain Text'})` : `결과 (${mode === 'encode' ? '인코딩된 URL' : '텍스트'})`}
                         </label>
                         <button
                             onClick={handleCopy}
                             disabled={!output}
-                            className="text-sm text-gray-500 hover:text-blue-500 disabled:opacity-50 flex items-center gap-1"
+                            className="text-sm text-gray-500 hover:text-blue-500 disabled:opacity-50 flex items-center gap-1 font-bold"
                         >
                             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            {copied ? '복사됨' : '복사'}
+                            {copied ? (isEn ? 'Copied' : '복사됨') : (isEn ? 'Copy' : '복사')}
                         </button>
                     </div>
                     <textarea
                         readOnly
                         value={output}
-                        placeholder="결과가 여기에 표시됩니다..."
+                        placeholder={isEn ? "Result will appear here..." : "결과가 여기에 표시됩니다..."}
                         className="input w-full h-48 resize-none font-mono text-sm bg-gray-50 dark:bg-gray-800/50"
                     />
                 </div>
             </div>
 
-            <div className="card p-6 bg-gray-50 dark:bg-gray-800/50">
-                <h3 className="text-lg font-semibold mb-3">💡 URL 인코딩이란?</h3>
+            <div className="card p-6 bg-gray-50 dark:bg-gray-800/50 mt-4">
+                <h3 className="text-lg font-semibold mb-3">💡 {isEn ? 'What is URL Encoding?' : 'URL 인코딩이란?'}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                    URL 인코딩(퍼센트 인코딩)은 URL에서 사용할 수 없는 문자나 의미가 있는 특수 문자를
-                    <code>%</code> 뒤에 16진수 값을 붙여 표현하는 방식입니다.
-                    예를 들어 공백(Space)은 <code>%20</code>으로, 한글 '가'는 <code>%EA%B0%80</code>로 변환됩니다.
+                    {isEn 
+                        ? <>URL encoding leverages <code>%</code> followed by hexadecimal numbers to safely dispatch string configurations. For example, a blank space naturally transforms into <code>%20</code>.</> 
+                        : <>URL 인코딩(퍼센트 인코딩)은 URL에서 사용할 수 없는 문자나 의미가 있는 특수 문자를 <code>%</code> 뒤에 16진수 값을 붙여 표현하는 방식입니다. 예를 들어 공백(Space)은 <code>%20</code>으로, 한글 '가'는 <code>%EA%B0%80</code>로 변환됩니다.</>}
                 </p>
             </div>
-        \n            <ToolGuide
-                title="URL 인코더/디코더"
-                intro="URL 인코딩 및 디코딩"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "URL Encoder / Decoder Guide" : "URL 인코더/디코더 활용 가이드"}
+                intro={isEn ? "Securely encode or decode URI components directly on your device using industry-standard percent encoding." : "URL 주소를 안전하게 인코딩하거나 원래 상태로 복원할 수 있습니다."}
+                steps={steps}
+                tips={isEn ? [
+                    "This tool executes functions like encodeURIComponent() locally. Your private GET parameters are never sent to external domains.",
+                    "If you encounter a URIError, it often implies the decoded URL string parameter isn't correctly percent-encoded.",
+                    "Encoding is essential for handles URL parameters containing non-ASCII characters or reserved symbols like '&' or '='."
+                ] : [
+                    "한글이나 공백 등이 포함된 주소는 인코딩하여 전송해야 오류가 발생하지 않습니다.",
+                    "모든 작업은 브라우저 내에서 직접 수행되어 데이터 유출 걱정 없이 안전합니다.",
+                    "이미 인코딩된 주소를 원본으로 되돌리고 싶을 때는 '디코딩' 모드를 활용하세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={faqs}
             />
         </div>
     );

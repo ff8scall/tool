@@ -4,8 +4,12 @@ import ToolGuide from '../components/ToolGuide';
 import { QrCode, Download, Wifi, User, Link as LinkIcon, Palette, Copy, Check } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
 import QRCode from 'qrcode';
+import { useLanguage } from '../context/LanguageContext';
 
 const QrGenerator = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [mode, setMode] = useState('text'); // text, wifi, vcard
     const [qrDataUrl, setQrDataUrl] = useState('');
     const [qrSize, setQrSize] = useState(400);
@@ -30,13 +34,7 @@ const QrGenerator = () => {
     };
 
     const generateVCardString = () => {
-        return `BEGIN:VCARD
-VERSION:3.0
-FN:${vcardName}
-TEL:${vcardPhone}
-EMAIL:${vcardEmail}
-ORG:${vcardOrg}
-END:VCARD`;
+        return `BEGIN:VCARD\nVERSION:3.0\nFN:${vcardName}\nTEL:${vcardPhone}\nEMAIL:${vcardEmail}\nORG:${vcardOrg}\nEND:VCARD`;
     };
 
     const getQRValue = () => {
@@ -66,7 +64,7 @@ END:VCARD`;
             });
             setQrDataUrl(dataUrl);
         } catch (err) {
-            console.error('QR 코드 생성 실패:', err);
+            console.error(isEn ? 'QR Gen Failed:' : 'QR 코드 생성 실패:', err);
         }
     };
 
@@ -88,16 +86,20 @@ END:VCARD`;
             setCopied(true);
             setTimeout(() => setCopied(false), 1500);
         } catch (err) {
-            console.error('복사 실패:', err);
+            console.error(isEn ? 'Copy Failed:' : '복사 실패:', err);
         }
     };
+
+    const titleText = isEn ? "QR Code Generator - WiFi, URL, vCard | Utility Hub" : "QR 코드 생성기 - WiFi, URL, 명함 QR 만들기 | Utility Hub";
+    const descText = isEn ? "Create QR Codes for Text, URL, WiFi, and vCard instantly. Free PNG download available." : "텍스트, URL, WiFi, 명함(vCard)을 QR 코드로 변환하세요. 무료로 PNG 다운로드 가능합니다.";
+    const keywordsText = isEn ? "QR code, QR generator, WiFi QR, vCard QR, create QR code" : "QR코드, QR생성, 큐알코드, WiFi QR, 명함 QR, vCard, QR만들기";
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             <SEO
-                title="QR 코드 생성기 - WiFi, URL, 명함 QR 만들기 | Utility Hub"
-                description="텍스트, URL, WiFi, 명함(vCard)을 QR 코드로 변환하세요. 무료로 PNG 다운로드 가능합니다."
-                keywords="QR코드, QR생성, 큐알코드, WiFi QR, 명함 QR, vCard, QR만들기"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
             />
 
             <div className="text-center space-y-4 py-6">
@@ -105,19 +107,17 @@ END:VCARD`;
                     <QrCode className="w-8 h-8 text-purple-600 dark:text-purple-400" />
                 </div>
                 <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-                    QR 코드 생성기
+                    {isEn ? 'QR Code Generator' : 'QR 코드 생성기'}
                 </h1>
                 <p className="text-muted-foreground">
-                    텍스트, URL, WiFi, 명함을 QR 코드로 변환하세요.
+                    {isEn ? 'Convert Text, URL, WiFi, or vCard into a QR Code instantly.' : '텍스트, URL, WiFi, 명함을 QR 코드로 변환하세요.'}
                 </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Input Section */}
                 <div className="space-y-6">
-                    {/* Mode Selection */}
                     <div className="card p-6 space-y-4">
-                        <h3 className="font-bold text-lg">QR 코드 유형</h3>
+                        <h3 className="font-bold text-lg">{isEn ? 'QR Code Type' : 'QR 코드 유형'}</h3>
                         <div className="grid grid-cols-3 gap-2">
                             <button
                                 onClick={() => setMode('text')}
@@ -127,7 +127,7 @@ END:VCARD`;
                                     }`}
                             >
                                 <LinkIcon className="w-5 h-5 mx-auto mb-1" />
-                                <div className="text-xs font-medium">텍스트/URL</div>
+                                <div className="text-xs font-medium">{isEn ? 'Text/URL' : '텍스트/URL'}</div>
                             </button>
                             <button
                                 onClick={() => setMode('wifi')}
@@ -147,23 +147,22 @@ END:VCARD`;
                                     }`}
                             >
                                 <User className="w-5 h-5 mx-auto mb-1" />
-                                <div className="text-xs font-medium">명함</div>
+                                <div className="text-xs font-medium">{isEn ? 'vCard' : '명함'}</div>
                             </button>
                         </div>
                     </div>
 
-                    {/* Input Fields */}
                     <div className="card p-6 space-y-4">
-                        <h3 className="font-bold text-lg">내용 입력</h3>
+                        <h3 className="font-bold text-lg">{isEn ? 'Enter Details' : '내용 입력'}</h3>
 
                         {mode === 'text' && (
                             <div>
-                                <label className="block text-sm font-medium mb-2">텍스트 또는 URL</label>
+                                <label className="block text-sm font-medium mb-2">{isEn ? 'Text or URL' : '텍스트 또는 URL'}</label>
                                 <textarea
                                     value={text}
                                     onChange={(e) => setText(e.target.value)}
                                     className="input w-full h-32 resize-none"
-                                    placeholder="https://example.com 또는 텍스트를 입력하세요"
+                                    placeholder={isEn ? "https://example.com or any text" : "https://example.com 또는 텍스트를 입력하세요"}
                                 />
                             </div>
                         )}
@@ -171,7 +170,7 @@ END:VCARD`;
                         {mode === 'wifi' && (
                             <div className="space-y-3">
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">네트워크 이름 (SSID)</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Network Name (SSID)' : '네트워크 이름 (SSID)'}</label>
                                     <input
                                         type="text"
                                         value={wifiSSID}
@@ -181,7 +180,7 @@ END:VCARD`;
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">비밀번호</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Password' : '비밀번호'}</label>
                                     <input
                                         type="text"
                                         value={wifiPassword}
@@ -191,7 +190,7 @@ END:VCARD`;
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">암호화 방식</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Encryption' : '암호화 방식'}</label>
                                     <select
                                         value={wifiEncryption}
                                         onChange={(e) => setWifiEncryption(e.target.value)}
@@ -199,7 +198,7 @@ END:VCARD`;
                                     >
                                         <option value="WPA">WPA/WPA2</option>
                                         <option value="WEP">WEP</option>
-                                        <option value="nopass">암호 없음</option>
+                                        <option value="nopass">{isEn ? 'None' : '암호 없음'}</option>
                                     </select>
                                 </div>
                             </div>
@@ -208,17 +207,17 @@ END:VCARD`;
                         {mode === 'vcard' && (
                             <div className="space-y-3">
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">이름</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Name' : '이름'}</label>
                                     <input
                                         type="text"
                                         value={vcardName}
                                         onChange={(e) => setVcardName(e.target.value)}
                                         className="input w-full"
-                                        placeholder="홍길동"
+                                        placeholder={isEn ? "John Doe" : "홍길동"}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">전화번호</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Phone Number' : '전화번호'}</label>
                                     <input
                                         type="tel"
                                         value={vcardPhone}
@@ -228,7 +227,7 @@ END:VCARD`;
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">이메일</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Email' : '이메일'}</label>
                                     <input
                                         type="email"
                                         value={vcardEmail}
@@ -238,13 +237,13 @@ END:VCARD`;
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium mb-2">회사/조직</label>
+                                    <label className="block text-sm font-medium mb-2">{isEn ? 'Organization' : '회사/조직'}</label>
                                     <input
                                         type="text"
                                         value={vcardOrg}
                                         onChange={(e) => setVcardOrg(e.target.value)}
                                         className="input w-full"
-                                        placeholder="회사명"
+                                        placeholder={isEn ? "Company Name" : "회사명"}
                                     />
                                 </div>
                             </div>
@@ -255,19 +254,18 @@ END:VCARD`;
                             disabled={!hasValidData()}
                             className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            QR 코드 생성
+                            {isEn ? 'Generate QR Code' : 'QR 코드 생성'}
                         </button>
                     </div>
 
-                    {/* Size Control */}
                     <div className="card p-6 space-y-4">
                         <h3 className="font-bold text-lg flex items-center gap-2">
                             <Palette className="w-5 h-5" />
-                            크기 설정
+                            {isEn ? 'Resolution Settings' : '크기 설정'}
                         </h3>
 
                         <div>
-                            <label className="block text-sm font-medium mb-2">크기: {qrSize}px</label>
+                            <label className="block text-sm font-medium mb-2">{isEn ? 'Size' : '크기'}: {qrSize}px</label>
                             <input
                                 type="range"
                                 min="200"
@@ -281,10 +279,9 @@ END:VCARD`;
                     </div>
                 </div>
 
-                {/* Preview Section */}
                 <div className="space-y-6">
                     <div className="card p-6 space-y-4">
-                        <h3 className="font-bold text-lg">미리보기</h3>
+                        <h3 className="font-bold text-lg">{isEn ? 'Preview' : '미리보기'}</h3>
 
                         <div className="flex items-center justify-center p-8 bg-muted/30 rounded-xl min-h-[400px]">
                             {qrDataUrl ? (
@@ -294,7 +291,7 @@ END:VCARD`;
                             ) : (
                                 <div className="text-center text-muted-foreground">
                                     <QrCode className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                                    <p>내용을 입력하고<br />생성 버튼을 클릭하세요</p>
+                                    <p>{isEn ? 'Enter content and' : '내용을 입력하고'}<br />{isEn ? 'click Generate' : '생성 버튼을 클릭하세요'}</p>
                                 </div>
                             )}
                         </div>
@@ -306,7 +303,7 @@ END:VCARD`;
                                     className="btn btn-primary flex-1 flex items-center justify-center gap-2"
                                 >
                                     <Download className="w-5 h-5" />
-                                    다운로드
+                                    {isEn ? 'Download' : '다운로드'}
                                 </button>
                                 <button
                                     onClick={copyToClipboard}
@@ -315,12 +312,12 @@ END:VCARD`;
                                     {copied ? (
                                         <>
                                             <Check className="w-5 h-5 text-green-500" />
-                                            복사됨
+                                            {isEn ? 'Copied' : '복사됨'}
                                         </>
                                     ) : (
                                         <>
                                             <Copy className="w-5 h-5" />
-                                            복사
+                                            {isEn ? 'Copy' : '복사'}
                                         </>
                                     )}
                                 </button>
@@ -328,47 +325,54 @@ END:VCARD`;
                         )}
                     </div>
 
-                    {/* Info */}
                     <div className="bg-muted/30 rounded-xl p-6 space-y-2 text-sm">
-                        <h3 className="font-bold text-base">💡 사용 팁</h3>
+                        <h3 className="font-bold text-base">💡 {isEn ? 'Tips' : '사용 팁'}</h3>
                         <ul className="space-y-1 text-muted-foreground list-disc list-inside">
-                            <li><strong>WiFi QR:</strong> 스마트폰으로 스캔하면 자동으로 WiFi 연결</li>
-                            <li><strong>명함 QR:</strong> 연락처 정보를 빠르게 공유</li>
-                            <li>생성된 QR 코드는 명함, 포스터, 웹사이트 등에 활용하세요</li>
-                            <li>모바일 카메라로 스캔하여 정보를 확인할 수 있습니다</li>
+                            <li><strong>{isEn ? 'WiFi QR:' : 'WiFi QR:'}</strong> {isEn ? 'Scan with your smartphone to connect to WiFi automatically.' : '스마트폰으로 스캔하면 자동으로 WiFi 연결'}</li>
+                            <li><strong>{isEn ? 'vCard QR:' : '명함 QR:'}</strong> {isEn ? 'Quickly share contact information.' : '연락처 정보를 빠르게 공유'}</li>
+                            <li>{isEn ? 'Use the generated QR code on business cards, posters, or websites.' : '생성된 QR 코드는 명함, 포스터, 웹사이트 등에 활용하세요'}</li>
+                            <li>{isEn ? 'You can verify the info by scanning it with your mobile camera.' : '모바일 카메라로 스캔하여 정보를 확인할 수 있습니다'}</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <ShareButtons
-                title="QR 코드 생성기"
-                description="텍스트, URL, WiFi, 명함을 QR 코드로 쉽게 변환하세요!"
+                title={isEn ? "QR Code Generator" : "QR 코드 생성기"}
+                description={isEn ? "Easily convert Text, URL, WiFi, and vCard into a QR code!" : "텍스트, URL, WiFi, 명함을 QR 코드로 쉽게 변환하세요!"}
             />
 
             <ToolGuide
-                title="스마트한 QR 코드 생성 및 활용 가이드"
-                intro="URL, 텍스트, WiFi 연결 정보, 연락처(vCard) 등을 담은 QR 코드를 즉석에서 생성할 수 있습니다. 마케팅, 정보 공유, 이벤트 등 다양한 용도로 활용해 보세요."
-                steps={[
+                title={isEn ? "Smart QR Code Generator Guide" : "스마트한 QR 코드 생성 및 활용 가이드"}
+                intro={isEn 
+                    ? "Instantly generate QR codes for URLs, text, WiFi credentials, or contact details (vCard). Perfect for marketing, sharing info, or event management."
+                    : "URL, 텍스트, WiFi 연결 정보, 연락처(vCard) 등을 담은 QR 코드를 즉석에서 생성할 수 있습니다. 마케팅, 정보 공유, 이벤트 등 다양한 용도로 활용해 보세요."}
+                steps={isEn ? [
+                    "Select the type of information you want to encode (Text/URL, WiFi, vCard).",
+                    "Fill in the required fields for the chosen type.",
+                    "Click 'Generate QR Code' to create the image.",
+                    "Adjust the size if needed, then Download or Copy the QR code."
+                ] : [
                     "생성하고자 하는 정보의 유형(URL, WiFi, 명함)을 선택합니다.",
                     "선택한 유형에 맞는 텍스트나 상세 정보를 입력란에 작성합니다.",
                     "'QR 코드 생성' 버튼을 클릭하여 이미지를 생성합니다.",
                     "원하는 크기로 조절한 후 다운로드하거나 복사하여 사용합니다."
                 ]}
-                tips={[
+                tips={isEn ? [
+                    "Print your WiFi QR code and stick it in your cafe or living room to avoid repeating the password.",
+                    "When using URLs, it is better to link to mobile-optimized pages.",
+                    "Set a higher resolution if you are printing the QR code."
+                ] : [
                     "WiFi QR 코드를 만들어 카페나 거실에 부치면 매번 비밀번호를 말해줄 필요가 없습니다.",
                     "URL 입력 시에는 가급적 모바일 최적화된 페이지 링크를 사용하는 것이 좋습니다.",
                     "QR 코드의 해상도를 높게 설정하면 인쇄물에서도 선명하게 스캔됩니다."
                 ]}
-                faqs={[
-                    {
-                        q: "생성된 QR 코드에 유효 기간이 있나요?",
-                        a: "아니요, 이 서비스에서 생성된 QR 코드는 영구적이며 별도의 만료 기간이 없습니다."
-                    },
-                    {
-                        q: "상업적 용도로 사용해도 되나요?",
-                        a: "네, 무료로 생성하여 상업적 홍보물이나 제품에 제한 없이 사용 가능합니다."
-                    }
+                faqs={isEn ? [
+                    { q: "Does the generated QR code expire?", a: "No, QR codes generated here are permanent and have no expiration date." },
+                    { q: "Can I use it for commercial purposes?", a: "Yes, you can generate and use them freely on commercial promotions or products." }
+                ] : [
+                    { q: "생성된 QR 코드에 유효 기간이 있나요?", a: "아니요, 이 서비스에서 생성된 QR 코드는 영구적이며 별도의 만료 기간이 없습니다." },
+                    { q: "상업적 용도로 사용해도 되나요?", a: "네, 무료로 생성하여 상업적 홍보물이나 제품에 제한 없이 사용 가능합니다." }
                 ]}
             />
         </div>

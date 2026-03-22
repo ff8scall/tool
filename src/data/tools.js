@@ -5,7 +5,7 @@ import {
     Heart, Brain, Scroll, Gift, PenTool, Timer, CheckSquare, Lightbulb,
     Binary, FileCode, Edit, GitCompare, Barcode, Youtube, ImageIcon,
     Ruler, Weight, FileDigit, Key, Thermometer, Link, Trophy, MousePointer2, Crosshair, Target, Bomb, Disc, GitCommit,
-    ArrowLeftRight, FileJson, Droplet, Gauge, Percent, Divide, Dices, Utensils, Bird, Grid3X3, Layers, PawPrint, Wind, User, Mic, Scale, Cookie, Eye, Circle, Ear, Music, BookOpen, HelpCircle, Radio, Smile, Battery, Smartphone, Briefcase, HelpingHand, MessageSquare, Mic2, Shield, Dog, Plus, Minus, X, TrendingUp
+    ArrowLeftRight, FileJson, Droplet, Gauge, Percent, Divide, Dices, Utensils, Bird, Grid3X3, Layers, PawPrint, Wind, User, Mic, Scale, Cookie, Eye, Circle, Ear, Music, BookOpen, HelpCircle, Radio, Smile, Battery, Smartphone, Briefcase, HelpingHand, MessageSquare, Mic2, Shield, Dog, Plus, Minus, X, TrendingUp, Wallet, Coins
 } from 'lucide-react';
 
 export const toolCategories = {
@@ -96,6 +96,7 @@ export const tools = [
         category: 'unit',
         icon: Ruler,
         color: 'bg-sky-500',
+        translated: true,
         keywords: ['길이변환기', '단위변환', '미터피트변환', '인치센티미터', '무료온라인도구', 'length converter']
     },
     {
@@ -106,6 +107,7 @@ export const tools = [
         category: 'unit',
         icon: Weight,
         color: 'bg-sky-600',
+        translated: true,
         keywords: ['무게변환기', '단위계산', 'kg파운드변환', '온스계산', 'weight converter']
     },
     {
@@ -116,6 +118,7 @@ export const tools = [
         category: 'unit',
         icon: DollarSign,
         color: 'bg-sky-700',
+        translated: true,
         keywords: ['환율계산기', '오늘의환율', '달러환율', '엔화환율', '통화변환', '실시간환율', 'currency exchange']
     },
     {
@@ -126,6 +129,7 @@ export const tools = [
         category: 'unit',
         icon: Thermometer,
         color: 'bg-red-500',
+        translated: true,
         keywords: ['온도', '섭씨', '화씨', '켈빈', 'temperature', 'converter']
     },
     {
@@ -136,6 +140,7 @@ export const tools = [
         category: 'unit',
         icon: Ruler,
         color: 'bg-blue-600',
+        translated: true,
         keywords: ['면적', '평수', '제곱미터', '에이커', 'area']
     },
     {
@@ -146,6 +151,7 @@ export const tools = [
         category: 'unit',
         icon: Droplet,
         color: 'bg-cyan-600',
+        translated: true,
         keywords: ['부피', '리터', '갤런', 'volume']
     },
     {
@@ -156,6 +162,7 @@ export const tools = [
         category: 'unit',
         icon: Gauge,
         color: 'bg-orange-600',
+        translated: true,
         keywords: ['속도', 'kmh', 'mph', 'speed']
     },
 
@@ -168,37 +175,41 @@ export const tools = [
         category: 'finance',
         icon: Calculator,
         color: 'bg-blue-500',
-        keywords: ['대출', '이자', '원리금', '상환', 'loan']
+        translated: true,
+        keywords: ['loan calculator', 'interest', 'amortization', 'repayment']
     },
     {
         id: 'salary',
         title: '연봉 실수령액',
         description: '4대 보험과 세금을 제외한 실수령액 계산',
-        path: '/salary-calc',
+        path: '/salary-calculator',
         category: 'finance',
         icon: DollarSign,
-        color: 'bg-green-600',
-        keywords: ['연봉', '실수령액', '세금', '4대보험', 'salary']
+        color: 'bg-emerald-600',
+        translated: true,
+        keywords: ['salary calculator', 'net pay', 'korea tax', 'take home pay']
     },
     {
         id: 'severance',
         title: '퇴직금 계산기',
         description: '입사일과 퇴사일로 예상 퇴직금 계산',
-        path: '/severance-calc',
+        path: '/severance-calculator',
         category: 'finance',
-        icon: Calculator,
-        color: 'bg-emerald-600',
-        keywords: ['퇴직금', '퇴직', '예상퇴직금', 'severance']
+        icon: Wallet,
+        color: 'bg-teal-600',
+        translated: true,
+        keywords: ['severance pay', 'retirement pay', 'korea labor law', 'toejikgeum']
     },
     {
         id: 'minimum-wage',
         title: '최저임금 계산기',
         description: '2024/2025년 최저임금 확인 및 계산',
-        path: '/minimum-wage',
+        path: '/minimum-wage-calculator',
         category: 'finance',
-        icon: DollarSign,
-        color: 'bg-teal-600',
-        keywords: ['최저임금', '최저시급', '2025', 'minimum wage']
+        icon: Coins,
+        color: 'bg-cyan-600',
+        translated: true,
+        keywords: ['minimum wage', 'korea labor law', 'hourly rate', 'weekly holiday pay']
     },
     {
         id: 'compound-interest',
@@ -208,7 +219,8 @@ export const tools = [
         category: 'finance',
         icon: Calculator,
         color: 'bg-blue-600',
-        keywords: ['복리', '이자', '투자', '수익', 'compound', 'interest']
+        translated: true,
+        keywords: ['compound interest', 'investing', 'ROI', 'savings']
     },
     {
         id: 'percent-calculator',
@@ -218,7 +230,8 @@ export const tools = [
         category: 'finance',
         icon: Percent,
         color: 'bg-green-600',
-        keywords: ['퍼센트', '백분율', '계산기']
+        translated: true,
+        keywords: ['percent calculator', 'percentage', 'ratio', 'increase', 'decrease']
     },
     {
         id: 'discount-calculator',
@@ -228,7 +241,8 @@ export const tools = [
         category: 'finance',
         icon: Calculator,
         color: 'bg-red-500',
-        keywords: ['할인', '세일', '가격계산']
+        translated: true,
+        keywords: ['discount calculator', 'sale price', 'shopping', 'savings', 'reverse discount']
     },
     {
         id: 'work-hours',
@@ -238,7 +252,8 @@ export const tools = [
         category: 'finance',
         icon: Clock,
         color: 'bg-blue-700',
-        keywords: ['근무시간', '급여', '시급', 'work', 'hours']
+        translated: true,
+        keywords: ['work hours', 'salary', 'hourly wage', 'shift calculator', 'overtime', 'night shift']
     },
     {
         id: 'age-calc',
@@ -248,6 +263,7 @@ export const tools = [
         category: 'finance',
         icon: Calendar,
         color: 'bg-cyan-600',
+        translated: true,
         keywords: ['나이', '만나이', '연나이', 'age', 'calculator']
     },
     {
@@ -258,6 +274,7 @@ export const tools = [
         category: 'finance',
         icon: Calendar,
         color: 'bg-cyan-500',
+        translated: true,
         keywords: ['날짜', 'dday', '디데이', 'date', 'calculator']
     },
     {
@@ -268,6 +285,7 @@ export const tools = [
         category: 'finance',
         icon: Utensils,
         color: 'bg-orange-500',
+        translated: true,
         keywords: ['점심', '메뉴', '추천', 'lunch', 'food', 'random']
     },
 
@@ -280,6 +298,7 @@ export const tools = [
         category: 'text',
         icon: FileText,
         color: 'bg-violet-500',
+        translated: true,
         keywords: ['글자수', '단어수', 'word', 'count', 'character']
     },
     {
@@ -290,6 +309,7 @@ export const tools = [
         category: 'text',
         icon: Code,
         color: 'bg-violet-600',
+        translated: true,
         keywords: ['유니코드', 'unicode', 'converter', 'text']
     },
     {
@@ -300,6 +320,7 @@ export const tools = [
         category: 'text',
         icon: Type,
         color: 'bg-violet-700',
+        translated: true,
         keywords: ['문자열', 'string', 'case', 'converter']
     },
     {
@@ -310,6 +331,7 @@ export const tools = [
         category: 'text',
         icon: FileDigit,
         color: 'bg-purple-600',
+        translated: true,
         keywords: ['base64', 'encode', 'decode', 'text']
     },
     {
@@ -320,6 +342,7 @@ export const tools = [
         category: 'text',
         icon: Code,
         color: 'bg-purple-700',
+        translated: true,
         keywords: ['html', 'encoder', 'entity', 'escape']
     },
     {
@@ -330,6 +353,7 @@ export const tools = [
         category: 'text',
         icon: Radio,
         color: 'bg-gray-800',
+        translated: true,
         keywords: ['모스부호', 'morse', 'code']
     },
 
@@ -342,6 +366,7 @@ export const tools = [
         category: 'dev',
         icon: Binary,
         color: 'bg-green-600',
+        translated: true,
         keywords: ['진법', 'binary', 'hex', 'decimal']
     },
     {
@@ -352,6 +377,7 @@ export const tools = [
         category: 'dev',
         icon: FileCode,
         color: 'bg-green-700',
+        translated: true,
         keywords: ['json', 'formatter', 'validator']
     },
     {
@@ -362,6 +388,7 @@ export const tools = [
         category: 'dev',
         icon: FileText,
         color: 'bg-emerald-600',
+        translated: true,
         keywords: ['markdown', 'editor', 'preview']
     },
     {
@@ -372,6 +399,7 @@ export const tools = [
         category: 'dev',
         icon: FileCode,
         color: 'bg-emerald-500',
+        translated: true,
         keywords: ['html', 'formatter', 'preview']
     },
     {
@@ -382,6 +410,7 @@ export const tools = [
         category: 'dev',
         icon: GitCompare,
         color: 'bg-lime-600',
+        translated: true,
         keywords: ['diff', 'compare', 'code']
     },
     {
@@ -392,6 +421,7 @@ export const tools = [
         category: 'dev',
         icon: Edit,
         color: 'bg-teal-500',
+        translated: true,
         keywords: ['web', 'editor', 'html', 'css', 'javascript']
     },
     {
@@ -402,6 +432,7 @@ export const tools = [
         category: 'dev',
         icon: Hash,
         color: 'bg-teal-600',
+        translated: true,
         keywords: ['hash', 'md5', 'sha', 'generator']
     },
     {
@@ -412,6 +443,7 @@ export const tools = [
         category: 'dev',
         icon: Key,
         color: 'bg-teal-700',
+        translated: true,
         keywords: ['uuid', 'guid', 'generator', 'unique']
     },
     {
@@ -422,6 +454,7 @@ export const tools = [
         category: 'dev',
         icon: Link,
         color: 'bg-blue-500',
+        translated: true,
         keywords: ['url', 'encoder', 'decoder', 'encode', 'decode']
     },
     {
@@ -432,6 +465,7 @@ export const tools = [
         category: 'dev',
         icon: Key,
         color: 'bg-yellow-500',
+        translated: true,
         keywords: ['jwt', 'decoder', 'token', 'json', 'web']
     },
     {
@@ -442,6 +476,7 @@ export const tools = [
         category: 'dev',
         icon: Search,
         color: 'bg-purple-500',
+        translated: true,
         keywords: ['regex', 'regular', 'expression', 'tester']
     },
     {
@@ -452,6 +487,7 @@ export const tools = [
         category: 'dev',
         icon: Type,
         color: 'bg-green-800',
+        translated: true,
         keywords: ['ascii', 'art', 'text']
     },
     {
@@ -462,6 +498,7 @@ export const tools = [
         category: 'dev',
         icon: FileCode,
         color: 'bg-lime-800',
+        translated: true,
         keywords: ['ascii', 'table', 'code']
     },
     {
@@ -472,6 +509,7 @@ export const tools = [
         category: 'dev',
         icon: Hash,
         color: 'bg-emerald-800',
+        translated: true,
         keywords: ['special', 'character', 'symbol']
     },
     {
@@ -482,6 +520,7 @@ export const tools = [
         category: 'dev',
         icon: Clock,
         color: 'bg-blue-600',
+        translated: true,
         keywords: ['cron', 'schedule', 'expression', 'generator', '스케줄']
     },
     {
@@ -492,6 +531,7 @@ export const tools = [
         category: 'dev',
         icon: ArrowLeftRight,
         color: 'bg-purple-600',
+        translated: true,
         keywords: ['csv', 'json', 'converter', '변환', 'data']
     },
     {
@@ -502,7 +542,8 @@ export const tools = [
         category: 'dev',
         icon: Divide,
         color: 'bg-violet-600',
-        keywords: ['분수', '계산기', '나누기']
+        translated: true,
+        keywords: ['fraction calculator', 'math', 'simplify', 'decimal to fraction']
     },
     {
         id: 'encryption-tool',
@@ -512,6 +553,7 @@ export const tools = [
         category: 'dev',
         icon: Lock,
         color: 'bg-red-600',
+        translated: true,
         keywords: ['암호화', '복호화', 'aes']
     },
 
@@ -524,6 +566,7 @@ export const tools = [
         category: 'utility',
         icon: QrCode,
         color: 'bg-orange-500',
+        translated: true,
         keywords: ['qr', 'code', 'generator']
     },
     {
@@ -534,6 +577,7 @@ export const tools = [
         category: 'utility',
         icon: Barcode,
         color: 'bg-orange-600',
+        translated: true,
         keywords: ['barcode', 'generator']
     },
     {
@@ -544,6 +588,7 @@ export const tools = [
         category: 'utility',
         icon: Lock,
         color: 'bg-red-600',
+        translated: true,
         keywords: ['password', 'generator', 'random']
     },
     {
@@ -554,6 +599,7 @@ export const tools = [
         category: 'utility',
         icon: Palette,
         color: 'bg-amber-600',
+        translated: true,
         keywords: ['color', 'picker', 'hex', 'rgb']
     },
     {
@@ -564,6 +610,7 @@ export const tools = [
         category: 'utility',
         icon: Lightbulb,
         color: 'bg-yellow-700',
+        translated: true,
         keywords: ['image', 'base64', 'encode']
     },
     {
@@ -574,6 +621,7 @@ export const tools = [
         category: 'utility',
         icon: Globe,
         color: 'bg-orange-700',
+        translated: true,
         keywords: ['ip', 'address', 'location']
     },
     {
@@ -584,6 +632,7 @@ export const tools = [
         category: 'utility',
         icon: Timer,
         color: 'bg-amber-700',
+        translated: true,
         keywords: ['timer', 'stopwatch', 'alarm']
     },
     {
@@ -594,6 +643,7 @@ export const tools = [
         category: 'utility',
         icon: Timer,
         color: 'bg-red-500',
+        translated: true,
         keywords: ['pomodoro', 'timer', 'focus', 'study']
     },
     {
@@ -604,7 +654,8 @@ export const tools = [
         category: 'utility',
         icon: CheckSquare,
         color: 'bg-yellow-600',
-        keywords: ['checklist', 'todo', 'task']
+        translated: true,
+        keywords: ['checklist', 'todo', 'task manager']
     },
     {
         id: 'flashlight',
@@ -624,6 +675,7 @@ export const tools = [
         category: 'utility',
         icon: ImageIcon,
         color: 'bg-orange-700',
+        translated: true,
         keywords: ['image', 'resize', 'compress']
     },
     {
@@ -644,6 +696,7 @@ export const tools = [
         category: 'utility',
         icon: Grid3X3,
         color: 'bg-sky-500',
+        translated: true,
         keywords: ['만다라트', 'mandalart', '목표계획', '플래너']
     },
     {
@@ -654,7 +707,8 @@ export const tools = [
         category: 'utility',
         icon: Palette,
         color: 'bg-pink-500',
-        keywords: ['색상추출', '팔레트', '이미지분석']
+        translated: true,
+        keywords: ['color extractor', 'palette', 'image analysis']
     },
     {
         id: 'world-clock',
@@ -662,6 +716,7 @@ export const tools = [
         description: '주요 도시의 현재 시간 확인',
         path: '/world-clock',
         category: 'utility',
+        translated: true,
         icon: Globe,
         color: 'bg-indigo-600',
         keywords: ['세계시간', 'timezone', '시계']
@@ -676,7 +731,8 @@ export const tools = [
         category: 'health',
         icon: Activity,
         color: 'bg-green-500',
-        keywords: ['bmi', '비만도', '건강']
+        translated: true,
+        keywords: ['bmi', 'body mass index', 'health']
     },
     {
         id: 'bmr',
@@ -686,7 +742,8 @@ export const tools = [
         category: 'health',
         icon: Flame,
         color: 'bg-orange-500',
-        keywords: ['bmr', '기초대사량', '칼로리', '건강계산기']
+        translated: true,
+        keywords: ['bmr', 'tdee', 'calorie']
     },
     {
         id: 'biorhythm',
@@ -696,7 +753,8 @@ export const tools = [
         category: 'health',
         icon: Activity,
         color: 'bg-rose-500',
-        keywords: ['바이오리듬', '오늘의상태', '신체주기']
+        translated: true,
+        keywords: ['biorhythm', 'cycles', 'health trend', 'condition']
     },
     {
         id: 'life-expectancy',
@@ -706,7 +764,8 @@ export const tools = [
         category: 'health',
         icon: Heart,
         color: 'bg-pink-500',
-        keywords: ['기대수명', '수명테스트', '건강관리']
+        translated: true,
+        keywords: ['life expectancy', 'longevity', 'health quiz', 'lifestyle']
     },
 
     // Mini Games
@@ -718,6 +777,7 @@ export const tools = [
         category: 'games',
         icon: Zap,
         color: 'bg-yellow-500',
+        translated: true,
         keywords: ['반응속도', '순발력', '게임', 'reaction', 'test']
     },
     {
@@ -728,6 +788,7 @@ export const tools = [
         category: 'games',
         icon: Keyboard,
         color: 'bg-indigo-500',
+        translated: true,
         keywords: ['타자', '영타', '한타', 'wpm', 'typing', 'test', '한글', '영어']
     },
     {
@@ -738,6 +799,7 @@ export const tools = [
         category: 'games',
         icon: Trophy,
         color: 'bg-yellow-500',
+        translated: true,
         keywords: ['1to50', 'game', 'speed', 'touch']
     },
     {
@@ -748,6 +810,7 @@ export const tools = [
         category: 'games',
         icon: MousePointer2,
         color: 'bg-blue-500',
+        translated: true,
         keywords: ['cps', 'click', 'speed', 'test']
     },
     {
@@ -758,6 +821,7 @@ export const tools = [
         category: 'games',
         icon: Crosshair,
         color: 'bg-red-500',
+        translated: true,
         keywords: ['aim', 'fps', 'training', 'mouse']
     },
     {
@@ -768,6 +832,7 @@ export const tools = [
         category: 'games',
         icon: Brain,
         color: 'bg-pink-500',
+        translated: true,
         keywords: ['memory', 'number', 'brain', 'test']
     },
     {
@@ -778,6 +843,7 @@ export const tools = [
         category: 'games',
         icon: Target,
         color: 'bg-green-500',
+        translated: true,
         keywords: ['baseball', 'number', 'game', 'bulls', 'cows']
     },
     {
@@ -788,6 +854,7 @@ export const tools = [
         category: 'games',
         icon: Bomb,
         color: 'bg-gray-600',
+        translated: true,
         keywords: ['minesweeper', 'mine', 'puzzle', 'game']
     },
     {
@@ -798,6 +865,7 @@ export const tools = [
         category: 'games',
         icon: Disc,
         color: 'bg-purple-500',
+        translated: true,
         keywords: ['roulette', 'random', 'choice', 'game']
     },
     {
@@ -808,6 +876,7 @@ export const tools = [
         category: 'games',
         icon: Gamepad2,
         color: 'bg-green-500',
+        translated: true,
         keywords: ['수박게임', 'suika', '머지퍼즐']
     },
     {
@@ -818,6 +887,7 @@ export const tools = [
         category: 'games',
         icon: Trophy,
         color: 'bg-yellow-500',
+        translated: true,
         keywords: ['2048', 'puzzle', 'game', 'number', '퍼즐']
     },
     {
@@ -828,6 +898,7 @@ export const tools = [
         category: 'games',
         icon: GitCommit,
         color: 'bg-green-600',
+        translated: true,
         keywords: ['ladder', 'random', 'game', 'bet']
     },
     {
@@ -838,6 +909,7 @@ export const tools = [
         category: 'games',
         icon: Utensils,
         color: 'bg-red-500',
+        translated: true,
         keywords: ['tanghulu', 'game', 'stack', '탕후루', '게임']
     },
     {
@@ -848,6 +920,7 @@ export const tools = [
         category: 'games',
         icon: Gamepad2,
         color: 'bg-gray-700',
+        translated: true,
         keywords: ['missile', 'dodge', 'game', 'avoid', '미사일', '피하기']
     },
     {
@@ -858,6 +931,7 @@ export const tools = [
         category: 'games',
         icon: Bird,
         color: 'bg-sky-400',
+        translated: true,
         keywords: ['flappy', 'bird', 'game', '파닥파닥', '플래피버드']
     },
     {
@@ -868,6 +942,7 @@ export const tools = [
         category: 'games',
         icon: Activity,
         color: 'bg-emerald-500',
+        translated: true,
         keywords: ['snake', '뱀게임', '고전게임']
     },
     {
@@ -878,6 +953,7 @@ export const tools = [
         category: 'games',
         icon: Grid3X3,
         color: 'bg-blue-500',
+        translated: true,
         keywords: ['스도쿠', 'sudoku', '퍼즐']
     },
     {
@@ -888,6 +964,7 @@ export const tools = [
         category: 'games',
         icon: Layers,
         color: 'bg-indigo-500',
+        translated: true,
         keywords: ['tower', 'stack', 'balancing']
     },
     {
@@ -898,6 +975,7 @@ export const tools = [
         category: 'games',
         icon: Dices,
         color: 'bg-purple-600',
+        translated: true,
         keywords: ['주사위', 'dice', 'random']
     },
     {
@@ -908,6 +986,7 @@ export const tools = [
         category: 'games',
         icon: Timer,
         color: 'bg-teal-500',
+        translated: true,
         keywords: ['시간감각', '10초맞추기', 'test']
     },
     {
@@ -918,6 +997,7 @@ export const tools = [
         category: 'games',
         icon: Music,
         color: 'bg-indigo-600',
+        translated: true,
         keywords: ['절대음감', '음감', '테스트']
     },
     {
@@ -928,6 +1008,7 @@ export const tools = [
         category: 'games',
         icon: Globe,
         color: 'bg-blue-600',
+        translated: true,
         keywords: ['수도', '퀴즈', '상식', 'geography']
     },
     {
@@ -938,6 +1019,7 @@ export const tools = [
         category: 'games',
         icon: Keyboard,
         color: 'bg-rose-500',
+        translated: true,
         keywords: ['타자연습', '산성비', '디펜스']
     },
     {
@@ -948,6 +1030,7 @@ export const tools = [
         category: 'games',
         icon: HelpCircle,
         color: 'bg-gray-600',
+        translated: true,
         keywords: ['hangman', '행맨', '단어맞추기']
     },
     {
@@ -958,6 +1041,7 @@ export const tools = [
         category: 'games',
         icon: Zap,
         color: 'bg-yellow-600',
+        translated: true,
         keywords: ['암산', '수학', '두뇌훈련']
     },
     {
@@ -968,6 +1052,7 @@ export const tools = [
         category: 'games',
         icon: Disc,
         color: 'bg-blue-400',
+        translated: true,
         keywords: ['뾱뾱이', '스트레스해소', '힐링게임']
     },
     {
@@ -978,6 +1063,7 @@ export const tools = [
         category: 'games',
         icon: Eye,
         color: 'bg-indigo-500',
+        translated: true,
         keywords: ['동체시력', '시력테스트', '순발력']
     },
 
@@ -990,6 +1076,7 @@ export const tools = [
         category: 'fun',
         icon: Sparkles,
         color: 'bg-yellow-500',
+        translated: true,
         keywords: ['로또', '행운번호', '추첨']
     },
     {
@@ -1130,6 +1217,7 @@ export const tools = [
         category: 'fun',
         icon: User,
         color: 'bg-blue-400',
+        translated: true,
         keywords: ['정신연령', '두뇌나이', '테스트']
     },
     {
@@ -1140,6 +1228,7 @@ export const tools = [
         category: 'fun',
         icon: Brain,
         color: 'bg-pink-300',
+        translated: true,
         keywords: ['뇌구조', '심리상태', '생각']
     },
     {
@@ -1190,6 +1279,7 @@ export const tools = [
         category: 'fun',
         icon: Dog,
         color: 'bg-orange-600',
+        translated: true,
         keywords: ['동물상', '강아지상', '고양이상']
     },
     {
@@ -1210,6 +1300,7 @@ export const tools = [
         category: 'fun',
         icon: Heart,
         color: 'bg-red-500',
+        translated: true,
         keywords: ['이상형', '연애심리', '월드컵']
     },
     {
@@ -1240,6 +1331,7 @@ export const tools = [
         category: 'fun',
         icon: Scale,
         color: 'bg-indigo-500',
+        translated: true,
         keywords: ['밸런스게임', '심리', '선택']
     },
     {
@@ -1260,6 +1352,7 @@ export const tools = [
         category: 'fun',
         icon: Palette,
         color: 'bg-gradient-to-r from-red-400 via-green-400 to-blue-400',
+        translated: true,
         keywords: ['색감', '예민도', '시각테스트']
     },
     {
@@ -1270,6 +1363,7 @@ export const tools = [
         category: 'fun',
         icon: Ear,
         color: 'bg-cyan-600',
+        translated: true,
         keywords: ['청력나이', '귀테스트', '청력']
     },
     {
@@ -1310,7 +1404,8 @@ export const tools = [
         category: 'fun',
         icon: Brain,
         color: 'bg-indigo-700',
-        keywords: ['좌뇌우뇌', '두뇌유형', '심리']
+        translated: true,
+        keywords: ['좌뇌우뇌', '두뇌테스트', '심리']
     },
     {
         id: 'eq-test',
@@ -1340,6 +1435,7 @@ export const tools = [
         category: 'fun',
         icon: User,
         color: 'bg-stone-600',
+        translated: true,
         keywords: ['꼰대', '심리테스트', '조직문화']
     },
     {
@@ -1350,6 +1446,7 @@ export const tools = [
         category: 'fun',
         icon: HelpingHand,
         color: 'bg-orange-300',
+        translated: true,
         keywords: ['호구', '성격테스트', '인간관계']
     },
     {

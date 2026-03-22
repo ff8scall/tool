@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-
 import { Share2, RefreshCw, Heart, Sparkles, Coffee, Sun, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const IdealType = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [step, setStep] = useState(0);
     const [scores, setScores] = useState({
         cute: 0,
@@ -15,7 +17,7 @@ const IdealType = () => {
     });
     const [result, setResult] = useState(null);
 
-    const questions = [
+    const questionsKo = [
         {
             id: 1,
             question: "처음 이성을 볼 때 가장 먼저 눈길이 가는 곳은?",
@@ -88,15 +90,132 @@ const IdealType = () => {
         }
     ];
 
-    const types = {
+    const questionsEn = [
+        {
+            id: 1,
+            question: "What's the first thing you notice in someone of the opposite sex?",
+            answers: [
+                { text: "Kind eyes that disappear when laughing", type: "cute", score: 2 },
+                { text: "A well-managed, great physique", type: "sexy", score: 2 },
+                { text: "Clean and neat outfit", type: "smart", score: 2 },
+                { text: "A smile that makes you feel good just by looking", type: "fresh", score: 2 }
+            ]
+        },
+        {
+            id: 2,
+            question: "What's your ideal weekend date with your partner?",
+            answers: [
+                { text: "Wearing school uniforms and playing at an amusement park", type: "fresh", score: 2 },
+                { text: "Having a deep conversation at a nice wine bar", type: "sexy", score: 2 },
+                { text: "Viewing an exhibition and then going to a trendy cafe", type: "smart", score: 2 },
+                { text: "Cooking something delicious and lounging at home", type: "reliable", score: 2 }
+            ]
+        },
+        {
+            id: 3,
+            question: "What's an unexpected charm that makes you fall for someone?",
+            answers: [
+                { text: "When they solve a difficult problem effortlessly", type: "smart", score: 2 },
+                { text: "When they try hard for me even if they're clumsy", type: "cute", score: 2 },
+                { text: "A tsundere moment where they take care of me indifferently", type: "reliable", score: 2 },
+                { text: "Their professional gaze while focused on work", type: "sexy", score: 2 }
+            ]
+        },
+        {
+            id: 4,
+            question: "What's the most important thing you value in a relationship?",
+            answers: [
+                { text: "Constant expressions of affection", type: "cute", score: 2 },
+                { text: "Excitement and tension", type: "sexy", score: 2 },
+                { text: "Good chemistry and conversation", type: "fresh", score: 2 },
+                { text: "Trust and reliance on each other", type: "reliable", score: 2 }
+            ]
+        },
+        {
+            id: 5,
+            question: "What would you want the person you're flirting with to do for you?",
+            answers: [
+                { text: "Dropping me off in front of my house late at night", type: "reliable", score: 2 },
+                { text: "Showing a cute jealous side", type: "cute", score: 2 },
+                { text: "Making a list of best restaurants and taking me there", type: "smart", score: 2 },
+                { text: "Surprising me with flowers suddenly", type: "fresh", score: 2 }
+            ]
+        },
+        {
+            id: 6,
+            question: "What's your dating style?",
+            answers: [
+                { text: "I prefer being led rather than leading", type: "sexy", score: 2 },
+                { text: "I like a comfortable relationship like friends", type: "fresh", score: 2 },
+                { text: "A mature relationship where we support each other's growth", type: "smart", score: 2 },
+                { text: "I want to take care of them like a child", type: "cute", score: 2 }
+            ]
+        },
+        {
+            id: 7,
+            question: "Finally, what's your dream perfect ideal type?",
+            answers: [
+                { text: "A puppy-like person who only looks at me", type: "cute", score: 2 },
+                { text: "A mentor-like person who is mature and has much to learn from", type: "smart", score: 2 },
+                { text: "A tree-like person who is always on my side and solid", type: "reliable", score: 2 },
+                { text: "A charming person who keeps me on my toes", type: "sexy", score: 2 }
+            ]
+        }
+    ];
+
+    const questions = isEn ? questionsEn : questionsKo;
+
+    const typesEn = {
+        cute: {
+            name: "Warm-hearted Puppy Type",
+            description: "Your ideal type is a cute and lovely 'puppy-like' person! You are attracted to someone who is honest in expressing feelings and looks only at you like a sunflower. You have a weakness for cute charms where they take care of small things and want to be together always.",
+            traits: ["#FullOfCharm", "#PureHeart", "#Lover", "#GoldenRetrieverVibes"],
+            color: "text-amber-500",
+            icon: Heart,
+            bg: "bg-amber-100 dark:bg-amber-900/30"
+        },
+        sexy: {
+            name: "Fatal Wolf/Fox Type",
+            description: "You're attracted to someone with a fatal charm where you can't let your guard down. You feel excited by someone with a sexy aura, charisma, and irresistible charm. You're the type to dream of a fiery love rather than an ordinary one!",
+            traits: ["#FatalCharm", "#SexyAndDaring", "#Charisma", "#HeartThrob"],
+            color: "text-red-600",
+            icon: Sparkles,
+            bg: "bg-red-100 dark:bg-red-900/30"
+        },
+        reliable: {
+            name: "Reliable Teddy Bear Type",
+            description: "You prefer someone like a solid tree who silently stays by your side. Your ideal is someone who has few emotional ups and downs and a broad heart to warmly embrace you. You pursue a comfortable relationship where you can be yourself the most when together.",
+            traits: ["#Reliable", "#Trustworthy", "#KingOfCaring", "#No1MarriagePartner"],
+            color: "text-emerald-600",
+            icon: Coffee,
+            bg: "bg-emerald-100 dark:bg-emerald-900/30"
+        },
+        fresh: {
+            name: "Refreshing Fruity Type",
+            description: "You're attracted to someone like a human vitamin who makes you feel good just by looking. You're looking for someone who will breathe vitality into your life with positive energy and a pleasant personality. A relationship where you can laugh like friends is perfect!",
+            traits: ["#HumanVitamin", "#MoodMaker", "#PositivityKing", "#HumorSense"],
+            color: "text-orange-500",
+            icon: Sun,
+            bg: "bg-orange-100 dark:bg-orange-900/30"
+        },
+        smart: {
+            name: "Smart 'Brainy' Type",
+            description: "You feel attracted to a smart person who has much to learn from and is passionate about their work. You aim for a mature relationship where intellectual conversation flows and you can support each other's growth. You're the type to find sexiness in a professional appearance!",
+            traits: ["#Brainy", "#SelfManagement", "#Intellectual", "#MatureCharm"],
+            color: "text-indigo-600",
+            icon: BookOpen,
+            bg: "bg-indigo-100 dark:bg-indigo-900/30"
+        }
+    };
+
+    const typesKo = {
         cute: {
             name: "다정다감 댕댕이파 (Cute)",
             description: "당신의 이상형은 애교 많고 사랑스러운 '댕댕이' 같은 사람입니다! 표현에 솔직하고 당신만 바라보는 해바라기 같은 연인에게 마음이 끌리네요. 사소한 것까지 챙겨주고 항상 붙어있고 싶어하는 귀여운 매력에 약하신 편이군요.",
             traits: ["#애교만점", "#순정파", "#사랑꾼", "#대형견재질"],
             color: "text-amber-500",
             icon: Heart,
-            bg: "bg-amber-100 dark:bg-amber-900/30",
-            match: "고양이상"
+            bg: "bg-amber-100 dark:bg-amber-900/30"
         },
         sexy: {
             name: "치명적인 늑대/여우파 (Sexy)",
@@ -104,8 +223,7 @@ const IdealType = () => {
             traits: ["#치명적", "#섹시도발", "#카리스마", "#심쿵유발"],
             color: "text-red-600",
             icon: Sparkles,
-            bg: "bg-red-100 dark:bg-red-900/30",
-            match: "곰상"
+            bg: "bg-red-100 dark:bg-red-900/30"
         },
         reliable: {
             name: "든든한 곰돌이파 (Reliable)",
@@ -113,8 +231,7 @@ const IdealType = () => {
             traits: ["#듬직함", "#신뢰감", "#배려왕", "#결혼상대1위"],
             color: "text-emerald-600",
             icon: Coffee,
-            bg: "bg-emerald-100 dark:bg-emerald-900/30",
-            match: "토끼상"
+            bg: "bg-emerald-100 dark:bg-emerald-900/30"
         },
         fresh: {
             name: "상큼발랄 과즙파 (Fresh)",
@@ -122,8 +239,7 @@ const IdealType = () => {
             traits: ["#비타민", "#분위기메이커", "#긍정왕", "#유머감각"],
             color: "text-orange-500",
             icon: Sun,
-            bg: "bg-orange-100 dark:bg-orange-900/30",
-            match: "강아지상"
+            bg: "bg-orange-100 dark:bg-orange-900/30"
         },
         smart: {
             name: "스마트한 뇌섹남녀파 (Smart)",
@@ -131,10 +247,11 @@ const IdealType = () => {
             traits: ["#뇌섹남녀", "#자기관리", "#지적임", "#어른미"],
             color: "text-indigo-600",
             icon: BookOpen,
-            bg: "bg-indigo-100 dark:bg-indigo-900/30",
-            match: "여우상"
+            bg: "bg-indigo-100 dark:bg-indigo-900/30"
         }
     };
+
+    const types = isEn ? typesEn : typesKo;
 
     const handleAnswer = (type, score) => {
         setScores(prev => ({
@@ -144,8 +261,6 @@ const IdealType = () => {
 
         if (step < questions.length - 1) {
             setStep(step + 1);
-        } else {
-            // Final step handled by handleFinalAnswer directly on click
         }
     };
 
@@ -167,18 +282,28 @@ const IdealType = () => {
     const shareResult = () => {
         if (navigator.share) {
             navigator.share({
-                title: '이상형 찾기 테스트',
-                text: `나의 이상형은: ${types[result].name}`,
+                title: isEn ? 'Ideal Type Test' : '이상형 찾기 테스트',
+                text: isEn ? `My ideal type is: ${types[result].name}` : `나의 이상형은: ${types[result].name}`,
                 url: window.location.href,
             });
         } else {
-            alert('링크가 복사되었습니다!');
+            alert(isEn ? 'Link copied!' : '링크가 복사되었습니다!');
             navigator.clipboard.writeText(window.location.href);
         }
     };
 
-    
-    const toolFaqs = [
+    const toolFaqsEn = [
+        {
+            "q": "How does the Ideal Type Test work?",
+            "a": "It analyzes your usual dating tendencies, contact frequency, and ways of expressing affection to match you with the type of person who best complements or matches you."
+        },
+        {
+            "q": "What if my current partner is different from the result?",
+            "a": "There is no right answer in love! The process of adjusting to each other's shortcomings is more important, so please enjoy the test results just for fun."
+        }
+    ];
+
+    const toolFaqsKo = [
         {
             "q": "이상형 찾기 테스트는 어떤 로직인가요?",
             "a": "본인의 평소 데이트 성향, 연락 빈도, 애정 표현 방식을 분석하여 이를 가장 잘 보완해주거나 잘 맞는 이성 타입을 매칭해주는 로직입니다."
@@ -188,33 +313,50 @@ const IdealType = () => {
             "a": "연애에는 정답이 없습니다! 서로 부족한 점을 맞춰가는 과정이 더 중요하니, 재미있는 테스트 결과로만 즐겨주세요."
         }
     ];
-    const toolSteps = [
+
+    const toolStepsEn = [
+        "Answer questions about your preferred date locations, response styles, and ways of celebrating anniversaries.",
+        "Click the button after completing all items.",
+        "Check descriptions and characteristic hashtags of your 'ideal type of destiny' who harmonizes with you the most."
+    ];
+
+    const toolStepsKo = [
         "내가 선호하는 데이트 장소, 카톡 답장 스타일, 기념일 챙기는 방식 등에 대한 질문에 답합니다.",
         "모든 문항을 마치고 버튼을 누릅니다.",
         "나에게 가장 잘 조화되는 '운명의 이상형'의 묘사와 특징 해시태그를 확인합니다."
     ];
-    const toolTips = [
+
+    const toolTipsEn = [
+        "Use this as a great opportunity to test each other's ideal types with your partner and talk about the dating style each of you wants.",
+        "It's also interesting to compare what ideal type results you and your friends received."
+    ];
+
+    const toolTipsKo = [
         "연인과 함께 서로의 이상형을 테스트해 보고, 각자가 원하는 연애 스타일을 대화로 나눠보는 좋은 기회로 삼으세요.",
         "친구들과 어떤 이상형 결과를 받았는지 서로 비교해 보는 것도 흥미롭습니다."
     ];
 
+    const toolFaqs = isEn ? toolFaqsEn : toolFaqsKo;
+    const toolSteps = isEn ? toolStepsEn : toolStepsKo;
+    const toolTips = isEn ? toolTipsEn : toolTipsKo;
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title="이상형 찾기 테스트 | 나에게 딱 맞는 이상형은?"
-                description="나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."
-                keywords="이상형테스트, 연애테스트, 이상형찾기, 심리테스트, 연애스타일"
-                category="운세/재미"
+                title={isEn ? "Ideal Type Test | Who's your perfect match? | Tool Hive" : "이상형 찾기 테스트 | 나에게 딱 맞는 이상형은? | Tool Hive"}
+                description={isEn ? "Find your ideal type based on your dating style! Find the style you're destined to be attracted to, from warm-hearted puppy to sexy fox." : "나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."}
+                keywords={isEn ? "ideal type test, dating test, find ideal type, psychological test, dating style" : "이상형테스트, 연애테스트, 이상형찾기, 심리테스트, 연애스타일"}
+                category={isEn ? "Fun" : "운세/재미"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />
 
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 animate-fade-in">
-                    💘 이상형 찾기 테스트 💘
+                    {isEn ? '💘 Ideal Type Test 💘' : '💘 이상형 찾기 테스트 💘'}
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300">
-                    내 마음속 깊은 곳, 진짜 이상형은 누구일까?
+                    {isEn ? 'Who is your true ideal type deep in your heart?' : '내 마음속 깊은 곳, 진짜 이상형은 누구일까?'}
                 </p>
             </div>
 
@@ -222,7 +364,7 @@ const IdealType = () => {
                 {step < questions.length ? (
                     <div className="animate-fade-in">
                         <div className="mb-8 flex justify-between items-center">
-                            <span className="text-sm font-medium text-gray-500">Question {step + 1} / {questions.length}</span>
+                            <span className="text-sm font-medium text-gray-500">{isEn ? `Question ${step + 1} / ${questions.length}` : `질문 ${step + 1} / ${questions.length}`}</span>
                             <div className="w-1/2 h-2 bg-gray-200 rounded-full">
                                 <div
                                     className="h-full bg-pink-500 rounded-full transition-all duration-300"
@@ -254,7 +396,11 @@ const IdealType = () => {
                         </div>
 
                         <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-                            당신의 운명의 짝은 <br /><span className={types[result].color}>{types[result].name}</span>
+                            {isEn ? (
+                                <>Your partner of destiny is<br /><span className={types[result].color}>{types[result].name}</span></>
+                            ) : (
+                                <>당신의 운명의 짝은 <br /><span className={types[result].color}>{types[result].name}</span></>
+                            )}
                         </h2>
 
                         <div className="flex flex-wrap justify-center gap-2 mb-6 mt-4">
@@ -275,26 +421,24 @@ const IdealType = () => {
                                 className="flex items-center px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-xl font-bold transition-all"
                             >
                                 <RefreshCw className="w-5 h-5 mr-2" />
-                                다시하기
+                                {isEn ? 'Retry' : '다시하기'}
                             </button>
                             <button
                                 onClick={shareResult}
                                 className="flex items-center px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-xl font-bold shadow-lg shadow-pink-500/30 transition-all transform hover:-translate-y-1"
                             >
                                 <Share2 className="w-5 h-5 mr-2" />
-                                결과 공유
+                                {isEn ? 'Share Result' : '결과 공유'}
                             </button>
                         </div>
                     </div>
                 )}
             </div>
 
-            
-        
             <div className="mt-12">
                 <ToolGuide
-                    title="이상형 찾기 테스트 안내"
-                    intro="나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."
+                    title={isEn ? "Ideal Type Test Guide" : "이상형 찾기 테스트 안내"}
+                    intro={isEn ? "Find your ideal type based on your dating style! Find the style you're destined to be attracted to, from warm-hearted puppy to sexy fox." : "나의 연애 스타일로 알아보는 이상형 테스트! 다정다감 댕댕이, 섹시한 여우, 듬직한 곰돌이 등 나에게 운명처럼 끌리는 이성 스타일을 찾아보세요."}
                     steps={toolSteps}
                     tips={toolTips}
                     faqs={toolFaqs}

@@ -1,11 +1,15 @@
 import React from 'react';
 import { HelpCircle, Lightbulb, MessageCircle, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * ToolGuide Component
- * 도구의 사용법, 팁, FAQ 등을 아름답게 보여주는 SEO 최적화 컴포넌트
+ * Beautiful SEO-optimized component for tool usage, tips, and FAQs.
  */
 const ToolGuide = ({ title, intro, steps, tips, faqs }) => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
+
     return (
         <div className="mt-16 space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             {/* Header Section */}
@@ -28,7 +32,7 @@ const ToolGuide = ({ title, intro, steps, tips, faqs }) => {
                         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                             <HelpCircle size={24} />
                         </div>
-                        <h3 className="text-xl font-bold">사용 방법</h3>
+                        <h3 className="text-xl font-bold">{isEn ? 'How to Use' : '사용 방법'}</h3>
                     </div>
                     <div className="space-y-4">
                         {steps.map((step, index) => (
@@ -48,7 +52,7 @@ const ToolGuide = ({ title, intro, steps, tips, faqs }) => {
                         <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600">
                             <Lightbulb size={24} />
                         </div>
-                        <h3 className="text-xl font-bold">전문가 팁</h3>
+                        <h3 className="text-xl font-bold">{isEn ? 'Professional Tips' : '전문가 팁'}</h3>
                     </div>
                     <div className="grid grid-cols-1 gap-4">
                         {tips.map((tip, index) => (
@@ -70,7 +74,7 @@ const ToolGuide = ({ title, intro, steps, tips, faqs }) => {
                         <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
                             <MessageCircle size={24} />
                         </div>
-                        <h3 className="text-xl font-bold">자주 묻는 질문 (FAQ)</h3>
+                        <h3 className="text-xl font-bold">{isEn ? 'Frequently Asked Questions (FAQ)' : '자주 묻는 질문 (FAQ)'}</h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {faqs.map((faq, index) => (

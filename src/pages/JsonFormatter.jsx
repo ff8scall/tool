@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Copy, Check, FileCode } from 'lucide-react';
+import { Copy, Check, FileCode, Trash2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const JsonFormatter = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [error, setError] = useState('');
@@ -16,7 +20,7 @@ const JsonFormatter = () => {
             const formatted = JSON.stringify(parsed, null, 2);
             setOutput(formatted);
         } catch (err) {
-            setError('JSON 파싱 실패: ' + err.message);
+            setError((isEn ? 'JSON Parsing Failed: ' : 'JSON 파싱 실패: ') + err.message);
             setOutput('');
         }
     };
@@ -28,7 +32,7 @@ const JsonFormatter = () => {
             const minified = JSON.stringify(parsed);
             setOutput(minified);
         } catch (err) {
-            setError('JSON 파싱 실패: ' + err.message);
+            setError((isEn ? 'JSON Parsing Failed: ' : 'JSON 파싱 실패: ') + err.message);
             setOutput('');
         }
     };
@@ -44,88 +48,142 @@ const JsonFormatter = () => {
         try {
             JSON.parse(input);
             setError('');
-            setOutput('✅ 유효한 JSON입니다!');
+            setOutput(isEn ? '✅ Valid JSON! Structure is syntactically perfect.' : '✅ 유효한 JSON입니다! 구조에 결함이 없습니다.');
         } catch (err) {
-            setError('❌ 유효하지 않은 JSON: ' + err.message);
+            setError((isEn ? '❌ Invalid JSON: ' : '❌ 유효하지 않은 JSON: ') + err.message);
             setOutput('');
         }
     };
 
+    const handleClear = () => {
+        setInput('');
+        setOutput('');
+        setError('');
+    };
+
+    const titleText = isEn ? t('tools.json-formatter.title') : "JSON 뷰어/포맷터 - Utility Hub";
+    const descText = isEn 
+        ? t('tools.json-formatter.description')
+        : "JSON 데이터를 보기 좋게 포맷팅하거나 압축할 수 있습니다. JSON 유효성 검사 기능도 제공합니다.";
+    const keywordsText = isEn 
+        ? "json formatter, json minifier, beautify json, validate json, online dev tools" 
+        : "JSON, JSON 포맷터, JSON 뷰어, JSON 검증, JSON 압축, 개발자도구";
+
+    const faqs = isEn ? [
+        {
+            q: "Why does it say 'Invalid' even with correct-looking keys?",
+            a: "Standard JSON explicitly requires double quotes (\") for both keys and string values. Single quotes or missing quotes will naturally cause parsing errors."
+        },
+        {
+            q: "Does this handle nested objects or arrays?",
+            a: "Absolutely! Our tool recursively formats deeply nested JSON hierarchies with accurate two-space indentation for maximum readability."
+        }
+    ] : [
+        { "q": "JSON 형식이 유효하지 않다고 나옵니다.", "a": "마지막 항목 뒤에 불필요한 쉼표(,)가 있거나, 키 이름에 큰따옴표가 없는 경우, 혹은 홑따옴표(')를 사용한 경우에 오류가 자주 발생합니다." },
+        { "q": "입력한 데이터가 외부 서버로 전송되나요?", "a": "아니요, 모든 분석과 변환은 사용자의 브라우저 내에서만 이루어지며 어떤 데이터도 외부로 전송되거나 저장되지 않습니다." }
+    ];
+
+    const steps = isEn ? [
+        "Select the left input pane and paste your raw or malformed JSON payload.",
+        "Choose 'Format' to beautify with indentation, or 'Minify' to remove all whitespaces.",
+        "Click 'Validate' if you're purely checking for syntax errors or trailing commas.",
+        "Use the top right copy button on the output pane to grab the results."
+    ] : [
+        "좌측 입력창에 정리가 필요한 JSON 텍스트를 붙여넣으세요.",
+        "상단 '포맷팅' 버튼을 누르면 보기 좋게 들여쓰기된 결과를 즉시 확인할 수 있습니다.",
+        "데이터 크기를 줄이고 싶다면 '압축' 버튼을, 문법 오류만 찾고 싶다면 '검증' 버튼을 활용하세요.",
+        "우측 결과 화면의 '복사' 버튼으로 변환된 내용을 가져갑니다."
+    ];
+
     return (
         <div className="max-w-6xl mx-auto space-y-6">
             <SEO
-                title="JSON 뷰어/포맷터 - Utility Hub"
-                description="JSON 데이터를 보기 좋게 포맷팅하거나 압축할 수 있습니다. JSON 유효성 검사 기능도 제공합니다."
-                keywords="JSON, JSON 포맷터, JSON 뷰어, JSON 검증, JSON 압축"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
+                category="dev"
+                faqs={faqs}
+                steps={steps}
             />
 
-            <header className="text-center space-y-2">
-                <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
+            <header className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400 mb-2 border border-emerald-200 dark:border-emerald-800">
                     <FileCode className="w-8 h-8" />
-                    JSON 뷰어/포맷터
+                </div>
+                <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
+                    {isEn ? 'JSON Formatter & Validator' : 'JSON 뷰어/포맷터'}
                 </h1>
                 <p className="text-muted-foreground">
-                    JSON 데이터를 포맷팅하고 검증하세요
+                    {isEn ? 'Beautify, compress, and troubleshoot your JSON structures effortlessly.' : 'JSON 데이터를 포맷팅하고 검증하여 가독성을 높이세요'}
                 </p>
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Input */}
-                <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                    <label className="block text-sm font-medium">
-                        JSON 입력
-                    </label>
+                <div className="bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm">
+                    <div className="flex items-center justify-between">
+                        <label className="block text-sm font-bold text-muted-foreground uppercase tracking-wider">
+                            {isEn ? 'Source JSON' : 'JSON 원본'}
+                        </label>
+                        <button 
+                            onClick={handleClear}
+                            className="p-2 hover:bg-red-500/10 text-muted-foreground hover:text-red-500 rounded-lg transition-colors"
+                            title={isEn ? "Clear input" : "내용 지우기"}
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    </div>
                     <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder='{"name": "홍길동", "age": 30}'
-                        className="w-full h-96 px-4 py-3 bg-background border border-border rounded-lg resize-none font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder='{"name": "John", "age": 30, "admin": true}'
+                        className="w-full h-[450px] px-4 py-3 bg-background border-2 border-border/80 focus:border-emerald-500 rounded-xl resize-none font-mono text-sm focus:outline-none shadow-inner transition-colors"
                     />
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <button
                             onClick={formatJson}
                             disabled={!input.trim()}
-                            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:brightness-110 transition-all disabled:opacity-50 text-sm"
+                            className="px-4 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all disabled:opacity-50 font-bold shadow-md active:scale-95"
                         >
-                            포맷팅
+                            {isEn ? 'Beautify Format' : '가독성 포맷팅'}
                         </button>
                         <button
                             onClick={minifyJson}
                             disabled={!input.trim()}
-                            className="px-4 py-2 bg-secondary hover:bg-accent rounded-lg transition-colors disabled:opacity-50 text-sm"
+                            className="px-4 py-3 bg-secondary hover:bg-accent rounded-xl transition-colors disabled:opacity-50 font-bold border border-border"
                         >
-                            압축
+                            {isEn ? 'Minify Payload' : '한 줄 압축'}
                         </button>
                         <button
                             onClick={validateJson}
                             disabled={!input.trim()}
-                            className="px-4 py-2 bg-secondary hover:bg-accent rounded-lg transition-colors disabled:opacity-50 text-sm"
+                            className="px-4 py-3 bg-secondary hover:bg-accent rounded-xl transition-colors disabled:opacity-50 font-bold border border-border"
                         >
-                            검증
+                            {isEn ? 'Validate Check' : '문법 검증'}
                         </button>
                     </div>
                 </div>
 
                 {/* Output */}
-                <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+                <div className="bg-card border border-border rounded-xl p-6 space-y-4 shadow-sm">
                     <div className="flex items-center justify-between">
-                        <label className="block text-sm font-medium">
-                            결과
+                        <label className="block text-sm font-bold text-muted-foreground uppercase tracking-wider">
+                            {isEn ? 'Formatted Output' : '변환 결과'}
                         </label>
                         {output && !error && (
                             <button
                                 onClick={copyToClipboard}
-                                className="flex items-center gap-2 px-3 py-1 text-sm bg-secondary hover:bg-accent rounded-md transition-colors"
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all ${copied ? 'bg-green-500 text-white shadow-sm' : 'bg-secondary hover:bg-accent text-muted-foreground border border-border'}`}
                             >
                                 {copied ? (
                                     <>
-                                        <Check className="w-4 h-4 text-green-500" />
-                                        복사됨
+                                        <Check className="w-4 h-4" />
+                                        {isEn ? 'Copied' : '복사됨'}
                                     </>
                                 ) : (
                                     <>
                                         <Copy className="w-4 h-4" />
-                                        복사
+                                        {isEn ? 'Copy Results' : '결과 복사'}
                                     </>
                                 )}
                             </button>
@@ -134,45 +192,55 @@ const JsonFormatter = () => {
                     <textarea
                         value={output}
                         readOnly
-                        placeholder="결과가 여기에 표시됩니다"
-                        className="w-full h-96 px-4 py-3 bg-background border border-border rounded-lg resize-none font-mono text-sm focus:outline-none"
+                        placeholder={isEn ? "Formatted and cleaned JSON results will appear here..." : "변환된 결과가 여기에 표시됩니다"}
+                        className="w-full h-[450px] px-4 py-3 bg-background border-2 border-border/80 rounded-xl resize-none font-mono text-sm focus:outline-none shadow-inner"
                     />
                     {error && (
-                        <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-500 text-sm">
-                            {error}
+                        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-600 dark:text-red-400 text-xs break-all font-mono leading-relaxed animate-in fade-in slide-in-from-bottom-2">
+                             <span className="font-bold underline mr-2">ERROR:</span> {error}
                         </div>
                     )}
                 </div>
             </div>
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 사용 방법</h3>
-                <ul className="space-y-1 list-disc list-inside">
-                    <li>왼쪽에 JSON 데이터를 입력하세요.</li>
-                    <li>"포맷팅" 버튼: 들여쓰기를 추가하여 보기 좋게 정렬합니다.</li>
-                    <li>"압축" 버튼: 불필요한 공백을 제거하여 데이터 크기를 줄입니다.</li>
-                    <li>"검증" 버튼: JSON 형식이 올바른지 확인합니다.</li>
+            <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6 text-sm text-foreground space-y-4">
+                <h3 className="font-black text-lg flex items-center gap-2 text-emerald-700 dark:text-emerald-400">💡 {isEn ? 'Best Practice Guidelines' : 'JSON 작업 가이드'}</h3>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium text-muted-foreground">
+                    <li className="flex gap-2">
+                        <span className="text-emerald-500 font-bold">1.</span>
+                        <span>{isEn ? 'Always verify that every key is enclosed strictly in double quotes.' : 'JSON 표준 규격에서 키(Key)는 반드시 큰따옴표로 감싸야 합니다.'}</span>
+                    </li>
+                    <li className="flex gap-2">
+                        <span className="text-emerald-500 font-bold">2.</span>
+                        <span>{isEn ? 'Remove trailing commas from precisely the last item in an array or object block.' : '배열이나 객체의 마지막 항목 뒤에는 쉼표가 붙지 않도록 주의하세요.'}</span>
+                    </li>
+                    <li className="flex gap-2">
+                        <span className="text-emerald-500 font-bold">3.</span>
+                        <span>{isEn ? 'Use Minify for production deployment to reduce unnecessary byte transfer weight.' : '최종 서비스 배포 시에는 압축 모드를 사용하여 전송량을 줄이는 것이 좋습니다.'}</span>
+                    </li>
+                    <li className="flex gap-2">
+                        <span className="text-emerald-500 font-bold">4.</span>
+                        <span>{isEn ? 'Beautify mode is perfect for debugging and code review sessions during development.' : '포맷팅 기능을 이용하면 복잡한 데이터 구조를 한눈에 파악하기 매우 수월합니다.'}</span>
+                    </li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="JSON 포맷터"
-                intro="JSON 데이터 정리 및 검증"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+            
+            <ToolGuide
+                title={isEn ? "Advanced JSON Formatter Guide" : "JSON 포맷터 상세 가이드"}
+                intro={isEn 
+                    ? "Our utility provides a secure, locally-rendered interface to manage your JSON data perfectly. Designed for developers needing rapid debugging without data leaks." 
+                    : "개발자 및 데이터 관리자를 위해 기획된 JSON 통합 도구입니다. 복잡하게 얽힌 JSON 데이터를 사람이 읽기 편하게 정리하거나 기계가 처리하기 좋게 압축하세요."}
+                steps={steps}
+                tips={isEn ? [
+                    "JSON (JavaScript Object Notation) is natively the most popular open standard for data exchange.",
+                    "Our parser runs strictly on your machine's CPU, meaning sensitive tokens or secrets never leave your browser.",
+                    "If you encounter failures, look for missing brackets [] or braces {} which often break structural balance."
+                ] : [
+                    "JSON은 자바스크립트 객체 표기법에서 파생되었지만 현재 모든 언어에서 사용되는 표준 데이터 형식입니다.",
+                    "모든 작업은 브라우저 내에서만 완결되므로 API Key나 토큰 정보가 포함된 데이터도 안심하고 작업할 수 있습니다.",
+                    "구조가 깨진 것 같다면 중괄호{}와 대괄호[]의 짝이 잘 맞는지 가장 먼저 확인해 보세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={faqs}
             />
         </div>
     );

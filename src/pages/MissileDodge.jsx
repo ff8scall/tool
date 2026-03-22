@@ -1,14 +1,17 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { Gamepad2, Rocket, Trophy, Play, RotateCcw, Share2 } from 'lucide-react';
+import { Rocket, Trophy, Play, RotateCcw, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Missile Dodge Game (미사일 피하기)
  * Fixed size canvas within a responsive container.
  */
 const MissileDodge = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const planeRef = useRef({ x: 200, y: 500, width: 40, height: 40 });
@@ -75,6 +78,7 @@ const MissileDodge = () => {
         lastTimeRef.current = time;
 
         const canvas = canvasRef.current;
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
         // 1. Clear
@@ -172,24 +176,62 @@ const MissileDodge = () => {
         };
     }, [isPlaying, moveDir, resetGame]);
 
+    const toolFaqs = isEn ? [
+        { q: "How do I play Missile Dodge?", a: "Use your Left and Right arrow keys to move your spacecraft. Avoid the red missiles falling from the top. Every missile that passes you increases your score." },
+        { q: "Does the game get harder?", a: "Yes, as your score increases, the interval between missile spawns decreases, making the rain more intense." },
+        { q: "Can I play on mobile?", a: "Yes, you can tap the on-screen buttons to fly your mission even on the go." }
+    ] : [
+        { q: "미사일 피하기는 어떻게 플레이하나요?", a: "좌우 방향키를 사용하여 비행기를 움직여보세요. 위에서 떨어지는 붉은 미사일을 피하면 됩니다." },
+        { q: "점수가 오르면 더 어려워지나요?", a: "네, 점수가 올라갈수록 미사일이 생성되는 간격이 짧아져 피하기가 더 까다로워집니다." },
+        { q: "모바일에서도 가능한가요?", a: "네, 모바일 기기에서도 화면의 버튼을 터치하여 간편하게 플레이할 수 있습니다." }
+    ];
+
+    const toolSteps = isEn ? [
+        "Click the 'Engage Mission' button to start the game.",
+        "Use the Left and Right arrow keys (or on-screen buttons) to maneuver.",
+        "Avoid any contact with red missiles falling from above.",
+        "If you are hit, the mission ends. Try to beat your personal best!"
+    ] : [
+        "'작전 시작' 버튼을 눌러 비행 통제를 시작합니다.",
+        "키보드의 좌우 방향키 혹은 화면 하단의 큰 버튼을 터치하여 움직입니다.",
+        "붉은색 미사일은 충돌 즉시 폭발하므로 틈새를 정교하게 파고들어 피하세요.",
+        "충돌 시 작전이 종료되며, 획득한 최종 점수를 친구들에게 공유해보세요!"
+    ];
+
+    const toolTips = isEn ? [
+        "Focus on the missiles near the center of the screen to anticipate their paths.",
+        "Make micro-adjustments rather than holding the direction keys too long.",
+        "As the score goes up, the missiles spawn faster. Keep your focus high!",
+        "Use the side walls effectively to roll away from dense clusters."
+    ] : [
+        "화면 상단보다는 비행기 주변 1/3 지점에 시선을 두면 미사일 궤적을 예측하기 쉽습니다.",
+        "조금씩 끊어서 이동하는 미세 조종법이 대량의 미사일을 피할 때 유리합니다.",
+        "점수가 높아질수록 미사일 사이의 간격이 좁아지니 미리 한쪽 공간을 확보하세요.",
+        "모바일 터치 조작 시에는 리드미컬하게 버튼을 눌러 관성을 제어하는 것이 좋습니다."
+    ];
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-4">
             <SEO
-                title="미사일 피하기 - 유틸리티 허브"
-                description="하늘에서 떨어지는 미사일을 피하고 가장 오래 살아남으세요!"
-                keywords="미사일피하기, 게임, 플래시게임, dodge game, missile dodge"
+                title={isEn ? "Missile Dodge - Extreme Reflex Game | Tool Hive" : "미사일 피하기 - 극한의 순발력 게임 | Tool Hive"}
+                description={isEn ? "Avoid falling missiles and survive as long as you can! Test your reflexes in this high-intensity dodge game. Share your high scores with friends." : "하늘에서 떨어지는 미사일을 피하고 가장 오래 살아남으세요! 당신의 반사신경을 테스트해보세요."}
+                keywords={isEn ? "missile dodge, reflex game, survival game, arcade game, avoid game" : "미사일피하기, 게임, 플래시게임, dodge game, missile dodge"}
+                faqs={toolFaqs}
+                steps={toolSteps}
             />
 
-            <div className="max-w-md w-full bg-slate-800 rounded-3xl p-6 shadow-2xl border border-slate-700">
-                <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                        <Rocket className="text-blue-400" size={24} />
-                        <h1 className="text-2xl font-bold text-white">미사일 피하기</h1>
+            <div className="max-w-md w-full bg-slate-800 rounded-[2.5rem] p-6 shadow-2xl border-4 border-slate-700/50">
+                <div className="flex justify-between items-center mb-6 px-2">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 bg-blue-500/20 rounded-xl">
+                            <Rocket className="text-blue-400" size={24} />
+                        </div>
+                        <h1 className="text-2xl font-black text-white italic tracking-tighter uppercase italic">{isEn ? 'Missile Dodge' : '미사일 피하기'}</h1>
                     </div>
                     <div className="flex flex-col items-end">
-                        <div className="text-slate-400 text-xs uppercase font-semibold">Best Score</div>
-                        <div className="text-yellow-400 font-bold flex items-center gap-1 text-xl">
-                            <Trophy size={18} />
+                        <div className="text-slate-500 text-[9px] uppercase font-black tracking-widest leading-none mb-1">{isEn ? 'Best Score' : '최고 기록'}</div>
+                        <div className="text-yellow-400 font-black flex items-center gap-1 text-xl italic">
+                            <Trophy size={16} className="fill-current" />
                             {bestScore}
                         </div>
                     </div>
@@ -197,97 +239,109 @@ const MissileDodge = () => {
 
                 <div
                     ref={containerRef}
-                    className="relative bg-slate-950 rounded-2xl overflow-hidden shadow-inner border border-slate-700 mx-auto"
+                    className="relative bg-black rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-700 mx-auto"
                     style={{ width: CANVAS_WIDTH, height: CANVAS_HEIGHT }}
                 >
                     <canvas
                         ref={canvasRef}
                         width={CANVAS_WIDTH}
                         height={CANVAS_HEIGHT}
-                        className="block bg-gradient-to-b from-slate-950 to-indigo-950"
+                        className="block bg-gradient-to-b from-slate-950 via-indigo-950 to-slate-950"
                     />
 
                     {/* Dashboard */}
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm px-4 py-1 rounded-full border border-slate-700">
-                        <span className="text-2xl font-black text-white">{score}</span>
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-slate-900/60 backdrop-blur-md px-6 py-2 rounded-2xl border border-white/10 shadow-xl">
+                        <span className="text-3xl font-black text-white italic font-mono">{score}</span>
                     </div>
 
                     {/* Start/GameOver Overlays */}
                     {!isPlaying && (
-                        <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center">
+                        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-300">
                             {gameOver ? (
-                                <>
-                                    <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mb-4 border border-red-500/30">
-                                        <RotateCcw className="text-red-400" size={40} />
+                                <div className="space-y-6 animate-in zoom-in-95 duration-500">
+                                    <div className="w-24 h-24 bg-rose-500/20 rounded-full flex items-center justify-center mx-auto border-2 border-rose-500/30 shadow-2xl shadow-rose-500/20 animate-pulse">
+                                        <RotateCcw className="text-rose-500" size={48} />
                                     </div>
-                                    <h2 className="text-3xl font-black text-white mb-2 uppercase tracking-tighter">Mission Failed</h2>
-                                    <p className="text-slate-400 mb-8 font-medium">최종 점수: <span className="text-white">{score}</span></p>
-                                    <button
-                                        onClick={resetGame}
-                                        className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-900/50 flex items-center justify-center gap-2"
-                                    >
-                                        <RotateCcw size={20} />
-                                        재도전 (Space)
-                                    </button>
-                                    <button
-                                        onClick={() => shareCanvas(containerRef.current, '미사일 피하기', score)}
-                                        className="w-full py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 mt-3"
-                                    >
-                                        <Share2 size={20} />
-                                        결과 공유하기
-                                    </button>
-                                </>
+                                    <div className="space-y-1">
+                                        <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter">{isEn ? 'Mission Failed' : '작전 실패'}</h2>
+                                        <p className="text-slate-400 font-black uppercase text-xs tracking-widest">{isEn ? 'Your Performance' : '최종 비행 점수'}</p>
+                                    </div>
+                                    <div className="text-6xl font-black text-white font-mono italic">{score}</div>
+                                    
+                                    <div className="flex flex-col gap-3 w-full max-w-[240px] mx-auto pt-4">
+                                        <button
+                                            onClick={resetGame}
+                                            className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-2 uppercase italic tracking-wider"
+                                        >
+                                            <RotateCcw size={20} />
+                                            {isEn ? 'Retry (Space)' : '재도전 (Space)'}
+                                        </button>
+                                        <button
+                                            onClick={() => shareCanvas(containerRef.current, isEn ? 'Missile Dodge' : '미사일 피하기', score)}
+                                            className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-black rounded-2xl transition-all flex items-center justify-center gap-2 uppercase text-sm tracking-widest"
+                                        >
+                                            <Share2 size={16} />
+                                            {isEn ? 'Share Intel' : '결과 공유하기'}
+                                        </button>
+                                    </div>
+                                </div>
                             ) : (
-                                <>
-                                    <div className="w-20 h-20 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 border border-blue-500/30">
-                                        <Play className="text-blue-400 ml-1" size={40} />
+                                <div className="space-y-6 animate-in zoom-in-95 duration-500">
+                                    <div className="w-24 h-24 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto border-2 border-blue-500/30 shadow-2xl shadow-blue-500/20">
+                                        <Play className="text-blue-400 ml-1" size={48} fill="currentColor" />
                                     </div>
-                                    <h2 className="text-3xl font-black text-white mb-2 uppercase tracking-tighter">Ready to Fly?</h2>
-                                    <p className="text-slate-400 mb-8 font-medium">방향키(←→)로 미사일을 피하세요!</p>
+                                    <div className="space-y-1">
+                                        <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter">{isEn ? 'Ready for Takeoff?' : '이륙 준비 완료?'}</h2>
+                                        <p className="text-slate-400 font-medium">{isEn ? 'Dodge missiles using Arrow keys (←→)' : '방향키(←→)를 움직여 미사일을 피하세요!'}</p>
+                                    </div>
                                     <button
                                         onClick={resetGame}
-                                        className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-900/50 flex items-center justify-center gap-2 uppercase tracking-widest"
+                                        className="w-full py-5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black rounded-3xl transition-all shadow-2xl shadow-blue-600/30 flex items-center justify-center gap-3 uppercase tracking-widest italic animate-pulse"
                                     >
-                                        <Play size={20} />
-                                        Start Mission
+                                        <Play size={24} fill="currentColor" />
+                                        {isEn ? 'Engage Mission' : '작전 시작'}
                                     </button>
-                                </>
+                                </div>
                             )}
                         </div>
                     )}
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                    <div className="bg-slate-900/50 p-3 rounded-xl border border-slate-700/50 text-center">
-                        <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Move Left</div>
-                        <div className="text-white font-medium text-sm">Arrow Left</div>
-                    </div>
-                    <div className="bg-slate-900/50 p-3 rounded-xl border border-slate-700/50 text-center">
-                        <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Move Right</div>
-                        <div className="text-white font-medium text-sm">Arrow Right</div>
-                    </div>
+                <div className="mt-8 grid grid-cols-2 gap-4">
+                    <button 
+                        onMouseDown={() => setMoveDir(-1)}
+                        onMouseUp={() => setMoveDir(0)}
+                        onMouseLeave={() => setMoveDir(0)}
+                        onTouchStart={() => setMoveDir(-1)}
+                        onTouchEnd={() => setMoveDir(0)}
+                        className="bg-slate-900 border-2 border-slate-700/50 hover:bg-slate-800 p-6 rounded-[2rem] text-center transition-all active:scale-95 active:bg-blue-500/10 active:border-blue-500/50 group"
+                    >
+                        <div className="text-blue-500/40 font-black uppercase tracking-widest text-[10px] mb-2 group-active:text-blue-400">{isEn ? 'Port' : '좌현'}</div>
+                        <div className="text-white font-black text-2xl">←</div>
+                    </button>
+                    <button 
+                        onMouseDown={() => setMoveDir(1)}
+                        onMouseUp={() => setMoveDir(0)}
+                        onMouseLeave={() => setMoveDir(0)}
+                        onTouchStart={() => setMoveDir(1)}
+                        onTouchEnd={() => setMoveDir(0)}
+                        className="bg-slate-900 border-2 border-slate-700/50 hover:bg-slate-800 p-6 rounded-[2rem] text-center transition-all active:scale-95 active:bg-blue-500/10 active:border-blue-500/50 group"
+                    >
+                        <div className="text-blue-500/40 font-black uppercase tracking-widest text-[10px] mb-2 group-active:text-blue-400">{isEn ? 'Starboard' : '우현'}</div>
+                        <div className="text-white font-black text-2xl">→</div>
+                    </button>
                 </div>
             </div>
-        \n            <ToolGuide
-                title="미사일 피하기"
-                intro="날아오는 미사일을 피해서 살아남으세요!"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
-                ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
-            />
+
+            <div className="mt-16 w-full max-w-4xl">
+                <ToolGuide
+                    title={isEn ? "Missile Dodge Survival Guide" : "미사일 피하기 작전 지침서"}
+                    intro={isEn ? "Test your cockpit reflexes in this high-intensity arcade survival game. Navigate your spacecraft through a rain of hostile missiles to secure the highest possible mission time." : "끊임없이 쏟아지는 적의 미사일을 피하며 살아남아야 하는 고전 아케이드 스타일의 게임입니다. 침착한 조종과 민첩한 순발력으로 최고 기록을 경신하고 전 세계 조종사들과 경쟁해 보세요!"}
+                    steps={toolSteps}
+                    tips={toolTips}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Copy, Check, Code, ArrowRightLeft, ShieldAlert } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const HtmlEncoder = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [mode, setMode] = useState('encode');
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
@@ -23,9 +27,9 @@ const HtmlEncoder = () => {
     };
 
     const decodeHtml = (text) => {
-        const textarea = document.createElement('textarea');
-        textarea.innerHTML = text;
-        return textarea.value;
+        // Safe DOM parser approach to prevent script execution during decode
+        const doc = new DOMParser().parseFromString(text, "text/html");
+        return doc.documentElement.textContent;
     };
 
     const handleConvert = () => {
@@ -50,159 +54,183 @@ const HtmlEncoder = () => {
         setTimeout(() => setCopied(false), 1500);
     };
 
-    const toolFaqs = [
+    const titleText = isEn ? "Online HTML Encoder & Decoder | Convert Entities - Utility Hub" : "HTML 인코더/디코더 | HTML 엔티티 변환 도구";
+    const descText = isEn 
+        ? "Safely encode and decode HTML entities securely natively preventing XSS vulnerabilities from script execution on your domains magically." 
+        : "HTML 특수문자를 안전하게 인코딩하거나 디코딩하세요. XSS 방지 및 소스 코드 표기에 필수적인 HTML 엔티티 변환 기능을 제공합니다.";
+    const keywordsText = isEn ? "html encoder, html decoder, html entity converter, prevent xss, escape html" : "html인코더, html디코더, html엔티티, 특수문자변환, html이스케이프, xss방지";
+
+    const faqs = isEn ? [
         {
-            "q": "HTML 인코딩(Encoding)은 왜 필요한가요?",
-            "a": "브라우저가 텍스트 내의 특수 문자(<, >, & 등)를 HTML 태그로 오해하여 렌더링하는 것을 방지하기 위함입니다. 또한 XSS(Cross-Site Scripting) 공격으로부터 웹사이트를 보호하는 보안 필수 과정입니다."
+            q: "Why is HTML encoding critical for site safety?",
+            a: "Browsers passively interpret tags inherently (like <script>). Encoding safely converts these strict characters into pure textual string sequences blocking cross-site scripting executions completely."
         },
         {
-            "q": "어떤 문자들을 변환해 주나요?",
-            "a": "기본적으로 태그 구분자(<, >), 앰퍼샌드(&), 따옴표(\", '), 그리고 슬래시(/)를 안전한 엔티티 코드로 변환합니다."
-        },
-        {
-            "q": "복잡한 HTML 코드도 전체 변환이 가능한가요?",
-            "a": "네, DIV나 SCRIPT 태그가 포함된 전체 소스 코드를 입력하면 해당 태그들이 웹 페이지 상에서 문자로 그대로 보이도록 안전하게 변환해 드립니다."
+            q: "Can I decode huge documents inside the browser?",
+            a: "Yes! Processing happens actively natively relying on modern front-end computational layers entirely securely handling extremely long files smoothly offline."
         }
+    ] : [
+        { "q": "HTML 인코딩(Encoding)은 왜 필요한가요?", "a": "브라우저가 텍스트 내의 특수 문자(<, >, & 등)를 HTML 태그로 오해하여 렌더링하는 것을 방지하기 위함입니다. 또한 XSS(Cross-Site Scripting) 공격으로부터 웹사이트를 보호하는 필수 과정입니다." },
+        { "q": "어떤 문자들을 변환해 주나요?", "a": "기본적으로 태그 구분자(<, >), 앰퍼샌드(&), 따옴표(\", '), 그리고 슬래시(/)를 안전한 엔티티 코드로 변환합니다." },
+        { "q": "복잡한 HTML 코드도 전체 변환이 가능한가요?", "a": "네, DIV나 SCRIPT 태그가 포함된 전체 소스 코드를 입력하면 해당 태그들이 웹 페이지 상에서 문자로 그대로 보이도록 안전하게 변환해 드립니다." }
     ];
 
-    const toolSteps = [
+    const steps = isEn ? [
+        "Pick strictly whether you'd love to precisely encode plain HTML text or rather decode back existing entities.",
+        "Paste payload nodes purely inside the primary left textbox field.",
+        "Click the heavy main convert trigger manually confirming transformations.",
+        "Grab the resulting encrypted character strings promptly clicking copy buttons attached securely."
+    ] : [
         "변환할 소스(원본 HTML 또는 엔티티 코드)를 입력창에 넣으세요.",
         "수행할 작업(인코딩/디코딩)을 모드 버튼으로 선택합니다.",
-        "인코딩/디코딩 버튼을 누르면 즉시 결과가 옆 창에 생성됩니다."
+        "수행 버튼을 누르면 즉시 결과가 화면 상에 생성됩니다.",
+        "우측 결과물 우측의 복사 버튼을 눌러 소스코드를 활용하세요."
     ];
 
-    const toolTips = [
+    const tips = isEn ? [
+        "Use encoding systematically across forums when trying actively displaying <script> code chunks gracefully preventing structural collapses.",
+        "Reversing encoded entities occasionally helps deeply analyze underlying invisible node injections originally nested deep inside codebases.",
+        "XSS purely depends highly entirely across missing strict entity sanitizations natively!"
+    ] : [
         "개발 중 로그 메시지에 HTML 태그를 포함시켜야 할 때 유용하게 활용할 수 있습니다.",
         "웹 게시판이나 블로그에 소스 코드를 포스팅할 때 인코딩된 결과를 복사하여 넣으시면 코드가 깨지지 않고 잘 보입니다.",
         "엔티티 코드(&lt; 등)를 실제 문자로 돌리고 싶다면 디코딩 모드를 활용하세요."
     ];
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="HTML 인코더/디코더 | HTML 엔티티 및 특수문자 변환 도구"
-                description="HTML 특수문자를 안전하게 인코딩하거나 디코딩하세요. XSS 방지 및 소스 코드 표기에 필수적인 HTML 엔티티 변환 기능을 실시간으로 제공합니다."
-                keywords="html인코더, html디코더, html엔티티, 특수문자변환, html이스케이프, xss방지, 웹개발도구"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
                 category="dev"
-                faqs={toolFaqs}
-                steps={toolSteps}
+                faqs={faqs}
+                steps={steps}
             />
 
-            <div className="text-center mb-10">
-                <div className="inline-flex items-center justify-center p-3 bg-emerald-600 rounded-2xl text-white mb-4 shadow-lg">
-                    <Code size={32} />
+            <div className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400 mb-2 border border-emerald-200 dark:border-emerald-800">
+                    <Code className="w-8 h-8" />
                 </div>
-                <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">
-                    HTML 인코딩/디코딩
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    {isEn ? 'HTML Entity Encoder / Decoder' : 'HTML 인코딩/디코딩'}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 text-lg">
-                    특수 문자를 안전한 HTML 엔티티로 즉시 변환하세요.
+                <p className="text-gray-600 dark:text-gray-400">
+                    {isEn ? 'Convert structural characters securely into native HTML entities dynamically offline.' : '특수 문자를 안전한 HTML 엔티티로 즉시 변환하세요.'}
                 </p>
             </div>
 
             {/* Mode Selector */}
-            <div className="flex justify-center items-center gap-3 mb-8">
+            <div className="flex justify-center items-center gap-3 bg-secondary/30 p-2 rounded-2xl w-fit mx-auto border border-border">
                 <button
                     onClick={() => setMode('encode')}
-                    className={`px-8 py-3 rounded-2xl font-black transition-all shadow-md active:scale-95 ${mode === 'encode'
-                        ? 'bg-emerald-600 text-white shadow-emerald-200 dark:shadow-none'
-                        : 'bg-white dark:bg-gray-800 text-gray-500 border border-gray-100 dark:border-gray-700 hover:bg-gray-50'
+                    className={`px-6 md:px-8 py-3 rounded-xl font-bold transition-all text-sm md:text-base ${mode === 'encode'
+                        ? 'bg-emerald-600 text-white shadow-md'
+                        : 'text-muted-foreground hover:bg-secondary/80 hover:text-foreground'
                     }`}
                 >
-                    인코딩 (Encode)
+                    {isEn ? 'Encode HTML' : '인코딩 (Encode)'}
                 </button>
                 <button
                     onClick={handleSwap}
-                    className="p-3 rounded-full bg-white dark:bg-gray-800 border-2 border-emerald-100 dark:border-emerald-900/30 text-emerald-600 hover:bg-emerald-50 transition-all shadow-sm active:rotate-180"
-                    title="입력/출력 바꾸기"
+                    className="p-3.5 rounded-xl bg-background border border-border hover:bg-secondary text-foreground hover:text-emerald-600 transition-all shadow-sm active:scale-95 group"
+                    title={isEn ? "Swap Modes" : "입력/출력 바꾸기"}
                 >
-                    <ArrowRightLeft size={20} />
+                    <ArrowRightLeft className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" />
                 </button>
                 <button
                     onClick={() => setMode('decode')}
-                    className={`px-8 py-3 rounded-2xl font-black transition-all shadow-md active:scale-95 ${mode === 'decode'
-                        ? 'bg-emerald-600 text-white shadow-emerald-200 dark:shadow-none'
-                        : 'bg-white dark:bg-gray-800 text-gray-500 border border-gray-100 dark:border-gray-700 hover:bg-gray-50'
+                    className={`px-6 md:px-8 py-3 rounded-xl font-bold transition-all text-sm md:text-base ${mode === 'decode'
+                        ? 'bg-emerald-600 text-white shadow-md'
+                        : 'text-muted-foreground hover:bg-secondary/80 hover:text-foreground'
                     }`}
                 >
-                    디코딩 (Decode)
+                    {isEn ? 'Decode Entities' : '디코딩 (Decode)'}
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
                 {/* Input Area */}
-                <div className="bg-white dark:bg-gray-800 border-2 border-gray-100 dark:border-gray-700 rounded-3xl p-8 shadow-xl">
-                    <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-4 ml-1">
-                        {mode === 'encode' ? 'Source HTML Content' : 'Encoded Entities'}
-                    </label>
+                <div className="card p-6 space-y-4 border border-border shadow-sm">
+                    <div className="flex justify-between items-center px-1">
+                        <label className="text-sm font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                            {mode === 'encode' ? (isEn ? 'Raw HTML Source' : '원본 HTML태그') : (isEn ? 'Encoded Entities' : '엔티티 코드')}
+                        </label>
+                    </div>
                     <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder={mode === 'encode' ? '<div>Hello & Welcome</div>' : '&lt;div&gt;Hello &amp; Welcome&lt;/div&gt;'}
-                        className="w-full h-80 p-6 bg-gray-50 dark:bg-gray-900 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl resize-none font-mono text-base focus:outline-none focus:border-emerald-500 transition-all dark:text-white"
+                        placeholder={mode === 'encode' ? '<div><p>Hello & Welcome!</p></div>' : '&lt;div&gt;&lt;p&gt;Hello &amp; Welcome!&lt;/p&gt;&lt;/div&gt;'}
+                        className="input w-full h-64 resize-none font-mono text-sm bg-background border-2 border-dashed border-border focus:border-emerald-500"
                     />
                     <button
                         onClick={handleConvert}
                         disabled={!input.trim()}
-                        className="w-full mt-6 py-4 bg-emerald-700 text-white rounded-2xl font-black text-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-emerald-100 dark:shadow-none disabled:opacity-30"
+                        className={`w-full py-4 text-white rounded-xl font-bold text-lg transition-all shadow-md active:scale-[0.98] flex justify-center items-center gap-2 ${!input.trim() ? 'bg-muted-foreground/30 text-muted-foreground shadow-none cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 hover:shadow-emerald-600/20'}`}
                     >
-                        {mode === 'encode' ? 'HTML 인코딩 실행' : 'HTML 디코딩 실행'}
+                        {mode === 'encode' ? (isEn ? 'Execute Encoding' : 'HTML 인코딩 실행') : (isEn ? 'Execute Decoding' : 'HTML 디코딩 실행')}
                     </button>
                 </div>
 
                 {/* Output Area */}
-                <div className="bg-white dark:bg-gray-800 border-2 border-gray-100 dark:border-gray-700 rounded-3xl p-8 shadow-xl">
-                    <div className="flex items-center justify-between mb-4">
-                        <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-1">
-                            {mode === 'encode' ? 'Encoded Result' : 'Original Content'}
+                <div className="card p-6 space-y-4 border border-border shadow-sm bg-emerald-50/5 dark:bg-emerald-900/5">
+                    <div className="flex items-center justify-between px-1 h-8">
+                        <label className="text-sm font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            {mode === 'encode' ? (isEn ? 'Encoded Result' : '변환된 결과') : (isEn ? 'Decoded HTML Source' : '원본 HTML 구조')}
                         </label>
                         {output && (
                             <button
                                 onClick={copyToClipboard}
-                                className={`flex items-center gap-2 px-4 py-1.5 rounded-xl font-bold text-sm transition-all ${copied ? 'bg-green-500 text-white' : 'bg-gray-100 dark:bg-gray-900 text-gray-500 hover:bg-emerald-50 hover:text-emerald-600'}`}
+                                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs transition-all ${copied ? 'bg-green-500 text-white' : 'bg-secondary hover:bg-emerald-100 hover:text-emerald-700 dark:hover:bg-emerald-900/30'}`}
                             >
-                                {copied ? <Check size={16} /> : <Copy size={16} />}
-                                {copied ? '복사됨' : '전체 복사'}
+                                {copied ? <Check size={14} /> : <Copy size={14} />}
+                                {copied ? (isEn ? 'Copied' : '복사됨') : (isEn ? 'Copy Result' : '복사')}
                             </button>
                         )}
                     </div>
                     <textarea
                         value={output}
                         readOnly
-                        placeholder="변환된 결과가 여기에 표시됩니다..."
-                        className="w-full h-80 p-6 bg-emerald-50/30 dark:bg-gray-900/50 border-2 border-emerald-100/50 dark:border-gray-700 rounded-2xl resize-none font-mono text-base focus:outline-none text-emerald-900 dark:text-emerald-200 shadow-inner"
+                        placeholder={isEn ? "Conversion output displays clearly here..." : "변환된 결과가 여기에 표시됩니다..."}
+                        className="input w-full h-64 resize-none font-mono text-sm shadow-inner bg-secondary/30 text-emerald-800 dark:text-emerald-300 border-border"
                     />
-                    <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-2xl flex gap-3 items-start border border-amber-100 dark:border-amber-900/30">
-                        <ShieldAlert className="w-5 h-5 text-amber-600 mt-0.5" />
-                        <p className="text-xs text-amber-700 dark:text-amber-400 font-medium leading-relaxed">
-                            XSS 방지를 위해서는 동적인 사용자 입력값을 렌더링하기 전에 반드시 서버와 클라이언트 양측에서 인코딩 처리를 거쳐야 합니다.
+                    <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex gap-3 items-start border border-amber-200 dark:border-amber-900/50">
+                        <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                        <p className="text-xs text-amber-800 dark:text-amber-300 font-medium leading-relaxed">
+                            {isEn 
+                                ? "Critical security note: Always encode unknown origin inputs securely on your server backends prior completely avoiding XSS payload execution chains natively entirely." 
+                                : "XSS 방지를 위해서는 동적인 사용자 입력값을 렌더링하기 전에 반드시 서버와 클라이언트 양측에서 인코딩 처리를 거쳐야 합니다."}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-3xl p-8 mb-12 shadow-sm">
-                <h3 className="font-black text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+            <div className="card p-6 border border-border mt-8">
+                <h3 className="font-bold text-foreground mb-6 flex items-center gap-2">
                     <span className="w-2 h-6 bg-emerald-500 rounded-full inline-block"></span>
-                    💡 주요 HTML 엔티티 참조표
+                    {isEn ? 'Common HTML Entity References' : '주요 HTML 엔티티 참조표'}
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                     {Object.entries(htmlEntities).map(([char, entity]) => (
-                        <div key={char} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-700 group hover:border-emerald-300 transition-colors">
-                            <code className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{char}</code>
-                            <span className="text-gray-300 dark:text-gray-600">→</span>
-                            <code className="font-mono font-bold text-gray-600 dark:text-gray-300 group-hover:text-emerald-600">{entity}</code>
+                        <div key={char} className="flex items-center justify-between p-4 bg-secondary/50 rounded-xl border border-border group hover:border-emerald-400/50 transition-colors">
+                            <code className="text-xl font-bold text-emerald-600 dark:text-emerald-400 w-8 text-center">{char}</code>
+                            <span className="text-muted-foreground group-hover:text-emerald-500">→</span>
+                            <code className="font-mono font-bold text-muted-foreground group-hover:text-foreground">{entity}</code>
                         </div>
                     ))}
                 </div>
             </div>
 
             <ToolGuide
-                title="HTML 인코더/디코더 상세 가이드"
-                intro="웹 개발 및 콘텐츠 관리 시 HTML 엔티티 변환은 데이터의 무결성과 보안을 위해 필수적인 과정입니다. 본 온라인 도구는 복잡한 하드코딩 없이도 특수 문자를 안전하게 처리할 수 있도록 직관적인 인터페이스를 제공합니다."
-                steps={toolSteps}
-                tips={toolTips}
-                faqs={toolFaqs}
+                title={isEn ? "Encoder Defense Strategy" : "HTML 인코더/디코더 상세 가이드"}
+                intro={isEn 
+                    ? "Executing dynamic frontends securely necessitates perfectly isolating character nodes natively preventing structural DOM exploits completely securely natively." 
+                    : "웹 개발 및 콘텐츠 관리 시 HTML 엔티티 변환은 데이터의 무결성과 보안을 위해 필수적인 과정입니다."}
+                steps={steps}
+                tips={tips}
+                faqs={faqs}
             />
         </div>
     );

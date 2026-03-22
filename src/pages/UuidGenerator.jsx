@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Copy, Check, RefreshCw, Key } from 'lucide-react';
+import { Copy, Check, RefreshCw, Key, Hash, Layers } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const UuidGenerator = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [uuids, setUuids] = useState([]);
     const [count, setCount] = useState(1);
     const [copied, setCopied] = useState('');
@@ -29,86 +33,132 @@ const UuidGenerator = () => {
         setTimeout(() => setCopied(''), 1500);
     };
 
+    const titleText = isEn ? t('tools.uuid-gen.title') : "랜덤 UUID / GUID 생성기 - 고유 식별자 생성";
+    const descText = isEn 
+        ? t('tools.uuid-gen.description')
+        : "고유 식별자 UUID v4를 실시간으로 생성하세요. 데이터베이스, API 토큰, 개발 테스트용 GUID 무료 생성 도구입니다.";
+    const keywordsText = isEn ? "uuid generator, generate guid, random uuid v4, generate unique identifier, online dev tools" : "UUID생성기, GUID생성, 고유식별자, 랜덤UUID, 개발자도구";
+
+    const faqs = isEn ? [
+        {
+            q: "What is the difference between UUID and GUID specifically?",
+            a: "Strictly speaking, they are the exact same 128-bit standard. 'GUID' is typically Microsoft's branding for the standard, while 'UUID' is the broader technical term."
+        },
+        {
+            q: "How unique is a Version 4 UUID truly?",
+            a: "A Version 4 UUID utilizes high-entropy random numbers. The probability of generating two identical IDs is astronomically low—practically impossible for any real-world application."
+        }
+    ] : [
+        { "q": "UUID와 GUID의 차이점은 무엇인가요?", "a": "사실상 동일한 128비트 식별자 체계입니다. GUID는 마이크로소프트에서 주로 사용하는 명칭이며, UUID는 업계 전반의 범용적인 명칭입니다." },
+        { "q": "생성된 UUID가 중복될 확률이 있나요?", "a": "이 도구가 생성하는 Version 4 UUID는 완전 난수를 사용하므로, 현실 세계의 어떤 시스템에서도 중복이 발생할 확률은 0에 가깝습니다." }
+    ];
+
+    const steps = isEn ? [
+        "Adjust the horizontal slider to determine exactly how many unique IDs you need at once.",
+        "Click the primary 'Generate IDs' button to populate the results list.",
+        "Review the generated 36-character strings specifically in the v4 format.",
+        "Use individual copy icons or the 'Batch Copy All' button to export the identifiers."
+    ] : [
+        "상단 슬라이더를 조절하여 한 번에 생성할 UUID 개수(최대 50개)를 선택하세요.",
+        "중앙의 '고유 식별자 생성' 버튼을 클릭하여 리스트를 채웁니다.",
+        "표준 32글자+하이픈 조합의 UUID v4 결과물을 확인하세요.",
+        "개별 항목의 복사 아이콘이나 상단의 '전체 복사' 버튼으로 데이터를 가져갑니다."
+    ];
+
     return (
-        <div className="max-w-3xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="UUID/GUID 생성기 - Utility Hub"
-                description="고유 식별자 UUID/GUID를 생성하세요. 개발, 데이터베이스, API 등에서 사용할 수 있는 랜덤 UUID를 무료로 생성합니다."
-                keywords="UUID 생성, GUID 생성, 고유 식별자, UUID 만들기, GUID 만들기"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
+                category="dev"
+                faqs={faqs}
+                steps={steps}
             />
 
-            <header className="text-center space-y-2">
+            <header className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center p-3 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 mb-2 border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <Key className="w-8 h-8" />
+                </div>
                 <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
-                    <Key className="w-8 h-8 text-primary" />
-                    UUID/GUID 생성기
+                    {isEn ? 'Universal UUID / GUID Generator' : 'UUID/GUID 생성기'}
                 </h1>
                 <p className="text-muted-foreground">
-                    고유 식별자를 빠르게 생성하세요
+                    {isEn ? 'Deploy cryptographically strong v4 random identifiers instantly for any system.' : '데이터베이스나 API에서 즉시 사용 가능한 고유 식별자를 빠르게 생성하세요'}
                 </p>
             </header>
 
-            {/* Controls */}
-            <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                <div>
-                    <label className="block text-sm font-medium mb-2">
-                        생성 개수: {count}개
-                    </label>
-                    <input
-                        type="range"
-                        min="1"
-                        max="50"
-                        value={count}
-                        onChange={(e) => setCount(parseInt(e.target.value))}
-                        className="w-full"
-                    />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                        <span>1개</span>
-                        <span>50개</span>
+            {/* Controls Center */}
+            <div className="bg-card border border-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                        <label className="text-sm font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
+                            <Layers className="w-4 h-4" />
+                            {isEn ? `Generation Quantity: ${count}` : `생성 수량 설정: ${count}개`}
+                        </label>
+                    </div>
+                    <div className="relative group">
+                        <input
+                            type="range"
+                            min="1"
+                            max="50"
+                            value={count}
+                            onChange={(e) => setCount(parseInt(e.target.value))}
+                            className="w-full h-3 bg-secondary rounded-lg appearance-none cursor-pointer accent-slate-600 dark:accent-slate-400"
+                        />
+                        <div className="flex justify-between text-[10px] font-black text-muted-foreground/50 mt-2 px-1">
+                            <span>MIN 1</span>
+                            <span>MAX 50</span>
+                        </div>
                     </div>
                 </div>
 
                 <button
                     onClick={generateUUIDs}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-bold hover:brightness-110 transition-all"
+                    className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 rounded-xl font-black text-lg hover:bg-slate-700 dark:hover:bg-white active:scale-[0.98] transition-all shadow-lg group"
                 >
-                    <RefreshCw className="w-5 h-5" />
-                    UUID 생성
+                    <RefreshCw className="w-5 h-5 group-active:rotate-180 transition-transform duration-500" />
+                    {isEn ? 'Generate Unique IDs' : '고유 식별자 생성'}
                 </button>
             </div>
 
-            {/* Results */}
+            {/* Results Grid */}
             {uuids.length > 0 && (
-                <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="font-bold">생성된 UUID</h3>
+                <div className="bg-card border border-border rounded-2xl p-6 space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-500 shadow-md">
+                    <div className="flex items-center justify-between pb-2 border-b border-border/50">
+                        <h3 className="font-black text-lg flex items-center gap-2">
+                            <Hash className="w-5 h-5 text-slate-500" />
+                            {isEn ? 'Raw UUID Pool' : '추출된 UUID 목록'}
+                        </h3>
                         <button
                             onClick={copyAll}
-                            className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-accent rounded-lg transition-colors text-sm"
+                            className={`flex items-center gap-2 px-5 py-2 rounded-xl transition-all text-xs font-black uppercase tracking-tighter shadow-sm border ${copied === 'all' ? 'bg-green-500 text-white border-green-500' : 'bg-secondary hover:bg-accent text-foreground border-border'}`}
                         >
                             {copied === 'all' ? (
                                 <>
-                                    <Check className="w-4 h-4 text-green-500" />
-                                    전체 복사됨
+                                    <Check className="w-3.5 h-3.5" />
+                                    {isEn ? 'Batch Copied' : '전체 복사됨'}
                                 </>
                             ) : (
                                 <>
-                                    <Copy className="w-4 h-4" />
-                                    전체 복사
+                                    <Copy className="w-3.5 h-3.5" />
+                                    {isEn ? 'Copy All Items' : '전체 리스트 복사'}
                                 </>
                             )}
                         </button>
                     </div>
 
-                    <div className="space-y-2 max-h-96 overflow-y-auto">
+                    <div className="grid grid-cols-1 gap-3 max-h-[460px] overflow-y-auto pr-2 custom-scrollbar">
                         {uuids.map((uuid, index) => (
-                            <div key={index} className="flex items-center gap-2 p-3 bg-background rounded-lg">
-                                <span className="flex-1 font-mono text-sm break-all">{uuid}</span>
+                            <div key={index} className="flex items-center gap-3 p-4 bg-background/50 border border-border/80 rounded-xl group hover:border-slate-500 transition-all hover:shadow-inner">
+                                <span className="text-[10px] font-black text-slate-300 dark:text-slate-700 w-4">{index + 1}</span>
+                                <span className="flex-1 font-mono text-sm break-all font-medium text-muted-foreground group-hover:text-foreground transition-colors lining-nums">{uuid}</span>
                                 <button
                                     onClick={() => copyToClipboard(uuid, index)}
-                                    className="p-2 hover:bg-secondary rounded-md transition-colors"
+                                    className={`p-2.5 rounded-lg transition-all shadow-sm border ${copied === index ? 'bg-green-500 text-white border-green-500' : 'bg-background hover:bg-secondary text-muted-foreground border-border'}`}
                                 >
                                     {copied === index ? (
-                                        <Check className="w-4 h-4 text-green-500" />
+                                        <Check className="w-4 h-4" />
                                     ) : (
                                         <Copy className="w-4 h-4" />
                                     )}
@@ -119,34 +169,43 @@ const UuidGenerator = () => {
                 </div>
             )}
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 UUID란?</h3>
-                <ul className="space-y-1 list-disc list-inside">
-                    <li>UUID (Universally Unique Identifier): 범용 고유 식별자</li>
-                    <li>128비트 숫자로 구성되며, 중복될 확률이 거의 없습니다</li>
-                    <li>데이터베이스 기본 키, API 토큰, 세션 ID 등에 사용됩니다</li>
-                    <li>형식: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx (Version 4)</li>
-                </ul>
+            <div className="bg-slate-500/5 border border-slate-500/10 rounded-2xl p-6 text-sm text-foreground space-y-4">
+                <h3 className="font-black text-lg flex items-center gap-2 text-slate-700 dark:text-slate-400">💡 {isEn ? 'Standardized Specifications' : 'UUID v4 기술 규격'}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-background rounded-xl border border-border/50 space-y-2">
+                        <p className="font-bold text-slate-600 dark:text-slate-400 text-xs uppercase tracking-widest">{isEn ? 'Structure' : '데이터 구조'}</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{isEn ? 'Contains 32 hexadecimal digits displayed in 5 groups separated by 4 hyphens.' : '32개의 16진수 문자와 4개의 하이픈을 조합하여 총 36자의 텍스트로 구성됩니다.'}</p>
+                    </div>
+                    <div className="p-4 bg-background rounded-xl border border-border/50 space-y-2">
+                        <p className="font-bold text-slate-600 dark:text-slate-400 text-xs uppercase tracking-widest">{isEn ? 'Implementation' : '주요 활용처'}</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{isEn ? 'Perfect for primary keys, secure session tokens, and distributed system tracing.' : 'DB 기본 키, 결제 트랜잭션 ID, 파일 서버 고유 경로 지정 등에 널리 쓰입니다.'}</p>
+                    </div>
+                </div>
+                <div className="p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl">
+                    <p className="text-amber-700 dark:text-amber-400 text-[11px] font-bold">
+                        {isEn 
+                            ? "NOTE: This tool utilizes your browser's cryptographically secure pseudo-random number generator (CSPRNG) via crypto.randomUUID()." 
+                            : "알림: 본 도구는 브라우저의 전용 암호화 API(crypto.randomUUID)를 사용하여 보안성이 보장된 난수 식별자를 생성합니다."}
+                    </p>
+                </div>
             </div>
-        \n            <ToolGuide
-                title="UUID 생성기"
-                intro="UUID v4 생성"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Advanced UUID / GUID Guide" : "UUID 생성기 통합 가이드"}
+                intro={isEn 
+                    ? "Generate cryptographically secure GUID strings instantly. Our utility ensures 100% browser-side execution for zero-latency and total data privacy." 
+                    : "개발자 및 인프라 엔지니어를 위해 설계된 고유 식별자 추출 도구입니다. 복잡한 설정 없이 클릭 한 번으로 모든 시스템에서 호환되는 표준 식별자 풀을 생성하세요."}
+                steps={steps}
+                tips={isEn ? [
+                    "Need mock data for testing? Use the slider to batch-generate up to 50 entries and export them via 'Copy All'.",
+                    "Unlike incrementing integers, UUIDs are secure because they don't reveal the total number of records to external users.",
+                    "Save and refresh is not needed; every click triggers a fresh batch of completely unique entropy identifiers."
+                ] : [
+                    "테스트용 데이터가 대량으로 필요할 때 슬라이더를 50으로 맞추고 '전체 복사'를 누르면 매우 빠르게 작업할 수 있습니다.",
+                    "일련번호(1, 2, 3...)와 달리 무작위 문자열이므로 외부에서 전체 데이터 규모를 추측하기 어렵게 만들어 보안성을 높입니다.",
+                    "모든 데이터는 실시간으로 휘발되므로 중요한 ID는 생성 즉시 메모장에 반드시 저장해 두세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={faqs}
             />
         </div>
     );

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
 import { Minus, Calculator, Trophy, RefreshCw, ChevronLeft, Delete, X, Check } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const SubtractionQuiz = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
     const [level, setLevel] = useState(1);
     const [questionCount, setQuestionCount] = useState(10);
@@ -17,7 +19,6 @@ const SubtractionQuiz = () => {
     const [feedback, setFeedback] = useState(null);
     const [history, setHistory] = useState([]);
 
-    // Timer effect
     useEffect(() => {
         if (gameState === 'playing' && timeLimit > 0) {
             const timer = setInterval(() => {
@@ -30,28 +31,7 @@ const SubtractionQuiz = () => {
                     return prev - 1;
                 });
             }, 1000);
-            
-    const toolFaqs = [
-        {
-            "q": "뺄셈 퀴즈의 난이도는 어떤가요?",
-            "a": "받아내림이 필요한 두 자리, 세 자리 수의 실생활 필수 뺄셈(거스름돈 계산 수준)부터 두뇌 트레이닝용 복합 뺄셈까지 존재합니다."
-        },
-        {
-            "q": "음수(마이너스) 결과도 나오나요?",
-            "a": "주로 양수 결과가 나오는 문제들로 세팅되어 초보자나 어린이도 재미있고 쉽게 접근할 수 있습니다."
-        }
-    ];
-    const toolSteps = [
-        "목표인 10문제 연속 맞추기 등 난이도를 선택합니다.",
-        "화면에 제시되는 뺄셈을 머릿속으로 빠르게 계산하여 정답란에 숫자를 입력합니다.",
-        "정확도와 속도별로 측정된 나의 뺄셈 두뇌 점수를 확인합니다."
-    ];
-    const toolTips = [
-        "일상생활에서 현금 거스름돈을 계산하는 캐시어 알바생이 되었다는 마인드로 플레이하면 스피드가 비약적으로 상승합니다.",
-        "어린이들의 수학적 감각과 흥미를 높이기 위한 홈스쿨링 교보재로 부모님이 옆에서 아이와 함께 진행해도 아주 훌륭합니다."
-    ];
-
-    return () => clearInterval(timer);
+            return () => clearInterval(timer);
         }
     }, [gameState, timeLimit]);
 
@@ -60,18 +40,13 @@ const SubtractionQuiz = () => {
         for (let i = 0; i < count; i++) {
             let a, b;
             if (lvl === 1) {
-                // 1 digit - 1 digit
                 a = Math.floor(Math.random() * 9) + 1;
                 b = Math.floor(Math.random() * 9) + 1;
-                // Ensure a >= b for simple subtraction
                 if (a < b) [a, b] = [b, a];
             } else if (lvl === 2) {
-                // 2 digits - 1 digit
                 a = Math.floor(Math.random() * 90) + 10;
                 b = Math.floor(Math.random() * 9) + 1;
-                // a is usually >= b here naturally, but good to check if we allowed small 2 digits
             } else {
-                // 2 digits - 2 digits
                 a = Math.floor(Math.random() * 90) + 10;
                 b = Math.floor(Math.random() * 90) + 10;
                 if (a < b) [a, b] = [b, a];
@@ -118,9 +93,9 @@ const SubtractionQuiz = () => {
 
         if (isCorrect) {
             setScore(prev => prev + 1);
-            setFeedback({ type: 'correct', message: '정답!' });
+            setFeedback({ type: 'correct', message: isEn ? 'Correct!' : '정답!' });
         } else {
-            setFeedback({ type: 'wrong', message: `땡! 정답은 ${currentQ.answer}` });
+            setFeedback({ type: 'wrong', message: isEn ? `Oops! Answer is ${currentQ.answer}` : `땡! 정답은 ${currentQ.answer}` });
         }
 
         setHistory(prev => [...prev, {
@@ -140,49 +115,82 @@ const SubtractionQuiz = () => {
         }, 1000);
     };
 
-    // Format seconds to MM:SS
     const formatTime = (seconds) => {
         const m = Math.floor(seconds / 60);
         const s = seconds % 60;
         return `${m}:${s.toString().padStart(2, '0')}`;
     };
 
+    const toolFaqs = isEn ? [
+        { q: "What's the best way to improve subtraction speed?", a: "Practice breaking down numbers. For example, 54 - 7 can be 54 - 4 - 3 = 47. Use our Level 2 for this training!" },
+        { q: "Is this suitable for children?", a: "Yes, Level 1 is perfect for elementary students learning basic math facts." },
+        { q: "Can I review my mistakes?", a: "Definitely. A review list with your answers and correct answers is provided at the result screen." }
+    ] : [
+        { q: "뺄셈 퀴즈의 난이도는 어떤가요?", a: "받아내림이 필요한 두 자리 수부터 두뇌 트레이닝용 복합 뺄셈까지 존재합니다." },
+        { q: "음수(마이너스) 결과도 나오나요?", a: "주로 양수 결과가 나오는 문제들로 세팅되어 초보자나 어린이도 재미있고 쉽게 접근할 수 있습니다." }
+    ];
+
+    const toolSteps = isEn ? [
+        "Pick a difficulty level and set a goal for how many questions to solve.",
+        "Calculate the subtraction result mentally as each problem appears.",
+        "Input the answer and keep your streak alive to reach high scores.",
+        "Review your incorrect answers at the end to learn from your mistakes."
+    ] : [
+        "목표 난이도와 시간 제한을 자유롭게 설정합니다.",
+        "화면에 제시되는 뺄셈을 머릿속으로 빠르게 계산하여 정답란에 숫자를 입력합니다.",
+        "정확도와 속도별로 측정된 나의 뺄셈 두뇌 점수를 확인합니다.",
+        "틀린 문제는 결과창에서 한 번 더 복습하여 연산 실수를 줄입니다."
+    ];
+
+    const toolTips = isEn ? [
+        "Imagine you're a cashier at a store—this mindset often boosts subtraction speed dramatically!",
+        "Start with Level 1 and move up once you can consistently get a perfect score within 30 seconds.",
+        "Take a deep breath and focus on the numbers; mental math is a great way to start your day."
+    ] : [
+        "일상생활에서 현금 거스름돈을 계산하는 캐시어 알바생이 되었다는 마인드로 플레이하면 스피드가 비약적으로 상승합니다.",
+        "어린이들의 수학적 감각과 흥미를 높이기 위한 홈스쿨링 교보재로 부모님이 옆에서 아이와 함께 진행해보세요.",
+        "매일 아침 1분만 플레이해도 뇌에 활기를 불어넣는 훌륭한 스트레칭이 됩니다."
+    ];
+
     return (
         <div className="max-w-md mx-auto px-4 py-8">
             <SEO
-                title="간단 뺄셈 퀴즈 | 간단 상식 테스트"
-                description="1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다."
-                keywords=""
-                category="간단 상식 테스트"
+                title={isEn ? "Online Subtraction Quiz - Mental Math Trainer | Tool Hive" : "간단 뺄셈 퀴즈 | 암산 능력 향상 테스트 | Tool Hive"}
+                description={isEn ? "Master subtraction with our interactive quiz. Multiple difficulty levels and survival modes to help you become a math pro." : "1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다. 정확하고 빠른 암산 능력을 테스트해보세요."}
+                keywords={isEn ? "subtraction quiz, math game, mental math, brain training, learn subtraction" : "뺄셈퀴즈, 암산게임, 초등수학, 두뇌트레이닝, 수학퀴즈"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />
 
-            <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center p-3 bg-red-500 rounded-2xl text-white mb-4 shadow-lg">
-                    <Minus size={32} />
+            <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center p-4 bg-rose-500 rounded-3xl text-white mb-6 shadow-2xl shadow-rose-500/20">
+                    <Minus size={40} />
                 </div>
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">간단 뺄셈 퀴즈</h1>
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 uppercase tracking-tighter italic">
+                    {isEn ? 'SUBTRACTION BATTLE' : '간단 뺄셈 퀴즈'}
+                </h1>
+                <p className="text-lg text-muted-foreground font-medium italic">
+                    {isEn ? 'Subtract fast, think sharp' : '빠르고 정확한 거슬름돈 계산 실력'}
+                </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden min-h-[500px] flex flex-col">
+            <div className="bg-card dark:bg-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden min-h-[550px] flex flex-col border-4 border-border/50">
                 {gameState === 'menu' && (
-                    <div className="p-8 flex flex-col items-center justify-center flex-1 space-y-6">
-
-                        <div className="w-full">
-                            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">난이도 선택</label>
-                            <div className="grid grid-cols-1 gap-2">
+                    <div className="p-10 flex flex-col items-center justify-center flex-1 space-y-8 animate-in fade-in zoom-in-95 duration-500">
+                        <div className="w-full space-y-3">
+                            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-2">{isEn ? 'SELECT DIFFICULTY' : '난이도 선택'}</label>
+                            <div className="grid grid-cols-1 gap-3">
                                 {[
-                                    { lvl: 1, label: '1단계 (한자리 - 한자리)' },
-                                    { lvl: 2, label: '2단계 (두자리 - 한자리)' },
-                                    { lvl: 3, label: '3단계 (두자리 - 두자리)' }
+                                    { lvl: 1, label: isEn ? 'Level 1 (Single Digits)' : '1단계 (한자리 - 한자리)' },
+                                    { lvl: 2, label: isEn ? 'Level 2 (Mixed Digits)' : '2단계 (두자리 - 한자리)' },
+                                    { lvl: 3, label: isEn ? 'Level 3 (Double Digits)' : '3단계 (두자리 - 두자리)' }
                                 ].map((item) => (
                                     <button
                                         key={item.lvl}
                                         onClick={() => setLevel(item.lvl)}
-                                        className={`p-3 rounded-xl border-2 text-left transition-all ${level === item.lvl
-                                                ? 'border-red-500 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-bold'
-                                                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
+                                        className={`p-4 rounded-2xl border-4 text-left transition-all italic font-black text-lg ${level === item.lvl
+                                                ? 'border-rose-500 bg-rose-500/10 text-rose-500 shadow-lg'
+                                                : 'border-muted/30 hover:border-muted/60 text-muted-foreground'
                                             }`}
                                     >
                                         {item.label}
@@ -191,21 +199,21 @@ const SubtractionQuiz = () => {
                             </div>
                         </div>
 
-                        <div className="w-full">
-                            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">시간 제한</label>
-                            <div className="grid grid-cols-2 gap-2">
+                        <div className="w-full space-y-3">
+                            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-2">{isEn ? 'TIME LIMIT' : '시간 제한'}</label>
+                            <div className="grid grid-cols-2 gap-3">
                                 {[
-                                    { value: 0, label: '없음' },
-                                    { value: 30, label: '30초' },
-                                    { value: 60, label: '1분' },
-                                    { value: 180, label: '3분' }
+                                    { value: 0, label: isEn ? 'INFINITY' : '없음' },
+                                    { value: 30, label: isEn ? '30 SEC' : '30초' },
+                                    { value: 60, label: isEn ? '1 MIN' : '1분' },
+                                    { value: 180, label: isEn ? '3 MIN' : '3분' }
                                 ].map((t) => (
                                     <button
                                         key={t.value}
                                         onClick={() => setTimeLimit(t.value)}
-                                        className={`p-3 rounded-lg border-2 font-bold ${timeLimit === t.value
-                                                ? 'border-red-500 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-                                                : 'border-gray-200 dark:border-gray-700 text-gray-500 hover:border-red-300'
+                                        className={`p-4 rounded-2xl border-4 font-black transition-all italic ${timeLimit === t.value
+                                                ? 'border-rose-500 bg-rose-500/10 text-rose-500 shadow-lg'
+                                                : 'border-muted/30 hover:border-muted/60 text-muted-foreground'
                                             }`}
                                     >
                                         {t.label}
@@ -214,19 +222,19 @@ const SubtractionQuiz = () => {
                             </div>
                         </div>
 
-                        <div className="w-full">
-                            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">문제 수</label>
-                            <div className="flex gap-2">
+                        <div className="w-full space-y-3">
+                            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-2">{isEn ? 'QUESTION COUNT' : '문제 수'}</label>
+                            <div className="flex gap-3">
                                 {[10, 20, 30].map(cnt => (
                                     <button
                                         key={cnt}
                                         onClick={() => setQuestionCount(cnt)}
-                                        className={`flex-1 p-3 rounded-lg border-2 font-bold ${questionCount === cnt
-                                                ? 'border-red-500 bg-red-500 text-white'
-                                                : 'border-gray-300 dark:border-gray-600 text-gray-500 hover:border-red-400'
+                                        className={`flex-1 p-4 rounded-2xl border-4 font-black transition-all italic ${questionCount === cnt
+                                                ? 'border-rose-500 bg-rose-500 text-white shadow-xl rotate-1'
+                                                : 'border-muted/30 hover:border-muted/60 text-muted-foreground'
                                             }`}
                                     >
-                                        {cnt}문제
+                                        {cnt} {isEn ? 'Q' : '문제'}
                                     </button>
                                 ))}
                             </div>
@@ -234,49 +242,50 @@ const SubtractionQuiz = () => {
 
                         <button
                             onClick={startGame}
-                            className="w-full py-4 bg-gradient-to-r from-red-500 to-pink-600 text-white text-xl font-bold rounded-xl shadow-lg hover:shadow-xl transform active:scale-95 transition-all mt-4"
+                            className="w-full py-6 bg-gradient-to-r from-rose-500 to-pink-600 text-white text-2xl font-black rounded-3xl shadow-2xl shadow-rose-500/30 hover:scale-105 transform active:scale-95 transition-all mt-6 uppercase tracking-widest italic"
                         >
-                            시작하기
+                            {isEn ? 'START SURVIVAL' : '시작하기'}
                         </button>
                     </div>
                 )}
 
                 {gameState === 'playing' && questions.length > 0 && (
-                    <div className="flex flex-col h-full">
+                    <div className="flex flex-col h-full animate-in fade-in duration-300">
                         {/* Header */}
-                        <div className="p-4 bg-gray-50 dark:bg-gray-700/50 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
-                            <div className="flex gap-4">
-                                <span className="text-gray-500 dark:text-gray-400 font-medium">
+                        <div className="p-6 bg-muted/30 flex justify-between items-center border-b border-border shadow-inner">
+                            <div className="flex gap-6 items-center">
+                                <span className="text-xs font-black uppercase tracking-widest text-muted-foreground bg-muted p-2 rounded-lg">
                                     {currentQuestionIndex + 1}/{questions.length}
                                 </span>
                                 {timeLimit > 0 && (
-                                    <span className={`font-bold font-mono text-lg ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-gray-700 dark:text-gray-300'}`}>
+                                    <div className={`flex items-center gap-2 font-black font-mono text-xl ${timeLeft <= 10 ? 'text-rose-500 animate-pulse' : 'text-foreground'}`}>
+                                        <div className="w-3 h-3 bg-red-500 rounded-full" />
                                         {formatTime(timeLeft)}
-                                    </span>
+                                    </div>
                                 )}
                             </div>
-                            <div className="text-red-600 dark:text-red-400 font-bold text-lg">
-                                {score}점
+                            <div className="text-rose-500 font-black text-2xl italic tracking-tighter">
+                                {score} {isEn ? 'PTS' : '점'}
                             </div>
                         </div>
 
                         {/* Problem Display */}
-                        <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-8">
-                            <div className="text-6xl font-black text-gray-800 dark:text-white tracking-widest flex items-center gap-4">
+                        <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-12">
+                            <div className="text-7xl font-black text-foreground tracking-tighter flex items-center gap-6 italic drop-shadow-sm">
                                 <span>{questions[currentQuestionIndex].a}</span>
-                                <span className="text-red-500">-</span>
+                                <Minus size={48} className="text-rose-500 stroke-[4]" />
                                 <span>{questions[currentQuestionIndex].b}</span>
                             </div>
 
-                            <div className={`w-48 h-20 flex items-center justify-center text-4xl font-bold bg-gray-100 dark:bg-gray-700 rounded-2xl border-2 ${feedback
-                                    ? feedback.type === 'correct' ? 'border-green-500 text-green-600 bg-green-50' : 'border-red-500 text-red-500 bg-red-50'
-                                    : 'border-red-200 dark:border-gray-600 text-gray-800 dark:text-white'
+                            <div className={`w-full max-w-[280px] h-24 flex items-center justify-center text-5xl font-black bg-muted/50 rounded-[2rem] border-4 transition-all duration-300 italic ${feedback
+                                    ? feedback.type === 'correct' ? 'border-green-500 text-green-600 bg-green-500/10 scale-110 shadow-xl shadow-green-500/20' : 'border-rose-500 text-rose-500 bg-rose-500/10'
+                                    : 'border-border text-foreground shadow-inner'
                                 }`}>
                                 {userAnswer || "?"}
                             </div>
 
                             {feedback && (
-                                <div className={`text-xl font-bold animate-bounce ${feedback.type === 'correct' ? 'text-green-500' : 'text-red-500'
+                                <div className={`text-2xl font-black uppercase tracking-widest animate-in slide-in-from-top-4 duration-300 italic ${feedback.type === 'correct' ? 'text-green-500' : 'text-rose-500'
                                     }`}>
                                     {feedback.message}
                                 </div>
@@ -284,14 +293,14 @@ const SubtractionQuiz = () => {
                         </div>
 
                         {/* Keypad */}
-                        <div className="p-4 bg-gray-50 dark:bg-gray-900 grid grid-cols-3 gap-2">
+                        <div className="p-6 bg-muted/50 grid grid-cols-3 gap-3 border-t border-border shadow-inner">
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0].map((key) => (
                                 <button
                                     key={key}
                                     onClick={() => handleKeypad(key)}
-                                    className={`h-16 rounded-xl text-2xl font-bold shadow-sm transition-transform active:scale-95 ${key === 'C'
-                                            ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                                            : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                                    className={`h-16 rounded-[1.25rem] text-3xl font-black shadow-lg transition-all active:scale-90 italic ${key === 'C'
+                                            ? 'bg-rose-500 text-white hover:bg-rose-600 outline-none'
+                                            : 'bg-card text-foreground hover:bg-rose-500/10 border-b-4 border-border/80'
                                         }`}
                                 >
                                     {key}
@@ -299,58 +308,64 @@ const SubtractionQuiz = () => {
                             ))}
                             <button
                                 onClick={() => handleKeypad('BS')}
-                                className="h-16 rounded-xl text-xl font-bold bg-orange-100 text-orange-600 hover:bg-orange-200 flex items-center justify-center shadow-sm active:scale-95"
+                                className="h-16 rounded-[1.25rem] text-2xl font-black bg-orange-500 text-white hover:bg-orange-600 flex items-center justify-center shadow-lg active:scale-90 italic"
                             >
-                                <Delete size={24} />
+                                <Delete size={28} />
                             </button>
                         </div>
 
                         {/* Submit Button */}
-                        <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700">
+                        <div className="p-6 bg-card border-t border-border">
                             <button
                                 onClick={submitAnswer}
-                                disabled={!userAnswer}
-                                className="w-full h-14 bg-red-600 hover:bg-red-700 text-white text-xl font-bold rounded-xl shadow-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                disabled={!userAnswer || feedback}
+                                className="w-full h-18 bg-rose-500 hover:bg-rose-600 text-white text-2xl font-black rounded-[1.5rem] shadow-2xl shadow-rose-500/20 transition-all disabled:opacity-30 disabled:grayscale flex items-center justify-center gap-3 uppercase tracking-widest italic"
                             >
-                                정답 확인 <Check size={24} />
+                                {isEn ? 'CONFIRM' : '정답 확인'} <Check size={32} className="stroke-[4]" />
                             </button>
                         </div>
                     </div>
                 )}
 
                 {gameState === 'result' && (
-                    <div className="p-8 text-center flex flex-col h-full">
-                        <div className="flex-1 flex flex-col items-center justify-center">
-                            <Trophy size={64} className="text-yellow-400 mb-6 animate-bounce" />
-                            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">결과 발표</h2>
-                            <p className="text-gray-500 mb-6">수고하셨습니다!</p>
-
-                            <div className="text-6xl font-black text-red-600 mb-8">
-                                {score} <span className="text-3xl text-gray-400">/ {questions.length}</span>
+                    <div className="p-10 text-center flex flex-col h-full animate-in zoom-in-95 duration-500 space-y-8">
+                        <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+                            <div className="relative">
+                                <Trophy size={100} className="text-yellow-500 drop-shadow-[0_0_20px_rgba(234,179,8,0.4)] animate-bounce" />
+                                <div className="absolute -top-4 -right-4 bg-rose-500 text-white text-xs font-black p-2 rounded-full -rotate-12">SHARP</div>
+                            </div>
+                            
+                            <div className="space-y-1">
+                                <h2 className="text-4xl font-black text-foreground italic uppercase tracking-tighter">{isEn ? 'FINAL SCORE' : '결과 발표'}</h2>
+                                <p className="text-muted-foreground font-bold italic">{isEn ? 'Brilliant Computation!' : '수고하셨습니다!'}</p>
                             </div>
 
-                            <div className="flex gap-4 w-full justify-center">
-                                <button
-                                    onClick={() => setGameState('menu')}
-                                    className="px-8 py-4 bg-gray-800 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-gray-700 transition-colors"
-                                >
-                                    <RefreshCw size={20} />
-                                    다시 하기
-                                </button>
+                            <div className="text-8xl font-black text-rose-500 italic tracking-tighter drop-shadow-lg p-8 bg-muted/30 rounded-[3rem] w-full border-4 border-border/50">
+                                {score} <span className="text-3xl text-muted font-bold tracking-normal italic">/ {questions.length}</span>
                             </div>
+
+                            <button
+                                onClick={() => setGameState('menu')}
+                                className="w-full py-6 bg-slate-900 text-white rounded-3xl font-black text-xl flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-2xl active:scale-95 uppercase tracking-widest italic"
+                            >
+                                <RefreshCw size={24} />
+                                {isEn ? 'RE-CHALLENGE' : '다시 하기'}
+                            </button>
                         </div>
 
                         {/* Review List */}
-                        <div className="mt-8 text-left bg-gray-50 dark:bg-gray-700/30 rounded-xl p-4 max-h-48 overflow-y-auto">
+                        <div className="mt-4 text-left bg-muted/50 rounded-[2rem] p-6 border-2 border-border/50 max-h-56 overflow-y-auto space-y-3 shadow-inner custom-scrollbar">
                             {history.map((item, idx) => (
-                                <div key={idx} className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
-                                    <span className="font-bold text-gray-700 dark:text-gray-300 w-24">{item.eq}</span>
-                                    <div className="flex gap-2">
-                                        <span className={`${item.isCorrect ? 'text-green-500' : 'text-red-500 line-through'}`}>
+                                <div key={idx} className="flex justify-between items-center py-3 border-b border-border/50 last:border-0">
+                                    <span className="font-black text-foreground italic text-lg">{item.eq}</span>
+                                    <div className="flex items-center gap-3">
+                                        <span className={`text-xl font-black italic ${item.isCorrect ? 'text-green-500' : 'text-rose-500 line-through'}`}>
                                             {item.userAnswer}
                                         </span>
                                         {!item.isCorrect && (
-                                            <span className="text-green-500 font-bold">({item.correctAnswer})</span>
+                                            <span className="text-lg font-black text-green-500 italic bg-green-500/10 px-2 py-1 rounded-lg">
+                                                {item.correctAnswer}
+                                            </span>
                                         )}
                                     </div>
                                 </div>
@@ -359,11 +374,11 @@ const SubtractionQuiz = () => {
                     </div>
                 )}
             </div>
-        
-            <div className="mt-12">
+
+            <div className="mt-24">
                 <ToolGuide
-                    title="간단 뺄셈 퀴즈 안내"
-                    intro="1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다."
+                    title={isEn ? "The Subtraction Master Guide" : "간단 뺄셈 퀴즈 가이드"}
+                    intro={isEn ? "Sharpen your mental edge with subtraction. Whether you're a student building basics or an adult keeping your mind quick for daily transactions, this tool offers the perfect practice environment with survival modes." : "뺄셈은 일상생활에서 가장 많이 쓰이는 연산 중 하나입니다. 본 퀴즈는 난이도별 뺄셈 훈련을 통해 거스름돈 계산과 같은 실생활 응용력을 키워주고, 시간 제한 모드를 통해 고도의 집중력을 발휘하는 두뇌 트레이닝 경험을 선사합니다."}
                     steps={toolSteps}
                     tips={toolTips}
                     faqs={toolFaqs}

@@ -3,8 +3,11 @@ import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Dices, RotateCcw, History } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
+import { useLanguage } from '../context/LanguageContext';
 
 const DiceRoller = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [diceType, setDiceType] = useState(6);
     const [diceCount, setDiceCount] = useState(1);
     const [results, setResults] = useState([]);
@@ -24,7 +27,7 @@ const DiceRoller = () => {
     const rollDice = () => {
         setIsRolling(true);
 
-        // 애니메이션 효과
+        // Animation effect simulation
         setTimeout(() => {
             const newResults = [];
             for (let i = 0; i < diceCount; i++) {
@@ -32,14 +35,14 @@ const DiceRoller = () => {
             }
             setResults(newResults);
 
-            // 히스토리에 추가
+            // Add to history
             const sum = newResults.reduce((a, b) => a + b, 0);
             setHistory(prev => [{
                 type: diceType,
                 count: diceCount,
                 results: newResults,
                 sum: sum,
-                time: new Date().toLocaleTimeString('ko-KR')
+                time: new Date().toLocaleTimeString(isEn ? 'en-US' : 'ko-KR')
             }, ...prev.slice(0, 9)]);
 
             setIsRolling(false);
@@ -54,45 +57,56 @@ const DiceRoller = () => {
         return diceTypes.find(d => d.value === diceType)?.color || 'bg-gray-500';
     };
 
+    const toolFaqs = isEn ? [
+        { q: "Is this dice roller fair?", a: "Yes, our dice roller uses a cryptographically secure pseudo-random number generator to ensure every roll is unbiased and fair." },
+        { q: "Can I roll different dice at once?", a: "Currently, you can roll multiple dice of the same type (like 5D6). To roll different types, you can roll them sequentially and check the history." },
+        { q: "What is D100 used for?", a: "D100, or percentile dice, are commonly used in RPGs like Call of Cthulhu to determine success based on percentage chances." }
+    ] : [
+        { q: "이 주사위 굴리기는 공정한가요?", a: "네! 암호학적으로 안전한 의사 난수 생성기(PRNG)를 사용하여 모든 결과가 편향되지 않고 공정함을 보장합니다." },
+        { q: "서로 다른 종류의 주사위를 동시에 굴릴 수 있나요?", a: "현재는 같은 종류의 주사위를 여러 개 굴리는 기능(예: 5D6)을 지원합니다. 다른 종류가 필요하면 순서대로 굴린 후 히스토리에서 합계를 확인하세요." },
+        { q: "D100 주사위는 보통 어디에 쓰이나요?", a: "주로 TRPG에서 백분율(%) 판정을 할 때 사용됩니다. 1부터 100까지의 숫자가 균등하게 나오도록 설계되었습니다." }
+    ];
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             <SEO
-                title="주사위 굴리기 - D4, D6, D8, D10, D12, D20, D100"
-                description="다양한 면의 주사위를 온라인에서 굴려보세요. D4부터 D100까지 지원하며 여러 개를 동시에 굴릴 수 있습니다."
-                keywords={['주사위', 'dice', 'roller', 'd20', 'd6', 'rpg']}
+                title={isEn ? "Online Dice Roller - D4, D6, D8, D10, D12, D20, D100 | Tool Hive" : "주사위 굴리기 - D4, D6, D8, D10, D12, D20, D100"}
+                description={isEn ? "Roll virtual dice online for RPGs, board games, or decision making. Supports all major dice types from D4 to D100. Accurate and fair results." : "다양한 면의 주사위를 온라인에서 굴려보세요. D4부터 D100까지 지원하며 여러 개를 동시에 굴릴 수 있습니다."}
+                keywords={isEn ? "dice roller, virtual dice, dnd dice, d6, d20, online dice" : "주사위, dice, roller, d20, d6, rgp, 보드게임"}
                 path="/dice-roller"
+                faqs={toolFaqs}
             />
 
             <div className="container mx-auto px-4 py-8 max-w-6xl">
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-4 shadow-lg">
-                        <Dices className="w-8 h-8 text-white" />
+                <div className="text-center mb-12">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl mb-6 shadow-2xl shadow-purple-500/20">
+                        <Dices className="w-10 h-10 text-white" />
                     </div>
-                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                        주사위 굴리기
+                    <h1 className="text-5xl font-black text-gray-900 dark:text-white mb-4 tracking-tighter italic uppercase">
+                        {isEn ? 'Dice Roller' : '주사위 굴리기'}
                     </h1>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        D4, D6, D8, D10, D12, D20, D100 주사위
+                    <p className="text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest text-sm">
+                        {isEn ? 'D4, D6, D8, D10, D12, D20, D100 Virtual Dice' : 'D4, D6, D8, D10, D12, D20, D100 주사위'}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Panel */}
-                    <div className="lg:col-span-2">
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-6">
+                    <div className="lg:col-span-2 space-y-8">
+                        <div className="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-2xl p-10 border-2 border-border/50">
                             {/* Dice Type Selection */}
-                            <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    주사위 종류
+                            <div className="mb-10">
+                                <label className="block text-xs font-black text-gray-400 dark:text-gray-500 mb-4 uppercase tracking-widest">
+                                    {isEn ? 'Dice Type' : '주사위 종류'}
                                 </label>
-                                <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                                <div className="grid grid-cols-4 sm:grid-cols-7 gap-3">
                                     {diceTypes.map((dice) => (
                                         <button
                                             key={dice.value}
                                             onClick={() => setDiceType(dice.value)}
-                                            className={`px-4 py-3 rounded-lg font-bold transition-all ${diceType === dice.value
-                                                    ? `${dice.color} text-white shadow-lg scale-105`
-                                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                                            className={`px-4 py-4 rounded-2xl font-black transition-all transform hover:scale-105 active:scale-95 ${diceType === dice.value
+                                                    ? `${dice.color} text-white shadow-xl shadow-current/30`
+                                                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                                                 }`}
                                         >
                                             {dice.name}
@@ -102,19 +116,22 @@ const DiceRoller = () => {
                             </div>
 
                             {/* Dice Count */}
-                            <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    주사위 개수: {diceCount}개
-                                </label>
+                            <div className="mb-10">
+                                <div className="flex justify-between items-end mb-4">
+                                    <label className="text-xs font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                                        {isEn ? 'Quantity' : '주사위 개수'}
+                                    </label>
+                                    <span className="text-2xl font-black text-primary font-mono">{diceCount}</span>
+                                </div>
                                 <input
                                     type="range"
                                     min="1"
                                     max="10"
                                     value={diceCount}
                                     onChange={(e) => setDiceCount(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                                    className="w-full h-3 bg-gray-100 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
                                 />
-                                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                <div className="flex justify-between text-[10px] font-black text-gray-400 dark:text-gray-500 mt-3 px-1">
                                     <span>1</span>
                                     <span>5</span>
                                     <span>10</span>
@@ -125,35 +142,38 @@ const DiceRoller = () => {
                             <button
                                 onClick={rollDice}
                                 disabled={isRolling}
-                                className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${isRolling
+                                className={`w-full py-6 rounded-2xl font-black text-xl transition-all shadow-2xl ${isRolling
                                         ? 'bg-gray-400 cursor-not-allowed'
-                                        : `${getDiceColor()} hover:shadow-xl hover:scale-105`
-                                    } text-white`}
+                                        : `${getDiceColor()} hover:scale-[1.02] active:scale-95 text-white shadow-current/30`
+                                    }`}
                             >
                                 {isRolling ? (
-                                    <span className="flex items-center justify-center gap-2">
-                                        <RotateCcw className="w-5 h-5 animate-spin" />
-                                        굴리는 중...
+                                    <span className="flex items-center justify-center gap-3">
+                                        <RotateCcw className="w-6 h-6 animate-spin" />
+                                        {isEn ? 'Rolling...' : '굴리는 중...'}
                                     </span>
                                 ) : (
-                                    '🎲 주사위 굴리기'
+                                    <span className="flex items-center justify-center gap-3">
+                                        <Dices className="w-6 h-6" />
+                                        {isEn ? 'ROLL DICE' : '주사위 굴리기'}
+                                    </span>
                                 )}
                             </button>
                         </div>
 
                         {/* Results */}
                         {results.length > 0 && (
-                            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                                    결과
+                            <div className="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-2xl p-10 border-2 border-border/50 animate-in fade-in zoom-in duration-300">
+                                <h2 className="text-xs font-black text-gray-400 dark:text-gray-500 mb-8 uppercase tracking-widest">
+                                    {isEn ? 'Latest Result' : '최신 결과'}
                                 </h2>
 
                                 {/* Individual Results */}
-                                <div className="grid grid-cols-5 sm:grid-cols-10 gap-3 mb-6">
+                                <div className="grid grid-cols-5 sm:grid-cols-10 gap-4 mb-10">
                                     {results.map((result, index) => (
                                         <div
                                             key={index}
-                                            className={`aspect-square ${getDiceColor()} rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg ${isRolling ? 'animate-bounce' : 'animate-pulse'
+                                            className={`aspect-square ${getDiceColor()} rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl transform transition-transform ${isRolling ? 'animate-bounce' : ''
                                                 }`}
                                             style={{ animationDelay: `${index * 0.1}s` }}
                                         >
@@ -163,14 +183,14 @@ const DiceRoller = () => {
                                 </div>
 
                                 {/* Total */}
-                                <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl p-6 text-center">
-                                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                                        합계
+                                <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/50 rounded-3xl p-8 text-center border border-border/50 shadow-inner">
+                                    <div className="text-[10px] font-black text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-widest">
+                                        {isEn ? 'Total Sum' : '합계'}
                                     </div>
-                                    <div className="text-5xl font-bold text-purple-600 dark:text-purple-400">
+                                    <div className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-purple-600 font-mono">
                                         {getTotal()}
                                     </div>
-                                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                                    <div className="text-[10px] font-black text-gray-400 dark:text-gray-500 mt-4 uppercase tracking-widest bg-white dark:bg-gray-800 px-4 py-1.5 rounded-full inline-block">
                                         {diceCount}D{diceType}
                                     </div>
                                 </div>
@@ -180,87 +200,110 @@ const DiceRoller = () => {
 
                     {/* History Panel */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sticky top-4">
-                            <div className="flex items-center gap-2 mb-4">
-                                <History className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                                    히스토리
-                                </h2>
+                        <div className="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-2xl p-8 sticky top-4 border-2 border-border/50">
+                            <div className="flex items-center justify-between mb-8">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-secondary/50 rounded-xl">
+                                        <History className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                                    </div>
+                                    <h2 className="text-lg font-black text-gray-900 dark:text-white uppercase tracking-tight">
+                                        {isEn ? 'History' : '히스토리'}
+                                    </h2>
+                                </div>
+                                {history.length > 0 && (
+                                    <button
+                                        onClick={() => setHistory([])}
+                                        className="text-[10px] font-black text-rose-500 hover:opacity-80 transition-opacity uppercase tracking-widest"
+                                    >
+                                        {isEn ? 'Clear' : '삭제'}
+                                    </button>
+                                )}
                             </div>
 
                             {history.length === 0 ? (
-                                <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-8">
-                                    아직 기록이 없습니다
-                                </p>
+                                <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+                                    <div className="w-12 h-12 bg-gray-50 dark:bg-gray-900 rounded-full flex items-center justify-center">
+                                        <History className="w-6 h-6 text-gray-300 dark:text-gray-700" />
+                                    </div>
+                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                                        {isEn ? 'No Rolls Yet' : '아직 기록이 없습니다'}
+                                    </p>
+                                </div>
                             ) : (
-                                <div className="space-y-3 max-h-[600px] overflow-y-auto">
+                                <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-gray-700">
                                     {history.map((record, index) => (
                                         <div
                                             key={index}
-                                            className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-sm"
+                                            className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-4 border border-border/50 transition-all hover:bg-white dark:hover:bg-gray-800"
                                         >
-                                            <div className="flex items-center justify-between mb-2">
-                                                <span className="font-bold text-gray-900 dark:text-white">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <span className="text-xs font-black text-primary uppercase tracking-tighter">
                                                     {record.count}D{record.type}
                                                 </span>
-                                                <span className="text-xs text-gray-500 dark:text-gray-400">
+                                                <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 font-mono">
                                                     {record.time}
                                                 </span>
                                             </div>
-                                            <div className="flex flex-wrap gap-1 mb-2">
+                                            <div className="flex flex-wrap gap-1.5 mb-3">
                                                 {record.results.map((r, i) => (
                                                     <span
                                                         key={i}
-                                                        className="px-2 py-1 bg-white dark:bg-gray-600 rounded text-xs font-mono"
+                                                        className="px-2 py-1 bg-white dark:bg-gray-800 rounded-lg text-[10px] font-black text-gray-600 dark:text-gray-400 border border-border/50 shadow-sm"
                                                     >
                                                         {r}
                                                     </span>
                                                 ))}
                                             </div>
-                                            <div className="text-right font-bold text-purple-600 dark:text-purple-400">
-                                                합계: {record.sum}
+                                            <div className="text-right text-lg font-black text-purple-600 dark:text-purple-400 font-mono">
+                                                <span className="text-[10px] font-black text-gray-400 dark:text-gray-500 mr-2 uppercase">{isEn ? 'SUM:' : '합계:'}</span>
+                                                {record.sum}
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             )}
-
-                            {history.length > 0 && (
-                                <button
-                                    onClick={() => setHistory([])}
-                                    className="w-full mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm"
-                                >
-                                    히스토리 지우기
-                                </button>
-                            )}
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-8">
-                    <ShareButtons />
+                <div className="mt-12 flex justify-center">
+                    <ShareButtons 
+                        title={isEn ? "Online Dice Roller" : "온라인 주사위 굴리기"}
+                    />
                 </div>
             </div>
-        \n            <ToolGuide
-                title="주사위 굴리기"
-                intro="D4, D6, D8, D10, D12, D20, D100 주사위"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
-                ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
-                ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
-            />
+            
+            <div className="max-w-6xl mx-auto px-4 pb-20 mt-12">
+                <ToolGuide
+                    title={isEn ? "Dice Roller Master Guide" : "주사위 굴리기 이용 가이드"}
+                    intro={isEn ? "A professional-grade virtual dice roller for tabletop RPGs, board games, or any high-stakes decision. Supports all standard polyhedral dice including D4, D6, D8, D10, D12, D20, and D100. Our random generator ensures fairness for critical hits and skill checks." : "보드게임, RPG, 또는 오늘의 메뉴 결정 등 무작위 숫자가 필요한 모든 순간에 사용하세요. D4부터 D100까지 실제 주사위의 모든 종류를 지원하며, 완벽하게 공정한 확률 계산 알고리즘을 사용합니다."}
+                    steps={isEn ? [
+                        "Select the type of dice you need (e.g., D20 for a saving throw).",
+                        "Adjust the quantity slider to roll multiple dice at once.",
+                        "Click 'ROLL DICE' and watch the animation for your results.",
+                        "Check the 'Total Sum' and review individual results in the dashboard.",
+                        "Use the History panel on the right to track your previous rolls."
+                    ] : [
+                        "D4부터 D100까지 필요한 주사위 종류를 클릭하여 선택하세요.",
+                        "슬라이더를 조절하여 한 번에 굴릴 주사위 개수(1~10개)를 설정합니다.",
+                        "'주사위 굴리기' 버튼을 누르면 화려한 애니메이션과 함께 결과가 나타납니다.",
+                        "전체 합계 점수와 개별 주사위 값을 직관적인 대시보드에서 확인합니다.",
+                        "오른쪽 히스토리 판넬을 통해 최근 10회까지의 기록을 다시 볼 수 있습니다."
+                    ]}
+                    tips={isEn ? [
+                        "Save the URL: Keep this tool bookmarked for your next DnD session.",
+                        "Percentile Rolls: Use the D100 for percentage-based outcome tests.",
+                        "Fair Play: Our PRNG (Pseudo-Random Number Generator) provides professional-grade fairness for competitive play.",
+                        "History Tracking: Don't worry about forgetting a score; the history panel saves your last 10 rolls."
+                    ] : [
+                        "D100 주사위는 보통 1% 단위의 확률 판정이 필요할 때 유용하게 쓰입니다.",
+                        "주사위 색상은 종류별로 다르게 지정되어 있어 시각적으로 쉽게 구분할 수 있습니다.",
+                        "모바일 세로 모드에 최적화되어 있어 실제 보드게임 판 옆에 두고 쓰기 아주 편리합니다.",
+                        "연속해서 굴릴 때 히스토리의 '삭제' 버튼을 눌러 깔끔하게 초기화할 수 있습니다."
+                    ]}
+                    faqs={toolFaqs}
+                />
+            </div>
         </div>
     );
 };

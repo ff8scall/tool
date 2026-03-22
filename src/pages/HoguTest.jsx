@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-
 import { Share2, RefreshCw, Hand, ShieldAlert, Award, HelpingHand } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const HoguTest = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [step, setStep] = useState('intro');
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
 
-    const questions = [
+    const questionsKo = [
         {
             id: 1,
             question: "친구가 돈을 빌려달라고 한다. 당신의 반응은?",
@@ -82,7 +84,105 @@ const HoguTest = () => {
         }
     ];
 
-    const getResult = (finalScore) => {
+    const questionsEn = [
+        {
+            id: 1,
+            question: "A friend asks to borrow money. Your reaction?",
+            options: [
+                { text: "How much do you need? (Lend if I have extra)", score: 5 },
+                { text: "Sorry, I'm tight too these days. (Firm refusal)", score: 0 },
+                { text: "Uh... okay... (Can't say no and lend)", score: 10 },
+                { text: "When will you pay back? Write a promissory note.", score: 2 }
+            ]
+        },
+        {
+            id: 2,
+            question: "The food served at a restaurant is different from what you ordered.",
+            options: [
+                { text: "Excuse me, I didn't order this. (Ask for exchange)", score: 0 },
+                { text: "I'll just eat it... (Can't speak up)", score: 10 },
+                { text: "Is this more expensive? Lucky me! (Optimist)", score: 5 },
+                { text: "Call the waiter and tell them quietly.", score: 2 }
+            ]
+        },
+        {
+            id: 3,
+            question: "When you receive a cold call for insurance:",
+            options: [
+                { text: "I'm not interested. (Hang up immediately)", score: 0 },
+                { text: "Ah... yes... (Keep listening)", score: 10 },
+                { text: "Sorry, I'm busy~ (Hang up kindly)", score: 5 },
+                { text: "What is that? (Intrigued and ask questions)", score: 8 }
+            ]
+        },
+        {
+            id: 4,
+            question: "No one wants to be the leader in a group project.",
+            options: [
+                { text: "I'll take the bullet because it's frustrating.", score: 8 },
+                { text: "Stay still until the end.", score: 0 },
+                { text: "Suggest drawing lots.", score: 3 },
+                { text: "Get pushed into it and do it reluctantly.", score: 10 }
+            ]
+        },
+        {
+            id: 5,
+            question: "A friend is 1 hour late for a meeting.",
+            options: [
+                { text: "It's okay! Take your time (Seething inside)", score: 10 },
+                { text: "Hey! Are you kidding me? (Angry)", score: 0 },
+                { text: "Tell them to buy me a meal since they're late.", score: 3 },
+                { text: "I'll just hang out at a cafe anyway.", score: 5 }
+            ]
+        },
+        {
+            id: 6,
+            question: "A clerk says 'This looks great on you!' and recommends an expensive outfit.",
+            options: [
+                { text: "Right? It's pretty. (Buy it because of praise)", score: 10 },
+                { text: "I'll look around more~ (Don't buy)", score: 0 },
+                { text: "I'll think about it. (Hesitate)", score: 5 },
+                { text: "Look at the price tag and put it back immediately.", score: 2 }
+            ]
+        },
+        {
+            id: 7,
+            question: "When I have to refuse someone:",
+            options: [
+                { text: "Say NO firmly.", score: 0 },
+                { text: "I drop hints but they often don't notice.", score: 8 },
+                { text: "I make long excuses and feel sorry.", score: 5 },
+                { text: "Eventually fail to refuse and accept it.", score: 10 }
+            ]
+        }
+    ];
+
+    const questions = isEn ? questionsEn : questionsKo;
+
+    const getResultEn = (finalScore) => {
+        if (finalScore >= 50) return {
+            level: 'Level 1', title: 'Human ATM Pushover King', color: 'text-purple-600', bg: 'bg-purple-50', icon: Award,
+            desc: "You are the ultimate pushover in this area! Being kind is different from being a pushover. You are the type to sacrifice yourself for others. You urgently need to practice saying 'no'.",
+            advice: "Practice shouting 'NO!' in front of the mirror 100 times."
+        };
+        if (finalScore >= 30) return {
+            level: 'Level 2', title: 'The Yes-Man', color: 'text-blue-500', bg: 'bg-blue-50', icon: HelpingHand,
+            desc: "You have a soft heart and find it hard to refuse requests. You think 'everyone should be happy', but you're actually stressed inside, aren't you? It's okay to be selfish sometimes.",
+            advice: "Take care of your own interests first without worrying about others."
+        };
+        if (finalScore >= 15) return {
+            level: 'Level 3', title: 'Smart Self-Care Explorer', color: 'text-green-500', bg: 'bg-green-50', icon: Hand,
+            desc: "You know how to be considerate while being firm when needed! There's almost no chance of you being taken advantage of. You are a pro at social life.",
+            advice: "Keep handling things wisely as you do now!"
+        };
+        return {
+            level: 'Level 4', title: 'Ultimate Iron Shield', color: 'text-gray-600', bg: 'bg-gray-100', icon: ShieldAlert,
+            desc: "Pushover? What's that? You have a 0% chance of being one. People might actually find you a bit difficult. Don't be too cold though~",
+            advice: "Sometimes it's good to pretend to lose a little."
+        };
+    };
+
+    const getResultKo = (finalScore) => {
         if (finalScore >= 50) return {
             level: '1등급', title: '인간 ATM 호구왕', color: 'text-purple-600', bg: 'bg-purple-50', icon: Award,
             desc: "당신은 이 구역의 호구왕입니다! 착한 것과 호구는 다릅니다. 남 배려하다가 본인 등골만 휘는 타입. 이제는 '싫다'고 말하는 연습이 시급합니다.",
@@ -105,6 +205,8 @@ const HoguTest = () => {
         };
     };
 
+    const getResult = (finalScore) => isEn ? getResultEn(finalScore) : getResultKo(finalScore);
+
     const handleAnswer = (points) => {
         setScore(prev => prev + points);
         if (currentQuestion < questions.length - 1) {
@@ -124,18 +226,28 @@ const HoguTest = () => {
         const result = getResult(score);
         if (navigator.share) {
             navigator.share({
-                title: '호구 성향 테스트',
-                text: `나의 호구력은? [${result.title}] - Utility Hub`,
+                title: isEn ? 'Pushover (Hogu) Test' : '호구 성향 테스트',
+                text: isEn ? `My pushover level is: [${result.title}] - Tool Hive` : `나의 호구력은? [${result.title}] - 유틸리티 허브`,
                 url: window.location.href,
             });
         } else {
-            alert('링크가 복사되었습니다!');
+            alert(isEn ? 'Link copied!' : '링크가 복사되었습니다!');
             navigator.clipboard.writeText(window.location.href);
         }
     };
 
-    
-    const toolFaqs = [
+    const toolFaqsEn = [
+        {
+            "q": "What does 'Pushover' mean in this test?",
+            "a": "It's a humorous term for people who find it hard to say no and often face financial or psychological losses by trying too hard to accommodate others."
+        },
+        {
+            "q": "The results hit too hard (fact-bombing).",
+            "a": "Being considerate of others is never bad! Take it as lighthearted advice to love yourself a little more."
+        }
+    ];
+
+    const toolFaqsKo = [
         {
             "q": "호구 성향 테스트의 '호구'가 무슨 뜻인가요?",
             "a": "거절을 잘 못하고, 남에게 맞춰주느라 금전적이거나 심리적인 손해를 자주 보는 착한 성격을 유머러스하게 일컫는 말입니다."
@@ -145,23 +257,40 @@ const HoguTest = () => {
             "a": "타인을 배려하는 성격이 결코 나쁜 것은 아닙니다! 다만 나 스스로를 더 사랑하라는 의미의 유쾌한 조언으로 받아들여주세요."
         }
     ];
-    const toolSteps = [
+
+    const toolStepsEn = [
+        "Read questions about situations where it's easy to be a pushover, like unreasonable requests from friends or office life.",
+        "Choose the item that matches your usual response way.",
+        "Check your global pushover level and prescription after finishing."
+    ];
+
+    const toolStepsKo = [
         "친구의 무리한 부탁, 직장 생활 등 호구가 되기 쉬운 상황 문항들을 읽습니다.",
         "평소 나의 대처 방식과 가장 똑같은 항목을 선택합니다.",
         "선택 완료 후, 나의 글로벌 호구 등급(?)과 처방전을 확인합니다."
     ];
-    const toolTips = [
+
+    const toolTipsEn = [
+        "If you have 'Good Boy/Girl Syndrome', be sure to apply the overcoming tips on the result page to your life.",
+        "You need to practice saying 'NO' to unreasonable requests."
+    ];
+
+    const toolTipsKo = [
         "본인이 착한 아이 증후군이 있다면, 결과 페이지에 나온 극복 팁을 실생활에 꼭 적용해 보세요.",
         "자신을 옭아매는 무리한 부탁엔 'No'라고 말하는 연습이 필요합니다."
     ];
 
+    const toolFaqs = isEn ? toolFaqsEn : toolFaqsKo;
+    const toolSteps = isEn ? toolStepsEn : toolStepsKo;
+    const toolTips = isEn ? toolTipsEn : toolTipsKo;
+
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
             <SEO
-                title="호구 성향 테스트 | 내가 호구라고?"
-                description="혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."
-                keywords="호구테스트, 거절못하는성격, 심리테스트, 호구자가진단, pushover test"
-                category="운세/재미"
+                title={isEn ? "Pushover (Hogu) Test | Am I too nice? | Tool Hive" : "호구 성향 테스트 | 내가 호구라고? | Tool Hive"}
+                description={isEn ? "Am I a pushover? Fact-bombing test for those who can't say no and keep losing out." : "혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."}
+                keywords={isEn ? "pushover test, can't say no, psychological test, self-diagnosis, hogu test" : "호구테스트, 거절못하는성격, 심리테스트, 호구자가진단, pushover test"}
+                category={isEn ? "Fun" : "운세/재미"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />
@@ -170,20 +299,22 @@ const HoguTest = () => {
                 <div className="text-center animate-fade-in bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl">
                     <HelpingHand className="w-24 h-24 text-purple-500 mx-auto mb-6 animate-pulse" />
                     <h1 className="text-3xl md:text-4xl font-black text-gray-800 dark:text-white mb-4">
-                        호구 성향 테스트
+                        {isEn ? 'Pushover (Hogu) Test' : '호구 성향 테스트'}
                     </h1>
                     <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                        혹시 '착하다'는 말을 자주 듣나요?<br />
-                        부탁을 거절하기가 너무 힘든가요?<br />
-                        당신의 호구력을 진단해드립니다.
+                        {isEn ? (
+                            <>Do you hear people say you're 'too nice' often?<br />Is it too hard for you to refuse requests?<br />We diagnose your pushover level.</>
+                        ) : (
+                            <>혹시 '착하다'는 말을 자주 듣나요?<br />부탁을 거절하기가 너무 힘든가요?<br />당신의 호구력을 진단해드립니다.</>
+                        )}
                     </p>
                     <button
                         onClick={() => setStep('test')}
                         className="w-full py-4 bg-purple-500 hover:bg-purple-600 text-white text-xl font-bold rounded-2xl shadow-lg transition-transform hover:scale-105"
                     >
-                        진단 시작하기
+                        {isEn ? 'Start Diagnosis' : '진단 시작하기'}
                     </button>
-                    <p className="mt-4 text-xs text-gray-400">주의: 팩폭에 상처받지 마세요</p>
+                    <p className="mt-4 text-xs text-gray-400">{isEn ? 'Note: Don\'t be hurt by fact-bombs' : '주의: 팩폭에 상처받지 마세요'}</p>
                 </div>
             )}
 
@@ -223,7 +354,7 @@ const HoguTest = () => {
                             <ResultIcon className={`w-24 h-24 mx-auto animate-bounce ${result.color}`} />
                         </div>
 
-                        <span className="text-gray-500 dark:text-gray-400 font-bold">당신은...</span>
+                        <span className="text-gray-500 dark:text-gray-400 font-bold">{isEn ? 'You are...' : '당신은...'}</span>
                         <h2 className={`text-3xl md:text-4xl font-black mt-2 mb-6 ${result.color}`}>
                             {result.title}
                         </h2>
@@ -243,14 +374,14 @@ const HoguTest = () => {
                                 className="flex-1 py-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
                             >
                                 <RefreshCw className="w-5 h-5" />
-                                다시하기
+                                {isEn ? 'Retry' : '다시하기'}
                             </button>
                             <button
                                 onClick={shareResult}
                                 className="flex-1 py-4 bg-purple-500 hover:bg-purple-600 text-white rounded-2xl font-bold shadow-lg shadow-purple-500/30 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-1"
                             >
                                 <Share2 className="w-5 h-5" />
-                                공유하기
+                                {isEn ? 'Share' : '공유하기'}
                             </button>
                         </div>
                     </div>
@@ -259,8 +390,8 @@ const HoguTest = () => {
         
             <div className="mt-12">
                 <ToolGuide
-                    title="호구 성향 테스트 안내"
-                    intro="혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."
+                    title={isEn ? "Pushover Test Guide" : "호구 성향 테스트 안내"}
+                    intro={isEn ? "Am I a pushover? Fact-bombing test for those who can't say no and keep losing out." : "혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."}
                     steps={toolSteps}
                     tips={toolTips}
                     faqs={toolFaqs}

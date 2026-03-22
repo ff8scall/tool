@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { tools } from '../data/tools';
+import { useLanguage } from '../context/LanguageContext';
 
 const SearchModal = ({ isOpen, onClose }) => {
     const [query, setQuery] = useState('');
@@ -9,6 +10,7 @@ const SearchModal = ({ isOpen, onClose }) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const inputRef = useRef(null);
     const navigate = useNavigate();
+    const { t, lang } = useLanguage();
 
     useEffect(() => {
         if (isOpen) {
@@ -24,11 +26,16 @@ const SearchModal = ({ isOpen, onClose }) => {
             return;
         }
 
-        const filtered = tools.filter(tool =>
-            tool.title.toLowerCase().includes(query.toLowerCase()) ||
-            (tool.description && tool.description.toLowerCase().includes(query.toLowerCase())) ||
-            (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(query.toLowerCase())))
-        ).slice(0, 5); // Limit to 5 results
+        const filtered = tools.filter(tool => {
+            // Filter by language if in English mode
+            if (lang === 'en' && !tool.translated) return false;
+
+            const localizedTitle = t(`tools.${tool.id}.title`, { defaultValue: tool.title });
+            const localizedDesc = t(`tools.${tool.id}.description`, { defaultValue: tool.description });
+            return localizedTitle.toLowerCase().includes(query.toLowerCase()) ||
+                   (localizedDesc && localizedDesc.toLowerCase().includes(query.toLowerCase())) ||
+                   (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(query.toLowerCase())));
+        }).slice(0, 5); // Limit to 5 results
 
         setResults(filtered);
         setSelectedIndex(0);
@@ -52,9 +59,12 @@ const SearchModal = ({ isOpen, onClose }) => {
     };
 
     const handleSelect = (tool) => {
-        navigate(tool.path);
+        const cleanPath = tool.path.replace(/^\/(?:ko|en)(?=\/|$)/, '');
+        navigate(`/${lang}${cleanPath}`);
         onClose();
     };
+
+    const isEn = lang === 'en';
 
     if (!isOpen) return null;
 
@@ -74,7 +84,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                         ref={inputRef}
                         type="text"
                         className="flex-1 bg-transparent border-none outline-none text-lg placeholder-gray-400 text-gray-900 dark:text-gray-100"
-                        placeholder="도구 검색... (예: 로또, 환율)"
+                        placeholder={t('common.searchPlaceholder', { defaultValue: isEn ? 'Search tools...' : '도구 검색...' })}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
@@ -87,7 +97,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                 {results.length > 0 && (
                     <div className="py-2 max-h-[60vh] overflow-y-auto">
                         <div className="px-3 pb-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            검색 결과
+                            {t('home.searchResult')}
                         </div>
                         {results.map((tool, index) => (
                             <div
@@ -100,9 +110,9 @@ const SearchModal = ({ isOpen, onClose }) => {
                             >
                                 <div className="flex items-center gap-3">
                                     <div className={`p-2 rounded-md ${tool.color} bg-opacity-10 text-opacity-100`}>
-                                        <tool.icon className={`w-5 h-5 ${tool.color.replace('bg-', 'text-')}`} />
+                                        <tool.icon className={`w-5 h-5 ${tool.color?.replace('bg-', 'text-') || 'text-indigo-500'}`} />
                                     </div>
-                                    <span className="font-medium">{tool.title}</span>
+                                    <span className="font-medium">{t(`tools.${tool.id}.title`, { defaultValue: tool.title }).split('|')[0].trim()}</span>
                                 </div>
                                 <ChevronRight className="w-4 h-4 opacity-50" />
                             </div>
@@ -112,20 +122,20 @@ const SearchModal = ({ isOpen, onClose }) => {
 
                 {query && results.length === 0 && (
                     <div className="py-8 text-center text-gray-500 dark:text-gray-400">
-                        검색 결과가 없습니다.
+                        {t('home.noResult', { defaultValue: isEn ? 'No results found.' : '검색 결과가 없습니다.' })}
                     </div>
                 )}
 
                 {!query && (
                     <div className="py-8 text-center text-gray-400 dark:text-gray-500 text-sm">
-                        찾고 싶은 도구의 이름을 입력하세요.
+                        {t('common.searchInstruction')}
                     </div>
                 )}
 
                 <div className="px-4 py-2 bg-gray-50 dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-500 flex justify-between">
-                    <span>선택: ↵</span>
-                    <span>이동: ↑↓</span>
-                    <span>닫기: ESC</span>
+                    <span>{t('common.select')}: ↵</span>
+                    <span>{t('common.navigate')}: ↑↓</span>
+                    <span>{t('common.close')}: ESC</span>
                 </div>
             </div>
         </div>

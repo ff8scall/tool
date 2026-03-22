@@ -4,8 +4,11 @@ import ToolGuide from '../components/ToolGuide';
 import { RefreshCw, Trophy, Share2 } from 'lucide-react';
 import useUserPreferences from '../hooks/useUserPreferences';
 import useShareCanvas from '../hooks/useShareCanvas';
+import { useLanguage } from '../context/LanguageContext';
 
 const Game2048 = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [grid, setGrid] = useState(Array(4).fill().map(() => Array(4).fill(0)));
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
@@ -15,7 +18,6 @@ const Game2048 = () => {
     const { shareCanvas } = useShareCanvas();
     const containerRef = useRef(null);
 
-    // Touch handling refs
     const touchStart = useRef({ x: 0, y: 0 });
     const touchEnd = useRef({ x: 0, y: 0 });
 
@@ -23,8 +25,6 @@ const Game2048 = () => {
         addRecentTool('2048');
         const saved = localStorage.getItem('tool-hive-2048-highscore');
         if (saved) setHighScore(parseInt(saved, 10));
-
-        // Initial spawn
         initializeGame();
     }, []);
 
@@ -38,7 +38,6 @@ const Game2048 = () => {
         setWon(false);
     };
 
-    // Save High Score
     useEffect(() => {
         if (score > highScore) {
             setHighScore(score);
@@ -59,7 +58,6 @@ const Game2048 = () => {
         }
     };
 
-    // Game Logic Helpers
     const slide = (row) => {
         let arr = row.filter(val => val);
         let missing = 4 - arr.length;
@@ -86,16 +84,6 @@ const Game2048 = () => {
         return row;
     };
 
-    const rotateGrid = (grid) => {
-        let newGrid = Array(4).fill().map(() => Array(4).fill(0));
-        for (let r = 0; r < 4; r++) {
-            for (let c = 0; c < 4; c++) {
-                newGrid[c][r] = grid[r][c];
-            }
-        }
-        return newGrid;
-    };
-
     const move = useCallback((direction) => {
         if (gameOver) return;
 
@@ -115,12 +103,6 @@ const Game2048 = () => {
                     newGrid[r] = newRow;
                 }
             } else if (direction === 'up' || direction === 'down') {
-                // To reuse logic, rotate grid, process as left/right, rotate back
-                // Or just process columns
-                // Let's manually process columns for simplicity or rotate
-                // Rotate is cleaner logic reuse
-                // 90deg?
-                // Let's just do manual column processing
                 for (let c = 0; c < 4; c++) {
                     let col = [newGrid[0][c], newGrid[1][c], newGrid[2][c], newGrid[3][c]];
                     if (direction === 'down') col.reverse();
@@ -138,13 +120,10 @@ const Game2048 = () => {
                 addRandomTile(newGrid);
                 setScore(s => s + scoreRef.current);
 
-                // Check Game Over
                 let movesAvailable = false;
-                // Check empty
                 for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (newGrid[r][c] === 0) movesAvailable = true;
 
                 if (!movesAvailable) {
-                    // Check adjacent merges
                     for (let r = 0; r < 4; r++) {
                         for (let c = 0; c < 4; c++) {
                             if (c < 3 && newGrid[r][c] === newGrid[r][c + 1]) movesAvailable = true;
@@ -159,9 +138,8 @@ const Game2048 = () => {
 
             return currentGrid;
         });
-    }, [gameOver]); // Include internal helpers if needed, but they are defined outside or safe
+    }, [gameOver]);
 
-    // Keyboard Listeners
     useEffect(() => {
         const handleKeyDown = (e) => {
             switch (e.key) {
@@ -188,25 +166,21 @@ const Game2048 = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [move]);
 
-    // Touch Logic
     const handleTouchStart = (e) => {
         touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
     const handleTouchEnd = (e) => {
         touchEnd.current = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-
         const dx = touchEnd.current.x - touchStart.current.x;
         const dy = touchEnd.current.y - touchStart.current.y;
 
         if (Math.abs(dx) > Math.abs(dy)) {
-            // Horizontal
             if (Math.abs(dx) > 30) {
                 if (dx > 0) move('right');
                 else move('left');
             }
         } else {
-            // Vertical
             if (Math.abs(dy) > 30) {
                 if (dy > 0) move('down');
                 else move('up');
@@ -214,7 +188,6 @@ const Game2048 = () => {
         }
     };
 
-    // Styling
     const getCellClass = (value) => {
         const base = "w-full h-full rounded-lg flex items-center justify-center font-bold transition-all duration-200 select-none shadow-sm text-slate-800";
         switch (value) {
@@ -234,13 +207,23 @@ const Game2048 = () => {
         }
     };
 
+    const toolFaqs = isEn ? [
+        { q: "How do I play 2048?", a: "Swipe (up, down, left, right) or use arrow keys to move the tiles. When two tiles with the same number touch, they merge into one with the total value." },
+        { q: "What is the goal of the game?", a: "The ultimate goal is to create a tile with the number 2048, though you can continue playing for high scores after reaching it." },
+        { q: "Is there a winning strategy?", a: "Many players find success by keeping their largest tile in one of the corners and building others around it sequentially." }
+    ] : [
+        { q: "2048 게임은 어떻게 하는 것인가요?", a: "가로, 세로로 타일들을 밀면 숫자들이 한쪽으로 쏠립니다. 이때 같은 숫자 두 개가 부딪히면 하나로 합쳐지며 숫자가 두 배가 됩니다." },
+        { q: "게임의 최종 목표는 무엇인가요?", a: "숫자를 계속 합쳐서 '2048'이 적힌 타일을 만드는 것이 목표입니다. 2048을 만든 후에도 계속해서 더 높은 점수에 도전할 수 있습니다." },
+        { q: "고득점을 위한 팁이 있나요?", a: "가장 높은 숫자의 타일을 한쪽 구석(예: 왼쪽 하단)에 고정시키고, 나머지 타일들을 그 주변으로 차곡차곡 쌓아가는 전략이 효과적입니다." }
+    ];
+
     return (
-        <div className="max-w-md mx-auto space-y-6 select-none touch-none" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} ref={containerRef}>
-            {/* Prevent default touch actions usually needed on body, but simple event handlers here work well */}
+        <div className="max-w-md mx-auto space-y-6 select-none touch-none px-4" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} ref={containerRef}>
             <SEO
-                title="2048 게임 - Tool Hive"
-                description="전설적인 숫자 퍼즐 게임 2048. 같은 숫자를 합쳐 2048을 만들어보세요!"
-                keywords="2048, 게임, 퍼즐, 숫자게임, puzzle, game"
+                title={isEn ? "2048 Game - Master the Number Puzzle | Tool Hive" : "2048 게임 - 전설적인 숫자 퍼즐 | Tool Hive"}
+                description={isEn ? "Play the addictive 2048 tile puzzle game online. Merge numbers, reach the 2048 tile, and challenge your high score. Fun, free, and optimized for mobile." : "전설적인 숫자 퍼즐 게임 2048. 같은 숫자를 합쳐 2048을 만들어보세요!"}
+                keywords={isEn ? "2048 game, number puzzle, math games online, addictive games, logic puzzles" : "2048, 게임, 퍼즐, 숫자게임, puzzle, game"}
+                faqs={toolFaqs}
             />
 
             <div className="flex flex-col items-center">
@@ -248,11 +231,11 @@ const Game2048 = () => {
                     <h2 className="text-4xl font-extrabold text-slate-700 dark:text-slate-200">2048</h2>
                     <div className="flex gap-2">
                         <div className="bg-gray-200 dark:bg-gray-800 rounded-md px-4 py-1 text-center">
-                            <div className="text-[10px] font-bold text-gray-500 uppercase">Score</div>
+                            <div className="text-[10px] font-bold text-gray-500 uppercase">{isEn ? 'Score' : '점수'}</div>
                             <div className="font-bold text-lg">{score}</div>
                         </div>
                         <div className="bg-gray-200 dark:bg-gray-800 rounded-md px-4 py-1 text-center">
-                            <div className="text-[10px] font-bold text-gray-500 uppercase">Best</div>
+                            <div className="text-[10px] font-bold text-gray-500 uppercase">{isEn ? 'Best' : '최고'}</div>
                             <div className="font-bold text-lg">{highScore}</div>
                         </div>
                     </div>
@@ -262,13 +245,13 @@ const Game2048 = () => {
                     {/* Game Over Overlay */}
                     {gameOver && (
                         <div className="absolute inset-0 z-10 bg-white/70 dark:bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl animate-in fade-in">
-                            <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">Game Over!</h3>
-                            <p className="text-lg text-slate-600 dark:text-slate-300 mb-6">최종 점수: {score}</p>
+                            <h3 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">{isEn ? 'Game Over!' : '게임 종료!'}</h3>
+                            <p className="text-lg text-slate-600 dark:text-slate-300 mb-6">{isEn ? 'Final Score' : '최종 점수'}: {score}</p>
                             <button onClick={initializeGame} className="bg-slate-800 text-white px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform">
-                                다시 도전하기
+                                {isEn ? 'Try Again' : '다시 도전하기'}
                             </button>
                             <button onClick={() => shareCanvas(containerRef.current, '2048', score)} className="bg-slate-600 text-white px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform mt-3 flex items-center gap-2">
-                                <Share2 size={18} /> 결과 공유하기
+                                <Share2 size={18} /> {isEn ? 'Share Result' : '결구 공유하기'}
                             </button>
                         </div>
                     )}
@@ -276,14 +259,14 @@ const Game2048 = () => {
                     {/* Win Overlay */}
                     {won && !gameOver && (
                         <div className="absolute inset-0 z-10 bg-yellow-500/50 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl animate-in fade-in">
-                            <h3 className="text-4xl font-black text-white mb-2 drop-shadow-md">You Win!</h3>
-                            <p className="text-lg text-white mb-6 font-bold">2048을 만들었습니다!</p>
+                            <h3 className="text-4xl font-black text-white mb-2 drop-shadow-md">{isEn ? 'You Win!' : '우승!'}</h3>
+                            <p className="text-lg text-white mb-6 font-bold">{isEn ? 'Reached the 2048 tile!' : '2048을 만들었습니다!'}</p>
                             <div className="flex gap-2">
                                 <button onClick={() => setWon(false)} className="bg-white text-yellow-600 px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform shadow-lg">
-                                    계속 하기
+                                    {isEn ? 'Keep Going' : '계속 하기'}
                                 </button>
                                 <button onClick={initializeGame} className="bg-slate-800 text-white px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform shadow-lg">
-                                    새 게임
+                                    {isEn ? 'New Game' : '새 게임'}
                                 </button>
                             </div>
                         </div>
@@ -304,36 +287,46 @@ const Game2048 = () => {
                 {/* Controls Info */}
                 <div className="mt-8 flex justify-between items-center w-full max-w-[400px]">
                     <div className="text-sm text-gray-500">
-                        <strong>방법:</strong> 방향키나 터치로 타일을 미세요.
+                        <strong>{isEn ? 'How to Play' : '방법'}:</strong> {isEn ? 'Use Arrow Keys or Swipe to move tiles.' : '방향키나 터치로 타일을 미세요.'}
                     </div>
                     <button
                         onClick={initializeGame}
                         className="p-2 bg-slate-200 dark:bg-slate-800 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
-                        title="새 게임"
+                        title={isEn ? "New Game" : "새 게임"}
                     >
                         <RefreshCw className="w-5 h-5 text-slate-600 dark:text-slate-300" />
                     </button>
                 </div>
             </div>
-        \n            <ToolGuide
-                title="2048"
-                intro="숫자를 합쳐 2048을 만드는 레전드 퍼즐"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "2048 Mastery Guide" : "2048 게임 완벽 정복 가이드"}
+                intro={isEn ? "Simple to learn, hard to master. 2048 is a sliding tile puzzle game where you combine matching numbers to reach the ultimate 2048 goal. It requires foresight, planning, and a bit of luck." : "2048은 전 세계적으로 선풍적인 인기를 끈 숫자 퍼즐 게임입니다. 같은 숫자가 적힌 타일들을 하나로 합쳐 점수를 높이고, 최종적으로 '2048'이라는 숫자를 만드는 것이 목표입니다. 간단한 규칙 속에 고도의 전략이 숨어있는 두뇌 게임을 즐겨보세요."}
+                steps={isEn ? [
+                    "Swipe or use keyboard arrow keys to move all tiles in one direction.",
+                    "When two tiles with the same number collide, they merge into one.",
+                    "New tiles (2 or 4) spawn in empty spots after every move.",
+                    "The game ends when the grid is full and no more merges are possible.",
+                    "Don't stop at 2048; keep merging to see how high you can score!"
+                ] : [
+                    "방향키(↑, ↓, ←, →) 또는 화면을 밀어 타일을 상하좌우 한쪽 방향으로 몰아넣습니다.",
+                    "이때 같은 숫자가 적힌 두 타일이 만나면 하나의 타일로 합쳐지며 숫자가 두 배가 됩니다.",
+                    "매 이동마다 빈 공간에 새로운 2 또는 4 타일이 무작위로 생성됩니다.",
+                    "모든 칸이 타일로 가득 차고 더 이상 합칠 수 있는 숫자가 없을 때 게임이 종료됩니다.",
+                    "2048 타일을 만든 이후에도 게임을 계속 진행하여 최고 기록을 경신할 수 있습니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Corner Strategy: Keep your highest number in a single corner (e.g., bottom-left).",
+                    "Avoid moving up (or whichever direction moves tiles away from your corner).",
+                    "Keep rows or columns organized by keeping numbers in descending order.",
+                    "Focus on making merges that clear up space to avoid getting boxed in."
+                ] : [
+                    "구석 전략: 가장 높은 숫자의 타일을 왼쪽 아래나 오른쪽 위 등 한쪽 구석에 고정시키세요.",
+                    "고정시킨 방향의 반대 방향(예: 아래면 위로)으로는 가급적 움직이지 않는 것이 유리합니다.",
+                    "인접한 칸에 큰 숫자부터 작은 숫자 순서대로 배치되도록 유도하세요.",
+                    "한 번의 움직임으로 여러 타일을 합칠 수 있는 기회를 노려 공간을 확보하세요."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { GitCommit, Play, Plus, RefreshCw, Trash2, Users } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const LadderGame = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [players, setPlayers] = useState(['A', 'B', 'C', 'D']);
-    const [results, setResults] = useState(['1등', '2등', '3등', '꽝']);
+    const [results, setResults] = useState(isEn ? ['1st', '2nd', '3rd', 'Fail'] : ['1등', '2등', '3등', '꽝']);
     const [isPlaying, setIsPlaying] = useState(false);
     const [ladder, setLadder] = useState([]);
     const [currentPath, setCurrentPath] = useState([]);
@@ -14,7 +17,6 @@ const LadderGame = () => {
     const canvasRef = useRef(null);
     const animationRef = useRef(null);
 
-    // Colors for each player path
     const colors = [
         '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
         '#FFEEAD', '#D4A5A5', '#9B59B6', '#3498DB'
@@ -22,14 +24,12 @@ const LadderGame = () => {
 
     const generateLadder = () => {
         const count = players.length;
-        const steps = 10; // Number of vertical steps
+        const steps = 10; 
         const newLadder = [];
 
         for (let i = 0; i < steps; i++) {
             const row = Array(count - 1).fill(false);
-            // Randomly place horizontal lines
             for (let j = 0; j < count - 1; j++) {
-                // Ensure no adjacent horizontal lines and random chance
                 if (Math.random() > 0.5 && (j === 0 || !row[j - 1])) {
                     row[j] = true;
                 }
@@ -59,14 +59,13 @@ const LadderGame = () => {
         const height = canvas.height;
         const count = players.length;
         const colWidth = width / count;
-        const rowHeight = (height - 100) / ladder.length; // Reserve top/bottom for text
+        const rowHeight = (height - 100) / ladder.length;
         const startY = 50;
 
         ctx.clearRect(0, 0, width, height);
         ctx.lineWidth = 2;
         ctx.lineCap = 'round';
 
-        // Draw vertical lines
         for (let i = 0; i < count; i++) {
             const x = colWidth * i + colWidth / 2;
             ctx.strokeStyle = '#ddd';
@@ -76,7 +75,6 @@ const LadderGame = () => {
             ctx.stroke();
         }
 
-        // Draw horizontal lines
         ladder.forEach((row, r) => {
             const y = startY + (r + 1) * rowHeight - rowHeight / 2;
             row.forEach((hasLine, c) => {
@@ -92,24 +90,18 @@ const LadderGame = () => {
             });
         });
 
-        // Draw current path if playing
         if (currentPath.length > 0 && selectedPlayer !== null) {
             ctx.strokeStyle = colors[selectedPlayer % colors.length];
             ctx.lineWidth = 4;
             ctx.beginPath();
-
-            // Start point
             const startX = colWidth * selectedPlayer + colWidth / 2;
             ctx.moveTo(startX, startY);
 
             currentPath.forEach(point => {
                 const x = colWidth * point.col + colWidth / 2;
-                const y = startY + point.row * rowHeight + (point.type === 'vertical' ? 0 : rowHeight / 2); // Adjust y based on type
-                // This is simplified drawing logic, actual path tracing needs precise coordinates
-                // Let's just draw lines between points
+                const y = startY + point.row * rowHeight + (point.type === 'vertical' ? 0 : rowHeight / 2);
                 ctx.lineTo(x, y);
             });
-
             ctx.stroke();
         }
     };
@@ -120,90 +112,29 @@ const LadderGame = () => {
         setSelectedPlayer(playerIndex);
         setIsPlaying(true);
 
-        const path = [];
-        let col = playerIndex;
-        let row = 0;
         const count = players.length;
-        const rowHeight = (canvasRef.current.height - 100) / ladder.length;
-        const startY = 50;
-
-        // Initial point
-        path.push({ col, row: -0.5, type: 'start' }); // -0.5 to represent top area
-
-        // Animation loop
-        let currentRow = 0;
-        let currentCol = playerIndex;
-
-        const animate = () => {
-            if (currentRow >= ladder.length) {
-                // Finished
-                path.push({ col: currentCol, row: ladder.length, type: 'end' });
-                setCurrentPath([...path]);
-                setIsPlaying(false);
-                return;
-            }
-
-            // Check horizontal lines
-            // Left
-            if (currentCol > 0 && ladder[currentRow][currentCol - 1]) {
-                path.push({ col: currentCol, row: currentRow, type: 'vertical' }); // Down to line
-                path.push({ col: currentCol - 1, row: currentRow, type: 'horizontal' }); // Move left
-                currentCol--;
-            }
-            // Right
-            else if (currentCol < count - 1 && ladder[currentRow][currentCol]) {
-                path.push({ col: currentCol, row: currentRow, type: 'vertical' }); // Down to line
-                path.push({ col: currentCol + 1, row: currentRow, type: 'horizontal' }); // Move right
-                currentCol++;
-            }
-            else {
-                // Just go down
-                path.push({ col: currentCol, row: currentRow, type: 'vertical' });
-            }
-
-            currentRow++;
-            setCurrentPath([...path]);
-
-            // Continue animation
-            animationRef.current = requestAnimationFrame(() => {
-                // Slow down animation for visibility - actually let's just compute full path and animate drawing?
-                // For simplicity in this version, we'll just compute full path instantly and let user trace with eye or implement simple delay
-                // Let's do instant for now to ensure correctness, maybe add delay later
-                animate();
-            });
-        };
-
-        // Actually, let's pre-calculate the full path and then animate drawing it
         const fullPath = [];
         let c = playerIndex;
 
-        // Start top
         fullPath.push({ x: c, y: 0 });
 
         for (let r = 0; r < ladder.length; r++) {
-            // Move down half step
             fullPath.push({ x: c, y: r + 0.5 });
-
             if (c > 0 && ladder[r][c - 1]) {
-                // Move left
                 c--;
                 fullPath.push({ x: c, y: r + 0.5 });
             } else if (c < count - 1 && ladder[r][c]) {
-                // Move right
                 c++;
                 fullPath.push({ x: c, y: r + 0.5 });
             }
-
-            // Move down half step (end of row)
             fullPath.push({ x: c, y: r + 1 });
         }
 
-        // Animate drawing
         let step = 0;
         const drawStep = () => {
             if (step < fullPath.length) {
-                // Map logical coordinates to canvas coordinates for drawing
                 const canvas = canvasRef.current;
+                if (!canvas) return;
                 const width = canvas.width;
                 const height = canvas.height;
                 const colWidth = width / count;
@@ -222,7 +153,7 @@ const LadderGame = () => {
                 const getY = (r) => startY + r * rowHeight;
 
                 if (step === 0) {
-                    ctx.moveTo(getX(curr.x), 50); // Start top
+                    ctx.moveTo(getX(curr.x), 50);
                 } else {
                     ctx.moveTo(getX(prev.x), getY(prev.y));
                     ctx.lineTo(getX(curr.x), getY(curr.y));
@@ -236,7 +167,6 @@ const LadderGame = () => {
             }
         };
 
-        // Clear previous path first
         drawLadder();
         drawStep();
     };
@@ -256,7 +186,7 @@ const LadderGame = () => {
     const addMember = () => {
         if (players.length < 8) {
             setPlayers([...players, String.fromCharCode(65 + players.length)]);
-            setResults([...results, '꽝']);
+            setResults([...results, isEn ? 'Fail' : '꽝']);
         }
     };
 
@@ -267,66 +197,77 @@ const LadderGame = () => {
         }
     };
 
+    const toolFaqs = isEn ? [
+        { q: "How many players can participate?", a: "You can have between 2 and 8 players in a single game." },
+        { q: "Is the ladder generated randomly each time?", a: "Yes, clicking the 'Regenerate Ladder' button will create a completely new random path configuration." },
+        { q: "Can I customize the results?", a: "Absolutely! You can type anything into the result boxes at the bottom, such as prizes, penalties, or chores." }
+    ] : [
+        { q: "최대 인원은 몇 명인가요?", a: "최소 2명에서 최대 8명까지 참가 인원을 조정하여 게임을 즐길 수 있습니다." },
+        { q: "사다리 모양을 바꿀 수 있나요?", a: "'사다리 재생성' 버튼을 누르면 매번 새로운 형태의 무작위 사다리가 생성됩니다." },
+        { q: "결과 항목에 무엇을 적으면 좋나요?", a: "간식 내기, 설거지 당번, 벌칙 내용 등 상황에 맞는 다양한 항목을 자유롭게 기입하여 활용해 보세요." }
+    ];
+
     return (
-        <div className="max-w-4xl mx-auto space-y-6 select-none">
+        <div className="max-w-4xl mx-auto space-y-8 select-none px-4">
             <SEO
-                title="사다리 타기 - 랜덤 매칭 게임"
-                description="참가자와 벌칙을 입력하고 사다리를 타보세요! 간식 내기, 당번 정하기에 딱 좋은 사다리 게임입니다."
-                keywords={['사다리', 'ladder', 'game', '내기', '복불복', 'random']}
+                title={isEn ? "Ladder Game - Fun Random Matching | Tool Hive" : "사다리 타기 (Ghost Leg) - 랜덤 매칭 게임 | Tool Hive"}
+                description={isEn ? "Make decisions fun with the Ghost Leg (Ladder Game). Enter players and results, then follow the falling path to see who gets what! Perfect for group bets and chores." : "참가자와 벌칙을 입력하고 사다리를 타보세요! 간식 내기, 당번 정하기에 딱 좋은 사다리 게임입니다."}
+                keywords={isEn ? "ladder game, ghost leg, random matching, decision maker, fun betting games" : "사다리, ladder, game, 내기, 복불복, random"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center space-y-4">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-3">
-                    <GitCommit className="w-8 h-8 text-green-500 rotate-90" />
-                    사다리 타기
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white flex items-center justify-center gap-4 italic tracking-tighter">
+                    <GitCommit className="w-10 h-10 text-emerald-500 rotate-90" />
+                    {isEn ? 'LADDER GAME' : '사다리 타기'}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                    참가자와 결과를 입력하고 이름을 클릭해서 사다리를 타보세요!
+                <p className="text-muted-foreground font-medium">
+                    {isEn ? 'Enter players and results, then click a vertical line to start!' : '참가자와 결과를 입력하고 이름을 클릭해서 사다리를 타보세요!'}
                 </p>
             </div>
 
-            <div className="card p-6 space-y-6">
+            <div className="bg-card border-2 border-border/50 rounded-3xl p-8 shadow-xl space-y-8">
                 {/* Controls */}
-                <div className="flex justify-center gap-4">
-                    <button onClick={addMember} className="btn btn-secondary btn-sm" disabled={players.length >= 8}>
-                        <Plus className="w-4 h-4 mr-1" /> 인원 추가
+                <div className="flex flex-wrap justify-center gap-3">
+                    <button onClick={addMember} className="flex items-center gap-2 px-5 py-2.5 bg-secondary hover:bg-secondary/80 rounded-xl text-sm font-bold transition-all active:scale-95" disabled={players.length >= 8}>
+                        <Plus size={18} /> {isEn ? 'Add Player' : '인원 추가'}
                     </button>
-                    <button onClick={removeMember} className="btn btn-secondary btn-sm" disabled={players.length <= 2}>
-                        <Trash2 className="w-4 h-4 mr-1" /> 인원 제거
+                    <button onClick={removeMember} className="flex items-center gap-2 px-5 py-2.5 bg-secondary hover:bg-secondary/80 rounded-xl text-sm font-bold transition-all active:scale-95" disabled={players.length <= 2}>
+                        <Trash2 size={18} /> {isEn ? 'Remove Player' : '인원 제거'}
                     </button>
-                    <button onClick={generateLadder} className="btn btn-primary btn-sm">
-                        <RefreshCw className="w-4 h-4 mr-1" /> 사다리 재생성
+                    <button onClick={generateLadder} className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/20 active:scale-95">
+                        <RefreshCw size={18} /> {isEn ? 'Regenerate' : '사다리 재생성'}
                     </button>
                 </div>
 
                 {/* Game Area */}
-                <div className="relative overflow-x-auto">
-                    <div className="min-w-[600px] flex flex-col">
+                <div className="relative overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600">
+                    <div className="min-w-[600px] flex flex-col px-4">
                         {/* Top Inputs (Players) */}
-                        <div className="flex justify-around mb-2">
+                        <div className="flex justify-around mb-4 gap-2">
                             {players.map((player, idx) => (
                                 <input
                                     key={`p-${idx}`}
                                     type="text"
                                     value={player}
                                     onChange={(e) => updatePlayer(idx, e.target.value)}
-                                    className="input w-20 text-center text-sm p-1"
-                                    placeholder={`참가자 ${idx + 1}`}
+                                    className="w-20 bg-muted/50 border-2 border-border/50 rounded-xl text-center text-sm font-black p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder={isEn ? `Player ${idx + 1}` : `참가자 ${idx + 1}`}
                                 />
                             ))}
                         </div>
 
                         {/* Start Buttons */}
-                        <div className="flex justify-around mb-0">
+                        <div className="flex justify-around mb-2">
                             {players.map((_, idx) => (
                                 <button
                                     key={`btn-${idx}`}
                                     onClick={() => startPath(idx)}
                                     disabled={isPlaying}
                                     className={`
-                    w-8 h-8 rounded-full flex items-center justify-center text-white font-bold transition-transform hover:scale-110
-                    ${isPlaying ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                  `}
+                                        w-10 h-10 rounded-2xl flex items-center justify-center text-white font-black transition-all hover:scale-110 active:scale-90 shadow-lg
+                                        ${isPlaying ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:rotate-12'}
+                                    `}
                                     style={{ backgroundColor: colors[idx % colors.length] }}
                                 >
                                     ▼
@@ -335,48 +276,60 @@ const LadderGame = () => {
                         </div>
 
                         {/* Canvas */}
-                        <canvas
-                            ref={canvasRef}
-                            width={800}
-                            height={400}
-                            className="w-full h-[300px] bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 my-2"
-                        />
+                        <div className="relative group">
+                            <canvas
+                                ref={canvasRef}
+                                width={800}
+                                height={440}
+                                className="w-full h-[360px] bg-slate-50 dark:bg-slate-900/50 rounded-3xl border-4 border-slate-100 dark:border-slate-800 shadow-inner my-4"
+                            />
+                        </div>
 
                         {/* Bottom Inputs (Results) */}
-                        <div className="flex justify-around mt-2">
+                        <div className="flex justify-around mt-4 gap-2">
                             {results.map((result, idx) => (
                                 <input
                                     key={`r-${idx}`}
                                     type="text"
                                     value={result}
                                     onChange={(e) => updateResult(idx, e.target.value)}
-                                    className="input w-20 text-center text-sm p-1"
-                                    placeholder={`결과 ${idx + 1}`}
+                                    className="w-20 bg-muted/50 border-2 border-border/50 rounded-xl text-center text-sm font-black p-2 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder={isEn ? `Result ${idx + 1}` : `결과 ${idx + 1}`}
                                 />
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-        \n            <ToolGuide
-                title="사다리 타기"
-                intro="내기할 때 좋은 사다리 게임"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "How to Use the Ladder Game" : "사다리 타기 완벽 가이드"}
+                intro={isEn ? "The Ladder Game, also known as 'Ghost Leg', is a classic random selection game. It's the perfect way to fairly distribute chores, prizes, or decide who should pay for snacks without any bias." : "간단하지만 가장 공평한 결정 도구, 사다리 타기(Ghost Leg) 게임입니다. 인원수와 결과 항목을 자유롭게 설정하여 복불복 상황을 즐길 수 있습니다. 깔끔한 애니메이션과 함께 직관적인 인터페이스로 제작되었습니다."}
+                steps={isEn ? [
+                    "Adjust the number of players using the 'Add' or 'Remove' buttons.",
+                    "Type the names of participants in the top input boxes.",
+                    "Enter possible results (prizes, penalties, etc.) in the bottom input boxes.",
+                    "Generate a new ladder pattern with the 'Regenerate' button if desired.",
+                    "Click the colored arrow button at the top to start a player's path."
+                ] : [
+                    "상단의 '인원 추가/제거' 버튼을 사용해 전체 참가 인원을 조절합니다.",
+                    "위쪽 입력 칸에 친구들의 이름이나 별명을 기입하세요.",
+                    "아래쪽 입력 칸에는 '점심 쏘기', '설거지 당번' 등 원하는 결과를 입력합니다.",
+                    "준비가 되었다면 각 이름 아래에 있는 화살표 버튼(▼)을 눌러 사다리 타기를 시작합니다.",
+                    "선택한 경로가 애니메이션으로 그려지며 최종적으로 도착한 결과를 확인합니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "You can test paths multiple times to see different results for each player.",
+                    "Shuffle the names or results manually for an even more random experience.",
+                    "This tool is fully optimized for touch screens; great for using at dinner or office parties.",
+                    "Try using emojis in the result boxes for a fun visual flair!"
+                ] : [
+                    "사다리는 생성 시마다 무작위로 그려지므로 공명정대한 결과를 보장합니다.",
+                    "결과 창에 이모지를 활용하면 시각적으로 훨씬 재미있는 결과 화면을 만들 수 있습니다.",
+                    "모바일 환경에서도 부드럽게 작동하므로 회식 자리나 모임에서 스마트폰으로 편리하게 활용하세요.",
+                    "연속해서 게임을 진행할 경우 '사다리 재생성'을 눌러 새로운 확률 구도를 만드세요."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

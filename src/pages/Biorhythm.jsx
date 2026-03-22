@@ -3,8 +3,11 @@ import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Activity, Calendar, Info, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import ShareButtons from '../components/ShareButtons';
+import { useLanguage } from '../context/LanguageContext';
 
 const Biorhythm = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [birthDate, setBirthDate] = useState('');
     const [targetDate, setTargetDate] = useState(new Date().toISOString().split('T')[0]);
     const [bioData, setBioData] = useState(null);
@@ -108,42 +111,55 @@ const Biorhythm = () => {
     };
 
     const getStatus = (value) => {
-        if (value > 80) return { label: '최고조', icon: TrendingUp, color: 'text-green-600 bg-green-100' };
-        if (value > 20) return { label: '고조기', icon: TrendingUp, color: 'text-blue-600 bg-blue-100' };
-        if (value < -80) return { label: '최저조', icon: TrendingDown, color: 'text-red-600 bg-red-100' };
-        if (value < -20) return { label: '저조기', icon: TrendingDown, color: 'text-orange-600 bg-orange-100' };
-        return { label: '전환기', icon: Minus, color: 'text-gray-600 bg-gray-100' }; // Near 0
+        if (value > 80) return { label: isEn ? 'Peak' : '최고조', icon: TrendingUp, color: 'text-green-600 bg-green-100' };
+        if (value > 20) return { label: isEn ? 'High' : '고조기', icon: TrendingUp, color: 'text-blue-600 bg-blue-100' };
+        if (value < -80) return { label: isEn ? 'Trough' : '최저조', icon: TrendingDown, color: 'text-red-600 bg-red-100' };
+        if (value < -20) return { label: isEn ? 'Low' : '저조기', icon: TrendingDown, color: 'text-orange-600 bg-orange-100' };
+        return { label: isEn ? 'Transition' : '전환기', icon: Minus, color: 'text-gray-600 bg-gray-100' };
     };
+
+    const faqs = isEn ? [
+        { q: "What is a Biorhythm?", a: "A biorhythm is an attempt to predict various aspects of a person's life through simple mathematical cycles. The theory states that a person's life is influenced by rhythmic biological cycles that affect their ability in various domains, such as mental, physical, and emotional." },
+        { q: "What do the three cycles represent?", a: "Physical (23 days) affects coordination, strength, and health. Emotional (28 days) affects creativity, sensitivity, and mood. Intellectual (33 days) affects memory, alertness, and logical reasoning." },
+        { q: "Are transition days important?", a: "Transition days (when the line crosses the zero mark) are often considered 'critical' days where one might be more prone to accidents or emotional instability." }
+    ] : [
+        { "q": "바이오리듬이란 무엇인까요?", "a": "신체, 감성, 지성 3가지 주기가 태어난 순간부터 일정한 패턴으로 반복된다는 이론입니다." },
+        { "q": "전환기란 무엇인가요?", "a": "리듬이 (+)에서 (-)로, 또는 그 반대로 교차하는 날을 말하며 에너지가 불안정한 시기로 봅니다." },
+        { "q": "이 결과는 과학적 근거가 있나요?", "a": "바이오리듬은 통계적 경향성을 보여주는 참고 도구로, 오늘의 컨디션을 가볍게 체크하는 용도로 즐겨주세요." }
+    ];
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             <SEO
-                title="무료 바이오리듬 계산기 - 신체, 감성, 지성 리듬 | Utility Hub"
-                description="생년월일만 입력하면 오늘의 신체, 감성, 지성 바이오리듬을 무료로 확인할 수 있습니다. 나의 컨디션 흐름을 그래프로 확인해보세요."
-                keywords="바이오리듬, 신체리듬, 감성리듬, 지성리듬, 무료바이오리듬, 컨디션체크, 바이오리듬계산기"
+                title={isEn ? "Biorhythm Calculator - Physical, Emotional, Intellectual Cycles" : "무료 바이오리듬 계산기 - 신체, 감성, 지성 리듬 | Utility Hub"}
+                description={isEn ? "Calculate your biorhythm based on your birth date. Track your condition trends with our visual chart." : "생년월일만 입력하면 오늘의 신체, 감성, 지성 바이오리듬을 무료로 확인할 수 있습니다."}
+                keywords={isEn ? "biorhythm, physical cycle, emotional rhythm, intellectual cycle, health tool" : "바이오리듬, 신체리듬, 감성리듬, 지성리듬, 컨디션체크"}
+                faqs={faqs}
             />
 
             <div className="text-center space-y-4 py-6">
                 <div className="inline-flex items-center justify-center p-3 bg-green-100 dark:bg-green-900/30 rounded-full mb-2">
                     <Activity className="w-8 h-8 text-green-600 dark:text-green-400" />
                 </div>
-                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-600">바이오리듬</h1>
+                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-blue-600">
+                    {isEn ? 'Biorhythm' : '바이오리듬'}
+                </h1>
                 <p className="text-muted-foreground">
-                    나의 신체, 감성, 지성 리듬을 확인하고 하루를 계획해보세요.
+                    {isEn ? 'Predict your daily physical, emotional, and intellectual status.' : '나의 신체, 감성, 지성 리듬을 확인하고 하루를 계획해보세요.'}
                 </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 입력 폼 */}
+                {/* Inputs */}
                 <div className="md:col-span-1 space-y-6">
                     <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
                         <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                             <Calendar className="w-5 h-5" />
-                            날짜 입력
+                            {isEn ? 'Date Input' : '날짜 입력'}
                         </h3>
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium mb-1">생년월일</label>
+                                <label className="block text-sm font-medium mb-1">{isEn ? 'Birth Date' : '생년월일'}</label>
                                 <input
                                     type="date"
                                     value={birthDate}
@@ -152,7 +168,7 @@ const Biorhythm = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-1">기준일</label>
+                                <label className="block text-sm font-medium mb-1">{isEn ? 'Reference Date' : '기준일'}</label>
                                 <input
                                     type="date"
                                     value={targetDate}
@@ -163,49 +179,49 @@ const Biorhythm = () => {
                         </div>
                     </div>
 
-                    {/* 범례 */}
+                    {/* Legend */}
                     <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
                         <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                             <Info className="w-5 h-5" />
-                            범례
+                            {isEn ? 'Legend' : '범례'}
                         </h3>
                         <div className="space-y-3">
                             <div className="flex items-center gap-2">
                                 <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                                <span className="text-sm">신체 (23일 주기) - 체력, 건강</span>
+                                <span className="text-sm">{isEn ? 'Physical (23d) - Stamina' : '신체 (23일 주기) - 체력, 건강'}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-4 h-4 rounded-full bg-red-500"></div>
-                                <span className="text-sm">감성 (28일 주기) - 기분, 신경</span>
+                                <span className="text-sm">{isEn ? 'Emotional (28d) - Mood' : '감성 (28일 주기) - 기분, 신경'}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-4 h-4 rounded-full bg-blue-500"></div>
-                                <span className="text-sm">지성 (33일 주기) - 두뇌, 집중력</span>
+                                <span className="text-sm">{isEn ? 'Intellectual (33d) - Focus' : '지성 (33일 주기) - 두뇌, 집중력'}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* 결과 및 차트 */}
+                {/* Chart Area */}
                 <div className="md:col-span-2 space-y-6">
                     {bioData ? (
                         <>
-                            {/* 오늘의 상태 카드 */}
+                            {/* Daily Status */}
                             <div className="grid grid-cols-3 gap-4">
                                 {[
-                                    { label: '신체', value: bioData.physical, color: 'text-green-600', bg: 'bg-green-50' },
-                                    { label: '감성', value: bioData.emotional, color: 'text-red-600', bg: 'bg-red-50' },
-                                    { label: '지성', value: bioData.intellectual, color: 'text-blue-600', bg: 'bg-blue-50' }
+                                    { label: isEn ? 'Physical' : '신체', value: bioData.physical, color: 'text-green-600', bg: 'bg-green-50' },
+                                    { label: isEn ? 'Emotional' : '감성', value: bioData.emotional, color: 'text-red-600', bg: 'bg-red-50' },
+                                    { label: isEn ? 'Intellectual' : '지성', value: bioData.intellectual, color: 'text-blue-600', bg: 'bg-blue-50' }
                                 ].map((item) => {
                                     const status = getStatus(item.value);
                                     const StatusIcon = status.icon;
                                     return (
-                                        <div key={item.label} className={`rounded-xl p-4 border text-center ${item.bg} dark:bg-opacity-10`}>
-                                            <div className="text-sm text-muted-foreground mb-1">{item.label}</div>
+                                        <div key={item.label} className={`rounded-xl p-4 border text-center ${item.bg} dark:bg-opacity-10 shadow-sm transition-transform hover:scale-105`}>
+                                            <div className="text-xs text-muted-foreground mb-1 font-medium">{item.label}</div>
                                             <div className={`text-2xl font-bold mb-1 ${item.color}`}>
                                                 {Math.round(item.value)}%
                                             </div>
-                                            <div className={`inline-flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full ${status.color}`}>
+                                            <div className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${status.color}`}>
                                                 <StatusIcon className="w-3 h-3" />
                                                 {status.label}
                                             </div>
@@ -214,9 +230,9 @@ const Biorhythm = () => {
                                 })}
                             </div>
 
-                            {/* 그래프 */}
+                            {/* Chart */}
                             <div className="bg-card border border-border rounded-xl p-6 shadow-sm overflow-hidden">
-                                <h3 className="font-bold text-lg mb-4 text-center">바이오리듬 그래프 (±15일)</h3>
+                                <h3 className="font-bold text-lg mb-4 text-center">{isEn ? 'Biorhythm Graph (±15 days)' : '바이오리듬 그래프 (±15일)'}</h3>
                                 <div className="relative w-full overflow-x-auto">
                                     <canvas
                                         ref={canvasRef}
@@ -226,16 +242,16 @@ const Biorhythm = () => {
                                     />
                                 </div>
                                 <p className="text-center text-xs text-muted-foreground mt-2">
-                                    가운데 점선이 기준일({targetDate})입니다.
+                                    {isEn ? `The dashed line is the reference date (${targetDate}).` : `가운데 점선이 기준일(${targetDate})입니다.`}
                                 </p>
                             </div>
                         </>
                     ) : (
                         <div className="h-full flex flex-col items-center justify-center bg-muted/30 rounded-xl border border-dashed border-border p-12 text-center">
                             <Activity className="w-16 h-16 text-muted-foreground/50 mb-4" />
-                            <h3 className="text-xl font-bold text-muted-foreground">생년월일을 입력해주세요</h3>
+                            <h3 className="text-xl font-bold text-muted-foreground">{isEn ? 'Enter Birth Date' : '생년월일을 입력해주세요'}</h3>
                             <p className="text-muted-foreground/80">
-                                좌측에서 생년월일을 선택하면<br />나의 바이오리듬이 분석됩니다.
+                                {isEn ? 'Select your birth date on the left to analyze your rhythms.' : '좌측에서 생년월일을 선택하면 바이오리듬이 분석됩니다.'}
                             </p>
                         </div>
                     )}
@@ -244,29 +260,36 @@ const Biorhythm = () => {
 
             <div className="mt-8">
                 <ShareButtons
-                    title="무료 바이오리듬 계산기"
-                    description="오늘 나의 신체, 감성, 지성 리듬은 어떨까요? 무료로 확인해보세요!"
+                    title={isEn ? "Free Biorhythm Calculator" : "무료 바이오리듬 계산기"}
+                    description={isEn ? "Track your physical, emotional, and intellectual status daily!" : "오늘 나의 신체, 감성, 지성 리듬은 어떨까요? 무료로 확인해보세요!"}
                 />
             </div>
-        \n            <ToolGuide
-                title="바이오리듬"
-                intro="신체/감성/지성 리듬 확인"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Biorhythm Guide" : "바이오리듬 가이드"}
+                intro={isEn ? "Understand the biological cycles that influence your daily life." : "신체/감성/지성 리듬 확인 도구입니다."}
+                steps={isEn ? [
+                    "Select your 'Birth Date' accurately.",
+                    "Choose a 'Reference Date' (usually today).",
+                    "Check your daily score for each category.",
+                    "Observe the trend chart to plan for upcoming peaks or lows."
+                ] : [
+                    "정확한 생년월일을 선택하세요.",
+                    "보고 싶은 기준일을 선택합니다. (기본은 오늘)",
+                    "오늘의 신체, 감성, 지성 점수를 확인합니다.",
+                    "그래프를 통해 앞으로 15일간의 컨디션 변화를 확인해보세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Physical Peak: Great for sports or intense physical activities.",
+                    "Emotional Transition: Be mindful of your relationships and mood swings.",
+                    "Intellectual Low: Maybe double-check your work or avoid complex decisions.",
+                    "Biorhythms are best used for self-reflection and general awareness."
+                ] : [
+                    "신체 최고조: 운동이나 격렬한 활동을 하기에 가장 좋은 날입니다.",
+                    "감성 전환기: 기분이 급변하거나 예민해질 수 있으니 대인관계에 유의하세요.",
+                    "지성 저조기: 중요한 결정이나 복잡한 업무는 다시 한번 검토해보는 것이 좋습니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={faqs}
             />
         </div>
     );

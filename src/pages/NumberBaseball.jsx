@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
 import { Target, RefreshCw, History, AlertCircle, Settings } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const NumberBaseball = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [digitCount, setDigitCount] = useState(3); // 3 or 4
     const [targetNumber, setTargetNumber] = useState('');
     const [input, setInput] = useState('');
@@ -45,13 +48,12 @@ const NumberBaseball = () => {
         if (gameState !== 'playing') return;
 
         if (input.length !== digitCount) {
-            alert(`${digitCount}자리 숫자를 입력해주세요.`);
+            alert(isEn ? `Please enter ${digitCount} digits.` : `${digitCount}자리 숫자를 입력해주세요.`);
             return;
         }
 
-        // Check for duplicate digits
         if (new Set(input).size !== digitCount) {
-            alert('중복되지 않는 숫자를 입력해주세요.');
+            alert(isEn ? 'Please enter unique digits.' : '중복되지 않는 숫자를 입력해주세요.');
             return;
         }
 
@@ -95,133 +97,144 @@ const NumberBaseball = () => {
 
     const toggleDigitCount = (count) => {
         if (count === digitCount) return;
-        if (window.confirm('난이도를 변경하면 현재 게임이 초기화됩니다. 계속하시겠습니까?')) {
+        const confirmMsg = isEn 
+            ? 'Changing difficulty will reset the current game. Continue?' 
+            : '난이도를 변경하면 현재 게임이 초기화됩니다. 계속하시겠습니까?';
+        if (window.confirm(confirmMsg)) {
             setDigitCount(count);
         }
     };
 
+    const toolFaqs = isEn ? [
+        { q: "What is a 'Strike'?", a: "A strike means one of your numbers is correct and is in the correct position." },
+        { q: "What is a 'Ball'?", a: "A ball means one of your numbers is correct but it is in the wrong position." },
+        { q: "Can the target number start with 0?", a: "Yes, the target number can be any combination of unique digits from 0-9, including starting with 0." }
+    ] : [
+        { q: "스트라이크와 볼의 차이가 무엇인가요?", a: "숫자와 자릿수가 모두 맞으면 스트라이크, 숫자는 맞지만 자릿수가 틀리면 볼입니다." },
+        { q: "숫자가 0으로 시작할 수도 있나요?", a: "네, 0부터 9까지의 숫자 중 중복 없이 뽑기 때문에 0으로 시작하는 숫자도 포함될 수 있습니다." },
+        { q: "힌트를 얻는 팁이 있나요?", a: "처음에는 123, 456과 같이 겹치지 않는 숫자들로 스트라이크/볼 여부를 파악하며 숫자의 범위를 좁혀가는 것이 유리합니다." }
+    ];
+
     return (
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-6 px-4">
             <SEO
-                title="숫자 야구 게임 - 추억의 두뇌 게임"
-                description="컴퓨터가 생각한 숫자를 맞춰보세요! 3자리 또는 4자리 모드를 선택할 수 있습니다."
-                keywords={['숫자야구', 'number baseball', 'bulls and cows', '두뇌게임', '추리']}
+                title={isEn ? "Number Baseball - Classic Mind Puzzle | Tool Hive" : "숫자 야구 게임 (Number Baseball) - 추억의 두뇌 게임 | Tool Hive"}
+                description={isEn ? "Play the classic Number Baseball (Bulls and Cows) game online. Guess the secret sequence using strike and ball clues. Fun brain training for all ages." : "컴퓨터가 생각한 숫자를 맞춰보세요! 3자리 또는 4자리 모드를 선택할 수 있습니다."}
+                keywords={isEn ? "number baseball, bulls and cows, guessing game, logic puzzle, brain test" : "숫자야구, number baseball, bulls and cows, 두뇌게임, 추리"}
+                faqs={toolFaqs}
             />
 
             <div className="text-center space-y-4">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-3">
-                    <Target className="w-8 h-8 text-green-500" />
-                    숫자 야구
+                <h1 className="text-4xl font-black text-gray-900 dark:text-white flex items-center justify-center gap-4 italic tracking-tight">
+                    <Target className="w-10 h-10 text-emerald-500" />
+                    {isEn ? 'NUMBER BASEBALL' : '숫자 야구'}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                    0~9 사이의 서로 다른 숫자를 맞춰보세요.
+                <p className="text-muted-foreground font-medium">
+                    {isEn ? 'Guess the hidden unique digits from 0 to 9.' : '0~9 사이의 서로 다른 숫자를 맞춰보세요.'}
                 </p>
             </div>
 
-            {/* Difficulty Selector */}
             <div className="flex justify-center gap-2">
                 <button
                     onClick={() => toggleDigitCount(3)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${digitCount === 3
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    className={`px-6 py-2.5 rounded-xl text-sm font-black transition-all ${digitCount === 3
+                            ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20 scale-105'
+                            : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                         }`}
                 >
-                    3자리 (보통)
+                    {isEn ? '3 DIGITS' : '3자리 (보통)'}
                 </button>
                 <button
                     onClick={() => toggleDigitCount(4)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${digitCount === 4
-                            ? 'bg-red-500 text-white'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    className={`px-6 py-2.5 rounded-xl text-sm font-black transition-all ${digitCount === 4
+                            ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20 scale-105'
+                            : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                         }`}
                 >
-                    4자리 (어려움)
+                    {isEn ? '4 DIGITS' : '4자리 (어려움)'}
                 </button>
             </div>
 
-            <div className="card p-6 space-y-6">
-                {/* Game Status */}
-                <div className="flex justify-between items-center px-4">
-                    <div className="text-lg font-bold">
-                        시도: <span className={`${attempts >= maxAttempts - 2 ? 'text-red-500' : 'text-blue-500'}`}>
+            <div className="bg-card border-2 border-border/50 rounded-3xl p-8 shadow-xl space-y-8">
+                <div className="flex justify-between items-center bg-muted/30 p-4 rounded-2xl">
+                    <div className="text-lg font-black uppercase tracking-widest text-muted-foreground">
+                        {isEn ? 'Attempts' : '시도'}: <span className={`text-2xl font-mono ${attempts >= maxAttempts - 2 ? 'text-rose-500' : 'text-primary'}`}>
                             {attempts}
-                        </span> / {maxAttempts}
+                        </span> <span className="text-sm opacity-50">/ {maxAttempts}</span>
                     </div>
                     <button
                         onClick={startNewGame}
-                        className="btn btn-ghost btn-sm flex items-center gap-2"
+                        className="flex items-center gap-2 px-4 py-2 bg-secondary/50 hover:bg-secondary rounded-xl text-xs font-bold transition-all active:scale-95"
                     >
                         <RefreshCw className="w-4 h-4" />
-                        새 게임
+                        {isEn ? 'NEW GAME' : '새 게임'}
                     </button>
                 </div>
 
-                {/* Input Area */}
-                <div className="flex flex-col items-center space-y-4">
+                <div className="flex flex-col items-center space-y-6">
                     {gameState === 'playing' ? (
-                        <form onSubmit={handleSubmit} className="w-full max-w-xs flex gap-2">
+                        <form onSubmit={handleSubmit} className="w-full max-w-xs flex gap-3">
                             <input
                                 ref={inputRef}
                                 type="text"
                                 inputMode="numeric"
                                 value={input}
                                 onChange={handleInputChange}
-                                className="input text-center text-2xl tracking-widest font-mono"
+                                className="flex-1 bg-muted/50 border-2 border-border/50 rounded-2xl text-center text-3xl tracking-[0.5em] font-mono font-black py-4 focus:ring-4 focus:ring-primary/20 focus:border-primary outline-none transition-all shadow-inner"
                                 placeholder={digitCount === 3 ? "123" : "1234"}
                                 disabled={gameState !== 'playing'}
                             />
                             <button
                                 type="submit"
-                                className="btn btn-primary"
+                                className="px-8 bg-primary text-primary-foreground rounded-2xl font-black text-lg transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 disabled:grayscale disabled:opacity-50"
                                 disabled={input.length !== digitCount}
                             >
-                                던지기!
+                                {isEn ? 'THROW!' : '던지기!'}
                             </button>
                         </form>
                     ) : (
-                        <div className={`text-center p-6 rounded-xl w-full ${gameState === 'won' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'
+                        <div className={`text-center p-10 rounded-3xl w-full animate-in zoom-in-95 duration-300 ${gameState === 'won' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-rose-100 dark:bg-rose-900/30'
                             }`}>
-                            <div className="text-2xl font-bold mb-2">
-                                {gameState === 'won' ? '🎉 홈런! 정답입니다!' : '😭 아웃! 게임 오버'}
+                            <div className="text-3xl font-black mb-4 italic tracking-tighter">
+                                {gameState === 'won' ? '🎉 HOME RUN!' : '😭 STRIKE OUT!'}
                             </div>
-                            <div className="text-gray-600 dark:text-gray-400">
-                                정답은 <span className="text-xl font-bold font-mono text-gray-900 dark:text-white mx-1">{targetNumber}</span> 였습니다.
+                            <div className="text-muted-foreground font-bold mb-8">
+                                {isEn ? 'The answer was' : '정답은'} <span className="text-2xl font-black font-mono text-foreground mx-2 tracking-widest">{targetNumber}</span>
                             </div>
-                            <button onClick={startNewGame} className="btn btn-primary mt-4">
-                                다시 도전하기
+                            <button onClick={startNewGame} className="px-10 py-4 bg-slate-900 text-white rounded-2xl font-black hover:scale-105 active:scale-95 shadow-xl transition-all">
+                                {isEn ? 'PLAY AGAIN' : '다시 도전하기'}
                             </button>
                         </div>
                     )}
                 </div>
 
-                {/* Logs */}
-                <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-gray-500 px-2">
+                <div className="space-y-4">
+                    <div className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-muted-foreground px-2">
                         <History className="w-4 h-4" />
-                        기록
+                        {isEn ? 'MATCH HISTORY' : '기록'}
                     </div>
-                    <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 min-h-[300px] max-h-[400px] overflow-y-auto space-y-2">
+                    <div className="bg-muted/30 border-2 border-border/50 rounded-2xl p-6 min-h-[300px] max-h-[400px] overflow-y-auto space-y-3 shadow-inner">
                         {logs.length === 0 ? (
-                            <div className="text-center text-gray-400 py-12">
-                                숫자를 입력해서 게임을 시작하세요!
+                            <div className="h-full flex flex-col items-center justify-center text-center text-muted-foreground/50 py-12">
+                                <Target className="w-12 h-12 mb-4 opacity-20" />
+                                <p className="font-bold">{isEn ? 'Enter a number to start!' : '숫자를 입력해서 게임을 시작하세요!'}</p>
                             </div>
                         ) : (
                             logs.map((log, idx) => (
-                                <div key={idx} className="flex items-center justify-between bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm animate-fade-in">
-                                    <div className="flex items-center gap-4">
-                                        <span className="text-gray-400 font-mono w-6">#{log.attempt}</span>
-                                        <span className="text-xl font-bold font-mono tracking-widest">{log.guess}</span>
+                                <div key={idx} className="flex items-center justify-between bg-card hover:bg-secondary/20 border border-border/50 p-4 rounded-xl shadow-sm transition-all animate-in slide-in-from-top-2">
+                                    <div className="flex items-center gap-6">
+                                        <span className="text-xs text-muted-foreground font-black font-mono w-6">#{log.attempt}</span>
+                                        <span className="text-2xl font-black font-mono tracking-[0.2em]">{log.guess}</span>
                                     </div>
-                                    <div className="flex gap-2 font-bold">
+                                    <div className="flex gap-3 font-black text-sm">
                                         {log.strikes > 0 && (
-                                            <span className="text-green-500">{log.strikes}S</span>
+                                            <span className="px-3 py-1 bg-green-100 text-green-600 rounded-lg border border-green-200">{log.strikes} S</span>
                                         )}
                                         {log.balls > 0 && (
-                                            <span className="text-blue-500">{log.balls}B</span>
+                                            <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-lg border border-blue-200">{log.balls} B</span>
                                         )}
                                         {log.strikes === 0 && log.balls === 0 && (
-                                            <span className="text-red-500">OUT</span>
+                                            <span className="px-3 py-1 bg-rose-100 text-rose-600 rounded-lg border border-rose-200">OUT</span>
                                         )}
                                     </div>
                                 </div>
@@ -231,37 +244,59 @@ const NumberBaseball = () => {
                 </div>
             </div>
 
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl text-sm text-blue-800 dark:text-blue-200 space-y-2">
-                <div className="flex items-center gap-2 font-bold">
-                    <AlertCircle className="w-4 h-4" />
-                    게임 규칙
+            <div className="bg-primary/5 border border-primary/20 p-8 rounded-3xl space-y-4">
+                <div className="flex items-center gap-3 font-black text-primary uppercase tracking-widest text-sm">
+                    <AlertCircle className="w-5 h-5" />
+                    {isEn ? 'Game Rules' : '게임 규칙'}
                 </div>
-                <ul className="list-disc list-inside space-y-1 ml-1">
-                    <li><span className="font-bold text-green-600 dark:text-green-400">스트라이크(S)</span>: 숫자와 위치가 모두 맞음</li>
-                    <li><span className="font-bold text-blue-600 dark:text-blue-400">볼(B)</span>: 숫자는 맞지만 위치가 다름</li>
-                    <li><span className="font-bold text-red-600 dark:text-red-400">아웃(OUT)</span>: 맞는 숫자가 하나도 없음</li>
-                    <li>10번의 기회 안에 {digitCount}자리 숫자를 맞춰야 합니다.</li>
+                <ul className="grid sm:grid-cols-2 gap-4 text-sm font-medium text-muted-foreground">
+                    <li className="flex gap-3">
+                        <span className="text-green-500 font-black">S</span>
+                        {isEn ? "Strike: Correct digit in the correct position." : "스트라이크(S): 숫자와 위치가 모두 맞음"}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-blue-500 font-black">B</span>
+                        {isEn ? "Ball: Correct digit in the wrong position." : "볼(B): 숫자는 맞지만 위치가 다름"}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-rose-500 font-black">OUT</span>
+                        {isEn ? "No digits match at all." : "아웃(OUT): 맞는 숫자가 하나도 없음"}
+                    </li>
+                    <li className="flex gap-3">
+                        <span className="text-primary font-black">!</span>
+                        {isEn ? `Guess ${digitCount} unique digits in 10 attempts.` : `10번의 기회 안에 ${digitCount}자리 숫자를 맞춰야 합니다.`}
+                    </li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="숫자 야구"
-                intro="숫자와 위치를 맞추는 추리 게임"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "How to Win at Number Baseball" : "숫자 야구 추리 가이드"}
+                intro={isEn ? "Number Baseball (also known as Bulls and Cows) is a logic-based code-breaking game. Your goal is to deduce the computer's secret sequence of digits using Strike and Ball clues provided after each guess." : "전략적인 두뇌 싸움, 숫자 야구 게임입니다. 컴퓨터가 정한 무작위 숫자를 스트라이크와 볼 힌트만을 이용해 맞혀보세요. 정보가 누적될수록 경우의 수를 좁혀나가는 논리적 쾌감을 무료로 경험하실 수 있습니다."}
+                steps={isEn ? [
+                    "Choose between 3-digit (Normal) or 4-digit (Hard) mode.",
+                    "Input a sequence of unique digits and click 'THROW!'.",
+                    "Check the Strike (S) and Ball (B) results in your match history.",
+                    "Repeat the process, using logic to eliminate impossible combinations.",
+                    "Find the exact number within 10 attempts to win!"
+                ] : [
+                    "먼저 게임의 난이도(3자리 또는 4자리)를 선택합니다.",
+                    "중복되지 않는 숫자를 입력 칸에 기입하고 '던지기!' 버튼을 누릅니다.",
+                    "기록 창에 표시되는 스트라이크(S)와 볼(B) 개수를 확인합니다.",
+                    "이전 기록들을 토대로 어떤 숫자가 포함되었고 어느 자리에 있는지 추리합니다.",
+                    "10번의 아웃 카운트가 다 차기 전에 정답 번호를 정확히 맞추면 승리합니다."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Start with distinct numbers (e.g., 123) to quickly test as many digits as possible.",
+                    "When you get an 'OUT', you can safely eliminate all those numbers from future guesses.",
+                    "Pay attention to the position of digits when you get Strikes; they are your most valuable clues.",
+                    "Record-keeping is key: Compare your new results with previous ones to find logical overlaps."
+                ] : [
+                    "처음에는 123, 456, 789와 같이 숫자가 겹치지 않는 조합으로 던져 숫자의 범위를 좁히세요.",
+                    "아웃(OUT)이 나온 숫자는 과감하게 머릿속에서 지우고 다음 추리를 진행합니다.",
+                    "스트라이크(S)가 나왔을 때는 해당 자릿수의 숫자를 고정하고 다른 숫자를 바꿔가며 확인하세요.",
+                    "추리가 막힐 때는 과거 기록들을 찬찬히 톺아보며 모순되는 경우의 수를 하나씩 제거해나가세요."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
-                ]}
+                faqs={toolFaqs}
             />
         </div>
     );

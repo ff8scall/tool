@@ -1,42 +1,46 @@
 import React, { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Hash } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const SpecialCharacters = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
     const [copiedChar, setCopiedChar] = useState('');
 
     const categories = [
         {
-            name: '화살표',
+            name: isEn ? 'Arrows' : '화살표',
             chars: ['←', '→', '↑', '↓', '↔', '↕', '⇐', '⇒', '⇑', '⇓', '⇔', '⇕', '➔', '➜', '➡', '⬅', '⬆', '⬇']
         },
         {
-            name: '기호',
+            name: isEn ? 'Symbols' : '기호',
             chars: ['※', '◎', '○', '●', '◇', '◆', '□', '■', '△', '▲', '▽', '▼', '☆', '★', '♤', '♠', '♡', '♥', '♧', '♣', '⊙', '◈', '▣']
         },
         {
-            name: '수학',
+            name: isEn ? 'Math' : '수학',
             chars: ['±', '×', '÷', '≠', '≤', '≥', '∞', '∑', '∫', '√', '∂', '∆', '∇', '≈', '≡', '⊂', '⊃', '∈', '∉', '∪', '∩']
         },
         {
-            name: '통화',
+            name: isEn ? 'Currency' : '통화',
             chars: ['$', '¢', '£', '¥', '€', '₩', '₽', '₹', '₨', '฿', '₫', '₪', '₱', '₦', '₡']
         },
         {
-            name: '단위',
+            name: isEn ? 'Units' : '단위',
             chars: ['°', '℃', '℉', 'Å', '㎎', '㎏', '㎞', '㎡', '㎥', '㎖', '㎗', '㎘', '㏄', '㏊', '㎝', '㎜', '㎛', '㎚']
         },
         {
-            name: '선',
+            name: isEn ? 'Lines' : '선',
             chars: ['─', '│', '┌', '┐', '└', '┘', '├', '┤', '┬', '┴', '┼', '═', '║', '╔', '╗', '╚', '╝', '╠', '╣', '╦', '╩', '╬']
         },
         {
-            name: '괄호',
+            name: isEn ? 'Brackets' : '괄호',
             chars: ['(', ')', '[', ']', '{', '}', '⟨', '⟩', '「', '」', '『', '』', '【', '】', '〔', '〕', '《', '》']
         },
         {
-            name: '특수기호',
+            name: isEn ? 'Special Symbols' : '특수기호',
             chars: ['©', '®', '™', '§', '¶', '†', '‡', '‰', '′', '″', '№', '℡', '℮', '㏂', '㏘', '♨', '☎', '☏', '✓', '✔', '✕', '✖', '✗', '✘']
         }
     ];
@@ -47,36 +51,48 @@ const SpecialCharacters = () => {
         setTimeout(() => setCopiedChar(''), 1500);
     };
 
+    const titleText = isEn ? t('tools.special-char.title') : "특수문자표 - Special Character Copier";
+    const descText = isEn 
+        ? t('tools.special-char.description')
+        : "다양한 특수문자를 한 곳에서 쉽게 복사할 수 있습니다. 화살표, 기호, 수학 기호, 통화 기호 등을 제공합니다.";
+    const keywordsText = isEn ? "special characters, symbols, arrows symbols, math symbols, currency symbols" : "특수문자, 특수기호, 화살표, 수학기호, 통화기호";
+
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title="특수문자표 - Utility Hub"
-                description="다양한 특수문자를 한 곳에서 쉽게 복사할 수 있습니다. 화살표, 기호, 수학 기호, 통화 기호 등을 제공합니다."
-                keywords="특수문자, 특수기호, 화살표, 수학기호, 통화기호"
+                title={titleText}
+                description={descText}
+                keywords={keywordsText}
             />
 
             <header className="text-center space-y-2">
-                <h1 className="text-3xl font-bold">특수문자표</h1>
+                <h1 className="text-3xl font-bold flex items-center justify-center gap-3">
+                    <Hash className="w-8 h-8 text-emerald-600" />
+                    {isEn ? 'Special Characters' : '특수문자표'}
+                </h1>
                 <p className="text-muted-foreground">
-                    원하는 특수문자를 클릭하여 복사하세요
+                    {isEn ? 'Click any symbol below to copy it instantly to your clipboard' : '원하는 특수문자를 클릭하여 복사하세요'}
                 </p>
             </header>
 
             <div className="space-y-6">
                 {categories.map((category, idx) => (
-                    <div key={idx} className="bg-card border border-border rounded-xl p-6">
-                        <h2 className="text-lg font-bold mb-4">{category.name}</h2>
+                    <div key={idx} className="bg-card border border-border rounded-xl p-6 shadow-sm">
+                        <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                            <span className="w-1 h-5 bg-emerald-500 rounded-full"></span>
+                            {category.name}
+                        </h2>
                         <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
                             {category.chars.map((char, charIdx) => (
                                 <button
                                     key={charIdx}
                                     onClick={() => copyToClipboard(char)}
-                                    className="aspect-square flex items-center justify-center text-2xl bg-secondary hover:bg-accent rounded-lg transition-colors relative group"
-                                    title={`클릭하여 복사: ${char}`}
+                                    className="aspect-square flex items-center justify-center text-2xl bg-secondary/50 hover:bg-emerald-50 content-center dark:hover:bg-emerald-900/20 rounded-lg transition-all relative group border border-transparent hover:border-emerald-200"
+                                    title={isEn ? `Click to copy: ${char}` : `클릭하여 복사: ${char}`}
                                 >
-                                    {char}
+                                    <span className="group-hover:scale-125 transition-transform">{char}</span>
                                     {copiedChar === char && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-green-500 rounded-lg">
+                                        <div className="absolute inset-0 flex items-center justify-center bg-emerald-500 rounded-lg animate-in fade-in zoom-in-50 duration-200">
                                             <Check className="w-5 h-5 text-white" />
                                         </div>
                                     )}
@@ -87,32 +103,46 @@ const SpecialCharacters = () => {
                 ))}
             </div>
 
-            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground">
-                <h3 className="font-bold text-foreground mb-2">💡 사용 방법</h3>
+            <div className="bg-muted/30 rounded-xl p-6 text-sm text-muted-foreground border border-border">
+                <h3 className="font-bold text-foreground mb-2">💡 {isEn ? 'How to use' : '사용 방법'}</h3>
                 <ul className="space-y-1 list-disc list-inside">
-                    <li>원하는 특수문자를 클릭하면 자동으로 클립보드에 복사됩니다.</li>
-                    <li>복사된 문자는 녹색 체크 표시로 확인할 수 있습니다.</li>
-                    <li>복사한 문자를 원하는 곳에 붙여넣기(Ctrl+V)하세요.</li>
+                    <li>{isEn ? 'Just click on the character you want, and it will be copied automatically.' : '원하는 특수문자를 클릭하면 자동으로 클립보드에 복사됩니다.'}</li>
+                    <li>{isEn ? 'A green check mark indicates the copy was successful.' : '복사된 문자는 녹색 체크 표시로 확인할 수 있습니다.'}</li>
+                    <li>{isEn ? 'Paste (Ctrl+V) the character wherever you need it.' : '복사한 문자를 원하는 곳에 붙여넣기(Ctrl+V)하세요.'}</li>
                 </ul>
             </div>
-        \n            <ToolGuide
-                title="특수문자표"
-                intro="자주 쓰는 특수문자 모음"
-                steps={[
-                    "원하시는 옵션이나 값을 화면에 안내된 순서대로 정확하게 기입해 주세요.",
-                    "제시된 항목과 보기를 꼼꼼하게 살펴보고 본인에게 맞는 것을 선택합니다.",
-                    "모든 입력을 완료한 후 결과 화면에서 계산된 수치나 분석된 내용을 확인합니다.",
-                    "결과가 마음에 든다면 캡처하거나 공유하기 버튼을 눌러 지인들에게 공유해보세요!"
+
+            <ToolGuide
+                title={isEn ? "Special Characters Picker Guide" : "특수문자표 활용 가이드"}
+                intro={isEn 
+                    ? "Organized repository of commonly used symbols and mathematical notation. Easy single-click copying for all your decorative and technical text needs."
+                    : "문서 작성이나 개발 시 자주 사용되는 특수 기호와 화살표, 수학 기호 등을 카테고리별로 모아둔 도구입니다."}
+                steps={isEn ? [
+                    "Browse through the different categories like Arrows, Math, or Currency.",
+                    "Click directly on any symbol square to trigger the copy action.",
+                    "Verify the green checkmark appears briefly.",
+                    "Paste the symbol into your target application or document."
+                ] : [
+                    "화살표, 기호, 수학, 통화 등 원하는 카테고리로 이동합니다.",
+                    "사용하려는 특수문자를 마우스로 클릭합니다.",
+                    "순식간에 클립보드에 복사되며, 체크 표시가 나타납니다.",
+                    "원하는 문서(한글, 워드, 메모장)나 채팅창에 붙여넣어 사용하세요."
                 ]}
-                tips={[
-                    "결과값이 예상과 다르다면 입력한 숫자나 단위를 한 번 더 확인해보는 것이 좋습니다.",
-                    "제공되는 다양한 부가 옵션을 함께 활용하면 훨씬 구체적인 형태의 맞춤형 결과를 얻을 수 있습니다.",
-                    "모바일과 데스크톱 환경 모두에 완벽하게 최적화되어 있으니 언제 어디서든 편리하게 이용해 보세요."
+                tips={isEn ? [
+                    "Currency symbols include widely used ones like Won, Euro, and Dollar for financial documentation.",
+                    "Math symbols are perfect for writing out formulas without using complex LaTeX systems.",
+                    "Line symbols can be used to create simple TUI (Text User Interface) borders in terminal apps."
+                ] : [
+                    "단위 기호 카테고리에는 온도(℃)나 면적(㎡) 등 실생활에 자주 쓰이는 기호들이 포함되어 있습니다.",
+                    "수학 기호는 복잡한 수식을 텍스트로 표현해야 할 때 유용하게 쓰입니다.",
+                    "선 기호들을 조합하면 텍스트 기반의 표나 테두리를 직접 그려볼 수도 있습니다."
                 ]}
-                faqs={[
-                    { "q": "이 도구들은 정말로 모두 무료인가요?", "a": "네! Tool Hive에서 제공하는 모든 도구 모음과 심리 테스트들은 가입 등의 번거로운 절차 없이 누구나 100% 무료로 무제한 사용할 수 있습니다." },
-                    { "q": "제가 입력한 개인적인 정보 데이터가 서버에 남나요?", "a": "아니요, 사용자가 입력하는 이름, 숫자, 금액 등의 모든 데이터는 방문자의 기기 내 브라우저에서만 실시간으로 연산되며 어떠한 경우에도 외부 서버로 전송되거나 저장되지 않으므로 안심하셔도 됩니다." },
-                    { "q": "버튼을 눌러도 반응이 없거나 에러가 생깁니다.", "a": "브라우저의 일시적인 캐시 문제일 수 있습니다. 키보드의 F5 버튼을 누르거나 새로고침을 진행한 후 다시 시도해 보시길 권장하며, 문제가 계속된다면 다른 브라우저 앱을 이용해 보세요." }
+                faqs={isEn ? [
+                    { q: "Will these symbols work in all fonts?", a: "Most modern fonts support these standard symbols, though some older or specialized fonts might display them as boxes (tofu)." },
+                    { q: "Is there a search function?", a: "You can use the browser default search (Ctrl+F or Cmd+F) to quickly locate a specific symbol category." }
+                ] : [
+                    { "q": "모든 폰트에서 정상적으로 보이나요?", "a": "대부분의 현대적인 폰트와 브라우저 환경에서 잘 작동하지만, 아주 오래된 시스템에서는 일부 문자가 깨져 보일 수 있습니다." },
+                    { "q": "찾고 있는 기호가 없으면 어떻게 하나요?", "a": "가장 대중적인 기호들 위주로 구성되어 있습니다. 향후 더 많은 기호들을 지속적으로 업데이트할 예정입니다." }
                 ]}
             />
         </div>

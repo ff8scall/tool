@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
@@ -161,213 +162,415 @@ import AdditionQuiz from './pages/AdditionQuiz';
 import SubtractionQuiz from './pages/SubtractionQuiz';
 import MultiplicationQuiz from './pages/MultiplicationQuiz';
 
+const NotFound = () => {
+  const { t, lang } = useLanguage();
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
+      <h1 className="text-6xl font-black text-indigo-600 mb-4 animate-bounce">404</h1>
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{t('error.notFound')}</h2>
+      <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto italic">
+        {lang === 'en' 
+          ? "The page you are looking for might have been moved or doesn't exist anymore."
+          : "요청하신 페이지가 사라졌거나 다른 주소로 옮겨졌을 수 있습니다."}
+      </p>
+      <a 
+        href={lang === 'en' ? "/en" : "/"} 
+        className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20 active:scale-95"
+      >
+        {t('error.backToHome')}
+      </a>
+    </div>
+  );
+};
+
 function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
         <Router basename="/">
-          <ScrollToTop />
-          <Layout>
+          <LanguageProvider>
+            <ScrollToTop />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/category/:categoryId" element={<CategoryPage />} />
+              {/* Redirect /ko/* to /* (Korean is now default without prefix) */}
+              <Route path="/ko/*" element={
+                <Navigate to={window.location.pathname.replace(/^\/ko/, '') || "/"} replace />
+              } />
 
-              {/* Unit */}
-              <Route path="/length" element={<LengthConverter />} />
-              <Route path="/weight" element={<WeightConverter />} />
-              <Route path="/currency" element={<CurrencyConverter />} />
-              <Route path="/temperature-converter" element={<TemperatureConverter />} />
-              <Route path="/temperature" element={<TemperatureConverter />} />
-              <Route path="/temp-conv" element={<TemperatureConverter />} />
-              <Route path="/area-converter" element={<AreaConverter />} />
-              <Route path="/volume-converter" element={<VolumeConverter />} />
-              <Route path="/speed-converter" element={<SpeedConverter />} />
+              {/* English Language Routes */}
+              <Route path="/en/*" element={
+                <Layout>
+                  <Routes>
+                    {/* Reuse path logic for English */}
+                    {Object.entries({
+                      "": Home,
+                      "category/:categoryId": CategoryPage,
+                      "length": LengthConverter,
+                      "weight": WeightConverter,
+                      "currency": CurrencyConverter,
+                      "temperature-converter": TemperatureConverter,
+                      "temperature": TemperatureConverter,
+                      "temp-conv": TemperatureConverter,
+                      "area-converter": AreaConverter,
+                      "volume-converter": VolumeConverter,
+                      "speed-converter": SpeedConverter,
+                      "loan": LoanCalculator,
+                      "date": DateCalculator,
+                      "date-calc": DateCalculator,
+                      "dday-calc": DateCalculator,
+                      "salary-calculator": SalaryCalculator,
+                      "salary-calc": SalaryCalculator,
+                      "severance-calculator": SeveranceCalculator,
+                      "severance-calc": SeveranceCalculator,
+                      "minimum-wage": MinimumWageCalculator,
+                      "min-wage-calc": MinimumWageCalculator,
+                      "compound-interest": CompoundInterestCalculator,
+                      "work-hours": WorkHoursCalculator,
+                      "age-calc": AgeCalculator,
+                      "age": AgeCalculator,
+                      "age-calculator": AgeCalculator,
+                      "discount-calculator": DiscountCalculator,
+                      "percent-calculator": PercentCalculator,
+                      "fraction-calculator": FractionCalculator,
+                      "lunch": LunchRecommender,
+                      "lunch-recommender": LunchRecommender,
+                      "word-count": WordCounter,
+                      "word-counter": WordCounter,
+                      "unicode": UnicodeConverter,
+                      "string-converter": StringConverter,
+                      "case-converter": StringConverter,
+                      "string-utils": StringConverter,
+                      "base64": Base64Tool,
+                      "html-encoder": HtmlEncoder,
+                      "ascii-art": AsciiArt,
+                      "morse-code": MorseCode,
+                      "base-converter": BaseConverter,
+                      "json-formatter": JsonFormatter,
+                      "markdown-editor": MarkdownEditor,
+                      "html-view": HtmlFormatter,
+                      "html-formatter": HtmlFormatter,
+                      "diff": CodeDiff,
+                      "code-diff": CodeDiff,
+                      "code-compare": CodeDiff,
+                      "compare": CodeDiff,
+                      "web-editor": WebEditor,
+                      "hash-gen": HashGenerator,
+                      "uuid-gen": UuidGenerator,
+                      "url-encoder": UrlEncoderDecoder,
+                      "jwt-decoder": JwtDecoder,
+                      "regex-tester": RegexTester,
+                      "ascii-table": AsciiTable,
+                      "special-char": SpecialCharacters,
+                      "cron-generator": CronGenerator,
+                      "csv-json": CsvJsonConverter,
+                      "encryption-tool": EncryptionTool,
+                      "qr-gen": QrGenerator,
+                      "qr-generator": QrGenerator,
+                      "barcode-gen": BarcodeGenerator,
+                      "password-gen": PasswordGenerator,
+                      "color-picker": ColorPicker,
+                      "image-base64": ImageToBase64,
+                      "ip-address": IpAddress,
+                      "timer": TimerStopwatch,
+                      "pomodoro-timer": PomodoroTimer,
+                      "pomodoro": PomodoroTimer,
+                      "checklist": Checklist,
+                      "flashlight": Flashlight,
+                      "image-resize": ImageResizer,
+                      "youtube-thumbnail": YoutubeThumbnail,
+                      "world-clock": WorldClock,
+                      "color-extractor": ColorExtractor,
+                      "dice-roller": DiceRoller,
+                      "bmi": BMI,
+                      "bmr": BMR,
+                      "biorhythm": Biorhythm,
+                      "life-expectancy": LifeExpectancy,
+                      "reaction-test": ReactionTest,
+                      "typing-test": TypingTest,
+                      "1to50": OneToFifty,
+                      "one-to-fifty": OneToFifty,
+                      "cps-test": CpsTest,
+                      "aim-trainer": AimTrainer,
+                      "number-memory": NumberMemory,
+                      "number-baseball": NumberBaseball,
+                      "minesweeper": Minesweeper,
+                      "roulette": Roulette,
+                      "ladder-game": LadderGame,
+                      "suika-game": SuikaGame,
+                      "2048": Game2048,
+                      "tanghulu-maker": TanghuluGame,
+                      "flappy-bird": FlappyBird,
+                      "missile-dodge": MissileDodge,
+                      "snake-game": SnakeGame,
+                      "sudoku": Sudoku,
+                      "sudoku-game": Sudoku,
+                      "tower-stacker": TowerStacker,
+                      "tower-blocks": TowerStacker,
+                      "bubble-wrap": BubbleWrap,
+                      "lotto": LottoGenerator,
+                      "lotto-sim": LottoSimulator,
+                      "mandalart": MandalartPlanner,
+                      "speed-math": SpeedMath,
+                      "time-sense": TimeSense,
+                      "typing-defense": TypingDefense,
+                      "hangman": Hangman,
+                      "dynamic-acuity": DynamicAcuity,
+                      "blood-type": BloodType,
+                      "mbti": MbtiTest,
+                      "mbti-test": MbtiTest,
+                      "saju": Saju,
+                      "compatibility": Saju,
+                      "gunghap": Saju,
+                      "zodiac-fortune": ZodiacFortune,
+                      "horoscope": Horoscope,
+                      "dream-interpretation": DreamInterpretation,
+                      "tarot": TarotCard,
+                      "birth-gen": BirthGen,
+                      "name-analysis": NameAnalysis,
+                      "personal-color": PersonalColor,
+                      "color-test": PersonalColor,
+                      "past-life": PastLife,
+                      "name-past-life": PastLife,
+                      "pet-mbti": PetMbti,
+                      "dog-cat-mbti": PetMbti,
+                      "mental-age": MentalAge,
+                      "mind-age": MentalAge,
+                      "brain-structure": BrainStructure,
+                      "my-brain": BrainStructure,
+                      "joseon-job": JoseonJob,
+                      "past-job": JoseonJob,
+                      "if-i-am-god": IfIAmGod,
+                      "god-test": IfIAmGod,
+                      "life-bgm": LifeBgm,
+                      "first-impression-color": FirstImpressionColor,
+                      "my-color": FirstImpressionColor,
+                      "animal-face": AnimalFace,
+                      "personal-scent": PersonalScent,
+                      "ideal-type": IdealType,
+                      "couple-compatibility": CoupleCompatibility,
+                      "hidden-talent": HiddenTalent,
+                      "balance-game": BalanceGame,
+                      "fortune-cookie": FortuneCookie,
+                      "color-sensitivity": ColorTest,
+                      "hearing-test": HearingTest,
+                      "pitch-test": PitchTest,
+                      "smile-dating-test": SmileDatingTest,
+                      "dating-test": DatingTest,
+                      "stress-test": StressTest,
+                      "brain-type": BrainType,
+                      "eq-test": EqTest,
+                      "smartphone-addiction": SmartphoneAddiction,
+                      "kkondae-test": KkondaeTest,
+                      "hogu-test": HoguTest,
+                      "debate-test": DebateTest,
+                      "idol-test": IdolPositionTest,
+                      "resilience-test": ResilienceTest,
+                      "initial-sound-quiz": InitialSoundQuiz,
+                      "food-quiz": FoodQuiz,
+                      "association-quiz": AssociationQuiz,
+                      "capital-quiz": CapitalQuiz,
+                      "spelling-quiz": SpellingQuiz,
+                      "vocabulary-test": VocabularyTest,
+                      "simple-addition": AdditionQuiz,
+                      "simple-subtraction": SubtractionQuiz,
+                      "simple-multiplication": MultiplicationQuiz
+                    }).map(([path, Component]) => (
+                      <Route key={path} path={path} element={<Component />} />
+                    ))}
+                    
+                    {/* 404 for /en/* */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Layout>
+              } />
 
-              {/* Finance / Life */}
-              <Route path="/loan" element={<LoanCalculator />} />
-              <Route path="/date" element={<DateCalculator />} />
-              <Route path="/date-calc" element={<DateCalculator />} />
-              <Route path="/dday-calc" element={<DateCalculator />} />
-              <Route path="/salary-calc" element={<SalaryCalculator />} />
-              <Route path="/severance-calc" element={<SeveranceCalculator />} />
-              <Route path="/minimum-wage" element={<MinimumWageCalculator />} />
-              <Route path="/min-wage-calc" element={<MinimumWageCalculator />} />
-              <Route path="/compound-interest" element={<CompoundInterestCalculator />} />
-              <Route path="/work-hours" element={<WorkHoursCalculator />} />
-              <Route path="/age-calc" element={<AgeCalculator />} />
-              <Route path="/age" element={<AgeCalculator />} />
-              <Route path="/age-calculator" element={<AgeCalculator />} />
-              <Route path="/discount-calculator" element={<DiscountCalculator />} />
-              <Route path="/percent-calculator" element={<PercentCalculator />} />
-              <Route path="/fraction-calculator" element={<FractionCalculator />} />
-              <Route path="/lunch" element={<LunchRecommender />} />
-              <Route path="/lunch-recommender" element={<LunchRecommender />} />
-
-              {/* Text */}
-              <Route path="/word-count" element={<WordCounter />} />
-              <Route path="/word-counter" element={<WordCounter />} />
-              <Route path="/unicode" element={<UnicodeConverter />} />
-              <Route path="/string-converter" element={<StringConverter />} />
-              <Route path="/case-converter" element={<StringConverter />} />
-              <Route path="/string-utils" element={<StringConverter />} />
-              <Route path="/base64" element={<Base64Tool />} />
-              <Route path="/html-encoder" element={<HtmlEncoder />} />
-              <Route path="/ascii-art" element={<AsciiArt />} />
-              <Route path="/morse-code" element={<MorseCode />} />
-
-              {/* Dev */}
-              <Route path="/base-converter" element={<BaseConverter />} />
-              <Route path="/json-formatter" element={<JsonFormatter />} />
-              <Route path="/markdown-editor" element={<MarkdownEditor />} />
-              <Route path="/html-view" element={<HtmlFormatter />} />
-              <Route path="/html-formatter" element={<HtmlFormatter />} />
-              <Route path="/diff" element={<CodeDiff />} />
-              <Route path="/code-diff" element={<CodeDiff />} />
-              <Route path="/code-compare" element={<CodeDiff />} />
-              <Route path="/compare" element={<CodeDiff />} />
-              <Route path="/web-editor" element={<WebEditor />} />
-              <Route path="/hash-gen" element={<HashGenerator />} />
-              <Route path="/uuid-gen" element={<UuidGenerator />} />
-              <Route path="/url-encoder" element={<UrlEncoderDecoder />} />
-              <Route path="/jwt-decoder" element={<JwtDecoder />} />
-              <Route path="/regex-tester" element={<RegexTester />} />
-              <Route path="/ascii-table" element={<AsciiTable />} />
-              <Route path="/special-char" element={<SpecialCharacters />} />
-              <Route path="/cron-generator" element={<CronGenerator />} />
-              <Route path="/csv-json" element={<CsvJsonConverter />} />
-              <Route path="/encryption-tool" element={<EncryptionTool />} />
-
-              {/* Utility */}
-              <Route path="/qr-gen" element={<QrGenerator />} />
-              <Route path="/qr-generator" element={<QrGenerator />} />
-              <Route path="/barcode-gen" element={<BarcodeGenerator />} />
-              <Route path="/password-gen" element={<PasswordGenerator />} />
-              <Route path="/color-picker" element={<ColorPicker />} />
-              <Route path="/image-base64" element={<ImageToBase64 />} />
-              <Route path="/ip-address" element={<IpAddress />} />
-              <Route path="/timer" element={<TimerStopwatch />} />
-              <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
-              <Route path="/pomodoro" element={<PomodoroTimer />} />
-              <Route path="/checklist" element={<Checklist />} />
-              <Route path="/flashlight" element={<Flashlight />} />
-              <Route path="/image-resize" element={<ImageResizer />} />
-              <Route path="/youtube-thumbnail" element={<YoutubeThumbnail />} />
-              <Route path="/world-clock" element={<WorldClock />} />
-              <Route path="/color-extractor" element={<ColorExtractor />} />
-              <Route path="/dice-roller" element={<DiceRoller />} />
-
-              {/* Health */}
-              <Route path="/bmi" element={<BMI />} />
-              <Route path="/bmr" element={<BMR />} />
-              <Route path="/biorhythm" element={<Biorhythm />} />
-              <Route path="/life-expectancy" element={<LifeExpectancy />} />
-
-              {/* Games */}
-              <Route path="/reaction-test" element={<ReactionTest />} />
-              <Route path="/typing-test" element={<TypingTest />} />
-              <Route path="/1to50" element={<OneToFifty />} />
-              <Route path="/one-to-fifty" element={<OneToFifty />} />
-              <Route path="/cps-test" element={<CpsTest />} />
-              <Route path="/aim-trainer" element={<AimTrainer />} />
-              <Route path="/number-memory" element={<NumberMemory />} />
-              <Route path="/number-baseball" element={<NumberBaseball />} />
-              <Route path="/minesweeper" element={<Minesweeper />} />
-              <Route path="/roulette" element={<Roulette />} />
-              <Route path="/ladder-game" element={<LadderGame />} />
-              <Route path="/suika-game" element={<SuikaGame />} />
-              <Route path="/2048" element={<Game2048 />} />
-              <Route path="/tanghulu-maker" element={<TanghuluGame />} />
-              <Route path="/flappy-bird" element={<FlappyBird />} />
-              <Route path="/missile-dodge" element={<MissileDodge />} />
-              <Route path="/snake-game" element={<SnakeGame />} />
-              <Route path="/sudoku" element={<Sudoku />} />
-              <Route path="/sudoku-game" element={<Sudoku />} />
-              <Route path="/tower-stacker" element={<TowerStacker />} />
-              <Route path="/tower-blocks" element={<TowerStacker />} />
-              <Route path="/bubble-wrap" element={<BubbleWrap />} />
-              <Route path="/lotto" element={<LottoGenerator />} />
-              <Route path="/lotto-sim" element={<LottoSimulator />} />
-              <Route path="/mandalart" element={<MandalartPlanner />} />
-              <Route path="/speed-math" element={<SpeedMath />} />
-              <Route path="/time-sense" element={<TimeSense />} />
-              <Route path="/typing-defense" element={<TypingDefense />} />
-              <Route path="/hangman" element={<Hangman />} />
-              <Route path="/dynamic-acuity" element={<DynamicAcuity />} />
-
-              {/* Fun / Fortune */}
-              <Route path="/blood-type" element={<BloodType />} />
-              <Route path="/mbti" element={<MbtiTest />} />
-              <Route path="/mbti-test" element={<MbtiTest />} />
-              <Route path="/saju" element={<Saju />} />
-              <Route path="/compatibility" element={<Saju />} />
-              <Route path="/gunghap" element={<Saju />} />
-              <Route path="/zodiac-fortune" element={<ZodiacFortune />} />
-              <Route path="/horoscope" element={<Horoscope />} />
-              <Route path="/dream-interpretation" element={<DreamInterpretation />} />
-              <Route path="/tarot" element={<TarotCard />} />
-              <Route path="/birth-gen" element={<BirthGen />} />
-              <Route path="/name-analysis" element={<NameAnalysis />} />
-              <Route path="/personal-color" element={<PersonalColor />} />
-              <Route path="/color-test" element={<PersonalColor />} />
-              <Route path="/past-life" element={<PastLife />} />
-              <Route path="/name-past-life" element={<PastLife />} />
-              <Route path="/pet-mbti" element={<PetMbti />} />
-              <Route path="/dog-cat-mbti" element={<PetMbti />} />
-              <Route path="/mental-age" element={<MentalAge />} />
-              <Route path="/mind-age" element={<MentalAge />} />
-              <Route path="/brain-structure" element={<BrainStructure />} />
-              <Route path="/my-brain" element={<BrainStructure />} />
-              <Route path="/joseon-job" element={<JoseonJob />} />
-              <Route path="/past-job" element={<JoseonJob />} />
-              <Route path="/if-i-am-god" element={<IfIAmGod />} />
-              <Route path="/god-test" element={<IfIAmGod />} />
-              <Route path="/life-bgm" element={<LifeBgm />} />
-              <Route path="/first-impression-color" element={<FirstImpressionColor />} />
-              <Route path="/my-color" element={<FirstImpressionColor />} />
-              <Route path="/animal-face" element={<AnimalFace />} />
-              <Route path="/personal-scent" element={<PersonalScent />} />
-              <Route path="/ideal-type" element={<IdealType />} />
-              <Route path="/couple-compatibility" element={<CoupleCompatibility />} />
-              <Route path="/hidden-talent" element={<HiddenTalent />} />
-              <Route path="/balance-game" element={<BalanceGame />} />
-              <Route path="/fortune-cookie" element={<FortuneCookie />} />
-              <Route path="/color-sensitivity" element={<ColorTest />} />
-              <Route path="/hearing-test" element={<HearingTest />} />
-              <Route path="/pitch-test" element={<PitchTest />} />
-              <Route path="/smile-dating-test" element={<SmileDatingTest />} />
-              <Route path="/dating-test" element={<DatingTest />} />
-              <Route path="/stress-test" element={<StressTest />} />
-              <Route path="/brain-type" element={<BrainType />} />
-              <Route path="/eq-test" element={<EqTest />} />
-              <Route path="/smartphone-addiction" element={<SmartphoneAddiction />} />
-              <Route path="/kkondae-test" element={<KkondaeTest />} />
-              <Route path="/hogu-test" element={<HoguTest />} />
-              <Route path="/debate-test" element={<DebateTest />} />
-              <Route path="/idol-test" element={<IdolPositionTest />} />
-              <Route path="/resilience-test" element={<ResilienceTest />} />
-
-              {/* Trivia */}
-              <Route path="/initial-sound-quiz" element={<InitialSoundQuiz />} />
-              <Route path="/food-quiz" element={<FoodQuiz />} />
-              <Route path="/association-quiz" element={<AssociationQuiz />} />
-              <Route path="/capital-quiz" element={<CapitalQuiz />} />
-              <Route path="/spelling-quiz" element={<SpellingQuiz />} />
-              <Route path="/vocabulary-test" element={<VocabularyTest />} />
-              <Route path="/simple-addition" element={<AdditionQuiz />} />
-              <Route path="/simple-subtraction" element={<SubtractionQuiz />} />
-              <Route path="/simple-multiplication" element={<MultiplicationQuiz />} />
-
-              <Route path="*" element={
-                <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
-                  <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">404</h1>
-                  <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">페이지를 찾을 수 없습니다.</p>
-                  <a href="/" className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                    홈으로 돌아가기
-                  </a>
-                </div>
+              {/* Default Language (Korean) Routes */}
+              <Route path="/*" element={
+                <Layout>
+                  <Routes>
+                    {/* Reuse path logic for default (ko) */}
+                    {Object.entries({
+                      "": Home,
+                      "category/:categoryId": CategoryPage,
+                      "length": LengthConverter,
+                      "weight": WeightConverter,
+                      "currency": CurrencyConverter,
+                      "temperature-converter": TemperatureConverter,
+                      "temperature": TemperatureConverter,
+                      "temp-conv": TemperatureConverter,
+                      "area-converter": AreaConverter,
+                      "volume-converter": VolumeConverter,
+                      "speed-converter": SpeedConverter,
+                      "loan": LoanCalculator,
+                      "date": DateCalculator,
+                      "date-calc": DateCalculator,
+                      "dday-calc": DateCalculator,
+                      "salary-calculator": SalaryCalculator,
+                      "salary-calc": SalaryCalculator,
+                      "severance-calculator": SeveranceCalculator,
+                      "severance-calc": SeveranceCalculator,
+                      "minimum-wage": MinimumWageCalculator,
+                      "min-wage-calc": MinimumWageCalculator,
+                      "compound-interest": CompoundInterestCalculator,
+                      "work-hours": WorkHoursCalculator,
+                      "age-calc": AgeCalculator,
+                      "age": AgeCalculator,
+                      "age-calculator": AgeCalculator,
+                      "discount-calculator": DiscountCalculator,
+                      "percent-calculator": PercentCalculator,
+                      "fraction-calculator": FractionCalculator,
+                      "lunch": LunchRecommender,
+                      "lunch-recommender": LunchRecommender,
+                      "word-count": WordCounter,
+                      "word-counter": WordCounter,
+                      "unicode": UnicodeConverter,
+                      "string-converter": StringConverter,
+                      "case-converter": StringConverter,
+                      "string-utils": StringConverter,
+                      "base64": Base64Tool,
+                      "html-encoder": HtmlEncoder,
+                      "ascii-art": AsciiArt,
+                      "morse-code": MorseCode,
+                      "base-converter": BaseConverter,
+                      "json-formatter": JsonFormatter,
+                      "markdown-editor": MarkdownEditor,
+                      "html-view": HtmlFormatter,
+                      "html-formatter": HtmlFormatter,
+                      "diff": CodeDiff,
+                      "code-diff": CodeDiff,
+                      "code-compare": CodeDiff,
+                      "compare": CodeDiff,
+                      "web-editor": WebEditor,
+                      "hash-gen": HashGenerator,
+                      "uuid-gen": UuidGenerator,
+                      "url-encoder": UrlEncoderDecoder,
+                      "jwt-decoder": JwtDecoder,
+                      "regex-tester": RegexTester,
+                      "ascii-table": AsciiTable,
+                      "special-char": SpecialCharacters,
+                      "cron-generator": CronGenerator,
+                      "csv-json": CsvJsonConverter,
+                      "encryption-tool": EncryptionTool,
+                      "qr-gen": QrGenerator,
+                      "qr-generator": QrGenerator,
+                      "barcode-gen": BarcodeGenerator,
+                      "password-gen": PasswordGenerator,
+                      "color-picker": ColorPicker,
+                      "image-base64": ImageToBase64,
+                      "ip-address": IpAddress,
+                      "timer": TimerStopwatch,
+                      "pomodoro-timer": PomodoroTimer,
+                      "pomodoro": PomodoroTimer,
+                      "checklist": Checklist,
+                      "flashlight": Flashlight,
+                      "image-resize": ImageResizer,
+                      "youtube-thumbnail": YoutubeThumbnail,
+                      "world-clock": WorldClock,
+                      "color-extractor": ColorExtractor,
+                      "dice-roller": DiceRoller,
+                      "bmi": BMI,
+                      "bmr": BMR,
+                      "biorhythm": Biorhythm,
+                      "life-expectancy": LifeExpectancy,
+                      "reaction-test": ReactionTest,
+                      "typing-test": TypingTest,
+                      "1to50": OneToFifty,
+                      "one-to-fifty": OneToFifty,
+                      "cps-test": CpsTest,
+                      "aim-trainer": AimTrainer,
+                      "number-memory": NumberMemory,
+                      "number-baseball": NumberBaseball,
+                      "minesweeper": Minesweeper,
+                      "roulette": Roulette,
+                      "ladder-game": LadderGame,
+                      "suika-game": SuikaGame,
+                      "2048": Game2048,
+                      "tanghulu-maker": TanghuluGame,
+                      "flappy-bird": FlappyBird,
+                      "missile-dodge": MissileDodge,
+                      "snake-game": SnakeGame,
+                      "sudoku": Sudoku,
+                      "sudoku-game": Sudoku,
+                      "tower-stacker": TowerStacker,
+                      "tower-blocks": TowerStacker,
+                      "bubble-wrap": BubbleWrap,
+                      "lotto": LottoGenerator,
+                      "lotto-sim": LottoSimulator,
+                      "mandalart": MandalartPlanner,
+                      "speed-math": SpeedMath,
+                      "time-sense": TimeSense,
+                      "typing-defense": TypingDefense,
+                      "hangman": Hangman,
+                      "dynamic-acuity": DynamicAcuity,
+                      "blood-type": BloodType,
+                      "mbti": MbtiTest,
+                      "mbti-test": MbtiTest,
+                      "saju": Saju,
+                      "compatibility": Saju,
+                      "gunghap": Saju,
+                      "zodiac-fortune": ZodiacFortune,
+                      "horoscope": Horoscope,
+                      "dream-interpretation": DreamInterpretation,
+                      "tarot": TarotCard,
+                      "birth-gen": BirthGen,
+                      "name-analysis": NameAnalysis,
+                      "personal-color": PersonalColor,
+                      "color-test": PersonalColor,
+                      "past-life": PastLife,
+                      "name-past-life": PastLife,
+                      "pet-mbti": PetMbti,
+                      "dog-cat-mbti": PetMbti,
+                      "mental-age": MentalAge,
+                      "mind-age": MentalAge,
+                      "brain-structure": BrainStructure,
+                      "my-brain": BrainStructure,
+                      "joseon-job": JoseonJob,
+                      "past-job": JoseonJob,
+                      "if-i-am-god": IfIAmGod,
+                      "god-test": IfIAmGod,
+                      "life-bgm": LifeBgm,
+                      "first-impression-color": FirstImpressionColor,
+                      "my-color": FirstImpressionColor,
+                      "animal-face": AnimalFace,
+                      "personal-scent": PersonalScent,
+                      "ideal-type": IdealType,
+                      "couple-compatibility": CoupleCompatibility,
+                      "hidden-talent": HiddenTalent,
+                      "balance-game": BalanceGame,
+                      "fortune-cookie": FortuneCookie,
+                      "color-sensitivity": ColorTest,
+                      "hearing-test": HearingTest,
+                      "pitch-test": PitchTest,
+                      "smile-dating-test": SmileDatingTest,
+                      "dating-test": DatingTest,
+                      "stress-test": StressTest,
+                      "brain-type": BrainType,
+                      "eq-test": EqTest,
+                      "smartphone-addiction": SmartphoneAddiction,
+                      "kkondae-test": KkondaeTest,
+                      "hogu-test": HoguTest,
+                      "debate-test": DebateTest,
+                      "idol-test": IdolPositionTest,
+                      "resilience-test": ResilienceTest,
+                      "initial-sound-quiz": InitialSoundQuiz,
+                      "food-quiz": FoodQuiz,
+                      "association-quiz": AssociationQuiz,
+                      "capital-quiz": CapitalQuiz,
+                      "spelling-quiz": SpellingQuiz,
+                      "vocabulary-test": VocabularyTest,
+                      "simple-addition": AdditionQuiz,
+                      "simple-subtraction": SubtractionQuiz,
+                      "simple-multiplication": MultiplicationQuiz
+                    }).map(([path, Component]) => (
+                      <Route key={path} path={path} element={<Component />} />
+                    ))}
+                    
+                    {/* 404 for default /* */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Layout>
               } />
             </Routes>
-          </Layout>
+          </LanguageProvider>
         </Router>
       </ThemeProvider>
     </HelmetProvider>

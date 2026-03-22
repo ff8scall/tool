@@ -3,31 +3,52 @@ import { Download, RefreshCw, Info } from 'lucide-react';
 import { domToPng } from 'modern-screenshot';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
-
-const toolFaqs = [
-    {
-        "q": "만다라트 플래너란 무엇인가요?",
-        "a": "핵심 목표를 중심으로 8개의 세부 목표와 64개의 실행 계획을 시각화하는 목표 설정 기법입니다. 오타니 쇼헤이 선수가 사용하면서 유명해졌습니다."
-    },
-    {
-        "q": "입력한 내용이 자동으로 저장되나요?",
-        "a": "브라우저의 로컬 스토리지에 저장되지만, 중요한 계획은 '이미지로 저장' 버튼을 눌러 별도로 보관하는 것을 권장합니다."
-    }
-];
-
-const toolSteps = [
-    "정중앙의 칸에 가장 핵심이 되는 '최종 목표'를 작성합니다.",
-    "중앙을 둘러싼 8칸에 최종 목표 달성을 위한 '세부 목표'를 작성합니다.",
-    "각 세부 목표를 둘러싼 그리드에 구체적인 '실행 계획'들을 채워 넣습니다.",
-    "모든 칸을 채운 뒤 '이미지로 저장' 버튼을 눌러 계획표를 소장하세요."
-];
-
-const toolTips = [
-    "64칸을 한꺼번에 채우려 하지 마세요. 핵심에서 주변부로 천천히 확장해 나가는 것이 중요합니다.",
-    "저장된 이미지를 스마트폰 배경화면으로 설정해 매일 목표를 상기시켜보세요."
-];
+import ShareButtons from '../components/ShareButtons';
+import { useLanguage } from '../context/LanguageContext';
 
 const MandalartPlanner = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
+
+    const toolFaqs = isEn ? [
+        {
+            "q": "What is a Mandalart Planner?",
+            "a": "A goal-setting technique that visualizes 1 core goal, 8 sub-goals, and 64 action plans. It became world-famous after baseball star Shohei Ohtani used it."
+        },
+        {
+            "q": "Is my data saved automatically?",
+            "a": "It is saved in your browser's local storage. However, we recommend clicking 'Save as Image' to keep a permanent record."
+        }
+    ] : [
+        {
+            "q": "만다라트 플래너란 무엇인가요?",
+            "a": "핵심 목표를 중심으로 8개의 세부 목표와 64개의 실행 계획을 시각화하는 목표 설정 기법입니다. 오타니 쇼헤이 선수가 사용하면서 유명해졌습니다."
+        },
+        {
+            "q": "입력한 내용이 자동으로 저장되나요?",
+            "a": "브라우저의 로컬 스토리지에 저장되지만, 중요한 계획은 '이미지로 저장' 버튼을 눌러 별도로 보관하는 것을 권장합니다."
+        }
+    ];
+
+    const toolSteps = isEn ? [
+        "Write your ultimate 'Core Goal' in the very center box.",
+        "Fill the surrounding 8 boxes with 'Sub-goals' required to achieve the core goal.",
+        "Populate the peripheral grids with specific 'Action Plans' for each sub-goal.",
+        "After filling all boxes, click 'Save as Image' to keep your roadmap."
+    ] : [
+        "정중앙의 칸에 가장 핵심이 되는 '최종 목표'를 작성합니다.",
+        "중앙을 둘러싼 8칸에 최종 목표 달성을 위한 '세부 목표'를 작성합니다.",
+        "각 세부 목표를 둘러싼 그리드에 구체적인 '실행 계획'들을 채워 넣습니다.",
+        "모든 칸을 채운 뒤 '이미지로 저장' 버튼을 눌러 계획표를 소장하세요."
+    ];
+
+    const toolTips = isEn ? [
+        "Don't try to fill all 64 boxes at once. It's important to expand slowly from the core to the periphery.",
+        "Set the saved image as your smartphone wallpaper to remind yourself of your goals daily."
+    ] : [
+        "64칸을 한꺼번에 채우려 하지 마세요. 핵심에서 주변부로 천천히 확장해 나가는 것이 중요합니다.",
+        "저장된 이미지를 스마트폰 배경화면으로 설정해 매일 목표를 상기시켜보세요."
+    ];
     // Main goal state
     const [mainGoal, setMainGoal] = useState('');
 
@@ -78,14 +99,14 @@ const MandalartPlanner = () => {
             link.click();
         } catch (err) {
             console.error('Failed to save image:', err);
-            alert('이미지 저장에 실패했습니다.');
+            alert(isEn ? 'Failed to save image.' : '이미지 저장에 실패했습니다.');
         } finally {
             setIsCapturing(false);
         }
     };
 
     const handleReset = () => {
-        if (window.confirm('모든 내용을 초기화하시겠습니까?')) {
+        if (window.confirm(isEn ? 'Are you sure you want to reset everything?' : '모든 내용을 초기화하시겠습니까?')) {
             setMainGoal('');
             setSubGoals(Array(8).fill(''));
             setTasks(Array.from({ length: 8 }, () => Array(8).fill('')));
@@ -107,7 +128,7 @@ const MandalartPlanner = () => {
                                     newSubGoals[i] = e.target.value;
                                     setSubGoals(newSubGoals);
                                 }}
-                                placeholder={`세부목표 ${i + 1}`}
+                                placeholder={isEn ? `Sub-goal ${i + 1}` : `세부목표 ${i + 1}`}
                                 className="w-full h-full text-center bg-transparent outline-none resize-none placeholder-opacity-50 text-[10px] sm:text-xs"
                             />
                         </div>
@@ -122,7 +143,7 @@ const MandalartPlanner = () => {
                                 newSubGoals[7] = e.target.value;
                                 setSubGoals(newSubGoals);
                             }}
-                            placeholder="세부목표 8"
+                            placeholder={isEn ? "Sub-goal 8" : "세부목표 8"}
                             className="w-full h-full text-center bg-transparent outline-none resize-none placeholder-opacity-50 text-[10px] sm:text-xs"
                         />
                     </div>
@@ -131,7 +152,7 @@ const MandalartPlanner = () => {
                         <textarea
                             value={mainGoal}
                             onChange={(e) => setMainGoal(e.target.value)}
-                            placeholder="최종목표"
+                            placeholder={isEn ? "Core Goal" : "최종목표"}
                             className="w-full h-full text-center bg-transparent outline-none resize-none flex items-center justify-center placeholder-gray-400 overflow-hidden text-xs sm:text-sm leading-tight"
                         />
                     </div>
@@ -144,7 +165,7 @@ const MandalartPlanner = () => {
                                 newSubGoals[3] = e.target.value;
                                 setSubGoals(newSubGoals);
                             }}
-                            placeholder="세부목표 4"
+                            placeholder={isEn ? "Sub-goal 4" : "세부목표 4"}
                             className="w-full h-full text-center bg-transparent outline-none resize-none placeholder-opacity-50 text-[10px] sm:text-xs"
                         />
                     </div>
@@ -159,7 +180,7 @@ const MandalartPlanner = () => {
                                     newSubGoals[i] = e.target.value;
                                     setSubGoals(newSubGoals);
                                 }}
-                                placeholder={`세부목표 ${i + 1}`}
+                                placeholder={isEn ? `Sub-goal ${i + 1}` : `세부목표 ${i + 1}`}
                                 className="w-full h-full text-center bg-transparent outline-none resize-none placeholder-opacity-50 text-[10px] sm:text-xs"
                             />
                         </div>
@@ -192,7 +213,7 @@ const MandalartPlanner = () => {
                     {/* Center of Sub Grid (ReadOnly from Main Grid) */}
                     <div key={`task-${index}-center`} className={`flex items-center justify-center p-1 text-center text-[10px] sm:text-xs font-bold ${headerColors[index]} rounded select-none overflow-hidden break-words`}>
                         <div className="flex items-center justify-center h-full w-full break-keep">
-                            {subGoals[index] || `세부목표 ${index + 1}`}
+                            {subGoals[index] || (isEn ? `Sub-goal ${index + 1}` : `세부목표 ${index + 1}`)}
                         </div>
                     </div>
 
@@ -222,9 +243,11 @@ const MandalartPlanner = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title="만다라트 플래너 | 온라인 목표 설정 도구"
-                description="오타니 쇼헤이의 목표 달성 비법! 온라인에서 간편하게 만다라트 계획표를 작성하고 관리하세요. 핵심 목표를 64개의 구체적인 실행 계획으로 시각화할 수 있습니다."
-                keywords="만다라트, 목표설정, 오타니만다라트, 계획표, 비주얼플래닝, 온라인플래너"
+                title={isEn ? "Mandalart Planner | Visual Goal Setting Tool" : "만다라트 플래너 | 온라인 목표 설정 도구"}
+                description={isEn 
+                    ? "Shohei Ohtani's secret to success! Easily create and manage your Mandalart plan online. Visualize your core goal into 64 specific action plans."
+                    : "오타니 쇼헤이의 목표 달성 비법! 온라인에서 간편하게 만다라트 계획표를 작성하고 관리하세요. 핵심 목표를 64개의 구체적인 실행 계획으로 시각화할 수 있습니다."}
+                keywords={isEn ? "mandalart, goal setting, shohei ohtani plan, visual planning, online planner, roadmap" : "만다라트, 목표설정, 오타니만다라트, 계획표, 비주얼플래닝, 온라인플래너"}
                 category="utility"
                 faqs={toolFaqs}
                 steps={toolSteps}
@@ -232,10 +255,10 @@ const MandalartPlanner = () => {
 
             <div className="text-center mb-10">
                 <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">
-                    만다라트 플래너
+                    {isEn ? 'Mandalart Planner' : '만다라트 플래너'}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 text-lg">
-                    최종 목표를 달성하기 위한 8개의 세부 목표와 64개의 실행 계획을 세워보세요.
+                    {isEn ? 'Create 8 sub-goals and 64 action plans to achieve your ultimate core goal.' : '최종 목표를 달성하기 위한 8개의 세부 목표와 64개의 실행 계획을 세워보세요.'}
                 </p>
             </div>
 
@@ -246,7 +269,7 @@ const MandalartPlanner = () => {
                         className="flex items-center px-5 py-2.5 text-sm font-bold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all active:scale-95"
                     >
                         <RefreshCw className="w-4 h-4 mr-2" />
-                        초기화
+                        {isEn ? 'Reset' : '초기화'}
                     </button>
                     <button
                         onClick={handleDownload}
@@ -254,7 +277,7 @@ const MandalartPlanner = () => {
                         className="flex items-center px-5 py-2.5 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all active:scale-95 shadow-lg shadow-indigo-600/20 disabled:opacity-50"
                     >
                         <Download className="w-4 h-4 mr-2" />
-                        이미지로 저장
+                        {isEn ? 'Save as Image' : '이미지로 저장'}
                     </button>
                 </div>
 
@@ -284,28 +307,32 @@ const MandalartPlanner = () => {
                 <div className="mt-8 p-6 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100 dark:border-indigo-800/30">
                     <h3 className="text-lg font-bold text-indigo-900 dark:text-indigo-300 mb-3 flex items-center">
                         <Info className="w-5 h-5 mr-2" />
-                        작성 방법 안내
+                        {isEn ? 'How to Use' : '작성 방법 안내'}
                     </h3>
                     <ul className="space-y-2 text-sm text-indigo-800/80 dark:text-indigo-300/80 font-medium">
                         <li className="flex items-start gap-2">
                             <span className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
-                            정중앙의 <strong>최종목표</strong> 칸에 가장 큰 목표를 입력합니다.
+                            {isEn ? <>Enter your biggest goal in the <strong>Core Goal</strong> box at the very center.</> : <>정중앙의 <strong>최종목표</strong> 칸에 가장 큰 목표를 입력합니다.</>}
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
-                            주변 8개의 <strong>세부목표</strong> 칸에 최종목표 달성을 위한 하위 목표를 입력합니다.
+                            {isEn ? <>Enter sub-goals required to achieve the core goal in the surrounding 8 <strong>Sub-goal</strong> boxes.</> : <>주변 8개의 <strong>세부목표</strong> 칸에 최종목표 달성을 위한 하위 목표를 입력합니다.</>}
                         </li>
                         <li className="flex items-start gap-2">
                             <span className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
-                            동기화된 외곽의 8개 그리드에 각 세부목표를 이루기 위한 <strong>구체적인 행동</strong>을 채웁니다.
+                            {isEn ? <>Fill the 8 synchronized peripheral grids with <strong>specific actions</strong> to achieve each sub-goal.</> : <>동기화된 외곽의 8개 그리드에 각 세부목표를 이루기 위한 <strong>구체적인 행동</strong>을 채웁니다.</>}
                         </li>
                     </ul>
                 </div>
             </div>
 
+            <ShareButtons />
+
             <ToolGuide
-                title="만다라트 플래너 사용 가이드"
-                intro="만다라트 기법은 목표를 시각화하고 세분화하는 데 가장 효율적인 도구입니다. 정중앙으로부터 시작해 주변으로 뻗어나가는 64개의 행동 계획을 통해, 막연했던 꿈을 구체적인 로드맵으로 바꿀 수 있습니다."
+                title={isEn ? "Mandalart Planner Guide" : "만다라트 플래너 사용 가이드"}
+                intro={isEn 
+                    ? "The Mandalart technique is the most effective tool for visualizing and subdividing goals. By creating 64 action plans extending from the very center, you can turn a vague dream into a concrete roadmap."
+                    : "만다라트 기법은 목표를 시각화하고 세분화하는 데 가장 효율적인 도구입니다. 정중앙으로부터 시작해 주변으로 뻗어나가는 64개의 행동 계획을 통해, 막연했던 꿈을 구체적인 로드맵으로 바꿀 수 있습니다."}
                 steps={toolSteps}
                 tips={toolTips}
                 faqs={toolFaqs}

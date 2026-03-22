@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-import { RefreshCw, Play, Pause, AlertCircle, Share2 } from 'lucide-react';
+import { RefreshCw, Play, Pause, AlertCircle, Share2, TrendingDown, TrendingUp, DollarSign } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const LottoSimulator = () => {
+    const { lang } = useLanguage();
+    const isEn = lang === 'en';
     const [isRunning, setIsRunning] = useState(false);
     const [stats, setStats] = useState({
         attempts: 0,
@@ -16,16 +18,7 @@ const LottoSimulator = () => {
         rank4: 0,
         rank5: 0
     });
-    const [logs, setLogs] = useState([]);
     const [speed, setSpeed] = useState(1); // x1, x10, x100
-
-    // Auto-scroll logs
-    const logsEndRef = useRef(null);
-    useEffect(() => {
-        if (logsEndRef.current) {
-            logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [logs]);
 
     const SIMULATION_INTERVAL = 50; // ms
 
@@ -47,9 +40,6 @@ const LottoSimulator = () => {
         return { numbers, bonus };
     };
 
-    // Assuming winning numbers are fixed for the "lifetime" simulation
-    // Or we can regenerate them every week. Let's regenerate to simulate "weekly" lotto.
-
     const checkWin = (myNumbers, winNumbers, bonus) => {
         const matchCount = myNumbers.filter(n => winNumbers.includes(n)).length;
         const matchBonus = myNumbers.includes(bonus);
@@ -63,95 +53,13 @@ const LottoSimulator = () => {
     };
 
     const PRIZES = {
-        1: 2000000000, // 20억
-        2: 50000000,   // 5천만
-        3: 1500000,    // 150만
-        4: 50000,      // 5만
-        5: 5000        // 5천
+        1: 2000000000, // 2 billion
+        2: 50000000,   // 50 million
+        3: 1500000,    // 1.5 million
+        4: 50000,      // 50k
+        5: 5000        // 5k
     };
 
-    useEffect(() => {
-        let interval;
-        if (isRunning) {
-            interval = setInterval(() => {
-                // Bulk process based on speed
-                const batchSize = speed === 1 ? 1 : (speed === 10 ? 10 : 100);
-
-                let newStats = { ...stats };
-                let newLogs = [...logs];
-
-                // Keep only last 50 logs to prevent memory issues
-                if (newLogs.length > 50) newLogs = newLogs.slice(newLogs.length - 50);
-
-                for (let i = 0; i < batchSize; i++) {
-                    const myLotto = generateLotto();
-                    const { numbers: winNumbers, bonus } = generateWinningNumbers();
-                    const rank = checkWin(myLotto, winNumbers, bonus);
-
-                    newStats.attempts += 1;
-                    newStats.spent += 1000;
-
-                    if (rank > 0) {
-                        newStats.won += PRIZES[rank];
-                        newStats[`rank${rank}`] += 1;
-
-                        // Add log for high ranks only to avoid spam
-                        if (rank <= 3) {
-                            newLogs.push({
-                                type: 'win',
-                                rank,
-                                count: newStats.attempts,
-                                prize: PRIZES[rank]
-                            });
-                        }
-                    }
-                }
-
-                // Force update logic state
-                setStats(curr => ({
-                    attempts: curr.attempts + batchSize,
-                    spent: curr.spent + (1000 * batchSize),
-                    won: curr.won + (newStats.won - stats.won), // Add diff
-                    rank1: curr.rank1 + (newStats.rank1 - stats.rank1),
-                    rank2: curr.rank2 + (newStats.rank2 - stats.rank2),
-                    rank3: curr.rank3 + (newStats.rank3 - stats.rank3),
-                    rank4: curr.rank4 + (newStats.rank4 - stats.rank4),
-                    rank5: curr.rank5 + (newStats.rank5 - stats.rank5),
-                }));
-
-                // Add regular log if winning happened or just periodically?
-                // Actually logs state needs to be managed carefully in interval
-                // Let's rely on React state updates which might be slow for x100
-                // For simplified visualisation, we check wins inside the loop and direct update
-            }, SIMULATION_INTERVAL);
-        }
-        
-    const toolFaqs = [
-        {
-            "q": "로또 시뮬레이터란 무엇인가요?",
-            "a": "실제 로또 1등 당첨 확률(약 814만 분의 1)을 코드 상에 그대로 구현하여, 내가 가상으로 매주 로또를 살 때 1등 당첨까지 얼마나 많은 돈과 시간이 드는지 돌려보는 시뮬레이터입니다."
-        },
-        {
-            "q": "이걸 돌려서 나온 번호로 실제로 당첨될 수 있나요?",
-            "a": "확률은 매우 희박하지만, 시뮬레이터가 무작위로 생성한 행운의 번호를 실제 로또 구매에 참고용으로 사용해보실 수는 있습니다."
-        }
-    ];
-    const toolSteps = [
-        "자동 버튼이나 수동으로 번호 6개를 선택하여 로또를 1회 구매해봅니다.",
-        "'1등 당첨될 때까지 무한 구매' 버튼을 눌러 시뮬레이션을 돌립니다.",
-        "1등 당첨까지 소모된 시간(수만 년)과 투자한 금액을 보며 현타(현실 자각 타임)를 느낍니다."
-    ];
-    const toolTips = [
-        "로또에 인생을 걸기보다는, 확률이 얼마나 희박한지 재미있게 체감하며 건전한 로또 문화를 즐기는 용도로 사용하세요.",
-        "그래도 꿈에 특별한 번호가 나왔다면, 확률 따위 무시하고 시뮬레이터에 돌려보세요!"
-    ];
-
-    return () => clearInterval(interval);
-    }, [isRunning, speed]); // Depend on stats causess infinite loop if not careful. 
-    // Actually, setInterval closure traps 'stats'. Using functional update is better, but local loop variables are needed.
-    // Refactoring to purely functional updates for safety.
-
-    // Better implementation for loop:
     useEffect(() => {
         let timer;
         if (isRunning) {
@@ -194,10 +102,11 @@ const LottoSimulator = () => {
         return () => clearInterval(timer);
     }, [isRunning, speed]);
 
+    const formatMoney = (n) => {
+        if (isEn) return '$' + (n / 1300).toLocaleString(undefined, { maximumFractionDigits: 0 });
+        return n.toLocaleString() + '원';
+    };
 
-    const formatMoney = (n) => n.toLocaleString() + '원';
-
-    // Calculates years purely for display (assuming 1 attempt = 1 week)
     const yearsPassed = (stats.attempts / 52).toFixed(1);
 
     const getProfitRate = () => {
@@ -205,38 +114,100 @@ const LottoSimulator = () => {
         return ((stats.won - stats.spent) / stats.spent * 100).toFixed(2);
     };
 
+    const toolFaqs = isEn ? [
+        {
+            "q": "What is the Lotto Simulator?",
+            "a": "It simulates the actual 1-in-8.14 million odds of winning the top lotto prize, showing you how much time and money it would take in reality."
+        },
+        {
+            "q": "Can I use these numbers to win the real lotto?",
+            "a": "The numbers are generated randomly. While you can use them, the odds of winning remain extremely low."
+        }
+    ] : [
+        {
+            "q": "로또 시뮬레이터란 무엇인가요?",
+            "a": "실제 로또 1등 당첨 확률(약 814만 분의 1)을 코드 상에 그대로 구현하여, 내가 가상으로 매주 로또를 살 때 1등 당첨까지 얼마나 많은 돈과 시간이 드는지 돌려보는 시뮬레이터입니다."
+        },
+        {
+            "q": "이걸 돌려서 나온 번호로 실제로 당첨될 수 있나요?",
+            "a": "확률은 매우 희박하지만, 시뮬레이터가 무작위로 생성한 행운의 번호를 실제 로또 구매에 참고용으로 사용해보실 수는 있습니다."
+        }
+    ];
+
+    const toolSteps = isEn ? [
+        "Select your simulation speed (x1, x10, x100).",
+        "Press 'Start Mission' to begin buying tickets automatically.",
+        "Observe the mounting costs and passed years as you wait for the jackpot."
+    ] : [
+        "시뮬레이션 속도를 선택합니다 (x1, x10, x100).",
+        "'작전 시작' 버튼을 눌러 자동으로 로또를 구매하기 시작합니다.",
+        "1등 당첨까지 소모된 시간과 투자한 금액을 보며 확률의 냉혹함을 직접 체감해 보세요."
+    ];
+
+    const toolTips = isEn ? [
+        "This tool is designed to show how low the odds are, encouraging responsible play.",
+        "Running the simulation at x100 speed covers roughly 2 years of weekly purchases every second.",
+        "Try resetting if you want to test how lucky a new batch might be."
+    ] : [
+        "로또에 인생을 걸기보다는, 확률이 얼마나 희박한지 재미있게 체감하며 건전한 로또 문화를 즐기는 용도로 사용하세요.",
+        "x100 속도로 돌리면 1초에 약 2년치의 로또를 자동으로 구매하게 됩니다.",
+        "수익률이 마이너스라면 현실에서의 로또 구매도 한 번쯤 다시 생각해보는 계기가 될 수 있습니다."
+    ];
+
+    const shareResult = () => {
+        const text = isEn 
+            ? `I've spent ${yearsPassed} years playing the lotto and my profit is ${getProfitRate()}%! - Tool Hive`
+            : `무려 ${yearsPassed}년 동안 로또를 샀지만 수익률이 ${getProfitRate()}%입니다... - 유틸리티 허브`;
+        if (navigator.share) {
+            navigator.share({
+                title: isEn ? 'Lotto Jackpot Simulator' : '로또 당첨 시뮬레이터',
+                text: text,
+                url: window.location.href,
+            });
+        } else {
+            alert(isEn ? 'Link copied!' : '링크가 복사되었습니다!');
+            navigator.clipboard.writeText(window.location.href);
+        }
+    };
+
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title="로또 당첨 시뮬레이터"
-                description="매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."
-                keywords=""
-                category="운세/재미"
+                title={isEn ? "Lotto Jackpot Simulator - Reality Check | Tool Hive" : "로또 당첨 시뮬레이터 | 현실적인 확률 체험 | Tool Hive"}
+                description={isEn ? "How long would it take to win the lottery if you bought tickets every week? Check the realistic odds with our simulator." : "매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."}
+                keywords={isEn ? "lotto simulator, lottery odds, jackpot probability, reality check, random numbers" : "로또시뮬레이터, 로또확률, 당첨운, 로또복권, 시뮬레이션"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />
 
-            <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-                    로또 1등 당첨 시뮬레이터
+            <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 dark:bg-amber-900/30 rounded-full text-amber-600 dark:text-amber-400 font-bold text-sm mb-4 border border-amber-100 dark:border-amber-800 animate-pulse">
+                    <TrendingDown size={16} />
+                    {isEn ? 'REALITY CHECK' : '현실 자각 타임'}
+                </div>
+                <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 uppercase tracking-tighter italic">
+                    {isEn ? 'LOTTO JACKPOT' : '로또 1등 당첨'} <span className="text-amber-500">SIMULATOR</span>
                 </h1>
-                <p className="text-gray-600 dark:text-gray-300">
-                    "매주 1장씩 평생 사면 언젠가 1등에 당첨될까?"<br />
-                    그 궁금증을 이 시뮬레이터로 확인해보세요.
+                <p className="text-xl text-muted-foreground font-medium italic">
+                    {isEn ? "If I play every week for a lifetime, will I finally win?" : "매주 1장씩 평생 사면 언젠가 1등에 당첨될까?"}
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 {/* Control Panel */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                    <div className="flex justify-between items-center mb-6">
-                        <div className="text-lg font-bold">시뮬레이션 속도</div>
+                <div className="bg-card dark:bg-slate-800 rounded-[2.5rem] shadow-2xl p-10 border-4 border-border/50 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <DollarSign size={120} />
+                    </div>
+                    
+                    <div className="flex justify-between items-center mb-10">
+                        <div className="text-sm font-black uppercase tracking-widest text-muted-foreground">{isEn ? 'SIM SPEED' : '시뮬레이션 속도'}</div>
                         <div className="flex gap-2">
                             {[1, 10, 100].map(s => (
                                 <button
                                     key={s}
                                     onClick={() => setSpeed(s)}
-                                    className={`px-3 py-1 rounded-lg text-sm font-bold transition-colors ${speed === s ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                    className={`w-12 h-12 rounded-xl text-sm font-black transition-all ${speed === s ? 'bg-amber-500 text-white shadow-lg scale-110' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
                                 >
                                     x{s}
                                 </button>
@@ -244,100 +215,113 @@ const LottoSimulator = () => {
                         </div>
                     </div>
 
-                    <div className="flex gap-4 mb-6">
+                    <div className="flex gap-4 mb-10">
                         <button
                             onClick={() => setIsRunning(!isRunning)}
-                            className={`flex-1 py-4 rounded-xl text-xl font-bold flex items-center justify-center transition-colors ${isRunning ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-green-500 hover:bg-green-600 text-white'}`}
+                            className={`flex-1 py-6 rounded-[1.5rem] text-2xl font-black flex items-center justify-center transition-all shadow-xl active:scale-95 uppercase italic tracking-widest ${isRunning ? 'bg-rose-500 hover:bg-rose-600 text-white' : 'bg-emerald-500 hover:bg-emerald-600 text-white'}`}
                         >
-                            {isRunning ? <><Pause className="mr-2" /> 일시정지</> : <><Play className="mr-2" /> 시작하기</>}
+                            {isRunning ? <><Pause className="mr-3" fill="currentColor" /> {isEn ? 'PAUSE' : '일시정지'}</> : <><Play className="mr-3" fill="currentColor" /> {isEn ? 'ENGAGE' : '작전 시작'}</>}
                         </button>
                         <button
                             onClick={() => {
                                 setIsRunning(false);
                                 setStats({ attempts: 0, spent: 0, won: 0, rank1: 0, rank2: 0, rank3: 0, rank4: 0, rank5: 0 });
                             }}
-                            className="px-6 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold"
+                            className="w-20 h-20 rounded-[1.5rem] bg-muted hover:bg-muted/80 text-muted-foreground font-black flex items-center justify-center transition-all active:scale-90"
+                            title={isEn ? 'Reset' : '초기화'}
                         >
-                            <RefreshCw className="w-6 h-6" />
+                            <RefreshCw className="w-8 h-8" />
                         </button>
                     </div>
 
                     <div className="space-y-4">
-                        <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <span className="text-gray-500">구매 횟수 (주)</span>
-                            <span className="text-2xl font-bold">{stats.attempts.toLocaleString()}회</span>
+                        <div className="flex justify-between items-center p-6 bg-muted/50 rounded-3xl border-2 border-border/50">
+                            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{isEn ? 'PURCHASE COUNT' : '구매 횟수 (주)'}</span>
+                            <span className="text-3xl font-black italic">{stats.attempts.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <span className="text-gray-500">경과 시간 (가정)</span>
-                            <span className="text-xl font-bold">{yearsPassed}년</span>
+                        <div className="flex justify-between items-center p-6 bg-muted/50 rounded-3xl border-2 border-border/50">
+                            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{isEn ? 'TIME PASSED' : '경과 시간 (가정)'}</span>
+                            <span className="text-3xl font-black italic">{yearsPassed} {isEn ? 'YEARS' : '년'}</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Score Panel */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                    <div className="space-y-4">
+                {/* Financial Panel */}
+                <div className="bg-card dark:bg-slate-800 rounded-[2.5rem] shadow-2xl p-10 border-4 border-border/50 flex flex-col justify-between">
+                    <div className="space-y-6">
                         <div className="flex justify-between items-center">
-                            <span className="text-gray-500">총 당첨금</span>
-                            <span className="text-2xl font-bold text-blue-600">+{formatMoney(stats.won)}</span>
+                            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{isEn ? 'TOTAL WINNINGS' : '총 당첨금'}</span>
+                            <span className="text-3xl font-black text-blue-500 italic">+{formatMoney(stats.won)}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                            <span className="text-gray-500">총 지출액</span>
-                            <span className="text-2xl font-bold text-red-500">-{formatMoney(stats.spent)}</span>
+                            <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{isEn ? 'TOTAL EXPENSES' : '총 지출액'}</span>
+                            <span className="text-3xl font-black text-rose-500 italic">-{formatMoney(stats.spent)}</span>
                         </div>
-                        <div className="h-px bg-gray-200 my-2"></div>
-                        <div className="flex justify-between items-center">
-                            <span className="font-bold">순수익 (손익)</span>
-                            <span className={`text-3xl font-black ${stats.won - stats.spent >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
-                                {formatMoney(stats.won - stats.spent)}
-                            </span>
+                        <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-500" style={{ width: `${Math.max(0, Math.min(100, (stats.won / (stats.spent || 1)) * 100))}%` }} />
                         </div>
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-500">수익률</span>
-                            <span className={`font-bold ${stats.won - stats.spent >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
-                                {getProfitRate()}%
-                            </span>
+                        <div className="flex justify-between items-center bg-muted/30 p-8 rounded-[2rem] border-4 border-dashed border-border/50">
+                            <div>
+                                <span className="text-xs font-black uppercase tracking-widest text-muted-foreground block mb-2">{isEn ? 'NET PROFIT' : '순수익 (손익)'}</span>
+                                <span className={`text-5xl font-black italic tracking-tighter ${stats.won - stats.spent >= 0 ? 'text-blue-500' : 'text-rose-500'}`}>
+                                    {formatMoney(stats.won - stats.spent)}
+                                </span>
+                            </div>
+                            <div className="text-right">
+                                <span className="text-xs font-black uppercase tracking-widest text-muted-foreground block mb-2">{isEn ? 'ROI' : '수익률'}</span>
+                                <span className={`text-2xl font-black italic ${stats.won - stats.spent >= 0 ? 'text-blue-500' : 'text-rose-500'}`}>
+                                    {getProfitRate()}%
+                                </span>
+                            </div>
                         </div>
                     </div>
+
+                    <button
+                        onClick={shareResult}
+                        className="w-full mt-8 py-4 bg-slate-900 text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-slate-800 transition-all uppercase tracking-widest italic"
+                    >
+                        <Share2 size={24} />
+                        {isEn ? 'SHARE INTEL' : '결과 공유하기'}
+                    </button>
                 </div>
             </div>
 
-            {/* Rank Board */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 mb-8">
+            {/* Jackpot Status */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
                 {[
-                    { rank: 1, label: '1등', prize: '20억', count: stats.rank1, color: 'bg-yellow-100 text-yellow-800 border-yellow-200' },
-                    { rank: 2, label: '2등', prize: '5천만', count: stats.rank2, color: 'bg-blue-100 text-blue-800 border-blue-200' },
-                    { rank: 3, label: '3등', prize: '150만', count: stats.rank3, color: 'bg-green-100 text-green-800 border-green-200' },
-                    { rank: 4, label: '4등', prize: '5만', count: stats.rank4, color: 'bg-white border-gray-200' },
-                    { rank: 5, label: '5등', prize: '5천', count: stats.rank5, color: 'bg-white border-gray-200' },
+                    { rank: 1, label: isEn ? '1st PRIZE' : '1등', prize: isEn ? '$1.5M' : '20억', count: stats.rank1, bg: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 text-amber-600' },
+                    { rank: 2, label: isEn ? '2nd PRIZE' : '2등', prize: isEn ? '$38k' : '5천만', count: stats.rank2, bg: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 text-blue-600' },
+                    { rank: 3, label: isEn ? '3rd PRIZE' : '3등', prize: isEn ? '$1.1k' : '150만', count: stats.rank3, bg: 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 text-emerald-600' },
+                    { rank: 4, label: isEn ? '4th PRIZE' : '4등', prize: isEn ? '$38' : '5만', count: stats.rank4, bg: 'bg-muted/50 border-border text-muted-foreground' },
+                    { rank: 5, label: isEn ? '5th PRIZE' : '5등', prize: isEn ? '$4' : '5천', count: stats.rank5, bg: 'bg-muted/50 border-border text-muted-foreground' },
                 ].map(item => (
-                    <div key={item.rank} className={`p-4 rounded-xl border-2 text-center ${item.color}`}>
-                        <div className="font-black text-lg mb-1">{item.label}</div>
-                        <div className="text-xs opacity-70 mb-2">({item.prize})</div>
-                        <div className="text-2xl font-bold">{item.count}회</div>
+                    <div key={item.rank} className={`p-6 rounded-3xl border-4 text-center transition-transform hover:scale-105 ${item.bg}`}>
+                        <div className="text-xs font-black uppercase tracking-widest mb-1">{item.label}</div>
+                        <div className="text-[10px] font-bold opacity-60 mb-4 italic">({item.prize})</div>
+                        <div className="text-3xl font-black italic">{item.count}<span className="text-xs ml-1 font-bold not-italic">{isEn ? 'x' : '회'}</span></div>
                     </div>
                 ))}
             </div>
 
             {/* Reality Check Message */}
             {stats.attempts > 0 && (
-                <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 rounded-xl p-4 text-center">
-                    <div className="flex items-center justify-center gap-2 text-orange-600 font-bold mb-2">
-                        <AlertCircle className="w-5 h-5" />
-                        팩트 체크
+                <div className="bg-amber-500/10 border-4 border-dashed border-amber-500/30 rounded-[2rem] p-8 text-center animate-in fade-in zoom-in-95 duration-700">
+                    <div className="flex items-center justify-center gap-3 text-amber-500 font-black text-xl uppercase italic mb-4">
+                        <AlertCircle className="w-8 h-8" />
+                        {isEn ? 'MISSION REPORT' : '상황 보고서'}
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300">
+                    <p className="text-xl text-foreground font-bold italic leading-relaxed">
                         {stats.rank1 > 0
-                            ? `축하합니다! ${yearsPassed}년 만에 드디어 1등에 당첨되셨군요!`
-                            : `${yearsPassed}년 동안 매주 로또를 샀지만 아직 1등에 당첨되지 못했습니다.`}
+                            ? (isEn ? `INCREDIBLE! It only took ${yearsPassed} years to score the jackpot!` : `축하합니다! ${yearsPassed}년 만에 드디어 1등에 당첨되셨군요!`)
+                            : (isEn ? `After ${yearsPassed} years of trying, the jackpot remains elusive.` : `${yearsPassed}년 동안 매주 로또를 샀지만 아직 1등에 당첨되지 못했습니다.`)}
                     </p>
                 </div>
             )}
         
-            <div className="mt-12">
+            <div className="mt-24">
                 <ToolGuide
-                    title="로또 당첨 시뮬레이터 안내"
-                    intro="매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."
+                    title={isEn ? "Lotto Simulator Mission Briefing" : "로또 시뮬레이터 안내"}
+                    intro={isEn ? "Experience the cold reality of probability. This simulator replicates the exact odds of the South Korean lotto to show you how difficult it is to actually win the jackpot." : "매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요. 본 도구는 실제 확률을 기반으로 설계되었습니다."}
                     steps={toolSteps}
                     tips={toolTips}
                     faqs={toolFaqs}

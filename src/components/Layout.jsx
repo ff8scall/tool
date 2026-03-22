@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Menu, X, ChevronDown, Search, Activity, Sparkles, Code, Calculator, Type, Image, Gamepad2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { Home, Menu, X, ChevronDown, Search, Activity, Sparkles, Code, Calculator, Type, Image, Gamepad2, Globe } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import SearchModal from './SearchModal';
 import RelatedTools from './RelatedTools';
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const { t, lang, switchLanguage, getLocalizedPath } = useLanguage();
 
     // Keyboard shortcut for search (Ctrl+K)
     React.useEffect(() => {
@@ -33,13 +35,19 @@ const Layout = ({ children }) => {
     const categoryOrder = ['unit', 'finance', 'text', 'dev', 'utility', 'health', 'games', 'fun', 'trivia'];
 
     const navCategories = categoryOrder.map(id => {
-        const categoryTools = tools.filter(tool => tool.category === id);
+        let categoryTools = tools.filter(tool => tool.category === id);
+        
+        // Filter out non-translated tools for English language
+        if (lang === 'en') {
+            categoryTools = categoryTools.filter(tool => tool.translated);
+        }
+        
         return {
             id,
-            title: toolCategories[id],
+            title: t(`common.categories.${id}`),
             items: categoryTools.map(tool => ({
                 path: tool.path,
-                label: getShortTitle(tool.title)
+                label: getShortTitle(t(`tools.${tool.id}.title`, { defaultValue: tool.title }))
             }))
         };
     }).filter(category => category.items.length > 0);
@@ -51,7 +59,7 @@ const Layout = ({ children }) => {
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg"
             >
-                본문으로 건너뛰기
+                {t('common.skipToContent')}
             </a>
 
             {/* Header */}
@@ -65,12 +73,12 @@ const Layout = ({ children }) => {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-6">
-                        <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">홈</Link>
+                        <Link to={getLocalizedPath('/')} className="text-sm font-medium hover:text-primary transition-colors">{t('common.home')}</Link>
 
                         {navCategories.map((category) => (
                             <div key={category.title} className="relative group">
                                 <Link
-                                    to={`/category/${category.id}`}
+                                    to={getLocalizedPath(`/category/${category.id}`)}
                                     className="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors py-2"
                                 >
                                     {category.title}
@@ -82,7 +90,7 @@ const Layout = ({ children }) => {
                                         {category.items.map((item) => (
                                             <Link
                                                 key={item.path}
-                                                to={item.path}
+                                                to={getLocalizedPath(item.path)}
                                                 className="block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                                             >
                                                 {item.label}
@@ -97,9 +105,17 @@ const Layout = ({ children }) => {
                     {/* Right Side Actions */}
                     <div className="flex items-center gap-2">
                         <button
+                            onClick={() => switchLanguage(lang === 'ko' ? 'en' : 'ko')}
+                            className="p-2 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1"
+                            aria-label="Change Language"
+                        >
+                            <Globe className="w-5 h-5" />
+                            <span className="text-xs font-bold uppercase">{lang}</span>
+                        </button>
+                        <button
                             onClick={() => setIsSearchOpen(true)}
                             className="p-2 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors"
-                            aria-label="검색"
+                            aria-label={t('common.search')}
                         >
                             <Search className="w-5 h-5" />
                         </button>
@@ -109,7 +125,7 @@ const Layout = ({ children }) => {
                         <button
                             className="md:hidden p-2 rounded-md hover:bg-accent"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            aria-label="메뉴 열기"
+                            aria-label={isMobileMenuOpen ? t('common.menuClose') : t('common.menuOpen')}
                         >
                             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
@@ -122,16 +138,16 @@ const Layout = ({ children }) => {
                 <div className="md:hidden border-b border-border bg-background">
                     <div className="container-custom py-4 space-y-4">
                         <Link
-                            to="/"
+                            to={getLocalizedPath('/')}
                             className="block text-sm font-medium py-2"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
-                            홈
+                            {t('common.home')}
                         </Link>
                         {navCategories.map((category) => (
                             <div key={category.title} className="space-y-2">
                                 <Link
-                                    to={`/category/${category.id}`}
+                                    to={getLocalizedPath(`/category/${category.id}`)}
                                     className="text-xs font-bold text-muted-foreground uppercase tracking-wider hover:text-primary transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
@@ -141,7 +157,7 @@ const Layout = ({ children }) => {
                                     {category.items.map((item) => (
                                         <Link
                                             key={item.path}
-                                            to={item.path}
+                                            to={getLocalizedPath(item.path)}
                                             className="block text-sm py-2 text-muted-foreground hover:text-foreground"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
@@ -158,7 +174,7 @@ const Layout = ({ children }) => {
             {/* Main Content */}
             <main id="main-content" className="flex-1 container-custom py-8">
                 {children}
-                {location.pathname !== '/' && <RelatedTools />}
+                {(location.pathname !== '/' && location.pathname !== `/${lang}` && location.pathname !== `/${lang}/`) && <RelatedTools />}
             </main>
 
             {/* Footer with SEO Sitemap */}
@@ -172,7 +188,7 @@ const Layout = ({ children }) => {
                                     {category.items.slice(0, 10).map((item) => (
                                         <li key={item.path}>
                                             <Link
-                                                to={item.path}
+                                                to={getLocalizedPath(item.path)}
                                                 className="text-xs text-muted-foreground hover:text-primary transition-colors"
                                             >
                                                 {item.label}
@@ -186,14 +202,14 @@ const Layout = ({ children }) => {
 
                     <div className="pt-8 border-t border-border/50 text-center space-y-4">
                         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-                            <Link to="/terms" className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">이용약관</Link>
-                            <Link to="/privacy" className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">개인정보처리방침</Link>
-                            <Link to="/contact" className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">문의하기</Link>
-                            <a href="/sitemap.xml" className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">사이트맵</a>
+                            <Link to={getLocalizedPath('/terms')} className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">{t('common.terms')}</Link>
+                            <Link to={getLocalizedPath('/privacy')} className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">{t('common.privacy')}</Link>
+                            <Link to={getLocalizedPath('/contact')} className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">{t('common.contact')}</Link>
+                            <a href="/sitemap.xml" className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline">{t('common.sitemap')}</a>
                         </div>
                         <div className="space-y-1">
-                            <p className="text-sm font-bold text-foreground opacity-80">Tool Hive (툴 하이브)</p>
-                            <p className="text-xs text-muted-foreground italic">"당신의 일상을 더 편리하게 만드는 88가지 이상의 무료 온라인 도구 모음"</p>
+                            <p className="text-sm font-bold text-foreground opacity-80">{t('home.footerTitle')}</p>
+                            <p className="text-xs text-muted-foreground italic">{t('common.footerDescription')}</p>
                         </div>
                         <p className="text-xs text-muted-foreground/60">© {new Date().getFullYear()} Tool Hive. All rights reserved.</p>
                     </div>
