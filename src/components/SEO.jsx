@@ -21,10 +21,13 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
     const defaultImage = `${siteUrl}/og-image.png`;
     const ogImage = image || defaultImage;
 
-    // Current page URL
-    const currentUrl = `${siteUrl}${location.pathname}${location.hash}`;
-    const cleanPath = location.pathname.replace(/^\/(?:ko|en)(?=\/|$)/, '');
-    const koUrl = `${siteUrl}${cleanPath}`.replace(/\/$/, '') || `${siteUrl}/`;
+    // Current page URL (normalized - no trailing slash, no hash for SEO)
+    const normalizedPath = location.pathname.replace(/\/$/, '') || '';
+    const currentUrl = `${siteUrl}${normalizedPath}`;
+    
+    // Internationalization URLs
+    const cleanPath = normalizedPath.replace(/^\/(?:ko|en)(?=\/|$)/, '') || '';
+    const koUrl = `${siteUrl}${cleanPath}` || siteUrl;
     const enUrl = `${siteUrl}/en${cleanPath}`.replace(/\/$/, '') || `${siteUrl}/en`;
 
     // WebSite Schema
