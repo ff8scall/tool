@@ -3,8 +3,8 @@ User-agent: *
 Allow: /
 
 # Sitemap locations
-Sitemap: https://math.lego-sia.com/sitemap.xml
-Sitemap: https://math.lego-sia.com/rss.xml
+Sitemap: https://tool.lego-sia.com/sitemap.xml
+Sitemap: https://tool.lego-sia.com/rss.xml
 
 # Allow all major search engine bots
 User-agent: Googlebot
