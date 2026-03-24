@@ -50,279 +50,279 @@
     },
     "temperature-converter": {
       "title": "Temperature Converter",
-      "description": "Convert Celsius, Fahrenheit, and Kelvin."
+      "description": "Instantly convert between Celsius (°C), Fahrenheit (°F), and Kelvin (K). A precise online tool perfect for cooking, science experiments, and checking international weather reports."
     },
     "area-converter": {
       "title": "Area Converter",
-      "description": "Convert square meters, acres, hectares, and pyeong."
+      "description": "Easily convert area units including square meters (㎡), acres, hectares, and pyeong. A precise, free online tool for real estate transactions and land measurements."
     },
     "volume-converter": {
       "title": "Volume Converter",
-      "description": "Convert liters, gallons, and cubic meters."
+      "description": "Convert all volume units instantly: liters (L), gallons (gal), cubic meters (㎥), and ounces (oz). A precise, free online tool for cooking recipes and liquid capacity calculations."
     },
     "speed-converter": {
       "title": "Speed Converter",
-      "description": "Convert km/h, mph, and m/s."
+      "description": "Instantly convert speed units: km/h, mph, m/s, knots, and Mach. A precise, free online tool for international travel, aviation, maritime analysis, and physics studies."
     },
     "loan": {
       "title": "Loan Calculator",
-      "description": "Calculate equal principal and interest loan payments."
+      "description": "Accurately calculate your monthly principle and interest payments along with total interest costs by entering the loan amount, rate, and term."
     },
     "salary": {
-      "title": "Salary Net Pay",
-      "description": "Calculate net salary after taxes and insurance."
+      "title": "Salary Calculator",
+      "description": "Easily estimate your actual take-home pay by applying the latest 2024-2025 tax rates and social insurance contributions for 4 major insurances."
     },
     "severance": {
-      "title": "Severance Calculator",
-      "description": "Calculate your estimated severance pay."
+      "title": "Severance Pay Calculator",
+      "description": "Calculate your expected severance pay based on your start date, resignation date, and recent 3 months of salary. Compliant with legal calculation methods."
     },
     "minimum-wage": {
       "title": "Minimum Wage Calculator",
-      "description": "Check and calculate 2024/2025 minimum wage."
+      "description": "Check and calculate your actual hourly and monthly wage, including weekly holiday pay, based on the 2024 and 2025 minimum wage standards."
     },
     "compound-interest": {
-      "title": "Compound Interest",
-      "description": "Calculate compound interest and investment returns."
+      "title": "Compound Interest Calculator",
+      "description": "Simulate the amazing power of compound interest and your final investment returns by setting the principal, monthly contribution, rate, and period."
     },
     "percent-calculator": {
       "title": "Percentage Calculator",
-      "description": "Calculate ratios, increase/decrease, and discounts."
+      "description": "Solve everyday percentage problems effortlessly, including finding a percentage of a value, calculating increases/decreases, and discount savings."
     },
     "discount-calculator": {
       "title": "Discount Calculator",
-      "description": "Calculate final prices after applying discount rates."
+      "description": "Input the original price and discount rate to find the final purchase price and amount saved. Supports 1+1 offers and additional discount stacks."
     },
     "work-hours": {
       "title": "Work Hours Calculator",
-      "description": "Calculate working hours and wages."
+      "description": "Easily record and check your daily total working hours and weekly accumulated time by entering your clock-in, clock-out, and break times."
     },
     "age-calc": {
       "title": "Age Calculator",
-      "description": "Calculate chronological and international age."
+      "description": "Simply enter your date of birth to instantly calculate your current exact age, international age, and the number of days remaining until your next birthday."
     },
     "date": {
       "title": "Date Calculator",
-      "description": "Calculate date differences and D-Days."
+      "description": "Calculate the day count between two dates or find the specific day 100/200 days from now. Manage your D-days and schedules all in one place."
     },
     "lunch-recommender": {
-      "title": "Lunch Recommender",
-      "description": "Can't decide? Let us pick a random lunch menu for you!"
+      "title": "Lunch Menu Recommender",
+      "description": "Wondering what to eat for lunch today? Get a random menu recommendation from various categories like Korean, Chinese, and Japanese to suit your taste."
     },
     "word-count": {
       "title": "Word Counter",
-      "description": "Count characters, words, and sentences."
+      "description": "Instantly analyze your text to count characters (with/without spaces), words, and sentences. Perfect for checking essay lengths and social media limits."
     },
     "unicode": {
       "title": "Unicode Converter",
-      "description": "Convert between text and unicode format."
+      "description": "Convert plain text into Unicode format or transform Unicode escape sequences back into readable text for programming and cross-platform compatibility."
     },
     "string-converter": {
-      "title": "String Format Converter",
-      "description": "Convert text case format like camelCase, PascalCase."
+      "title": "String Converter",
+      "description": "Instantly transform strings between various naming conventions including Upper/Lower case, camelCase, PascalCase, and more for coding efficiency."
     },
     "base64": {
-      "title": "Base64 Encode/Decode",
-      "description": "Base64 encoder and decoder tool."
+      "title": "Base64 Tool",
+      "description": "An online tool to safely encode text data into Base64 format or decode base64 strings back into their original plain text form for data transmission."
     },
     "html-encoder": {
-      "title": "HTML Entity Encoder",
-      "description": "Encode and decode HTML entities securely."
+      "title": "HTML Encoder",
+      "description": "Escape and encode HTML special characters or tags for security, or decode them to their original state to prevent web vulnerabilities and simplify coding."
     },
     "morse-code": {
       "title": "Morse Code Converter",
-      "description": "Translate text to Morse code and vice versa."
+      "description": "A fun tool to translate Korean, English, and numbers into international standard Morse code or translate Morse signals back into readable text."
     },
     "base-converter": {
-      "title": "Numeric Base Converter",
-      "description": "Convert binary, octal, decimal, and hexadecimals."
+      "title": "Base Converter",
+      "description": "Perform instant conversions between binary, octal, decimal, and hexadecimal bases. Provides precise results and formatting for each number system."
     },
     "json-formatter": {
       "title": "JSON Formatter",
-      "description": "Format and validate JSON data perfectly."
+      "description": "Format complex JSON data to be human-readable and validate for syntax errors. Visualize your data structure with an easy-to-read tree view."
     },
     "markdown-editor": {
       "title": "Markdown Editor",
-      "description": "Real-time preview markdown editor."
+      "description": "Write Markdown code directly in your browser and see the rendered results in real-time. A simple and efficient tool for documentation and notes."
     },
     "html-view": {
       "title": "HTML Formatter",
-      "description": "Format and preview HTML code cleanly."
+      "description": "Beautify and format your HTML code or check the real-time rendering of how your code appears in a web browser for web development and learning."
     },
     "diff": {
-      "title": "Code Diff Checker",
-      "description": "Compare differences between two text or code files."
+      "title": "Diff Checker",
+      "description": "Compare two pieces of code or text to visually identify added, deleted, or modified lines. Perfect for tracking changes and debugging."
     },
     "web-editor": {
       "title": "Web Editor",
-      "description": "Real-time HTML/CSS/JS editor and previewer."
+      "description": "Edit HTML, CSS, and JavaScript code in real-time and instantly see the output. Great for learning web design and frontend development concepts."
     },
     "hash-gen": {
       "title": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256 hashes."
+      "description": "Generate secure hash values from input text using various cryptographic algorithms like MD5, SHA-1, and SHA-256 instantly for data verification."
     },
     "uuid-gen": {
       "title": "UUID Generator",
-      "description": "Generate secure UUID v4 tokens."
+      "description": "Generate unique identifiers (UUID v4) for software development. Get multiple unique keys instantly for database entries and API development."
     },
     "url-encoder": {
       "title": "URL Encoder/Decoder",
-      "description": "URL encoding and decoding tool."
+      "description": "Safely encode special characters and non-ASCII text in URLs or decode encoded addresses back into readable, original URLs for web navigation."
     },
     "jwt-decoder": {
       "title": "JWT Decoder",
-      "description": "Decode and inspect JSON Web Tokens."
+      "description": "Decode JSON Web Token (JWT) headers and payloads to easily check and debug claims and signatures in a secure and convenient environment."
     },
     "regex-tester": {
       "title": "Regex Tester",
-      "description": "Test and validate regular expressions."
+      "description": "Test your regular expressions against target text in real-time and view group capture results to ensure your patterns match accurately."
     },
     "ascii-art": {
-      "title": "ASCII Art Generator",
-      "description": "Convert text to ASCII art beautifully."
+      "title": "ASCII Art",
+      "description": "Convert plain text into vibrant ASCII Art characters to create unique visual elements for communities, forums, or code comments."
     },
     "ascii-table": {
-      "title": "ASCII Table Reference",
-      "description": "Comprehensive ASCII code table reference."
+      "title": "ASCII Table",
+      "description": "A reference tool providing the ASCII character set, distinguishing between printable and control characters with their corresponding index numbers."
     },
     "special-char": {
       "title": "Special Characters",
-      "description": "Collection of frequently used special symbols."
+      "description": "Access a collection of frequently used special symbols, emojis, and arrows that are difficult to type on a keyboard. Copy and paste them anywhere."
     },
     "cron-generator": {
       "title": "CRON Generator",
-      "description": "Generate CRON scheduling expressions."
+      "description": "Generate CRON expressions for Linux or Unix scheduling with just a few clicks. Easily verify and understand the execution schedule of your tasks."
     },
     "csv-json": {
-      "title": "CSV to JSON Converter",
-      "description": "Convert between CSV and JSON data formats."
+      "title": "CSV ↔ JSON Converter",
+      "description": "Convert CSV data from spreadsheets or databases into JSON format, and vice versa, to simplify data processing and integration tasks."
     },
     "fraction-calculator": {
       "title": "Fraction Calculator",
-      "description": "Perform operations on fractions."
+      "description": "Perform arithmetic operations including addition, subtraction, multiplication, and division with fractions. Get precise results in fractional and decimal forms."
     },
     "encryption-tool": {
-      "title": "AES Encryption Tool",
-      "description": "Encrypt text utilizing AES algorithms securely."
+      "title": "Encryption/Decryption",
+      "description": "Securely lock and restore important text data using powerful symmetric encryption methods like the AES algorithm with your own password."
     },
     "qr-gen": {
       "title": "QR Code Generator",
-      "description": "Convert URL or text to QR code formats."
+      "description": "Instantly convert any URL or text into a high-quality QR code and download it. A convenient tool for marketing and information sharing."
     },
     "barcode-gen": {
       "title": "Barcode Generator",
-      "description": "Generate standard barcodes from numbers."
+      "description": "Quickly generate barcoded images in various formats by entering numbers. Perfect for inventory management or retail tasks, for free."
     },
     "password-gen": {
       "title": "Password Generator",
-      "description": "Generate secure, random passwords instantly."
+      "description": "Instantly create strong, uncrackable random passwords by combining uppercase, lowercase, numbers, and symbols for your security."
     },
     "color-picker": {
-      "title": "Color Picker & Palette",
-      "description": "Pick colors and convert HEX/RGB codes."
+      "title": "Color Picker",
+      "description": "Select the perfect color codes for your web design and instantly get HEX, RGB, and HSL formats. Useful for creating consistent color palettes."
     },
     "image-base64": {
       "title": "Image to Base64",
-      "description": "Encode images to Base64 data natively."
+      "description": "A developer tool to encode image files into Base64 strings, allowing you to embed images directly into HTML or CSS without external files."
     },
     "ip-address": {
-      "title": "My IP Address",
-      "description": "Check your public IP and location information."
+      "title": "IP Address Check",
+      "description": "Instantly check your current public IP address and approximate network location. Useful for troubleshooting your internet connection status."
     },
     "timer": {
-      "title": "Timer & Stopwatch",
-      "description": "Online timer, stopwatch, and alarm tool."
+      "title": "Timer/Stopwatch",
+      "description": "An online timer and stopwatch for precise time measurement during work, exercise, or cooking. Includes lap time tracking functionality."
     },
     "pomodoro-timer": {
       "title": "Pomodoro Timer",
-      "description": "25-minute focus, 5-minute break timer."
+      "description": "Maximize your productivity and focus by using the Pomodoro technique - 25 minutes of deep work followed by a 5-minute rejuvenating break."
     },
     "checklist": {
-      "title": "Checklist / Todo",
-      "description": "Simple task checklist manager."
+      "title": "Checklist",
+      "description": "Easily record and manage your daily to-do lists or shopping items. Your list is saved locally in your browser even after you close the tab."
     },
     "flashlight": {
       "title": "Flashlight",
-      "description": "Use your screen display as a flashlight."
+      "description": "When you need light in the dark, use your mobile or laptop screen as a flashlight by turning it to maximum white brightness."
     },
     "image-resize": {
-      "title": "Image Resizer",
-      "description": "Resize and compress images quickly."
+      "title": "Image Resize",
+      "description": "Adjust the dimensions of your images to specific pixels and compress the file size efficiently while maintaining quality for web or social use."
     },
     "youtube-thumbnail": {
-      "title": "YouTube Thumbnail Downloader",
-      "description": "Extract and download thumbnails from YouTube videos."
+      "title": "YouTube Thumbnail",
+      "description": "Enter a YouTube video URL to instantly extract and download high-quality thumbnail images to your computer or mobile device."
     },
     "mandalart": {
       "title": "Mandalart Planner",
-      "description": "Visual planner mimicking Shohei Ohtani's achievement method."
+      "description": "Systematically plan your core goals and 64 detailed sub-tasks using the Mandalart technique, famously used by Ohtani for peak performance."
     },
     "color-extractor": {
       "title": "Image Color Extractor",
-      "description": "Extract major color palettes from images."
+      "description": "Upload any photo or image file to instantly extract a professional color palette and the major HEX codes used in the image."
     },
     "world-clock": {
       "title": "World Clock",
-      "description": "Check current time across major cities globally."
+      "description": "Check and compare the current time and time differences across major global cities like New York, London, Paris, and Tokyo in real-time."
     },
     "bmi": {
       "title": "BMI Calculator",
-      "description": "Measure obesity and body mass index."
+      "description": "Enter your height and weight to calculate your Body Mass Index (BMI). Get instant health status guidance and obesity classification."
     },
     "bmr": {
       "title": "BMR Calculator",
-      "description": "Calculate your Basal Metabolic Rate and daily recommended calories."
+      "description": "Calculate your Basal Metabolic Rate (BMR) based on age, gender, and activity level to determine your daily calorie needs for effective dieting."
     },
     "biorhythm": {
-      "title": "Biorhythm Tracker",
-      "description": "Check your physical, emotional, and intellectual cycles for today."
+      "title": "Biorhythm",
+      "description": "Visualize your physical, emotional, and intellectual cycles on a graph based on your birth date to check your overall condition for today."
     },
     "life-expectancy": {
       "title": "Life Expectancy Test",
-      "description": "Find out your estimated life expectancy based on lifestyle habits."
+      "description": "Take a fun survey about your habits, diet, and exercise to see your estimated life expectancy and get tips for a healthier lifestyle."
     },
     "reaction-test": {
       "title": "Reaction Time Test",
-      "description": "What's your reflexes in ms? Test your reaction speed."
+      "description": "How fast can you react? Precisely measure your reaction speed in milliseconds the moment the screen color changes and record your score."
     },
     "typing-test": {
       "title": "Typing Speed Test",
-      "description": "Measure your WPM and accuracy for English and Korean typing."
+      "description": "Improve your typing speed (WPM) and accuracy by practicing with various sentences in English and Korean with real-time feedback."
     },
     "1to50": {
       "title": "1 to 50",
-      "description": "Touch from 1 to 50 as fast as you can!"
+      "description": "A brain training game where you touch numbers from 1 to 50 in order as fast as possible. Test your reflexes and concentration skills."
     },
     "cps-test": {
       "title": "CPS Test",
-      "description": "Click Per Second: Measure your mouse clicking speed."
+      "description": "Measure how many times you can click your mouse within a time limit to check your Clicks Per Second (CPS) and click speed rank."
     },
     "aim-trainer": {
       "title": "Aim Trainer",
-      "description": "Train your mouse accuracy and reaction time."
+      "description": "Improve your mouse accuracy and reaction speed by clicking on random targets. A perfect training tool for FPS gamers and competitive play."
     },
     "number-memory": {
       "title": "Number Memory",
-      "description": "Instant memory test (Chimpanzee memory benchmark)."
+      "description": "Challenge your short-term memory by remembering increasingly longer sequences of numbers. See how far you can go in this memory test."
     },
     "number-baseball": {
       "title": "Number Baseball",
-      "description": "A logic game of guessing numbers and positions."
+      "description": "A classic logic game where you deduce a 3-4 digit number using hints of strikes and balls. Test your deductive reasoning and strategy."
     },
     "minesweeper": {
       "title": "Minesweeper",
-      "description": "Classic puzzle to uncover all cells without detonating mines."
+      "description": "A logic-based puzzle game where you must clear all cells without detonating hidden mines by using numbered clues to reveal safe areas."
     },
     "roulette": {
-      "title": "Roulette Spinner",
-      "description": "Random drawing tool for decision making."
+      "title": "Random Roulette",
+      "description": "Fairly decide anything from lunch menus to game penalties by entering your own items into a vibrant, spinning random roulette wheel."
     },
     "suika-game": {
-      "title": "Fruit Merge Game",
-      "description": "Merge fruits to make the largest watermelon!"
+      "title": "Suika Game",
+      "description": "An addictive merge puzzle game where you combine smaller fruits to create larger ones, eventually aiming to complete a giant watermelon."
     },
     "ladder-game": {
-      "title": "Ghost Leg (Ladder)",
-      "description": "Decision making ladder game for bets."
+      "title": "Ladder Game",
+      "description": "A thrilling random draw tool where participants follow winding paths to discover their results. Perfect for betting and quick decisions."
     },
     "tanghulu-maker": {
       "title": "Tanghulu Maker",
@@ -386,187 +386,187 @@
     },
     "lotto": {
       "title": "Lotto Number Generator",
-      "description": "Extract today's lucky numbers with a sophisticated algorithm."
+      "description": "Extract your lucky numbers for today with our sophisticated random number generation algorithm. Combine them based on past history for your unique combination."
     },
     "lotto-sim": {
       "title": "Lotto Simulator",
-      "description": "How much would you win if you kept buying lotto? Check results!"
+      "description": "Check your virtual return on investment and winning odds if you were to buy lottery tickets continuously. Experience the thrill of the draw with this simulation."
     },
     "tarot": {
       "title": "Daily Tarot Reading",
-      "description": "Predict your destiny with 22 Major Arcana tarot cards."
+      "description": "Have your fortune, love life, and career outlook read with the 22 Major Arcana tarot cards. Mysterious card interpretations guide your way through the day."
     },
     "blood-type": {
       "title": "Blood Type Personality",
-      "description": "Personality analysis based on your blood type."
+      "description": "Check the characteristics, personality, and dating styles of A, B, O, and AB blood types. Discover blood type compatibility with friends and lovers for fun."
     },
     "mbti": {
-      "title": "MBTI Test",
-      "description": "Simple MBTI personality type test."
+      "title": "MBTI Personality Test",
+      "description": "Discover your personality type through our deeply researched questionnaire. Get insights into your 16-personality profile and tips for better relationships."
     },
     "saju": {
-      "title": "Four Pillars of Destiny",
-      "description": "Check your fortune based on your date and time of birth."
+      "title": "Four Pillars (Saju)",
+      "description": "Check your innate destiny and Saju (Four Pillars of Destiny) based on your birth date and time. Get detailed interpretations rooted in traditional studies."
     },
     "zodiac-fortune": {
-      "title": "Daily Zodiac Fortune",
-      "description": "Today's fortune for all 12 zodiac animals."
+      "title": "Zodiac Fortune",
+      "description": "Check your wealth, love, and health fortunes based on your Chinese Zodiac sign for today. Plan your day with traditional 12-animal zodiac insights."
     },
     "horoscope": {
       "title": "Daily Horoscope",
-      "description": "Today's fortune for all 12 astrological signs."
+      "description": "Check your daily horoscope and find out your lucky color and number. Receive messages from the stars every morning to guide your cosmological energy."
     },
     "dream-interpretation": {
       "title": "Dream Interpretation",
-      "description": "Search for meanings behind your dreams."
+      "description": "Wondering what your dream last night meant? Search by keywords to get clear interpretations of hidden symbols and your psychological state."
     },
     "birth-gen": {
-      "title": "Birthstone & Birthflower",
-      "description": "Find the birthstone and flower that match your birthday."
+      "title": "Birthstone/Birth Flower",
+      "description": "Discover the birthstone and flower that match your birthday, and the meanings and symbolism behind them. Make your special day even more meaningful."
     },
     "name-analysis": {
       "title": "Name Analysis",
-      "description": "Analyze the meaning and fortune hidden in your name."
+      "description": "Analyze the meaning and energy of your name based on its linguistic and traditional roots. See what kind of fortune your name brings to you."
     },
     "personal-color": {
       "title": "Color Psychology Test",
-      "description": "Analyze the colors that suit you and their meanings."
+      "description": "Discover the best colors that match your skin tone and personality. Analyze your personal color palette and its psychological meanings."
     },
     "past-life": {
       "title": "Past Life Finder",
-      "description": "What kind of person were you in your past life?"
+      "description": "Who were you in a previous life? Take this fun, imaginative journey through time to discover your past life's identity and personality."
     },
     "pet-mbti": {
       "title": "Pet MBTI",
-      "description": "Analyze your dog or cat's personality using MBTI."
+      "description": "Analyze your beloved dog or cat's unique personality using a pet-specialized MBTI framework. Better understand your furry companion's behavior."
     },
     "mental-age": {
       "title": "Mental Age Test",
-      "description": "Measure your mental age based on your thoughts and attitudes."
+      "description": "Measure your true mental age based on your attitudes, thoughts, and reactions to daily scenarios. Compare your psychological maturity with your real age."
     },
     "brain-structure": {
       "title": "Brain Structure Analysis",
-      "description": "What kind of thoughts are filling your head right now?"
+      "description": "What's filling your mind right now? Visualize your current interests, worries, and thoughts with our fun brain structure analysis tool."
     },
     "joseon-job": {
       "title": "Joseon Dynasty Job Test",
-      "description": "What would your job be if you lived in the Joseon era?"
+      "description": "If you were born in the Joseon Dynasty, what would your profession be? Find your historical career based on your personality and traits."
     },
     "if-i-am-god": {
       "title": "If I Were God?",
-      "description": "What would you look like if you were the creator of the world?"
+      "description": "What kind of world would you create if you were a god? Explore your divine imagination and deep psychological values through this creative test."
     },
     "life-bgm": {
       "title": "BGM of My Life",
-      "description": "What background music suits your life at this very moment?"
+      "description": "What background music best suits your current life situation? Discover your personal soundtrack that matches your vibe and energy right now."
     },
     "first-impression-color": {
       "title": "First Impression Color",
-      "description": "What color is your first impression to others?"
+      "description": "What color do people first sense when they meet you? Discover the vibrant energy and aura you project to others through this color test."
     },
     "animal-face": {
       "title": "Animal Face Test",
-      "description": "Which animal do you look like the most?"
+      "description": "Which animal do you resemble the most based on your facial features? Find your animal-like charm, whether it is a puppy, cat, or a fox."
     },
     "personal-scent": {
       "title": "Personal Scent Finder",
-      "description": "Find the fragrance that matches your vibe and personality."
+      "description": "Find the signature fragrance that matches your unique vibe and personality. Discover the scent that represents your inner self and character."
     },
     "ideal-type": {
       "title": "Ideal Type World Cup",
-      "description": "Analyze your preferred style through a tournament."
+      "description": "Analyze your preferred romantic style through an ideal type tournament. Find out what qualities you truly value in a partner."
     },
     "couple-compatibility": {
       "title": "Couple Compatibility",
-      "description": "What is our dating style and harmony level?"
+      "description": "How well do you and your partner match? Analyze your dating style and harmony level to see how to build a better relationship."
     },
     "hidden-talent": {
       "title": "My Hidden Talent",
-      "description": "Check the special ability you haven't discovered yet."
+      "description": "Discover the special ability or potential you haven't realized yet. Check your dormant talents and find new ways to express yourself."
     },
     "balance-game": {
       "title": "Balance Game",
-      "description": "A thrilling game of choosing between two tough options."
+      "description": "A thrilling game where you must choose between two extremely difficult options. Test your values and have fun with friends and family."
     },
     "fortune-cookie": {
       "title": "Fortune Cookie",
-      "description": "A short, powerful message for you today."
+      "description": "Cracking open a virtual cookie! Receive a short but powerful message or piece of advice to guide your day and shift your perspective."
     },
     "color-test": {
       "title": "Color Sensitivity Test",
-      "description": "Can you distinguish subtle color differences?"
+      "description": "Test your vision and see if you can distinguish subtle color differences. Measure your visual sensitivity and color perception level."
     },
     "hearing-test": {
       "title": "Hearing Age Test",
-      "description": "Measure your audio frequency range to find your hearing age."
+      "description": "Measure your audible frequency range to determine your current hearing age. A simple tool to check your ear health and hearing sensitivity."
     },
     "smile-dating-test": {
       "title": "Smile Dating Test",
-      "description": "What kind of smile is your dating style?"
+      "description": "What kind of 'smile' perfectly represents your unique dating style? Discover your romantic personality and values through this fun test."
     },
     "dating-test": {
       "title": "Dating Personality Quiz",
-      "description": "Analyze your dating style and values."
+      "description": "Deeply analyze your romantic tendencies, values, and relationship style. Understand yourself better to build more meaningful connections."
     },
     "stress-test": {
       "title": "Stress Level Test",
-      "description": "How stressed is your heart right now?"
+      "description": "How stressed is your mind and body right now? Answer a few questions to measure your stress index and get tips for mental relaxation."
     },
     "brain-type": {
       "title": "Left/Right Brain Test",
-      "description": "Find out which side of your brain you use more."
+      "description": "Are you more left-brained or right-brained? Discover which hemisphere of your brain is more dominant and how it affects your thinking style."
     },
     "eq-test": {
       "title": "Emotional Quotient (EQ) Test",
-      "description": "Analyze your empathy and emotional intelligence."
+      "description": "Analyze your emotional intelligence (EQ), including empathy, self-awareness, and social skills. Understand your emotional strengths and weaknesses."
     },
     "smartphone-addiction": {
       "title": "Smartphone Addiction Test",
-      "description": "Measure your level of smartphone dependency."
+      "description": "Measure your level of smartphone dependency and digital habits. Get an objective view of your digital usage and tips for a healthier lifestyle."
     },
     "kkondae-test": {
-      "title": "Kkondae Test (Precise)",
-      "description": "Find out your stubbornness level (Anonymous results)."
+      "title": "Kkondae Test (Stubbornness)",
+      "description": "Precisely measure your 'Kkondae' index based on your daily attitudes and speech. A fun, anonymous test to check your communication style."
     },
     "hogu-test": {
-      "title": "Pushover Level Test",
-      "description": "Am I being a pushover? Check your 'Hogu' index!"
+      "title": "Hogu (Pushover) Test",
+      "description": "Do you find it hard to say no? Check if your kind nature is being taken advantage of through our fun pushover index questions."
     },
     "debate-test": {
       "title": "Debate Skills Test",
-      "description": "Measure your logic and elocution abilities."
+      "description": "Test your logic, elocution, and reasoning abilities. Measure your debate skills and see how well you can express your opinions."
     },
     "idol-test": {
       "title": "Idol Position Finder",
-      "description": "What position would you have in an idol group?"
+      "description": "What position would you have if you debuted in an idol group? Find your perfect role, from lead vocal to main dancer, based on your traits."
     },
     "resilience-test": {
       "title": "Resilience Test",
-      "description": "Check your inner energy to overcome difficulties."
+      "description": "Measure your inner strength to overcome difficulties and bounce back from stress. Check your psychological resilience and emotional durability."
     },
     "initial-sound-quiz": {
       "title": "Initial Sound Quiz",
-      "description": "Guess the words from the given consonant initials."
+      "description": "Guess the words corresponding to the given initial consonants within the time limit. A fun quiz game to boost your vocabulary and brain agility."
     },
     "food-quiz": {
-      "title": "Food & Restaurant Quiz",
-      "description": "How much do you know about world cuisines?"
+      "title": "Food/Restaurant Quiz",
+      "description": "Guess the names of various global dishes based on images or hints. A great chance to test if you are a true foodie or gourmet expert."
     },
     "association-quiz": {
       "title": "Association Quiz",
-      "description": "Guess the answer by associating given keywords."
+      "description": "A high-level deduction quiz where you guess the common answer connecting several given words. Unleash your imagination and logic."
     },
     "spelling-quiz": {
       "title": "Spelling Quiz",
-      "description": "How well do you know common spelling mistakes?"
+      "description": "Test your knowledge of commonly misspelled words and grammar through our fun quiz. Improve your linguistic precision and score higher."
     },
     "vocabulary-test": {
-      "title": "Vocabulary Level Test",
-      "description": "Check your vocabulary level by rating."
+      "title": "Vocabulary Test",
+      "description": "Test your vocabulary level from common words to advanced terminology. Check your rank and see how your word power compares to others."
     },
     "simple-math": {
       "title": "Mental Arithmetic Quiz",
-      "description": "Solve addition, subtraction, and multiplication fast."
+      "description": "Activate your brain with fast-paced mental arithmetic. Solve addition, subtraction, and multiplication problems as quickly as possible."
     }
   },
   "home": {
@@ -591,40 +591,40 @@
   },
   "categoryData": {
     "unit": {
-      "title": "Unit Converters Collection",
-      "description": "Convert all units instantly in one place including length, weight, currency, temperature, and area. We provide real-time currency info and accurate conversion formulas."
+      "title": "Unit Converter Collection",
+      "description": "Convert all units in one place, including length, weight, currency, temperature, and area. We provide real-time exchange rates and accurate formulas."
     },
     "finance": {
-      "title": "Life & Finance Calculators",
-      "description": "Try essential financial calculators for loan interest, net salary, severance pay, and minimum wage. Reflects accurate legal formulas and latest data."
+      "title": "Finance & Life Calculator Collection",
+      "description": "Use essential financial calculators for loan interest, salary net pay, severance, and minimum wage. Reflecting legal formulas and latest data."
     },
     "text": {
       "title": "Text Conversion & Analysis Tools",
-      "description": "Useful tools for text editing like word counters, case converters, and Unicode converters. Simply copy and paste to use."
+      "description": "Useful tools for text editing like word counting, case conversion, and Unicode transformation. Simply copy and paste to process text effortlessly."
     },
     "dev": {
-      "title": "Essential Online Tools for Developers",
-      "description": "Maximize productivity with professional tools like JSON formatters, Base64 encoders, hash generators, and URL encoders directly in your browser."
+      "title": "Essential Developer Online Tools",
+      "description": "Boost productivity with JSON formatters, Base64 encoders, hash generators, and URL encoders, all in your browser without any installation."
     },
     "utility": {
       "title": "Convenient Life Utility Tools",
-      "description": "A collection of various utility tools that solve daily hassles, such as QR code generators, barcode generation, password creation, and world clocks."
+      "description": "A collection of various utility tools to solve daily hassles, such as QR code generation, barcode creation, password generators, and world clocks."
     },
     "health": {
       "title": "Health & Body Index Calculators",
-      "description": "Check your health status with professional body index calculators like BMI, BMR, and biorhythms."
+      "description": "Professional health index calculators to check your status, including BMI (Obesity), BMR (Basal Metabolic Rate), and Biorhythms."
     },
     "games": {
-      "title": "Mini Games Collection",
-      "description": "Play addictive mini-games like Suika Game, 2048, Sudoku, and Snake instantly without any installation."
+      "title": "Mini Game Collection",
+      "description": "Play addictive mini-games like Suika Game, 2048, Sudoku, and Snake directly in your browser without any installation required."
     },
     "fun": {
-      "title": "Fun Fortune & Psychology Tests",
-      "description": "Full of fun content to see your luck and psychology, from MBTI tests and daily horoscopes to tarot cards!"
+      "title": "Fortune Telling & Psychology Tests",
+      "description": "From traditional Saju and MBTI tests to daily horoscopes and Tarot cards! Enjoy a variety of content to explore your fortune and psychology."
     },
     "trivia": {
-      "title": "Simple Trivia & Quizzes",
-      "description": "A collection of quizzes like initial sound games and general knowledge questions to build knowledge while having fun."
+      "title": "Trivia & Common Sense Quizzes",
+      "description": "A collection of quizzes to build your knowledge while having fun, including initial sound quizzes and general common sense questions."
     }
   },
   "error": {
