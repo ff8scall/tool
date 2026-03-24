@@ -50,9 +50,9 @@ const WorkHoursCalculator = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 space-y-12">
             <SEO
-                title={isEn ? "Work Hours & Salary Calculator - Daily/Monthly Income" : "근무 시간 계산기 | 시급 계산, 일급 월급 자동 계산"}
-                description={isEn ? "Calculate your actual working hours and estimated salary based on check-in/out times, break time, and hourly rate. 2025 Updated." : "출근·퇴근 시간과 휴게 시간을 입력하면 실제 근무 시간과 일급·월급을 자동 계산합니다."}
-                keywords={isEn ? "work hours calculator, wage calculator, salary estimator, hourly to monthly, korea labor law, shift calculator" : "근무시간계산기, 시급계산기, 일급계산, 월급계산, 근로시간계산, 알바시급계산"}
+                title={t('tools.work-hours.title')}
+                description={t('tools.work-hours.description')}
+                keywords={isEn ? "work hours calculator, timesheet calculator, break time calculator, payroll helper, daily work log" : "근무시간계산기, 알바시간계산, 월급날짜계산, 출퇴근시간기록, 주간근무시간"}
                 faqs={faqs}
             />
 

@@ -43,10 +43,6 @@ const WebEditor = () => {
         return () => clearTimeout(timer);
     }, [html, css, js]);
 
-    const titleText = isEn ? t('tools.web-editor.title') : "실시간 웹 에디터 | HTML, CSS, JS 온라인 코딩 도구";
-    const descText = isEn 
-        ? t('tools.web-editor.description')
-        : "HTML, CSS, JavaScript를 한 공간에서 작성하고 실시간 미리보기로 확인하세요. 프론트엔드 프로토타이핑 및 코드 테스트용 무료 웹 에디터입니다.";
     const keywordsText = isEn ? "web editor online, html css js preview, live code editor, frontend sandbox, online programming tool" : "웹에디터, HTML에디터, 코드에디터, 온라인코딩, 프론트엔드테스트, 개발자도구";
 
     const toolFaqs = isEn ? [
@@ -88,8 +84,8 @@ const WebEditor = () => {
     return (
         <div className="max-w-7xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.web-editor.title')}
+                description={t('tools.web-editor.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={toolFaqs}

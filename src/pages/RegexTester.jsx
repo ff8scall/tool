@@ -78,37 +78,12 @@ const RegexTester = () => {
         setTestString('');
     };
 
-    const titleText = isEn ? t('tools.regex.title') : "실시간 정규표현식 테스터 | Regex Tester 온라인 도구";
-    const descText = isEn 
-        ? t('tools.regex.description')
-        : "정규표현식(Regular Expression)을 실시간으로 테스트하고 검증하세요. 자바스크립트 엔진 기반의 하이라이트와 치트시트를 제공하는 무료 개발자 도구입니다.";
+    const titleText = t('tools.regex-tester.title');
+    const descText = t('tools.regex-tester.description');
     const keywordsText = isEn ? "regex tester, regular expression online, regex debug, javascript regex, pattern matching tool" : "정규식테스터, 정규표현식, RegexTester, 매칭결과, 개발자도구, 자바스크립트정규식";
 
-    const faqs = isEn ? [
-        {
-            q: "Which specific regex dialect does this tool utilize?",
-            a: "This tool is built strictly upon the standard JavaScript (ECMAScript) regular expression engine, which is the native implementation of your modern web browser."
-        },
-        {
-            q: "Are there performance safety limits for complex patterns?",
-            a: "Yes. To explicitly prevent browser freezing or memory overflow from catastrophic backtracking, we cap the total match count at 1,000 per execution."
-        }
-    ] : [
-        { "q": "어떤 정규식 엔진을 사용하나요?", "a": "브라우저 내장 자바스크립트(ECMAScript) 정규표현식 엔진을 그대로 사용하므로 웹 개발에 최적화되어 있습니다." },
-        { "q": "매칭 결과 개수에 제한이 있나요?", "a": "브라우저 성능 저하와 무한 루프 가능성을 막기 위해 최대 1,000개까지만 매칭 결과를 표시하도록 안전 장치가 되어 있습니다." }
-    ];
-
-    const steps = isEn ? [
-        "Insert your logical Regex pattern inside the primary slash-enclosed input box.",
-        "Optionally append control flags (like 'g' for global or 'i' for case-insensitive).",
-        "Paste the raw sample content you wish to evaluate into the 'Test Subject' area.",
-        "Review highlighted purple hits instantly in the interactive results panel beneath."
-    ] : [
-        "패턴(/.../) 입력란에 테스트하고자 하는 정규표현식 논리를 입력합니다.",
-        "플래그 입력란에 g(전체), i(대소문자 무시) 등 필요한 제어 문자를 추가하세요.",
-        "검증이 필요한 본문 텍스트를 테스트용 문자열 영역에 붙여넣습니다.",
-        "하단의 결과창에서 보라색으로 강조된 실시간 매칭 위치를 확인합니다."
-    ];
+    const faqs = t('tools.regex-tester.faqs', { returnObjects: true }) || [];
+    const steps = t('tools.regex-tester.steps', { returnObjects: true }) || [];
 
     return (
         <div className="max-w-6xl mx-auto space-y-6">
@@ -117,8 +92,8 @@ const RegexTester = () => {
                 description={descText}
                 keywords={keywordsText}
                 category="dev"
-                faqs={faqs}
-                steps={steps}
+                faqs={Array.isArray(faqs) ? faqs : []}
+                steps={Array.isArray(steps) ? steps : []}
             />
 
             <header className="text-center space-y-4">

@@ -70,8 +70,8 @@ const TemperatureConverter = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <SEO
-                title={t('tools.temperature.title')}
-                description={t('tools.temperature.description')}
+                title={t('tools.temperature-converter.title')}
+                description={t('tools.temperature-converter.description')}
                 keywords={isEn ? "temperature converter, celsius to fahrenheit, kelvin to celsius, fahrenheit to celsius, unit converter" : "온도변환기, 섭씨화씨변환, 켈빈변환, 화씨섭씨계산, 온도계산기, 미국온도변환, celsius fahrenheit kelvin"}
                 faqs={faqs}
             />

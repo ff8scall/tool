@@ -5,7 +5,7 @@ import { GitCommit, Play, Plus, RefreshCw, Trash2, Users } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const LadderGame = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [players, setPlayers] = useState(['A', 'B', 'C', 'D']);
     const [results, setResults] = useState(isEn ? ['1st', '2nd', '3rd', 'Fail'] : ['1등', '2등', '3등', '꽝']);
@@ -210,8 +210,8 @@ const LadderGame = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 select-none px-4">
             <SEO
-                title={isEn ? "Ladder Game - Fun Random Matching | Tool Hive" : "사다리 타기 (Ghost Leg) - 랜덤 매칭 게임 | Tool Hive"}
-                description={isEn ? "Make decisions fun with the Ghost Leg (Ladder Game). Enter players and results, then follow the falling path to see who gets what! Perfect for group bets and chores." : "참가자와 벌칙을 입력하고 사다리를 타보세요! 간식 내기, 당번 정하기에 딱 좋은 사다리 게임입니다."}
+                title={t('tools.ladder-game.title')}
+                description={t('tools.ladder-game.description')}
                 keywords={isEn ? "ladder game, ghost leg, random matching, decision maker, fun betting games" : "사다리, ladder, game, 내기, 복불복, random"}
                 faqs={toolFaqs}
             />

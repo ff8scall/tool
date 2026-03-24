@@ -27,10 +27,6 @@ const HashGenerator = () => {
         setTimeout(() => setCopied(''), 1500);
     };
 
-    const titleText = isEn ? t('tools.hash-gen.title') : "해시 생성기 (MD5, SHA-256) - Utility Hub";
-    const descText = isEn 
-        ? t('tools.hash-gen.description')
-        : "텍스트를 MD5, SHA-1, SHA-256, SHA-512 등 다양한 해시값으로 변환하세요. 암호화 해시 생성 도구.";
     const keywordsText = isEn ? "hash generator, text to md5, sha256 generator, sha512 generator, cryptography, hashing tool" : "해시 생성기, MD5, SHA256, SHA512, 암호화, 해시값";
 
     const faqs = isEn ? [
@@ -62,8 +58,8 @@ const HashGenerator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.hash-gen.title')}
+                description={t('tools.hash-gen.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

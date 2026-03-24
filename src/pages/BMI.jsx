@@ -96,8 +96,8 @@ const BMI = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Free BMI Calculator | Measure Body Mass Index Online" : "무료 BMI 계산기 | 한국인 비만도 측정 및 표준 체중 확인"}
-                description={isEn ? "Check your Body Mass Index (BMI) easily. Enter your height and weight to see if you are in a healthy range based on WHO standards." : "나의 비만도는 얼마일까? 키와 몸무게만 입력하여 정확한 BMI(체질량지수)를 측정하고 건강 상태를 확인하세요. WHO 및 한국 비만학회 기준 가이드 제공."}
+                title={t('tools.bmi.title')}
+                description={t('tools.bmi.description')}
                 keywords={isEn ? "BMI calculator, body mass index, obesity measure, ideal weight calculator, health tool" : "BMI계산기, 비만도측정, 체질량지수계산, 표준체중계산기, 다이어트계산기, 무료건강검사, bmi수치"}
                 category={isEn ? "Health" : "건강"}
                 faqs={bmiFaqs}

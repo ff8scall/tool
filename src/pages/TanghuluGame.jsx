@@ -16,7 +16,7 @@ const FRUITS = [
 ];
 
 const TanghuluGame = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const sceneRef = useRef(null);
     const containerRef = useRef(null);
@@ -374,10 +374,9 @@ const TanghuluGame = () => {
     return (
         <div className="container mx-auto px-4 py-8 max-w-4xl">
             <SEO
-                title={isEn ? "Tanghulu Maker - Fun Physics Stacking Game | Tool Hive" : "탕후루 만들기 | Utility Hub"}
-                description={isEn ? "Make your own virtual Tanghulu! Time your drops to skewer various fruits onto the stick. A fun and addictive physics-based arcade game." : "과일 탕후루를 직접 만들어보는 중독성 있는 물리 퍼즐 게임입니다."}
-                keywords={isEn ? "tanghulu game, fruit stacking, physics puzzle, online arcade, free games" : "탕후루게임, 과일쌓기, 물리퍼즐, 미니게임, 탕후루만들기"}
-                category="Luck/Fun"
+                title={t('tools.tanghulu-maker.title')}
+                description={t('tools.tanghulu-maker.description')}
+                keywords={isEn ? "Tanghulu game, virtual cooking, fruit skewers, DIY tanghulu, online game" : "탕후루만들기, 탕후루게임, 과일꼬치, 요리게임, 힐링게임, 나만의탕후루, tanghulu"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />

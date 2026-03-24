@@ -66,10 +66,7 @@ const UnicodeConverter = () => {
         setOutput('');
     };
 
-    const titleText = isEn ? t('tools.unicode.title') : "유니코드 변환기 | Unicode 인코딩 및 디코딩 온라인 도구";
-    const descText = isEn 
-        ? t('tools.unicode.description')
-        : "한글 및 특수 문자를 유니코드(\\uXXXX) 이스케이프 시퀀스로 즉시 변환하거나 복구하세요. 개발자를 위한 온라인 유니코드 도구입니다.";
+    // Removed titleText and descText as they were not used in SEO and the header uses direct t() calls or isEn ternaries.
     const keywordsText = isEn ? "unicode converter, text to unicode, unicode decoder, hex to text, dev tools online" : "유니코드변환기, unicode converter, 유니코드인코딩, 유니코드디코딩, 한글유니코드변환, 개발자도구, 이스케이프시퀀스";
 
     const toolFaqs = isEn ? [
@@ -111,8 +108,8 @@ const UnicodeConverter = () => {
     return (
         <div className="max-w-6xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.unicode.title')}
+                description={t('tools.unicode.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={toolFaqs}

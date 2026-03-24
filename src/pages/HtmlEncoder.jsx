@@ -54,10 +54,6 @@ const HtmlEncoder = () => {
         setTimeout(() => setCopied(false), 1500);
     };
 
-    const titleText = isEn ? "Online HTML Encoder & Decoder | Convert Entities - Utility Hub" : "HTML 인코더/디코더 | HTML 엔티티 변환 도구";
-    const descText = isEn 
-        ? "Safely encode and decode HTML entities securely natively preventing XSS vulnerabilities from script execution on your domains magically." 
-        : "HTML 특수문자를 안전하게 인코딩하거나 디코딩하세요. XSS 방지 및 소스 코드 표기에 필수적인 HTML 엔티티 변환 기능을 제공합니다.";
     const keywordsText = isEn ? "html encoder, html decoder, html entity converter, prevent xss, escape html" : "html인코더, html디코더, html엔티티, 특수문자변환, html이스케이프, xss방지";
 
     const faqs = isEn ? [
@@ -100,8 +96,8 @@ const HtmlEncoder = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.html-encoder.title')}
+                description={t('tools.html-encoder.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

@@ -88,8 +88,8 @@ const ImageResizer = () => {
     return (
         <div className="max-w-5xl mx-auto space-y-6">
             <SEO
-                title={isEn ? "Image Resizer & Compressor | Quick Online Photo Resize" : "이미지 리사이즈/압축 - Utility Hub"}
-                description={isEn ? "Resize image dimensions and reduce file size locally. Free online tool for photo resizing and compression." : "이미지 크기를 조절하고 용량을 줄이세요. 온라인에서 무료로 사진 리사이즈 및 압축이 가능합니다."}
+                title={t('tools.image-resizer.title')}
+                description={t('tools.image-resizer.description')}
                 keywords={isEn ? "image resizer, reduce photo size, image compressor, resize images online, image dimension changer" : "이미지 리사이즈, 사진 크기 줄이기, 이미지 압축, 용량 줄이기, 이미지 크기 조절"}
             />
 

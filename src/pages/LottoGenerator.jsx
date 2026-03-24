@@ -7,7 +7,7 @@ import RelatedTools from '../components/RelatedTools';
 import { useLanguage } from '../context/LanguageContext';
 
 const LottoGenerator = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [numbers, setNumbers] = useState([]);
     const [history, setHistory] = useState([]);
@@ -58,8 +58,8 @@ const LottoGenerator = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-10 px-4 py-8">
             <SEO
-                title={isEn ? "Free Lotto Number Generator - 6/45 Random Picker | Tool Hive" : "무료 로또 번호 생성기 | 6/45 랜덤 번호 추출기 | Tool Hive"}
-                description={isEn ? "Generate your lucky 6/45 lotto numbers today! Our secure random algorithm provides fair combinations. Includes winning odds, color meanings, and responsible play guide." : "오늘의 행운을 잡으세요! 1부터 45까지 무작위로 추출되는 무료 온라인 로또 번호 생성기. 역대 당첨 확률 정보와 책임 있는 로또 구매 가이드를 확인하세요."}
+                title={t('tools.lotto.title')}
+                description={t('tools.lotto.description')}
                 keywords={isEn ? "lotto generator, random number picker, 6/45 lotto, lucky numbers, lottery simulation" : "로또번호생성기, 로또자동번호, 로또당첨번호, 무료로또번호, 행운의숫자, 로또확률"}
                 category="Luck/Fun"
                 faqs={toolFaqs}

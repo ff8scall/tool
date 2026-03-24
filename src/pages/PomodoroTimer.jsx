@@ -170,10 +170,6 @@ const PomodoroTimer = () => {
     // Get today's sessions
     const todaySessions = history.filter(h => new Date(h.date).toDateString() === new Date().toDateString()).length;
 
-    const titleText = isEn ? "Pomodoro Timer | Focus & Productivity App - Utility Hub" : "포모도로 타이머 - Pomodoro Timer";
-    const descText = isEn 
-        ? "Boost your productivity with our free Pomodoro Timer tool. Manage your work sessions, track history, and customize break times easily." 
-        : "집중력 향상을 위한 포모도로 타이머. 커스텀 시간 설정, 긴 휴식, 기록 관리 기능 제공.";
     const keywordsText = isEn ? "pomodoro timer, productivity timer, focus tool, tomato timer, pomodoro app" : "포모도로, pomodoro, 타이머, 집중, 생산성, 공부";
 
     const faqs = isEn ? [
@@ -205,8 +201,8 @@ const PomodoroTimer = () => {
     return (
         <div className="max-w-lg mx-auto space-y-6 pb-12">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.pomodoro-timer.title')}
+                description={t('tools.pomodoro-timer.description')}
                 keywords={keywordsText}
                 category="productivity"
                 faqs={faqs}

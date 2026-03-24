@@ -70,8 +70,8 @@ const WorldClock = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             <SEO
-                title={isEn ? "World Clock - Current Time in Major Cities" : "세계 시계 - 전 세계 주요 도시 현재 시간"}
-                description={isEn ? "Check the current time in major cities worldwide including Seoul, New York, London, Paris, and Tokyo in real-time." : "서울, 도쿄, 뉴욕, 런던, 파리 등 전 세계 주요 도시의 현재 시간을 실시간으로 확인하세요."}
+                title={t('tools.world-clock.title')}
+                description={t('tools.world-clock.description')}
                 keywords={isEn ? ['world clock', 'time', 'timezone', 'time difference'] : ['세계시계', '시간', '시차', 'world clock', 'timezone']}
                 path="/world-clock"
             />

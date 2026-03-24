@@ -67,17 +67,13 @@ const PasswordGenerator = () => {
 
     const strength = getStrength();
 
-    const titleText = isEn ? "Random Password Generator | Utility Hub" : "랜덤 비밀번호 생성기 - Utility Hub";
-    const descText = isEn 
-        ? "Generate a strong and secure random password. Combine uppercase, lowercase, numbers, and symbols to create an uncrackable password." 
-        : "강력한 랜덤 비밀번호를 생성하세요. 대소문자, 숫자, 특수문자를 조합하여 안전한 비밀번호를 만들 수 있습니다.";
     const keywordsText = isEn ? "password generator, random password, secure password, strong password" : "비밀번호 생성기, 랜덤 비밀번호, 강력한 비밀번호, 패스워드 생성";
 
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.password-generator.title')}
+                description={t('tools.password-generator.description')}
                 keywords={keywordsText}
             />
 

@@ -10,7 +10,7 @@ import { useLanguage } from '../context/LanguageContext';
  * Fixed size canvas within a responsive container.
  */
 const MissileDodge = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
@@ -213,8 +213,8 @@ const MissileDodge = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-4">
             <SEO
-                title={isEn ? "Missile Dodge - Extreme Reflex Game | Tool Hive" : "미사일 피하기 - 극한의 순발력 게임 | Tool Hive"}
-                description={isEn ? "Avoid falling missiles and survive as long as you can! Test your reflexes in this high-intensity dodge game. Share your high scores with friends." : "하늘에서 떨어지는 미사일을 피하고 가장 오래 살아남으세요! 당신의 반사신경을 테스트해보세요."}
+                title={t('tools.missile-dodge.title')}
+                description={t('tools.missile-dodge.description')}
                 keywords={isEn ? "missile dodge, reflex game, survival game, arcade game, avoid game" : "미사일피하기, 게임, 플래시게임, dodge game, missile dodge"}
                 faqs={toolFaqs}
                 steps={toolSteps}

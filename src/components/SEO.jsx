@@ -7,7 +7,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
     const location = useLocation();
     const { lang, getLocalizedPath } = useLanguage();
     const siteTitle = 'Tool Hive';
-    const siteUrl = 'https://tool.lego-sia.com';
+    const siteUrl = 'https://math.lego-sia.com';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     const defaultDescription = lang === 'en' 
         ? 'A collection of convenient web tools: Fortune telling, MBTI, Lotto, unit converters, loan calculators, word counts, and more. Experience over 134 free tools now.'

@@ -38,10 +38,6 @@ const UrlEncoderDecoder = () => {
         setOutput('');
     };
 
-    const titleText = isEn ? t('tools.url-encoder.title') : "URL 인코더/디코더 - URL Encode & Decode";
-    const descText = isEn 
-        ? t('tools.url-encoder.description')
-        : "URL을 인코딩하거나 디코딩하는 무료 도구입니다. 특수 문자를 안전한 URL 형식으로 변환하세요.";
     const keywordsText = isEn ? "url encoder, url decoder, encode uri, percent encoding, decode url" : "URL 인코더, URL 디코더, URL encode, URL decode, percent encoding";
 
     const faqs = isEn ? [
@@ -73,8 +69,8 @@ const UrlEncoderDecoder = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.url-encoder.title')}
+                description={t('tools.url-encoder.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

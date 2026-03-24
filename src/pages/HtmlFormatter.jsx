@@ -62,10 +62,6 @@ const HtmlFormatter = () => {
         setFormatted('');
     };
 
-    const titleText = isEn ? t('tools.html-view.title') : "HTML 코드 뷰/포맷터 - Utility Hub";
-    const descText = isEn 
-        ? t('tools.html-view.description')
-        : "HTML 코드를 보기 좋게 포맷팅하거나 압축할 수 있습니다. 들여쓰기 자동 정렬 기능을 제공합니다.";
     const keywordsText = isEn ? "html formatter, beautify html online, html minifier, online developer tools, clean html code" : "HTML포맷터, HTML정렬, 코드포맷팅, HTML압축, 개발자도구";
 
     const faqs = isEn ? [
@@ -97,8 +93,8 @@ const HtmlFormatter = () => {
     return (
         <div className="max-w-6xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.html-view.title')}
+                description={t('tools.html-view.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

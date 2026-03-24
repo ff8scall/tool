@@ -5,7 +5,7 @@ import { Brain, Play, ArrowRight, RefreshCw, CheckCircle2, XCircle } from 'lucid
 import { useLanguage } from '../context/LanguageContext';
 
 const NumberMemory = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [level, setLevel] = useState(1);
     const [number, setNumber] = useState('');
@@ -78,8 +78,8 @@ const NumberMemory = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8 px-4">
             <SEO
-                title={isEn ? "Number Memory Test - How Fast is Your Brain? | Tool Hive" : "숫자 기억하기 (Number Memory) - 기억력 테스트 | Tool Hive"}
-                description={isEn ? "Test your visual short-term memory with our Number Memory game. Recall increasingly long sequences of numbers and push your brain to its limits. Free and mobile-friendly." : "잠깐 나타나는 숫자를 기억해서 입력하세요. 당신의 순간 기억력은 몇 단계인가요?"}
+                title={t('tools.number-memory.title')}
+                description={t('tools.number-memory.description')}
                 keywords={isEn ? "number memory test, brain games, short term memory, chimpanzee test, cognitive training" : "기억력, memory, test, 숫자 기억, chimp test, brain"}
                 faqs={toolFaqs}
             />

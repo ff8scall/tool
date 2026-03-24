@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const SubtractionQuiz = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gameState, setGameState] = useState('menu'); // menu, playing, result
     const [level, setLevel] = useState(1);
@@ -155,8 +155,8 @@ const SubtractionQuiz = () => {
     return (
         <div className="max-w-md mx-auto px-4 py-8">
             <SEO
-                title={isEn ? "Online Subtraction Quiz - Mental Math Trainer | Tool Hive" : "간단 뺄셈 퀴즈 | 암산 능력 향상 테스트 | Tool Hive"}
-                description={isEn ? "Master subtraction with our interactive quiz. Multiple difficulty levels and survival modes to help you become a math pro." : "1단계부터 3단계까지 난이도 별로 즐기는 간단 뺄셈 퀴즈입니다. 정확하고 빠른 암산 능력을 테스트해보세요."}
+                title={t('tools.simple-math.title')}
+                description={t('tools.simple-math.description')}
                 keywords={isEn ? "subtraction quiz, math game, mental math, brain training, learn subtraction" : "뺄셈퀴즈, 암산게임, 초등수학, 두뇌트레이닝, 수학퀴즈"}
                 faqs={toolFaqs}
                 steps={toolSteps}

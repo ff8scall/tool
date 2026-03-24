@@ -13,7 +13,7 @@ const INITIAL_SPEED = 2.5;
 const SPEED_INCREMENT = 0.05;
 
 const TowerStacker = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
@@ -197,8 +197,8 @@ const TowerStacker = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 px-4">
             <SEO
-                title={isEn ? "Tower Stacker - Fun Online Stacking Game | Tool Hive" : "무료 온라인 탑 쌓기 게임 | 타워 스태커 중독성 퍼즐"}
-                description={isEn ? "Challenge your reflexes and timing! Stack blocks as high as you can in this addictive online tower builder game. Real-time physics and colorful graphics." : "아슬아슬한 긴장감! 하늘 끝까지 블록을 쌓아 올리는 온라인 탑 쌓기 게임입니다. 높은 점수에 도전하고 친구들과 기록을 공유해보세요."}
+                title={t('tools.tower-stacker.title')}
+                description={t('tools.tower-stacker.description')}
                 keywords={isEn ? "tower stacker, block stack, reaction game, online puzzle, free mini games" : "탑쌓기게임, 타워스태커, 블록쌓기, 온라인게임, 무료미니게임, 중독성게임, 퍼즐게임"}
                 category="Luck/Fun"
                 faqs={stackFaqs}

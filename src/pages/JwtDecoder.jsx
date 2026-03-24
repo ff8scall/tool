@@ -47,10 +47,6 @@ const JwtDecoder = () => {
         setTimeout(() => setCopiedKey(null), 1500);
     };
 
-    const titleText = isEn ? t('tools.jwt-decoder.title') : "JWT 디코더 - JSON Web Token 분석 도구";
-    const descText = isEn 
-        ? t('tools.jwt-decoder.description')
-        : "JWT(JSON Web Token)를 실시간으로 디코딩하고 헤더와 페이로드를 확인하세요. 브라우저에서 안전하게 실행됩니다.";
     const keywordsText = isEn ? "jwt decoder, json web token, online jwt parser, decode jwt, jwt viewer" : "jwt, jwt decoder, json web token, 디코더, 인증, 토큰";
 
     const faqs = isEn ? [
@@ -82,8 +78,8 @@ const JwtDecoder = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.jwt-decoder.title')}
+                description={t('tools.jwt-decoder.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

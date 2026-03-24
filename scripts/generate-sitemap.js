@@ -10,7 +10,7 @@ const publicPath = path.resolve(__dirname, '../public');
 const distPath = path.resolve(__dirname, '../dist');
 
 // Base URL - ensuring it matches the current domain
-const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
+const BASE_URL = process.env.VITE_BASE_URL || 'https://math.lego-sia.com';
 
 function generateSitemap() {
     console.log('Generating sitemap...');

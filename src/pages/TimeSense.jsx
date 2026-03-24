@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const TimeSense = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gameState, setGameState] = useState('idle'); // idle, running, stopped
     const [startTime, setStartTime] = useState(0);
@@ -112,10 +112,9 @@ const TimeSense = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Internal Clock Challenge | 10.00s Timing Game | Tool Hive" : "절대 시간 감각 테스트 | 10초 맞추기 게임 | Tool Hive"}
-                description={isEn ? "Can you hit exactly 10.00 seconds without looking? Test your internal body clock and see how accurate your perception of time really is." : "시계 없이 정확히 10.00초를 맞춰보세요! 당신의 체감 시간은 실제 시간과 얼마나 다를까요? 초정밀 시간 감각 테스트."}
-                keywords={isEn ? "time sense, internal clock, 10 second challenge, timing game, biological clock" : "시간감각, 10초맞추기, 타이머게임, 절대시간, 시간맞추기, 감각테스트"}
-                category="Luck/Fun"
+                title={t('tools.time-sense.title')}
+                description={t('tools.time-sense.description')}
+                keywords={isEn ? "internal clock, timing game, precision test, reaction speed, time sense" : "시간감각, 10초맞추기, 타이머게임, 절대시간, 순발력테스트, 미니게임"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />

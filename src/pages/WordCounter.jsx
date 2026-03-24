@@ -89,17 +89,13 @@ const WordCounter = () => {
         "긴 글을 작성할 때는 중간중간 내용을 복사하여 메모장 등에 백업하시는 것을 권장합니다."
     ];
 
-    const titleText = isEn ? "Word Counter | Real-time Character & Custom Byte Counter" : "글자수 세기 | 실시간 글자수 계산 및 자기소개서 분량 확인";
-    const descText = isEn 
-        ? "Free online tool to count characters (with/without spaces), words, lines, and bytes in real-time. Perfect for essays, tweets, and blogging." 
-        : "실시간으로 글자수(공백 포함/제외), 단어수, 줄 수, 파일 바이트를 계산해주는 무료 온라인 도구입니다. 취업 자기소개서, 블로그 포스팅, 레포트 분량 확인에 최적화되어 있습니다.";
     const keywordsText = isEn ? "word counter, character counter, byte counter, count letters, online counter" : "글자수세기, 글자수계산기, 자기소개서글자수, 공백제외글자수, 바이트계산, 단어수세기, 온라인글자수";
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.word-count.title')}
+                description={t('tools.word-count.description')}
                 keywords={keywordsText}
                 category="text"
                 faqs={faqs}

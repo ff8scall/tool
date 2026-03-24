@@ -60,8 +60,8 @@ const SpeedConverter = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <SEO
-                title={t('tools.speed.title')}
-                description={t('tools.speed.description')}
+                title={t('tools.speed-converter.title')}
+                description={t('tools.speed-converter.description')}
                 keywords={isEn ? "speed converter, km/h to mph, mph converter, mach to km/h, knots converter" : "속도변환기, kmh mph변환, 마일킬로미터변환, 노트변환, 마하변환, 속도계산기, speed converter"}
                 faqs={faqs}
             />

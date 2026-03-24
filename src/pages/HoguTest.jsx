@@ -288,7 +288,7 @@ const HoguTest = () => {
         <div className="max-w-2xl mx-auto px-4 py-12">
             <SEO
                 title={isEn ? "Pushover (Hogu) Test | Am I too nice? | Tool Hive" : "호구 성향 테스트 | 내가 호구라고? | Tool Hive"}
-                description={isEn ? "Am I a pushover? Fact-bombing test for those who can't say no and keep losing out." : "혹시 내가 호구? 거절 못하고 손해만 보는 당신을 위한 팩트 폭격 테스트."}
+                description={t('tools.hogu-test.description')}
                 keywords={isEn ? "pushover test, can't say no, psychological test, self-diagnosis, hogu test" : "호구테스트, 거절못하는성격, 심리테스트, 호구자가진단, pushover test"}
                 category={isEn ? "Fun" : "운세/재미"}
                 faqs={toolFaqs}

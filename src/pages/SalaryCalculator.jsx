@@ -6,7 +6,7 @@ import ShareButtons from '../components/ShareButtons';
 import { useLanguage } from '../context/LanguageContext';
 
 const SalaryCalculator = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [year, setYear] = useState('2025');
     const [annualSalary, setAnnualSalary] = useState('');
@@ -163,8 +163,8 @@ const SalaryCalculator = () => {
     return (
         <div className="max-w-6xl mx-auto px-4 py-8 space-y-12">
             <SEO
-                title={isEn ? "2025 Salary Net Pay Calculator (Korea) - Tax & Insurance" : "2025년 연봉 실수령액 계산기 | 월급 세금 및 4대보험 자동 계산"}
-                description={isEn ? "Calculate your actual take-home pay in Korea for 2025. Includes 4 major insurances, income tax, meal allowance, and dependent deductions." : "2025년 동결된 최신 4대보험 요율과 소득세를 반영한 연봉 실수령액 계산기입니다."}
+                title={t('tools.salary.title')}
+                description={t('tools.salary.description')}
                 keywords={isEn ? "salary calculator korea, net pay calculator, korea income tax, 4 major insurances korea, paycheck analysis" : "연봉실수령액계산기, 2025연봉계산기, 월급계산기, 4대보험계산, 소득세계산, 비과세식대"}
                 category="finance"
                 faqs={toolFaqs}

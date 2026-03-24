@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Minesweeper = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [grid, setGrid] = useState([]);
     const [gameState, setGameState] = useState('waiting'); // waiting, playing, won, lost
@@ -192,8 +192,8 @@ const Minesweeper = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6 select-none px-4" ref={containerRef}>
             <SEO
-                title={isEn ? "Play Minesweeper Online - Classic Logic Puzzle | Tool Hive" : "지뢰찾기 (Minesweeper) - 고전 명작 퍼즐 | Tool Hive"}
-                description={isEn ? "Play the classic Minesweeper puzzle game online. Use logic to flag mines and clear the grid. Multiple difficulty levels available for free." : "지뢰를 피해 모든 칸을 열어보세요! 논리적인 추리로 지뢰의 위치를 찾아내는 고전 명작 게임입니다."}
+                title={t('tools.minesweeper.title')}
+                description={t('tools.minesweeper.description')}
                 keywords={isEn ? "minesweeper online, logic puzzle games, classic windows games, free puzzles, brain games" : "지뢰찾기, minesweeper, 퍼즐, 두뇌게임, 고전게임"}
                 faqs={toolFaqs}
             />

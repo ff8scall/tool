@@ -8,7 +8,7 @@ import useShareCanvas from '../hooks/useShareCanvas';
 import { useLanguage } from '../context/LanguageContext';
 
 const SuikaGame = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const sceneRef = useRef(null);
     const containerRef = useRef(null);
@@ -440,8 +440,8 @@ const SuikaGame = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 px-4">
             <SEO
-                title={isEn ? "Suika Game - Merge Fruit Puzzle | Play Free Online" : "수박 게임 (Suika Game) - 과일 합치기 퍼즐 | Utility Hub"}
-                description={isEn ? "Play the trending Suika Game (Watermelon Game) online for free! Merge identical fruits to create a giant watermelon. Challenge your high score in this addictive physics puzzle." : "같은 과일을 합쳐 더 큰 과일을 만드는 중독성 있는 퍼즐 게임. 최고 점수에 도전하세요!"}
+                title={t('tools.suika-game.title')}
+                description={t('tools.suika-game.description')}
                 keywords={isEn ? "suika game, watermelon game, fruit merge, physics puzzle, online games" : "수박게임, 머지퍼즐, 게임, 퍼즐, 과일합치기, 웹게임"}
                 faqs={toolFaqs}
             />

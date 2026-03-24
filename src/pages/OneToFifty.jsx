@@ -6,7 +6,7 @@ import useShareCanvas from '../hooks/useShareCanvas';
 import { useLanguage } from '../context/LanguageContext';
 
 const OneToFifty = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [numbers, setNumbers] = useState([]);
     const [currentNumber, setCurrentNumber] = useState(1);
@@ -124,8 +124,8 @@ const OneToFifty = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8 select-none" ref={containerRef}>
             <SEO
-                title={isEn ? "1 to 50 - Reaction & Speed Game Online" : "1 to 50 - 순발력 테스트 게임 | Utility Hub"}
-                description={isEn ? "Click numbers 1 to 50 as fast as you can. Test your focus and reaction time in this addictive speed challenge." : "1부터 50까지 숫자를 순서대로 빠르게 클릭하세요! 당신의 순발력을 테스트해보세요."}
+                title={t('tools.1to50.title')}
+                description={t('tools.1to50.description')}
                 keywords={isEn ? "1to50, speed test, reaction game, focus game, click speed" : "1to50, 1부터50, 순발력, 게임, 반응속도"}
                 faqs={toolFaqs}
             />

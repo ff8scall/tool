@@ -5,7 +5,7 @@ import { Target, RefreshCw, History, AlertCircle, Settings } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext';
 
 const NumberBaseball = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [digitCount, setDigitCount] = useState(3); // 3 or 4
     const [targetNumber, setTargetNumber] = useState('');
@@ -118,8 +118,8 @@ const NumberBaseball = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6 px-4">
             <SEO
-                title={isEn ? "Number Baseball - Classic Mind Puzzle | Tool Hive" : "숫자 야구 게임 (Number Baseball) - 추억의 두뇌 게임 | Tool Hive"}
-                description={isEn ? "Play the classic Number Baseball (Bulls and Cows) game online. Guess the secret sequence using strike and ball clues. Fun brain training for all ages." : "컴퓨터가 생각한 숫자를 맞춰보세요! 3자리 또는 4자리 모드를 선택할 수 있습니다."}
+                title={t('tools.number-baseball.title')}
+                description={t('tools.number-baseball.description')}
                 keywords={isEn ? "number baseball, bulls and cows, guessing game, logic puzzle, brain test" : "숫자야구, number baseball, bulls and cows, 두뇌게임, 추리"}
                 faqs={toolFaqs}
             />

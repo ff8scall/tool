@@ -87,8 +87,8 @@ const ReactionTest = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Reaction Time Test - Check Your Reflexes Online" : "반응속도 테스트 - 순발력 게임 | Utility Hub"}
-                description={isEn ? "How fast are your reflexes? Test your reaction time in milliseconds. Compare your score with the average." : "나의 반응속도는 몇 ms일까요? 초록색 화면이 뜰 때 클릭하여 순발력을 테스트해보세요."}
+                title={t('tools.reaction-test.title')}
+                description={t('tools.reaction-test.description')}
                 keywords={isEn ? "reaction time test, click speed, human benchbark, reflexes test" : "반응속도, 순발력테스트, 미니게임, 반응속도테스트"}
                 faqs={toolFaqs}
             />

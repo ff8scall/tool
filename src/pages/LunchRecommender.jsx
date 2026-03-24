@@ -6,7 +6,7 @@ import { lunchMenu, foodCategories } from '../data/lunchData';
 import { useLanguage } from '../context/LanguageContext';
 
 const LunchRecommender = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     
     // State
@@ -158,8 +158,8 @@ const LunchRecommender = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8 pb-12">
             <SEO
-                title={isEn ? "Lunch Menu Recommender - What to Eat Today?" : "점심 메뉴 추천기 - 오늘 뭐 먹지? | Utility Hub"}
-                description={isEn ? "Struggling to decide what to eat for lunch? Get personalized recommendations based on your preferences, categories, and dietary filters." : "오늘 점심 뭐 먹을지 고민되시나요? 개인화된 추천으로 딱 맞는 메뉴를 찾아보세요!"}
+                title={t('tools.lunch-recommender.title')}
+                description={t('tools.lunch-recommender.description')}
                 keywords={isEn ? "lunch recommender, food picker, random menu, what to eat, menu suggestion" : "점심메뉴, 메뉴추천, 점심, 메뉴, 랜덤, 맛집"}
                 faqs={toolFaqs}
             />

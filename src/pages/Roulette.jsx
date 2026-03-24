@@ -5,7 +5,7 @@ import { Disc, Plus, Trash2, RotateCw, Trophy } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Roulette = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [items, setItems] = useState(isEn ? ['Pizza', 'Burger', 'Tacos', 'Sushi'] : ['짜장면', '짬뽕', '볶음밥', '탕수육']);
     const [newItem, setNewItem] = useState('');
@@ -149,8 +149,8 @@ const Roulette = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 select-none px-4 pb-20 mt-8">
             <SEO
-                title={isEn ? "Spin the Wheel - Random Decision Maker | Tool Hive" : "돌림판 돌리기 - 랜덤 추첨 게임 | Tool Hive"}
-                description={isEn ? "Need to make a quick decision? Use our Spin the Wheel tool to randomly pick items, names, or food choices. Easy to use and fun!" : "점심 메뉴, 벌칙 정하기 등 결정이 필요할 때 돌림판을 돌려보세요! 쉽고 간편한 온라인 룰렛 게임입니다."}
+                title={t('tools.roulette.title')}
+                description={t('tools.roulette.description')}
                 keywords={isEn ? "spin the wheel, wheel spinner, random picker, online roulette, decision maker" : "돌림판, 룰렛, roulette, 랜덤, 추첨, 복불복"}
                 faqs={toolFaqs}
             />

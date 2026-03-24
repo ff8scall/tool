@@ -6,7 +6,7 @@ import ShareButtons from '../components/ShareButtons';
 import { useLanguage } from '../context/LanguageContext';
 
 const SeveranceCalculator = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [avgSalary, setAvgSalary] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -51,9 +51,9 @@ const SeveranceCalculator = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Severance Pay Calculator (Korea) - Estimate Your Retirement Pay" : "퇴직금 계산기 | 입사일 퇴사일 입력으로 예상 퇴직금 조회"}
-                description={isEn ? "Calculate your expected statutory severance pay in South Korea based on service period and average salary. 2025 Updated." : "입사일, 퇴사일, 평균 월급을 입력하면 법정 퇴직금을 즉시 계산합니다."}
-                keywords={isEn ? "severance pay calculator korea, toejikgeum calculator, retirement pay korea, labor law korea" : "퇴직금계산기, 예상퇴직금계산, 퇴직금공식, 퇴직금조회, 재직기간계산"}
+                title={t('tools.severance.title')}
+                description={t('tools.severance.description')}
+                keywords={isEn ? "severance pay calculator korea, retirement pay, labor law korea, severance pay calculation" : "퇴직금계산기, 예상퇴직금, 퇴직금계산방법, 2025최근퇴직금, 고용노동부퇴직금"}
                 faqs={faqs}
             />
 

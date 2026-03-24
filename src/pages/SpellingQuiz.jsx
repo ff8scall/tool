@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const SpellingQuiz = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [step, setStep] = useState(0);
     const [score, setScore] = useState(0);
@@ -138,26 +138,8 @@ const SpellingQuiz = () => {
         }
     };
 
-    const toolFaqs = isEn ? [
-        { q: "What kind of questions are in the quiz?", a: "Commonly confused Korean spellings like '되/돼', '낫/낳', and '금새/금세' that even native speakers often get wrong." },
-        { q: "Are explanations provided?", a: "Yes, after each answer, a clear explanation based on standard Korean grammar rules is shown." },
-        { q: "Who is this quiz for?", a: "Anyone who wants to improve their Korean writing skills or test their language proficiency in a fun way." }
-    ] : [
-        { q: "맞춤법 퀴즈는 어떤 단어들이 나오나요?", a: "되/돼, 낫/낳/낮, 어이/어의 등 성인들도 자주 틀려 곤란해지는 실생활 헷갈리는 맞춤법들이 주로 출제됩니다." },
-        { q: "정답 해설도 제공되나요?", a: "문제를 푸신 뒤, 왜 이 단어가 맞는 표현인지 국어사전 기준의 깔끔한 설명과 올바른 예문을 제공하여 학습에 도움을 줍니다." }
-    ];
-
-    const toolSteps = isEn ? [
-        "Read the sentence and choose the correct word for the bracketed space.",
-        "Check the feedback and read the explanation for each question.",
-        "Complete all 10 questions to see your final rank and score.",
-        "Review your mistakes and share your results with friends!"
-    ] : [
-        "문장 안에서 비어 있는 괄호나 밑줄 친 부분에 알맞은 단어를 보기 중에서 고릅니다.",
-        "문제를 푼 직후 나타나는 정답 여부와 해설을 꼼꼼히 읽어봅니다.",
-        "모든 문제를 풀었다면 최종 점수와 칭호(등급)를 확인합니다.",
-        "틀린 문제를 복습하여 실생활에서의 실수를 줄입니다."
-    ];
+    const toolFaqs = t('tools.spelling-quiz.faqs', { returnObjects: true }) || [];
+    const toolSteps = t('tools.spelling-quiz.steps', { returnObjects: true }) || [];
 
     const toolTips = isEn ? [
         "Focus on the sound and meaning; often the origin of the word gives a clue.",
@@ -172,8 +154,8 @@ const SpellingQuiz = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Korean Spelling & Grammar Quiz | Tool Hive" : "한국어 맞춤법 능력 고사 (Spelling Test) | Tool Hive"}
-                description={isEn ? "Test your Korean proficiency with our Spelling Quiz. Learn the differences between commonly confused words and improve your grammar skills." : "안돼? 안되? 봬요? 뵈요? 자주 틀리는 한국어 맞춤법 퀴즈로 당신의 국어 실력을 테스트해보세요."}
+                title={t('tools.spelling-quiz.title')}
+                description={t('tools.spelling-quiz.description')}
                 keywords={isEn ? "korean spelling quiz, learn korean grammar, choseong quiz, hangul test" : "맞춤법퀴즈, 한글맞춤법, 국어문법, 한국어테스트, 맞춤법교정"}
                 faqs={toolFaqs}
                 steps={toolSteps}

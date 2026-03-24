@@ -215,8 +215,8 @@ const TypingTest = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Typing Speed Test - Test Your WPM Online" : "타자 속도 테스트 - 영어/한글 타자 연습 | Utility Hub"}
-                description={isEn ? "How fast can you type? Test your WPM (Words Per Minute) in English and Korean. Track your progress and improve accuracy." : "나의 타자 속도(WPM)를 측정해보세요. 영어와 한글 모드를 지원하며 정확도와 속도를 실시간으로 분석해드립니다."}
+                title={translate('tools.typing-test.title')}
+                description={translate('tools.typing-test.description')}
                 keywords={isEn ? "typing test, wpm test, typing speed, touch typing practice" : "타자연습, 영타연습, 한타연습, WPM, 타자속도, 타이핑테스트"}
                 faqs={toolFaqs}
             />

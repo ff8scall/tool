@@ -243,11 +243,9 @@ const MandalartPlanner = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title={isEn ? "Mandalart Planner | Visual Goal Setting Tool" : "만다라트 플래너 | 온라인 목표 설정 도구"}
-                description={isEn 
-                    ? "Shohei Ohtani's secret to success! Easily create and manage your Mandalart plan online. Visualize your core goal into 64 specific action plans."
-                    : "오타니 쇼헤이의 목표 달성 비법! 온라인에서 간편하게 만다라트 계획표를 작성하고 관리하세요. 핵심 목표를 64개의 구체적인 실행 계획으로 시각화할 수 있습니다."}
-                keywords={isEn ? "mandalart, goal setting, shohei ohtani plan, visual planning, online planner, roadmap" : "만다라트, 목표설정, 오타니만다라트, 계획표, 비주얼플래닝, 온라인플래너"}
+                title={t('tools.mandalart-planner.title')}
+                description={t('tools.mandalart-planner.description')}
+                keywords={isEn ? "mandalart planner, ultimate goal setting tool, habit tracker, yearly planning, visual goal map" : "만다라트, 계획표, 목표달성, 만다라트기법, 칸다라트, 목표수립, 연간계획, 64개과제"}
                 category="utility"
                 faqs={toolFaqs}
                 steps={toolSteps}

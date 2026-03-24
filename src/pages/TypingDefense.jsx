@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const TypingDefense = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
     const [score, setScore] = useState(0);
@@ -209,8 +209,8 @@ const TypingDefense = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Typing Defense - Attack the Falling Words | Tool Hive" : "타자 디펜스 게임 | 떨어지는 단어를 파괴하라! | Tool Hive"}
-                description={isEn ? "Destroy falling words by typing them correctly! A thrilling typing practice game. Test your typing speed and reflexes." : "단어가 바닥에 닿기 전에 입력해서 파괴하세요! 스릴 넘치는 타자 연습 게임. 당신의 타자 속도와 순발력을 테스트해보세요."}
+                title={t('tools.typing-defense.title')}
+                description={t('tools.typing-defense.description')}
                 keywords={isEn ? "typing game, venezian, acid rain, typing practice, word game" : "타자게임, 한컴타자, 베네치아, 산성비, 타자연습, typing game"}
                 faqs={toolFaqs}
                 steps={toolSteps}

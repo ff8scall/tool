@@ -77,7 +77,7 @@ const generateSudoku = (difficulty) => {
 };
 
 const Sudoku = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [board, setBoard] = useState(Array(9).fill(null).map(() => Array(9).fill(0)));
     const [initialBoard, setInitialBoard] = useState(Array(9).fill(null).map(() => Array(9).fill(0)));
@@ -190,13 +190,26 @@ const Sudoku = () => {
         { q: "스도쿠의 기본 규칙은 무엇인가요?", a: "가로 9칸, 세로 9칸, 그리고 3x3 작은 상자 9개 안에 1부터 9까지의 숫자가 중복 없이 들어가야 합니다." }
     ];
 
+    const toolSteps = isEn ? [
+        "Choose a difficulty level (Easy, Medium, Hard) to generate a new puzzle.",
+        "Click on an empty cell and use the numeric pad or keyboard to enter digits 1-9.",
+        "Fill all rows, columns, and 3x3 blocks without repeating numbers.",
+        "Use the 'Hint' button if you're stuck, or 'DEL' to clear an incorrect entry."
+    ] : [
+        "게임의 난이도(쉬움, 보통, 어려움)를 선택하여 퍼즐을 생성합니다.",
+        "빈 칸을 클릭하고 하단의 숫자 패드나 키보드를 이용해 1~9 사이의 숫자를 입력합니다.",
+        "모든 가로/세로 줄과 3x3 박스에 숫자가 중복되지 않도록 채워나갑니다.",
+        "막힐 때는 '힌트' 버튼을 눌러 정답 숫자를 확인하거나, '삭제' 버튼으로 잘못된 숫자를 지웁니다."
+    ];
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-8">
             <SEO
-                title={isEn ? "Play Sudoku - Online Logic Puzzle | Tool Hive" : "스도쿠 (Sudoku) - 클래식 로직 퍼즐 | Tool Hive"}
-                description={isEn ? "Challenge your brain with free online Sudoku puzzles. Choose your difficulty level, track your time, and improve your logical thinking skills." : "다양한 난이도의 클래식 스도쿠를 즐겨보세요. 두뇌를 단련하고 기록을 세워 공유해보세요!"}
-                keywords={isEn ? "sudoku online, logic puzzle, brain training, daily sudoku, free puzzle games" : "스도쿠, sudoku, 로직퍼즐, 퍼즐게임, 두뇌게임, 무료게임"}
+                title={t('tools.sudoku.title')}
+                description={t('tools.sudoku.description')}
+                keywords={isEn ? "Sudoku online, free Sudoku, puzzle game, brain training, daily Sudoku" : "스도쿠기초, 스도쿠풀기, 온라인스도쿠, 무료스도쿠, 두뇌게임, 온가족게임, 숫자퍼즐"}
                 faqs={toolFaqs}
+                steps={toolSteps}
             />
 
             <div className="flex flex-col md:flex-row items-start gap-8" ref={containerRef}>

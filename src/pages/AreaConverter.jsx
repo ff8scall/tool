@@ -66,8 +66,8 @@ const AreaConverter = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <SEO
-                title={t('tools.area.title')}
-                description={t('tools.area.description')}
+                title={t('tools.area-converter.title')}
+                description={t('tools.area-converter.description')}
                 keywords={isEn ? "area converter, square meters to pyeong, acres to square meters, hectares converter, apartment size conversion" : "면적변환기, 제곱미터평변환, 평계산기, 에이커변환, 헥타르계산, 아파트평수변환, 부동산면적계산"}
                 faqs={faqs}
             />

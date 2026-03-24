@@ -71,10 +71,6 @@ const TimerStopwatch = () => {
         setStopwatchTime(0);
     };
 
-    const titleText = isEn ? "Online Timer & Stopwatch | Utility Hub" : "타이머 및 스톱워치 - Utility Hub";
-    const descText = isEn 
-        ? "Use our free online timer and stopwatch. Perfect for studying, workouts, and time tracking." 
-        : "온라인 타이머와 스톱워치를 사용하세요. 집중 타이머, 시간 측정, 운동 타이머 등 다양한 용도로 활용하세요.";
     const keywordsText = isEn 
         ? "online timer, stopwatch, time tracker, focus timer, countdown" 
         : "온라인 타이머, 스톱워치, 시간 측정, 집중 타이머, 카운트다운";
@@ -82,8 +78,8 @@ const TimerStopwatch = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.timer.title')}
+                description={t('tools.timer.description')}
                 keywords={keywordsText}
             />
 

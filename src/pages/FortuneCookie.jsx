@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-
 import { Share2, RefreshCw, Cookie, Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
 import ToolGuide from '../components/ToolGuide';
+import { useLanguage } from '../context/LanguageContext';
 
 const FortuneCookie = () => {
+    const { lang, t } = useLanguage();
+    const isEn = lang === 'en';
     const [isCracked, setIsCracked] = useState(false);
     const [fortune, setFortune] = useState(null);
     const [animationState, setAnimationState] = useState('idle'); // idle, cracking, revealed
@@ -64,7 +66,6 @@ const FortuneCookie = () => {
         }
     };
 
-    
     const toolFaqs = [
         {
             "q": "포춘 쿠키 메시지는 매일 바뀌나요?",
@@ -88,9 +89,9 @@ const FortuneCookie = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title="포춘 쿠키 | 오늘의 행운 메시지 뽑기"
-                description="매일매일 확인하는 오늘의 행운 메시지! 포춘 쿠키를 깨서 당신을 위한 긍정적인 조언과 행운의 문구를 확인해보세요."
-                keywords="포춘쿠키, 운세, 행운, 명언, 좋은글, 오늘의메시지"
+                title={t('tools.fortune-cookie.title')}
+                description={t('tools.fortune-cookie.description')}
+                keywords={isEn ? "fortune cookie, daily luck, positive quotes, funny fortune, fortune teller" : "포춘쿠키, 운세, 행운, 명언, 좋은글, 오늘의메시지"}
                 category="운세/재미"
                 faqs={toolFaqs}
                 steps={toolSteps}
@@ -173,8 +174,6 @@ const FortuneCookie = () => {
                     </div>
                 )}
             </div>
-
-            
 
             <style>{`
                 @keyframes shake {

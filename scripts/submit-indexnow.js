@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const sitemapPath = path.resolve(__dirname, '../public/sitemap.xml');
-const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
+const BASE_URL = process.env.VITE_BASE_URL || 'https://math.lego-sia.com';
 const API_KEY = 'c6e8260628d349a68cb9d68d6e4a891c';
 const KEY_LOCATION = `${BASE_URL}/${API_KEY}.txt`;
 const HOST = new URL(BASE_URL).hostname;

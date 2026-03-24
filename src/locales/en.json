@@ -173,8 +173,18 @@
       "description": "Decode JSON Web Token (JWT) headers and payloads to easily check and debug claims and signatures in a secure and convenient environment."
     },
     "regex-tester": {
-      "title": "Regex Tester",
-      "description": "Test your regular expressions against target text in real-time and view group capture results to ensure your patterns match accurately."
+      "title": "Professional Regex Tester | Real-time Pattern Validator",
+      "description": "Validate complex patterns and capture groups with instantaneous visual feedback. Standard JavaScript engine based regex tester with a cheat sheet.",
+      "faqs": [
+        { "q": "Which specific regex dialect does this tool utilize?", "a": "This tool is built strictly upon the standard JavaScript (ECMAScript) regular expression engine, which is the native implementation of your modern web browser." },
+        { "q": "Are there performance safety limits for complex patterns?", "a": "Yes. To explicitly prevent browser freezing or memory overflow from catastrophic backtracking, we cap the total match count at 1,000 per execution." }
+      ],
+      "steps": [
+        "Insert your logical Regex pattern inside the primary slash-enclosed input box.",
+        "Optionally append control flags (like 'g' for global or 'i' for case-insensitive).",
+        "Paste the raw sample content you wish to evaluate into the 'Test Subject' area.",
+        "Review highlighted purple hits instantly in the interactive results panel beneath."
+      ]
     },
     "ascii-art": {
       "title": "ASCII Art",
@@ -557,8 +567,19 @@
       "description": "A high-level deduction quiz where you guess the common answer connecting several given words. Unleash your imagination and logic."
     },
     "spelling-quiz": {
-      "title": "Spelling Quiz",
-      "description": "Test your knowledge of commonly misspelled words and grammar through our fun quiz. Improve your linguistic precision and score higher."
+      "title": "Korean Spelling Ability Test | Daily Life Grammar Quiz",
+      "description": "Test your Korean spelling skills with common mistakes like '되/돼', '낫/낳', and '금새/금세'. A fun and free online way to improve your Korean grammar.",
+      "faqs": [
+        { "q": "What kind of questions are in the quiz?", "a": "Commonly confused Korean spellings like '되/돼', '낫/낳', and '금새/금세' that even native speakers often get wrong." },
+        { "q": "Are explanations provided?", "a": "Yes, after each answer, a clear explanation based on standard Korean grammar rules is shown." },
+        { "q": "Who is this quiz for?", "a": "Anyone who wants to improve their Korean writing skills or test their language proficiency in a fun way." }
+      ],
+      "steps": [
+        "Read the sentence and choose the correct word for the bracketed space.",
+        "Check the feedback and read the explanation for each question.",
+        "Complete all 10 questions to see your final rank and score.",
+        "Review your mistakes and share your results with friends!"
+      ]
     },
     "vocabulary-test": {
       "title": "Vocabulary Test",

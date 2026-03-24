@@ -6,7 +6,7 @@ import ShareButtons from '../components/ShareButtons';
 import { useLanguage } from '../context/LanguageContext';
 
 const BMR = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gender, setGender] = useState('male');
     const [age, setAge] = useState('');
@@ -58,8 +58,8 @@ const BMR = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "BMR & TDEE Calculator - Daily Calorie Needs" : "BMR 기초대사량 계산기 - 하루 권장 칼로리"}
-                description={isEn ? "Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE)." : "나의 기초대사량(BMR)과 활동 대사량(TDEE)을 계산하여 하루 권장 칼로리를 확인해보세요."}
+                title={t('tools.bmr.title')}
+                description={t('tools.bmr.description')}
                 keywords={isEn ? "BMR, TDEE, calorie calculator, diet" : "BMR계산기, 기초대사량, 활동대사량, TDEE, 칼로리계산, 다이어트"}
                 faqs={toolFaqs}
                 category={isEn ? "Health" : "건강"}

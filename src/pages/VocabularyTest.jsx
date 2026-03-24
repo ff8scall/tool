@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const VocabularyTest = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gameState, setGameState] = useState('start'); // start, playing, result
     const [score, setScore] = useState(0);
@@ -169,9 +169,9 @@ const VocabularyTest = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Korean Literacy & Vocabulary Test | Tool Hive" : "문해력 테스트 (Vocabulary Test) | 어휘력 퀴즈 | Tool Hive"}
-                description={isEn ? "Test your Korean literacy and vocabulary with our quiz. From '심심한 사과' to idioms, see how well you understand the depth of the Korean language." : "심심한 사과? 금일? 사흘? 알쏭달쏭한 어휘력 퀴즈. 나의 문해력 수준을 테스트해보세요."}
-                keywords={isEn ? "korean vocabulary test, literacy quiz, learn korean idioms, advanced korean" : "문해력, 어휘력, 사자성어, 한국어퀴즈, 문해력테스트"}
+                title={t('tools.vocabulary-test.title')}
+                description={t('tools.vocabulary-test.description')}
+                keywords={isEn ? "vocabulary quiz, korean literacy, word power, language test, idioms quiz" : "어휘력테스트, 문해력퀴즈, 국어실력, 단어맞추기, 상식퀴즈, 어휘력검사, 문해력테스트"}
                 faqs={toolFaqs}
                 steps={toolSteps}
             />

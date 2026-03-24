@@ -68,8 +68,8 @@ const VolumeConverter = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             <SEO
-                title={t('tools.volume.title')}
-                description={t('tools.volume.description')}
+                title={t('tools.volume-converter.title')}
+                description={t('tools.volume-converter.description')}
                 keywords={isEn ? "volume converter, liters to gallons, ml converter, cup to ml, liters calculation" : "부피변환기, 리터갤런변환, mL변환, 컵ml변환, volume converter, 갤런리터계산"}
                 faqs={faqs}
             />

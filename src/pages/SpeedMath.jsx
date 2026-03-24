@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const SpeedMath = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [gameState, setGameState] = useState('start'); // start, playing, gameover
     const [score, setScore] = useState(0);
@@ -161,8 +161,8 @@ const SpeedMath = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Speed Math Challenge - Test Your Brain Power | Tool Hive" : "암산 챌린지 | 두뇌 회전 스피드 게임 | Tool Hive"}
-                description={isEn ? "Wake up your brain with our Speed Math Challenge! Solve as many arithmetic problems as possible within the time limit. Test your reflexes and mental math skills." : "잠든 뇌를 깨우는 스피드 암산 게임! 제한 시간 내에 최대한 많은 산수 문제를 풀어보세요. 당신의 순발력과 암산 실력을 테스트해보세요."}
+                title={t('tools.speed-math.title')}
+                description={t('tools.speed-math.description')}
                 keywords={isEn ? "speed math, arithmetic game, brain training, mental math test, quick calculation" : "암산게임, 수학게임, 두뇌게임, 산수, 더하기빼기, 스피드게임"}
                 faqs={toolFaqs}
                 steps={toolSteps}

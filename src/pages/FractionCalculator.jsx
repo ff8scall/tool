@@ -6,7 +6,7 @@ import ShareButtons from '../components/ShareButtons';
 import { useLanguage } from '../context/LanguageContext';
 
 const FractionCalculator = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
 
     const [num1, setNum1] = useState('');
@@ -94,8 +94,8 @@ const FractionCalculator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={isEn ? "Fraction Calculator - Simplify & Convert" : "분수 계산기 - 분수 사칙연산 및 소수 변환"}
-                description={isEn ? "Perform fraction arithmetic (add, subtract, multiply, divide) and convert decimals to simplified fractions." : "분수 덧셈, 뺄셈, 곱셈, 나눗셈 계산 및 기약분수 자동 변환 기능을 제공합니다."}
+                title={t('tools.fraction-calculator.title')}
+                description={t('tools.fraction-calculator.description')}
                 keywords={isEn ? "fraction calculator, fraction to decimal, simplify fraction, math tool" : "분수계산기, 기약분수변환, 소수분수변환, 분수사칙연산"}
             />
 

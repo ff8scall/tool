@@ -33,10 +33,6 @@ const UuidGenerator = () => {
         setTimeout(() => setCopied(''), 1500);
     };
 
-    const titleText = isEn ? t('tools.uuid-gen.title') : "랜덤 UUID / GUID 생성기 - 고유 식별자 생성";
-    const descText = isEn 
-        ? t('tools.uuid-gen.description')
-        : "고유 식별자 UUID v4를 실시간으로 생성하세요. 데이터베이스, API 토큰, 개발 테스트용 GUID 무료 생성 도구입니다.";
     const keywordsText = isEn ? "uuid generator, generate guid, random uuid v4, generate unique identifier, online dev tools" : "UUID생성기, GUID생성, 고유식별자, 랜덤UUID, 개발자도구";
 
     const faqs = isEn ? [
@@ -68,8 +64,8 @@ const UuidGenerator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.uuid-gen.title')}
+                description={t('tools.uuid-gen.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

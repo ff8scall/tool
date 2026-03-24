@@ -11,7 +11,7 @@ const MIN_SPEED = 60;
 const SPEED_INCREMENT = 2;
 
 const SnakeGame = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
@@ -250,9 +250,9 @@ const SnakeGame = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8 px-4">
             <SEO
-                title={isEn ? "Classic Snake Game - Play Online | Tool Hive" : "클래식 스네이크 게임 (Snake Game) - 뱀 게임 | Tool Hive"}
-                description={isEn ? "Play the timeless classic Snake Game online. Eat food, grow longer, and survive as long as you can! Challenge your high score and share with friends." : "먹이를 먹고 점점 길어지는 클래식 스네이크 게임을 즐겨보세요. 당신의 한계에 도전하고 기록을 공유하세요!"}
-                keywords={isEn ? "snake game, classic arcade, online games, mobile snake, free mini games" : "스네이크게임, 뱀게임, 클래식게임, 미니게임, 무료게임, snake game"}
+                title={t('tools.snake-game.title')}
+                description={t('tools.snake-game.description')}
+                keywords={isEn ? "classic snake game, retro arcade, free online game, snake puzzle" : "뱀게임, 스네이크게임, 클래식게임, 고전게임, 무료미니게임, 심심풀이게임"}
                 faqs={toolFaqs}
             />
 

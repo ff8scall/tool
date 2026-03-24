@@ -6,7 +6,7 @@ import ShareButtons from '../components/ShareButtons';
 import { useLanguage } from '../context/LanguageContext';
 
 const LifeExpectancy = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [step, setStep] = useState(0);
     const [result, setResult] = useState(null);
@@ -156,8 +156,8 @@ const LifeExpectancy = () => {
     return (
         <div className="max-w-2xl mx-auto px-4 py-8">
             <SEO
-                title={isEn ? "Life Expectancy Calculator - Health Check" : "기대 수명 계산기 | 생활 습관 분석"}
-                description={isEn ? "Analyze your lifestyle habits to estimate your life expectancy and plan for a healthier future." : "나의 생활 습관을 분석하여 기대 수명과 남은 시간을 계산해보세요."}
+                title={t('tools.life-expectancy.title')}
+                description={t('tools.life-expectancy.description')}
                 keywords={isEn ? "life expectancy, health calculator, longevity, habits, wellness" : "기대수명, 건강계산기, 생활습관, 수명테스트"}
                 category={isEn ? "Health" : "건강"}
                 faqs={faqs}

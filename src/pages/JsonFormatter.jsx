@@ -61,10 +61,6 @@ const JsonFormatter = () => {
         setError('');
     };
 
-    const titleText = isEn ? t('tools.json-formatter.title') : "JSON 뷰어/포맷터 - Utility Hub";
-    const descText = isEn 
-        ? t('tools.json-formatter.description')
-        : "JSON 데이터를 보기 좋게 포맷팅하거나 압축할 수 있습니다. JSON 유효성 검사 기능도 제공합니다.";
     const keywordsText = isEn 
         ? "json formatter, json minifier, beautify json, validate json, online dev tools" 
         : "JSON, JSON 포맷터, JSON 뷰어, JSON 검증, JSON 압축, 개발자도구";
@@ -98,8 +94,8 @@ const JsonFormatter = () => {
     return (
         <div className="max-w-6xl mx-auto space-y-6">
             <SEO
-                title={titleText}
-                description={descText}
+                title={t('tools.json-formatter.title')}
+                description={t('tools.json-formatter.description')}
                 keywords={keywordsText}
                 category="dev"
                 faqs={faqs}

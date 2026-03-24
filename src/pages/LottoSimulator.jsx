@@ -5,7 +5,7 @@ import ToolGuide from '../components/ToolGuide';
 import { useLanguage } from '../context/LanguageContext';
 
 const LottoSimulator = () => {
-    const { lang } = useLanguage();
+    const { lang, t } = useLanguage();
     const isEn = lang === 'en';
     const [isRunning, setIsRunning] = useState(false);
     const [stats, setStats] = useState({
@@ -173,8 +173,8 @@ const LottoSimulator = () => {
     return (
         <div className="max-w-4xl mx-auto px-4 py-12">
             <SEO
-                title={isEn ? "Lotto Jackpot Simulator - Reality Check | Tool Hive" : "로또 당첨 시뮬레이터 | 현실적인 확률 체험 | Tool Hive"}
-                description={isEn ? "How long would it take to win the lottery if you bought tickets every week? Check the realistic odds with our simulator." : "매주 로또를 산다면 언제 1등에 당첨될까? 현실적인 로또 당첨 확률 시뮬레이터로 확인해보세요."}
+                title={t('tools.lotto-simulator.title')}
+                description={t('tools.lotto-simulator.description')}
                 keywords={isEn ? "lotto simulator, lottery odds, jackpot probability, reality check, random numbers" : "로또시뮬레이터, 로또확률, 당첨운, 로또복권, 시뮬레이션"}
                 faqs={toolFaqs}
                 steps={toolSteps}
