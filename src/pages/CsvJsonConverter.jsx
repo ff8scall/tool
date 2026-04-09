@@ -154,11 +154,9 @@ Bob,35,Incheon`);
         setError('');
     };
 
-    const titleText = isEn ? t('tools.csv-json.title') : "CSV ↔ JSON 변환기 - 데이터 변환 도구";
-    const descText = isEn 
-        ? t('tools.csv-json.description')
-        : "CSV와 JSON 형식을 상호 변환하세요. 데이터 처리와 API 작업에 필수적인 도구입니다.";
-    const keywordsText = isEn ? "csv to json, json to csv, csv converter, json converter" : "csv, json, converter, 변환기, csv to json, json to csv, data";
+    const titleText = t('tools.csv-json.title');
+    const descText = t('tools.csv-json.description');
+    const keywordsText = t('tools.csv-json.keywords');
 
     const faqs = isEn ? [
         {

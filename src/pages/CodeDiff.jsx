@@ -48,11 +48,9 @@ const CodeDiff = () => {
         setText2('');
     };
 
-    const titleText = isEn ? t('tools.diff.title') : "코드 비교(Diff) - Utility Hub";
-    const descText = isEn 
-        ? t('tools.diff.description')
-        : "두 개의 텍스트나 코드를 비교하여 차이점을 실시간으로 확인하세요. 추가, 삭제, 수정된 정보를 한눈에 볼 수 있는 Diff 도구입니다.";
-    const keywordsText = isEn ? "code diff online, text comparison, compare source code, diff checker, versions difference" : "코드비교, DiffChecker, 텍스트비교, 차이점확인, 개발자도구";
+    const titleText = t('tools.diff.title');
+    const descText = t('tools.diff.description');
+    const keywordsText = t('tools.diff.keywords');
 
     const faqs = isEn ? [
         {

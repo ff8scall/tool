@@ -98,10 +98,8 @@ const Base64Tool = () => {
         "이미지 주소(Data URI) 생성 시 기본이 되는 텍스트 포맷이 바로 Base64입니다."
     ];
 
-    const titleText = isEn ? "Base64 Encoder/Decoder Tool | Utility Hub" : "Base64 인코더/디코더 | 온라인 텍스트 변환 도구";
-    const descText = isEn 
-        ? "Encode text arrays or decode standard base-64 strings efficiently on your local browser with support for multi-language UTF-8 specs." 
-        : "텍스트를 Base64 포맷으로 안전하게 인코딩하거나, Base64 문자열을 원본 텍스트로 디코딩하세요. 한글 완벽 지원 및 실시간 변환 기능을 제공하는 무료 개발자 도구입니다.";
+    const titleText = t('tools.base64.title');
+    const descText = t('tools.base64.description');
     const keywordsText = isEn ? "base64 encoder, base64 decoder, encode base64, utility tool" : "base64인코더, base64디코더, base64변환기, 온라인인코딩, 온라인디코딩, 개발자도구, 텍스트인코딩";
 
     return (

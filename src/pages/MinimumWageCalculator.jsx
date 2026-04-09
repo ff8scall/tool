@@ -42,8 +42,8 @@ const MinimumWageCalculator = () => {
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Korea Minimum Wage Calculator 2025 - Hourly to Monthly" : "최저임금 계산기 2025 | 내 시급 최저임금 준수 여부 확인"}
-                description={isEn ? "Check if your hourly pay meets the 2025 South Korean minimum wage (10,030 KRW). Calculate monthly salary and weekly holiday pay." : "2025년 최저시급 10,030원 기준으로 내 시급이 기준을 충족하는지 즉시 확인하세요."}
+                title={t('tools.minimum-wage.title')}
+                description={t('tools.minimum-wage.description')}
                 keywords={isEn ? "minimum wage korea 2025, hourly wage calculator, weekly holiday pay korea, 10030 krw, labor law korea" : "최저임금계산기, 최저시급2025, 2025최저임금, 시급계산기, 주휴수당계산"}
                 faqs={faqs}
             />

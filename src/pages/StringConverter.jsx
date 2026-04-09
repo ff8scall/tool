@@ -57,10 +57,8 @@ const StringConverter = () => {
         setInput('');
     };
 
-    const titleText = isEn ? t('tools.string-converter.title') : "문자열 변환기 | 대소문자 변환, 공백 제거, 텍스트 편집 온라인 도구";
-    const descText = isEn 
-        ? t('tools.string-converter.description')
-        : "텍스트를 대문자나 소문자로 바꾸고, 공백을 제거하거나 문자열을 뒤집는 등 다양한 텍스트 편집 작업을 클릭 한 번으로 해결하세요. 실시간 무료 온라인 문자열 변환기입니다.";
+    const titleText = t('tools.string-converter.title');
+    const descText = t('tools.string-converter.description');
     const keywordsText = isEn ? "string converter, uppercase lowercase, remove spaces, title case tool, reverse text online" : "문자열변환기, 대소문자변환, 공백제거, 텍스트편집, 첫글자대문자, 문자열뒤집기, 온라인텍스트도구";
 
     const toolFaqs = isEn ? [

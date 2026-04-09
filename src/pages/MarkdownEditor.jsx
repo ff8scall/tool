@@ -92,11 +92,9 @@ Input raw markdown strings on the left to view the live HTML rendering on the ri
         setMarkdown('');
     };
 
-    const titleText = isEn ? t('tools.markdown-editor.title') : "마크다운 에디터 - 실시간 미리보기 및 HTML 변환";
-    const descText = isEn 
-        ? t('tools.markdown-editor.description')
-        : "온라인 마크다운 에디터. 실시간 미리보기와 함께 마크다운 문서를 작성하고 편집하세요. HTML 변환 및 파일 다운로드를 지원합니다.";
-    const keywordsText = isEn ? "online markdown editor, live md preview, markdown to html converter, github flavor markdown, write readme online" : "마크다운 에디터, markdown editor, md 에디터, 마크다운 미리보기, 텍스트편집기";
+    const titleText = t('tools.markdown-editor.title');
+    const descText = t('tools.markdown-editor.description');
+    const keywordsText = t('tools.markdown-editor.keywords');
 
     const faqs = isEn ? [
         {

@@ -51,11 +51,9 @@ const SpecialCharacters = () => {
         setTimeout(() => setCopiedChar(''), 1500);
     };
 
-    const titleText = isEn ? t('tools.special-char.title') : "특수문자표 - Special Character Copier";
-    const descText = isEn 
-        ? t('tools.special-char.description')
-        : "다양한 특수문자를 한 곳에서 쉽게 복사할 수 있습니다. 화살표, 기호, 수학 기호, 통화 기호 등을 제공합니다.";
-    const keywordsText = isEn ? "special characters, symbols, arrows symbols, math symbols, currency symbols" : "특수문자, 특수기호, 화살표, 수학기호, 통화기호";
+    const titleText = t('tools.special-char.title');
+    const descText = t('tools.special-char.description');
+    const keywordsText = t('tools.special-char.keywords');
 
     return (
         <div className="max-w-4xl mx-auto space-y-6">

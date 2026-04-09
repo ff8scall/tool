@@ -167,11 +167,9 @@ const CronGenerator = () => {
         setCronType('advanced');
     };
 
-    const titleText = isEn ? t('tools.cron-generator.title') : "CRON 표현식 생성기 - 스케줄링 도구";
-    const descText = isEn 
-        ? t('tools.cron-generator.description')
-        : "CRON 표현식을 시각적으로 생성하고 해석하세요. 개발자와 시스템 관리자를 위한 필수 도구입니다.";
-    const keywordsText = isEn ? "cron generator, crontab UI, scheduling expression, generate cron job" : "cron, cron expression, cron generator, 크론, 스케줄링, scheduler";
+    const titleText = t('tools.cron-generator.title');
+    const descText = t('tools.cron-generator.description');
+    const keywordsText = t('tools.cron-generator.keywords');
 
     const faqs = isEn ? [
         {

@@ -39,7 +39,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
         "description": metaDescription,
         "potentialAction": {
             "@type": "SearchAction",
-            "target": `${siteUrl}/#/search?q={search_term_string}`,
+            "target": `${siteUrl}/search?q={search_term_string}`,
             "query-input": "required name=search_term_string"
         }
     };
@@ -137,7 +137,7 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
             <link rel="canonical" href={currentUrl} />
-            <link rel="alternate" hreflang="x-default" href={koUrl} />
+            <link rel="alternate" hreflang="x-default" href={siteUrl} />
             <link rel="alternate" hreflang="ko" href={koUrl} />
             <link rel="alternate" hreflang="en" href={enUrl} />
 
@@ -161,7 +161,6 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
 
             {/* Additional Meta Tags */}
             <meta name="robots" content="index, follow" />
-            <meta name="language" content={lang === 'ko' ? 'Korean' : 'English'} />
             <meta name="author" content="Tool Hive" />
 
             {/* Schema.org JSON-LD */}

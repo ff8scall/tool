@@ -105,8 +105,8 @@ const DateCalculator = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "D-Day & Date Calculator | Business Day Calc" : "D-Day 및 날짜 계산기 | 근무일 계산"}
-                description={isEn ? "Calculate remaining or elapsed time until important dates like anniversaries or exams. Includes business/working day calculation." : "기념일, 시험일 등 중요한 날짜까지 남은 시간이나 지난 시간을 계산하세요. 근무일/영업일 계산 기능 포함."}
+                title={t('tools.date.title')}
+                description={t('tools.date.description')}
                 keywords={isEn ? "D-Day calculation, date calculator, anniversary calc, add days, subtract days, business days, working days" : "D-Day 계산, 날짜 계산, 기념일 계산, 날짜 더하기, 날짜 빼기, 근무일 계산, 영업일 계산"}
                 faqs={faqs}
             />

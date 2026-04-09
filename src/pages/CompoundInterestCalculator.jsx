@@ -56,8 +56,8 @@ const CompoundInterestCalculator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <SEO
-                title={isEn ? "Compound Interest Calculator - ROI & Savings" : "복리 계산기 | 원금, 이율, 기간으로 복리 이자 계산"}
-                description={isEn ? "Calculate future value with compound interest. Compare compound vs simple interest and see the magic of compounding." : "원금, 연이율, 투자 기간을 입력하면 복리로 불어난 최종 금액을 즉시 계산합니다."}
+                title={t('tools.compound-interest.title')}
+                description={t('tools.compound-interest.description')}
                 keywords={isEn ? "compound interest, savings calculator, ROI calculator, finance tool" : "복리계산기, 복리이자계산, 단리복리비교, 투자수익계산, 72법칙"}
                 faqs={faqs}
             />

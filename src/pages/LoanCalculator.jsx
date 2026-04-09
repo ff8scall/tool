@@ -70,8 +70,8 @@ const LoanCalculator = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Loan Calculator - Repayment & Interest" : "대출 이자 계산기 | 원리금균등, 원금균등 대출금 계산"}
-                description={isEn ? "Calculate monthly payments, total interest, and total repayment amount for your loan." : "대출금액, 연이자율, 대출기간을 입력하면 월 납입금과 총 이자를 즉시 계산합니다."}
+                title={t('tools.loan.title')}
+                description={t('tools.loan.description')}
                 keywords={isEn ? "loan calculator, interest calculator, monthly payment, mortgage, credit loan" : "대출계산기, 이자계산기, 대출이자계산, 원리금균등계산, 원금균등계산"}
                 faqs={faqs}
             />

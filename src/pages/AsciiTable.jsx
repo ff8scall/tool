@@ -34,11 +34,9 @@ const AsciiTable = () => {
         return isEn ? 'Symbol' : '기호';
     }
 
-    const titleText = isEn ? t('tools.ascii-table.title') : "아스키 코드표 - ASCII Reference Table";
-    const descText = isEn 
-        ? t('tools.ascii-table.description')
-        : "ASCII 코드표를 확인하고 복사할 수 있습니다. 10진수, 16진수, 문자를 한눈에 볼 수 있습니다.";
-    const keywordsText = isEn ? "ascii table, character codes, hex to ascii, decimal to ascii, ascii chart" : "ASCII, 아스키코드, 문자코드, 16진수, 10진수";
+    const titleText = t('tools.ascii-table.title');
+    const descText = t('tools.ascii-table.description');
+    const keywordsText = t('tools.ascii-table.keywords');
 
     return (
         <div className="max-w-5xl mx-auto space-y-6">

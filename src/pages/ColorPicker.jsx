@@ -62,11 +62,9 @@ const ColorPicker = () => {
         '#374151', '#6b7280', '#9ca3af', '#d1d5db', '#e5e7eb', '#ffffff'
     ];
 
-    const titleText = isEn ? "Color Picker & Converter | Utility Hub" : "색상표 - Utility Hub";
-    const descText = isEn 
-        ? "Pick and convert colors easily via HEX, RGB, and HSL modes. Includes quick copy functions and standard preset colors." 
-        : "색상 코드를 HEX, RGB, HSL 형식으로 변환하고 복사할 수 있습니다. 색상 선택기를 통해 원하는 색상을 쉽게 찾아보세요.";
-    const keywordsText = isEn ? "color picker, hex to rgb, color palette, color converter, hsl" : "색상표, 컬러피커, HEX, RGB, HSL, 색상코드";
+    const titleText = t('tools.color-picker.title');
+    const descText = t('tools.color-picker.description');
+    const keywordsText = t('tools.color-picker.keywords');
 
     return (
         <div className="max-w-3xl mx-auto space-y-6">

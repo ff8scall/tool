@@ -182,10 +182,8 @@ const CurrencyConverter = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             <SEO
-                title={isEn ? "Live Currency Converter | Exchange Rates" : "실시간 환율 계산기 | 달러, 엔화, 유로, 원화 환율 변환"}
-                description={isEn 
-                    ? "Instantly convert USD, EUR, JPY, GBP and more with live exchange rates. Check how much you get easily." 
-                    : "실시간 환율을 기반으로 달러(USD), 엔화(JPY), 유로(EUR), 위안(CNY) 등 전 세계 주요 통화를 즉시 변환하세요. 환전 시 얼마인지 바로 확인하세요."}
+                title={t('tools.currency.title')}
+                description={t('tools.currency.description')}
                 keywords={isEn ? "currency converter, live exchange rates, USD KRW, JPY KRW, EUR KRW, money converter" : "환율계산기, 실시간환율, 달러환율, 엔화환율, 유로환율, 원화환율, 환전계산, USD KRW, JPY KRW, EUR KRW"}
                 faqs={faqs}
             />

@@ -62,11 +62,9 @@ const EncryptionTool = () => {
         setResult('');
     };
 
-    const titleText = isEn ? t('tools.encryption-tool.title') : "암호화/복호화 도구 - AES-256 Online";
-    const descText = isEn 
-        ? t('tools.encryption-tool.description')
-        : "AES 알고리즘을 사용한 텍스트 암호화 및 복호화 도구입니다. 비밀번호를 사용하여 텍스트를 안전하게 관리하세요.";
-    const keywordsText = isEn ? "aes encryption online, text encryptor, decrypt text, password protect text, cryptography tool" : "암호화, 복호화, AES, encryption, decryption, 텍스트암호화";
+    const titleText = t('tools.encryption-tool.title');
+    const descText = t('tools.encryption-tool.description');
+    const keywordsText = t('tools.encryption-tool.keywords');
 
     return (
         <div className="max-w-4xl mx-auto space-y-6">

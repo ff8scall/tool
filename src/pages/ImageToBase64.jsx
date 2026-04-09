@@ -45,11 +45,9 @@ const ImageToBase64 = () => {
         URL.revokeObjectURL(url);
     };
 
-    const titleText = isEn ? "Image to Base64 Converter | Encode Images Online" : "이미지 Base64 변환기 | 온라인 이미지 인코딩 도구";
-    const descText = isEn 
-        ? "Convert any image file (PNG, JPG, SVG, WebP) into a Base64 encoded string instantly. Perfect for embedding images directly into HTML or CSS." 
-        : "이미지 파일을 Base64 문자열로 즉시 변환하세요. HTML이나 CSS에 이미지를 직접 삽입(Embed)할 때 필수적인 유용한 개발자 도구입니다.";
-    const keywordsText = isEn ? "image to base64, base64 encoder, data uri generator, encode image online, svg to base64" : "이미지Base64, Base64변환, 이미지인코딩, DataURL생성, 개발자도구, 이미지임베딩";
+    const titleText = t('tools.image-base64.title');
+    const descText = t('tools.image-base64.description');
+    const keywordsText = t('tools.image-base64.keywords');
 
     const toolFaqs = isEn ? [
         {

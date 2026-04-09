@@ -50,11 +50,9 @@ const IpAddress = () => {
         setTimeout(() => setCopied(false), 1500);
     };
 
-    const titleText = isEn ? "My IP Address & Location Check | Utility Hub" : "IP 주소 확인 - Utility Hub";
-    const descText = isEn 
-        ? "Check your current public IP address, location, and ISP details instantly." 
-        : "현재 사용 중인 공인 IP 주소와 위치 정보를 확인할 수 있습니다.";
-    const keywordsText = isEn ? "my ip address, check ip, public ip, ip location, find ip" : "IP주소, 아이피조회, 공인IP, 위치정보";
+    const titleText = t('tools.ip-address.title');
+    const descText = t('tools.ip-address.description');
+    const keywordsText = t('tools.ip-address.keywords');
 
     return (
         <div className="max-w-2xl mx-auto space-y-6">

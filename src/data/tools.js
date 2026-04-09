@@ -91,7 +91,7 @@ export const tools = [
     {
         id: 'length',
         title: '길이 변환기 | 미터, 피트, 인치 단위 계산',
-        description: '다양한 길이 단위를 즉시 변환하세요. 미터(m), 피트(ft), 인치(in), 센티미터(cm) 등 모든 길이 단위를 지원하는 정확한 무료 온라인 변환 도구입니다.',
+        description: '다양한 길이 단위를 즉시 변환하세요. 미터(m), 피트(ft), 인치(in), 센티미터(cm), 밀리미터(mm), 마일(mile) 등 전 세계 모든 길이 단위를 지원합니다. 별도의 설치 없이 브라우저에서 바로 사용하는 정확한 무료 온라인 변환 도구입니다.',
         path: '/length',
         category: 'unit',
         icon: Ruler,
@@ -102,7 +102,7 @@ export const tools = [
     {
         id: 'weight',
         title: '무게 변환기 | 킬로그램, 파운드, 온스 계산',
-        description: '킬로그램(kg), 파운드(lb), 온스(oz), 그람(g) 등 무게 단위를 간편하게 변환하세요. 정밀한 변환 공식을 사용하는 무료 온라인 무게 계산기입니다.',
+        description: '킬로그램(kg), 파운드(lb), 온스(oz), 그람(g), 밀리그램(mg) 등 무게 단위를 간편하게 상호 변환하세요. 정밀한 변환 공식을 사용하여 해외 직구, 다이어트, 요리 등 생활 속에 필요한 무게를 즉석에서 계산해 주는 무료 온라인 무게 계산기입니다.',
         path: '/weight',
         category: 'unit',
         icon: Weight,
@@ -113,7 +113,7 @@ export const tools = [
     {
         id: 'currency',
         title: '실시간 환율 계산기 | 오늘 달러 엔화 유로 환율 변환',
-        description: '전 세계 주요 통화의 실시간 환율을 확인하고 변환하세요. 달러(USD), 엔화(JPY), 유로(EUR) 등 최신 환율 정보를 기반으로 한 정확한 계산기.',
+        description: '전 세계 주요 통화의 최신 시장 환율을 확인하고 목표 환전 금액을 상세히 분석하세요. 달러(USD), 엔화(JPY), 유로(EUR), 위안(CNY) 등 매일 업데이트되는 실시간 환율 정보를 기반으로 오차 없는 빠르고 정확한 금액 변환을 지원하는 계산기입니다.',
         path: '/currency',
         category: 'unit',
         icon: DollarSign,
@@ -124,7 +124,7 @@ export const tools = [
     {
         id: 'temperature-converter',
         title: '온도 변환기',
-        description: '섭씨(°C), 화씨(°F), 켈빈(K) 등 모든 온도 단위를 즉시 상호 변환하세요. 요리, 과학 실험, 해외 기상 정보 확인에 유용한 정확한 온라인 온도 계산기입니다.',
+        description: '섭씨(°C), 화씨(°F), 켈빈(K) 등 모든 글로벌 온도 단위를 즉시 상호 변환하세요. 해외 요리 레시피 해석, 과학 실험, 미국 등 해외 기상 및 날씨 정보를 확인할 때 유용하게 쓰이는 직관적이고 정확한 무료 온라인 온도 계산기입니다.',
         path: '/temperature-converter',
         category: 'unit',
         icon: Thermometer,
@@ -135,7 +135,7 @@ export const tools = [
     {
         id: 'area-converter',
         title: '면적 변환기',
-        description: '제곱미터(㎡), 평, 에이커, 헥타르 등 다양한 면적 단위를 간편하게 변환하세요. 부동산 거래나 토지 면적 계산 시 유용한 정확한 무료 온라인 면적 변환 도구입니다.',
+        description: '제곱미터(㎡), 평, 에이커(ac), 헥타르(ha) 등 다양한 부동산 면적 단위를 간편하게 변환하세요. 아파트 평수 계산이나 토지 면적 단위 환산 등 일상적인 부동산 거래 및 넓이 파악 시 꼭 필요한 빠르고 정확한 무료 온라인 면적 변환 평수 계산기입니다.',
         path: '/area-converter',
         category: 'unit',
         icon: Ruler,
@@ -146,7 +146,7 @@ export const tools = [
     {
         id: 'volume-converter',
         title: '부피 변환기',
-        description: '리터(L), 갤런(gal), 세제곱미터(㎥), 온스(oz) 등 모든 부피 단위를 즉시 변환하세요. 요리 레시피나 액체 용량 계산에 필요한 정확한 무료 온라인 부피 계산기입니다.',
+        description: '리터(l), 갤런(gal), 세제곱미터(㎥), 온스(oz) 등 모든 액체 및 부피 단위를 즉시 자동 정밀 변환하세요. 해외 요리 레시피나 액체 용량, 과학 계산 등에 꼭 필요한 빠르고 편리한 무료 온라인 부피 전용 계산기 모음입니다.',
         path: '/volume-converter',
         category: 'unit',
         icon: Droplet,
@@ -157,7 +157,7 @@ export const tools = [
     {
         id: 'speed-converter',
         title: '속도 변환기',
-        description: 'km/h, mph, m/s, 노트(knot), 마하(Mach) 등 모든 속도 단위를 즉시 상호 변환하세요. 해외 여행, 항공·선박 속도 이해, 물리 학습에 유용한 정확한 무료 온라인 속도 변환기입니다.',
+        description: 'km/h(시속), mph(마일), m/s(초속), 노트(knot), 마하(Mach) 등 구하기 까다로운 모든 속도 단위를 즉시 상호 변환하세요. 해외 여행 시 자동차 속도계 체감, 항공·선박 이동 속도 이해, 차량 스펙 비교에 유용한 정확한 무료 온라인 속도 계산기입니다.',
         path: '/speed-converter',
         category: 'unit',
         icon: Gauge,
@@ -169,8 +169,8 @@ export const tools = [
     // Finance/Life
     {
         id: 'loan',
-        title: '대출금 계산기',
-        description: '대출 금액, 금리, 기간을 입력하여 매월 납부해야 하는 원리금 균등상환액과 총 이자 비용을 정확하게 계산해 보세요.',
+        title: '대출 이자 계산기 | 원리금균등, 만기일시 상환',
+        description: '대출 금액, 금리, 기간을 입력하여 매월 납부해야 하는 원리금 균등상환, 원금균등상환, 만기일시상환 방식별 이자와 총 상환 비용을 정확하게 계산하세요. 주담대, 전세자금, 신용대출 상환 계획 수립 시 필수적인 무료 대출이자 계산기입니다.',
         path: '/loan',
         category: 'finance',
         icon: Calculator,
@@ -180,8 +180,8 @@ export const tools = [
     },
     {
         id: 'salary',
-        title: '연봉 실수령액',
-        description: '2024-2025년 최신 세율과 4대 보험 사회보험 요율을 적용하여 나의 실제 월급 실수령액을 간편하게 계산할 수 있습니다.',
+        title: '연봉 실수령액 계산기 | 2025년 최신 4대보험 반영',
+        description: '2025년 최신 세율, 4대 사회보험 요율(국민연금, 건강보험, 고용보험), 소득세 및 비과세 한도(식대 등)를 모두 반영하여 나의 실제 월급 실수령액을 간편하게 계산하세요. 이직이나 연봉 협상 시 진짜 가져가는 급여 내역을 1원 단위까지 확인 가능합니다.',
         path: '/salary-calculator',
         category: 'finance',
         icon: DollarSign,
@@ -192,7 +192,7 @@ export const tools = [
     {
         id: 'severance',
         title: '퇴직금 계산기',
-        description: '입사일과 퇴사일, 최근 3개월 급여 정보를 바탕으로 예상 퇴직금을 정확하게 산출해 드립니다. 법정 퇴직금 계산법을 준수합니다.',
+        description: '입사일과 퇴사일, 최근 3개월 급여 및 상여금 정보를 바탕으로 예상 퇴직금을 정확하게 산출해 드립니다. 고용노동부 기준 법정 퇴직금 계산법을 준수하므로 퇴사 전 정확한 재무 계획을 세우고 퇴직 연금을 확인해 볼 수 있습니다.',
         path: '/severance-calculator',
         category: 'finance',
         icon: Wallet,
@@ -202,8 +202,8 @@ export const tools = [
     },
     {
         id: 'minimum-wage',
-        title: '최저임금 계산기',
-        description: '2024년 및 2025년 최저임금을 기준으로 주휴수당을 포함한 나의 실제 시급과 월급을 즉시 확인하고 계산해 보세요.',
+        title: '최저임금 계산기 | 2025년 주휴수당 포함 월급 계산',
+        description: '2025년 최저임금(10,030원)을 기준으로 나의 시급이 법적 기준을 충족하는지 바로 확인하세요. 정규 근로시간에 따른 예상 월급과 필수 산정되는 주휴수당까지 한 번에 자동 계산하여 알바나 파트타임 근무 시 꼭 필요한 임금 계산 도구입니다.',
         path: '/minimum-wage-calculator',
         category: 'finance',
         icon: Coins,
@@ -213,8 +213,8 @@ export const tools = [
     },
     {
         id: 'compound-interest',
-        title: '복리 계산기',
-        description: '원금과 월 적립액, 이자율, 투자 기간을 설정하여 복리 이자의 놀라운 효과와 최종 투자 수익금을 시뮬레이션해 보세요.',
+        title: '복리 계산기 | 예금 적금 투자 수익률 계산',
+        description: '원금과 월별 적립액, 기대 이자율, 그리고 투자 기간을 설정하여 시간이 지날수록 눈덩이처럼 불어나는 복리 이자의 마법을 시뮬레이션하세요. 주식, 펀드, 예적금 투자의 장기적인 연평균 수익률(CAGR)을 분석하는 강력한 투자 도구입니다.',
         path: '/compound-interest',
         category: 'finance',
         icon: Calculator,
@@ -224,8 +224,8 @@ export const tools = [
     },
     {
         id: 'percent-calculator',
-        title: '퍼센트 계산기',
-        description: '전체값의 일정 비율, 값의 증감율, 할인가격 계산 등 일상에서 자주 쓰이는 퍼센트 계산을 막힘없이 해결해 드립니다.',
+        title: '퍼센트 계산기 (백분율)',
+        description: '전체값의 일정 비율(%), 값 간의 증감률, 주식 수익률, 할인가격 계산 등 일상에서 자주 접하지만 헷갈리는 모든 백분율 및 퍼센트 연산을 한 번에 막힘없이 해결해 드립니다. 비즈니스 마진율이나 쇼핑 할인율 파악에 특화된 직관적이고 정확한 계산기입니다.',
         path: '/percent-calculator',
         category: 'finance',
         icon: Percent,
@@ -236,7 +236,7 @@ export const tools = [
     {
         id: 'discount-calculator',
         title: '할인 계산기',
-        description: '상품 가격과 할인율을 입력하여 최종 구매 가격과 절약된 금액을 확인하세요. 1+1 할인이나 추가 할인율 적용도 가능합니다.',
+        description: '상품 원가와 세일 할인율(%)을 입력하여 정확한 최종 결제 금액과 실제 절약된 혜택 금액을 확인하세요. 이중 할인이나 추가 쿠폰이 적용될 경우의 실구매가를 한 번에 알 수 있어 효율적이고 알뜰한 쇼핑을 도와주는 쇼핑 전용 계산기입니다.',
         path: '/discount-calculator',
         category: 'finance',
         icon: Calculator,
@@ -246,8 +246,8 @@ export const tools = [
     },
     {
         id: 'work-hours',
-        title: '근무시간 계산기',
-        description: '출근 시간과 퇴근 시간, 휴게 시간을 입력하여 나의 하루 총 근무 시간과 주간 합산 근로 시간을 간편하게 기록하고 확인하세요.',
+        title: '근무 시간 계산기 | 통상임금, 초과수당 자동 계산',
+        description: '나의 출근 시간과 퇴근 시간, 휴게 시간을 입력하여 하루 실근로 시간과 주간 합산 근로 시간을 간편하게 기록하고 확인하세요. 아르바이트, 교대 근무, 시급제 근로자의 정확한 소정근로시간 파악 및 초과 근무 시간에 따른 추가 임금 산정에 매우 유용한 도구입니다.',
         path: '/work-hours',
         category: 'finance',
         icon: Clock,
@@ -257,8 +257,8 @@ export const tools = [
     },
     {
         id: 'age-calc',
-        title: '나이 계산기',
-        description: '나의 생년월일을 입력하여 현재의 정확한 만 나이, 연 나이, 그리고 다음 생일까지 남은 날짜를 즉시 계산해 드립니다.',
+        title: '나이 계산기 | 만 나이, 연 나이 자동 계산',
+        description: '법적 기준인 ‘만 나이 통일법’에 맞춰 나의 생년월일을 입력하면 현재 정확한 만 나이와 연 나이를 즉시 보여줍니다. 또한 띠 확인 및 다음 생일까지 남은 D-Day 날짜를 계산해 주어 여권 발급, 군인, 연금 수급 등 중요 법적 자격 요건 확인에 필수적입니다.',
         path: '/age-calc',
         category: 'finance',
         icon: Calendar,
@@ -268,8 +268,8 @@ export const tools = [
     },
     {
         id: 'date',
-        title: '날짜 계산기',
-        description: '두 날짜 사이의 일수 차이 계산, 특정 날짜로부터 100일/200일 뒤 계산 등 디데이와 날짜 관리를 한곳에서 해결하세요.',
+        title: '날짜 계산기 | 디데이(D-Day), 만난 날짜 자동 계산',
+        description: '두 날짜 사이의 정확한 일수 차이 계산, 커플 연애 100일/200일 등 지정일로부터 지난 날짜 또는 앞으로 남은 D-Day 계산을 간편하게 해결하세요. 아기 개월 수, 달력 기반 휴일 제외 영업일 계산 등 중요한 날짜 관리를 한곳에서 모아 직관적으로 제공합니다.',
         path: '/date',
         category: 'finance',
         icon: Calendar,
@@ -279,8 +279,8 @@ export const tools = [
     },
     {
         id: 'lunch-recommender',
-        title: '점심 메뉴 추천',
-        description: '오늘 점심 뭐 먹지? 한식, 중식, 일식 등 다양한 카테고리 중에서 당신의 입맛에 맞는 메뉴를 랜덤으로 추천해 드립니다.',
+        title: '점심 메뉴 추천 & 룰렛',
+        description: '오늘 점심 뭐 먹지? 고민될 때 한식, 중식, 일식, 양식 등 다양한 카테고리 중에서 당신의 입맛에 맞는 매력적인 메뉴를 랜덤으로 추천해 드립니다. 식사 결정 장애를 한 번에 해결해 주는 재미있고 유용한 직장인 및 학생 필수 메뉴 추천 룰렛 도구입니다.',
         path: '/lunch-recommender',
         category: 'finance',
         icon: Utensils,
@@ -292,8 +292,8 @@ export const tools = [
     // Text Tools
     {
         id: 'word-count',
-        title: '글자 수 세기',
-        description: '입력한 텍스트의 공백 포함/제외 글자 수, 단어 수, 문장 수 및 원고지 매수를 즉시 확인하고 분석해 드립니다.',
+        title: '글자 수 세기 | 이력서 자소서 글자수 계산기',
+        description: '입력한 텍스트의 공백 포함 및 공백 제외 글자 수, 단어 수, 문장 수, 원고지 매수(200자 기준), 바이트(Byte)를 즉시 실시간으로 아주 정확하게 분석해 드립니다. 입사 지원서, 자기소개서 작성이나 블로그, SNS 포스팅 최적화 시 꼭 필요한 필수 글자수 계산기입니다.',
         path: '/word-count',
         category: 'text',
         icon: FileText,
@@ -303,8 +303,8 @@ export const tools = [
     },
     {
         id: 'unicode',
-        title: '유니코드 변환기',
-        description: '일반 텍스트를 유니코드(Unicode) 형식으로 변환하거나, 유니코드 이스케이프 문자를 읽기 쉬운 텍스트로 상호 변환해 보세요.',
+        title: '유니코드 변환기 | 인코딩 디코딩 문자 변환',
+        description: '한글, 영문, 특수 기호 등 일반 텍스트를 컴퓨터가 이해할 수 있는 유니코드(Unicode) 이스케이프 이진 형식으로 완벽하게 인코딩 변환하거나, 읽기 복잡한 유니코드 문자를 다시 알아보기 쉬운 일상적인 텍스트 언어로 안전하고 신속하게 디코딩 해주는 개발자 전용 도구입니다.',
         path: '/unicode',
         category: 'text',
         icon: Code,
@@ -314,8 +314,8 @@ export const tools = [
     },
     {
         id: 'string-converter',
-        title: '문자열 변환기',
-        description: '문자열의 대소문자 변환(Upper/Lower), 카멜 케이스, 파스칼 케이스 등 다양한 프로그래밍 명명 규칙으로 즉시 변환합니다.',
+        title: '문자열 변환기 | 대소문자, 카멜케이스 포맷 변환',
+        description: '영문 문자열의 전체 대문자(Uppercase), 소문자(Lowercase) 변환은 물론, 개발자에게 유용한 카멜 케이스(camelCase), 파스칼 케이스(PascalCase), 스네이크 케이스, 케밥 케이스 등 프로그래밍 코딩 명명 규칙에 맞게 즉시 다중 변환합니다.',
         path: '/string-converter',
         category: 'text',
         icon: Type,
@@ -325,8 +325,8 @@ export const tools = [
     },
     {
         id: 'base64',
-        title: 'Base64 도구',
-        description: '텍스트 데이터를 Base64 형식으로 인코딩하거나 base64 코드를 다시 일반 텍스트로 안전하게 디코딩할 수 있는 온라인 도구입니다.',
+        title: 'Base64 인코더 및 디코더 | 텍스트 변환',
+        description: '중요한 텍스트 문자열이나 프로그래밍 데이터를 암호화표준인 Base64 형식으로 빠르게 인코딩하거나, 전달받은 Base64 코드를 원래의 깨끗한 일반 텍스트로 안전하게 디코딩할 수 있습니다. 데이터 전송 오류를 막고 코드 스니펫 보안을 도와주는 강력한 무료 웹 기반 도구입니다.',
         path: '/base64',
         category: 'text',
         icon: FileDigit,
@@ -336,8 +336,8 @@ export const tools = [
     },
     {
         id: 'html-encoder',
-        title: 'HTML 인코더',
-        description: 'HTML 특수 문자나 태그를 안전하게 이스케이프 인코딩하거나 원본 상태로 디코딩하여 웹 취약점 예방 및 코드 작성을 돕습니다.',
+        title: 'HTML 인코더 및 디코더 | 엔티티 이스케이프',
+        description: '웹페이지 개발 시 충돌을 일으키는 HTML 특수 문자나 태그를 안전한 HTML 엔티티(Entity) 형태로 이스케이프 인코딩하거나 원본 소스 상태로 디코딩합니다. XSS와 같은 크로스 사이트 스크립팅 웹 취약점 예방 및 안전한 프론트엔드 코드 작성을 적극적으로 돕습니다.',
         path: '/html-encoder',
         category: 'text',
         icon: Code,
@@ -347,8 +347,8 @@ export const tools = [
     },
     {
         id: 'morse-code',
-        title: '모스 부호 변환기',
-        description: '한글, 영어, 숫자를 국제 표준 모스 부호로 변환하거나 모스 신호를 다시 텍스트로 번역해 주는 재미있는 도구입니다.',
+        title: '모스 부호 변환기 (번역기)',
+        description: '한글, 영어 알파벳, 숫자를 국제 민간 표준 규격인 삐- 점과 선의 모스 부호(Morse Code)로 완벽하게 변환하거나, 알 수 없는 모스 신호 체계를 다시 읽을 수 있는 텍스트 문서로 자동 번역 및 해독해 주는 매우 유익하고 흥미로운 양방향 통신 암호 변환 도구입니다.',
         path: '/morse-code',
         category: 'text',
         icon: Radio,
@@ -361,18 +361,18 @@ export const tools = [
     {
         id: 'base-converter',
         title: '진법 변환기',
-        description: '2진수, 8진수, 10진수, 16진수 간의 즉각적인 변환을 수행하세요. 각 진법별 정확한 결과값과 포맷팅을 제공합니다.',
+        description: '복잡한 2진수, 8진수, 10진수, 16진수 사이의 진법 변환을 즉시 수행합니다. 각 진법별 정확한 표현 방식과 컴퓨터 공학에 필요한 수학적 계산 결과치를 실시간으로 제공하는 개발자 전용 무료 웹 계산기입니다.',
         path: '/base-converter',
         category: 'dev',
         icon: Binary,
         color: 'bg-green-600',
         translated: true,
-        keywords: ['진법', 'binary', 'hex', 'decimal']
+        keywords: ['진법', 'binary', 'hex', 'decimal', 'calculator', '2진수', '16진수']
     },
     {
         id: 'json-formatter',
         title: 'JSON 포맷터',
-        description: '복잡한 JSON 데이터를 읽기 좋게 정렬하고 문법 오류를 검증하세요. 트리 뷰를 통해 데이터 구조를 한눈에 파악할 수 있습니다.',
+        description: '복잡하고 길게 얽혀 알아보기 힘든 JSON 데이터를 사람이 읽기 좋게 들여쓰기 정렬(Beautify)해주고 문법 오류를 확실하게 검사해 드립니다. 깔끔한 트리 구조 뷰어 기능을 통해 데이터 파싱 구조를 단번에 파악하세요.',
         path: '/json-formatter',
         category: 'dev',
         icon: FileCode,
@@ -382,19 +382,19 @@ export const tools = [
     },
     {
         id: 'markdown-editor',
-        title: '마크다운 에디터',
-        description: '브라우저에서 직접 마크다운 코드를 작성하고 실시간으로 렌더링된 결과를 확인하세요. 문서 작성과 메모에 최적화된 도구입니다.',
+        title: '마크다운 에디터 | 실시간 미리보기 및 HTML 변환',
+        description: '웹 브라우저에서 마크다운(Markdown) 코드를 작성하고 실시간 미리보기로 결과물을 즉시 확인하세요. 깃허브 리드미 작성 및 블로그 포스팅에 최적화된 무료 에디터입니다.',
         path: '/markdown-editor',
         category: 'dev',
         icon: FileText,
         color: 'bg-emerald-600',
         translated: true,
-        keywords: ['markdown', 'editor', 'preview']
+        keywords: ['markdown', 'editor', 'preview', 'github', 'readme', '마크다운']
     },
     {
         id: 'html-view',
         title: 'HTML 포맷터',
-        description: 'HTML 코드를 깔끔하게 정리하거나, 작성한 코드가 웹 브라우저에서 어떻게 보이는지 실시간 렌더링으로 확인해 보세요.',
+        description: '정돈되지 않은 HTML 소스 코드를 깔끔하게 정렬 포맷팅(Beautify) 하거나, 작성한 태그 코드가 실제 웹 브라우저 환경에서 어떻게 렌더링되어 보이는지 실시간 결과물로 점검할 수 있는 유용한 프론트엔드 검증 도구입니다.',
         path: '/html-view',
         category: 'dev',
         icon: FileCode,
@@ -404,19 +404,19 @@ export const tools = [
     },
     {
         id: 'diff',
-        title: '코드 비교',
-        description: '두 개의 코드나 텍스트를 비교하여 추가, 삭제, 수정된 부분을 시각적으로 찾아냅니다. 변경 사항 추적 및 디버깅에 유용합니다.',
+        title: '코드 텍스트 비교 (Diff Checker)',
+        description: '두 개의 서로 다른 코드나 텍스트 문서를 양옆으로 비교하여 추가되거나 삭제된 부분, 미세하게 변경된 줄을 깃(Git)처럼 시각적으로 한눈에 명확히 파악할 수 있도록 돕는 차이점 분석 및 디버깅 전용 툴입니다.',
         path: '/diff',
         category: 'dev',
         icon: GitCompare,
         color: 'bg-lime-600',
         translated: true,
-        keywords: ['diff', 'compare', 'code']
+        keywords: ['diff', 'compare', 'code', 'text', '비교', '차이']
     },
     {
         id: 'web-editor',
         title: '웹 에디터',
-        description: 'HTML, CSS, JavaScript 코드를 실시간으로 편집하고 결과물을 즉시 확인하세요. 웹 디자인과 프론트엔드 학습에 최적입니다.',
+        description: '에디터 설치 없이 HTML, CSS, JavaScript 코드를 웹상에서 실시간으로 직접 편집하고 디자인 결과 화면을 즉시 확인해 보세요. 코드펜(CodePen)처럼 자유로운 퍼블리싱 학습이 가능합니다.',
         path: '/web-editor',
         category: 'dev',
         icon: Edit,
@@ -427,7 +427,7 @@ export const tools = [
     {
         id: 'hash-gen',
         title: '해시 생성기',
-        description: 'MD5, SHA-1, SHA-256 등 다양한 암호화 알고리즘을 사용하여 입력한 텍스트의 보안 해시값을 즉석에서 생성합니다.',
+        description: '입력한 일반 텍스트 문장이나 비밀번호를 MD5, SHA-1, SHA-256, SHA-512 등 세계적으로 널리 쓰이는 다양한 암호화 알고리즘을 사용하여 복원 불가능한 일방향 보안 해시 문자열 값으로 즉석에서 안전하게 생성해 드립니다.',
         path: '/hash-gen',
         category: 'dev',
         icon: Hash,
@@ -438,7 +438,7 @@ export const tools = [
     {
         id: 'uuid-gen',
         title: 'UUID 생성기',
-        description: '소프트웨어 개발에 필요한 고유 식별자(UUID v4)를 생성합니다. 데이터베이스 입력이나 API 개발을 위한 고유 키를 즉시 발급받으세요.',
+        description: '소프트웨어 개발에 필수적으로 요구되는 절대 중복되지 않는 범용 고유 식별자인 UUID v4 버전을 대량으로 빠르게 생성해 드립니다. 데이터베이스 프라이머리 키(PK) 입력이나 안전한 API 통신을 위한 고유 키를 즉시 발급받으세요.',
         path: '/uuid-gen',
         category: 'dev',
         icon: Key,
@@ -449,7 +449,7 @@ export const tools = [
     {
         id: 'url-encoder',
         title: 'URL 인코더/디코더',
-        description: 'URL의 특수 기호나 비아스키 문자를 안전하게 인코딩하거나, 인코딩된 주소를 다시 읽기 쉬운 원본 URL로 디코딩합니다.',
+        description: '인터넷 웹 URL 주소에 포함된 민감한 특수 문자나 한글 데이터를 브라우저가 인식할 수 있는 안전한 퍼센트 인코딩 형식으로 변환하거나 알아보기 힘든 인코딩된 주소를 다시 가독성 높은 원본 주소로 디코딩합니다.',
         path: '/url-encoder',
         category: 'dev',
         icon: Link,
@@ -460,7 +460,7 @@ export const tools = [
     {
         id: 'jwt-decoder',
         title: 'JWT 디코더',
-        description: 'JSON 웹 토큰(JWT)의 헤더와 페이로드를 디코딩하여 클레임과 서명 내용을 안전하고 간편하게 디버깅 및 확인할 수 있습니다.',
+        description: '웹 인증에 널리 사용되는 JSON 웹 토큰(JWT)의 헤더(Header)와 페이로드(Payload) 데이터를 브라우저 단에서 즉시 디코딩하여, 내부 클레임 정보와 서명 만료일 등의 구조를 안전하게 디버깅하세요.',
         path: '/jwt-decoder',
         category: 'dev',
         icon: Key,
@@ -471,7 +471,7 @@ export const tools = [
     {
         id: 'regex-tester',
         title: '정규식 테스터',
-        description: '작성한 정규 표현식을 대상 텍스트에 실시간으로 테스트하고 그룹 캡처 결과를 확인하여 패턴이 정확한지 검증해 보세요.',
+        description: '난해한 정규표현식(Regular Expression) 패턴을 실시간으로 테스트하고 즉시 매칭 결과를 검증하세요. 자바스크립트(JS) 엔진 기반의 직관적인 구문 하이라이트와 유용한 문법 치트시트를 활용하여 쉽고 빠르게 코드를 완성합니다.',
         path: '/regex-tester',
         category: 'dev',
         icon: Search,
@@ -482,7 +482,7 @@ export const tools = [
     {
         id: 'ascii-art',
         title: '아스키아트',
-        description: '일반 텍스트를 화려한 아스키 아트(ASCII Art) 문자로 변환하여 커뮤니티나 코드 주석 등에 사용할 개성 있는 시각 요소를 만듭니다.',
+        description: '영문 텍스트를 화려한 아스키 아트(ASCII Art) 모양의 폰트 블록으로 즉시 변환해 줍니다. 텍스트 기반 커뮤니티나 코드 주석 등에 사용하여 개성 있는 시각적 요소를 자유롭게 만들어 보세요.',
         path: '/ascii-art',
         category: 'dev',
         icon: Type,
@@ -492,8 +492,8 @@ export const tools = [
     },
     {
         id: 'ascii-table',
-        title: '아스키 코드표',
-        description: '컴퓨터 통신에서 사용하는 ASCII 코드 전체 표를 제공하며, 출력 가능 문자와 제어 문자를 구분하여 인덱스 번호를 확인할 수 있습니다.',
+        title: '아스키 코드표 (ASCII Table) | 10진수 16진수 문자 대응표',
+        description: '표준 ASCII 코드표를 한눈에 확인하세요. 10진수, 16진수, 문자와 상세 설명을 제공하며 클릭 한 번으로 문자를 복사할 수 있는 개발자 전용 필수 참조 도구입니다.',
         path: '/ascii-table',
         category: 'dev',
         icon: FileCode,
@@ -503,8 +503,8 @@ export const tools = [
     },
     {
         id: 'special-char',
-        title: '특수문자표',
-        description: '키보드로 입력하기 어려운 자주 사용하는 특수 기호, 이모지, 화살표 등을 모아두었습니다. 클릭 한 번으로 간편하게 복사하세요.',
+        title: '특수문자표 | 이모지 및 특수기호 원클릭 복사 모음',
+        description: '화살표, 수학 기호, 통화 단위, 이모지 등 다양한 특수문자를 카테고리별로 모았습니다. 필요한 기호를 클릭하여 즉시 클립보드에 복사해 문서 및 채팅에 활용하세요.',
         path: '/special-char',
         category: 'dev',
         icon: Hash,
@@ -514,8 +514,8 @@ export const tools = [
     },
     {
         id: 'cron-generator',
-        title: 'CRON 표현식 생성기',
-        description: '리눅스나 유닉스 스케줄링을 위한 CRON 표현식을 클릭만으로 생성하세요. 실행 주기를 쉽게 확인하고 이해할 수 있습니다.',
+        title: 'CRON 표현식 생성기 | 크론탭(Crontab) 스케줄 설정 도구',
+        description: '복잡한 CRON 표현식을 UI를 통해 간편하게 생성하세요. 실행 주기를 시각적으로 설정하고 향후 실행 일정을 미리 확인하여 서버 예약 작업을 완벽하게 관리할 수 있습니다.',
         path: '/cron-generator',
         category: 'dev',
         icon: Clock,
@@ -525,8 +525,8 @@ export const tools = [
     },
     {
         id: 'csv-json',
-        title: 'CSV ↔ JSON 변환기',
-        description: '엑셀이나 데이터베이스의 CSV 데이터를 JSON 형식으로, 또는 그 반대로 변환하여 데이터 형식을 간편하게 일치시킬 수 있습니다.',
+        title: 'CSV ↔ JSON 변환기 | 데이터 양방향 변환기',
+        description: 'CSV 파일을 JSON 객체로, 또는 JSON 데이터를 CSV 형식으로 상호 변환하세요. 데이터 파싱과 API 연동 작업을 돕는 빠르고 정확한 무료 온라인 데이터 변환 도구입니다.',
         path: '/csv-json',
         category: 'dev',
         icon: ArrowLeftRight,
@@ -537,7 +537,7 @@ export const tools = [
     {
         id: 'fraction-calculator',
         title: '분수 계산기',
-        description: '분수의 덧셈, 뺄셈, 곱셈, 나눗셈 등 사칙연산을 수행합니다. 기약 분수 형태와 소수점 결과를 동시에 확인할 수 있습니다.',
+        description: '까다로운 두 분수의 덧셈, 뺄셈, 곱셈, 나눗셈 수학 연산을 정밀하게 수행합니다. 단순히 정답만 던져주는 것이 아니라 자동으로 약분 처리된 깔끔한 기약 분수 형태와 직관적인 소수점 환산 결과를 동시에 한 번에 제공합니다.',
         path: '/fraction-calculator',
         category: 'dev',
         icon: Divide,
@@ -547,8 +547,8 @@ export const tools = [
     },
     {
         id: 'encryption-tool',
-        title: '암호화/복호화 도구',
-        description: '강력한 대칭키 암호화 방식인 AES 알고리즘을 사용하여 중요한 텍스트 데이터를 나만의 비밀번호로 안전하게 잠그고 복원하세요.',
+        title: 'AES 텍스트 암호화 및 복호화 | 텍스트 보안 도구',
+        description: 'AES-256 알고리즘을 사용하여 중요한 텍스트를 비밀번호로 암호화하거나 복호화하세요. 브라우저 내에서 안전하게 처리되어 개인정보 유출 걱정 없이 보안 메시지를 관리합니다.',
         path: '/encryption-tool',
         category: 'dev',
         icon: Lock,
@@ -560,8 +560,8 @@ export const tools = [
     // Utility
     {
         id: 'qr-gen',
-        title: 'QR코드 생성기',
-        description: 'URL 주소나 텍스트 정보를 고화질 QR코드로 즉시 변환하고 다운로드하세요. 마케팅, 명함, 정보 공유에 편리한 도구입니다.',
+        title: 'QR코드 생성기 | URL 및 와이파이 명함 QR 만들기',
+        description: '웹사이트 주소, 텍스트, WiFi 연결 정보, 연락처(vCard)를 담은 고화질 QR코드를 즉시 생성하고 다운로드하세요. 마케팅 및 정보 공유를 위한 최적의 무료 도구입니다.',
         path: '/qr-gen',
         category: 'utility',
         icon: QrCode,
@@ -593,8 +593,8 @@ export const tools = [
     },
     {
         id: 'color-picker',
-        title: '색상표',
-        description: '웹 디자인에 필요한 최적의 색상 코드를 선택하고 HEX, RGB, HSL 형식을 즉시 확인하세요. 일관성 있는 색상 조합을 돕습니다.',
+        title: '색상표 & 컬러 피커 | HEX RGB HSL 색상 변환',
+        description: '디자인에 필요한 컬러 코드를 선택하고 HEX, RGB, HSL 형식으로 즉시 확인하세요. 웹 안전 색상과 팔레트 기능을 제공하여 완벽한 디자인 작업을 돕는 무료 색상표 도구입니다.',
         path: '/color-picker',
         category: 'utility',
         icon: Palette,
@@ -604,8 +604,8 @@ export const tools = [
     },
     {
         id: 'image-base64',
-        title: '이미지 Base64',
-        description: '이미지 파일을 Base64 문자열로 인코딩하여 HTML이나 CSS에 직접 삽입할 수 있게 해주는 개발자용 변환 도구입니다.',
+        title: '이미지 Base64 변환기 | 온라인 이미지 인코딩 도구',
+        description: '이미지 파일을 Base64 문자열로 인코딩하여 HTML이나 CSS에 직접 삽입 가능한 Data URI 형식으로 변환하세요. 별도 파일 없이 이미지를 임베딩하는 필수 개발 도구입니다.',
         path: '/image-base64',
         category: 'utility',
         icon: Lightbulb,
@@ -615,8 +615,8 @@ export const tools = [
     },
     {
         id: 'ip-address',
-        title: 'IP 주소 확인',
-        description: '현재 사용 중인 공인 IP 주소와 대략적인 네트워크 위치를 즉시 확인하세요. 인터넷 연결 상태 확인 및 트러블슈팅에 유용합니다.',
+        title: '내 IP 주소 확인 | 공인 IP 및 위치 정보 조회',
+        description: '현재 접속 중인 공인 IP 주소와 네트워크 위치, ISP 정보를 즉시 확인하세요. 별도의 프로그램 설치 없이 내 인터넷 연결 상태와 아이피 주소를 상세히 알려드립니다.',
         path: '/ip-address',
         category: 'utility',
         icon: Globe,

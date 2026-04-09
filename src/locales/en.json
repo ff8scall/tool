@@ -38,139 +38,140 @@
     },
     "length": {
       "title": "Length Converter | Meters, Feet, Inches",
-      "description": "Convert between meters, feet, inches, centimeters, and miles easily."
+      "description": "Convert between all length units like meters, feet, inches, centimeters, and miles instantly. An essential, fast, and free online conversion tool that gives precise measurements for construction, DIY projects, and everyday use."
     },
     "weight": {
       "title": "Weight Converter | Kilograms, Pounds, Ounces",
-      "description": "Convert between kilograms, pounds, ounces, and grams accurately."
+      "description": "Convert weight and mass between kilograms, pounds, ounces, and grams with high precision. Use this completely free online calculator for cooking recipes, international weight tracking, diets, and gym equipment conversions."
     },
     "currency": {
       "title": "Currency Converter | Real-time Exchange Rates",
-      "description": "Real-time exchange rates for USD, EUR, JPY and more."
+      "description": "Discover current live exchange rates for USD, EUR, JPY, GBP, and more global currencies instantly. A fast, powerful calculator to track market currency fluctuations and find out exactly how much you get to the decimal."
     },
     "temperature-converter": {
       "title": "Temperature Converter",
-      "description": "Instantly convert between Celsius (°C), Fahrenheit (°F), and Kelvin (K). A precise online tool perfect for cooking, science experiments, and checking international weather reports."
+      "description": "Instantly convert between Celsius (°C), Fahrenheit (°F), and Kelvin (K). A fast and highly precise online tool strictly designed for diverse global cooking recipes, science experiments, or checking international weather reports seamlessly."
     },
     "area-converter": {
       "title": "Area Converter",
-      "description": "Easily convert area units including square meters (㎡), acres, hectares, and pyeong. A precise, free online tool for real estate transactions and land measurements."
+      "description": "Easily convert various area units including square meters (㎡), acres, hectares, and regional pyeong. A robust and precise free online tool optimized for real estate transactions, gardening, or land measurements anywhere."
     },
     "volume-converter": {
       "title": "Volume Converter",
-      "description": "Convert all volume units instantly: liters (L), gallons (gal), cubic meters (㎥), and ounces (oz). A precise, free online tool for cooking recipes and liquid capacity calculations."
+      "description": "Convert all complex volume units instantly: liters (L), gallons (gal), cubic meters (㎥), and fluid ounces (oz). A precise, totally free online browser tool for translating baking recipes and figuring out exact liquid capacity calculations."
     },
     "speed-converter": {
       "title": "Speed Converter",
-      "description": "Instantly convert speed units: km/h, mph, m/s, knots, and Mach. A precise, free online tool for international travel, aviation, maritime analysis, and physics studies."
+      "description": "Instantly convert complicated speed units: km/h, mph, m/s, knots, and Mach without hassle. A precisely-tuned free online tool perfect for international travel, aviation, maritime analysis, driving specs, and advanced physics studies."
     },
     "loan": {
-      "title": "Loan Calculator",
-      "description": "Accurately calculate your monthly principle and interest payments along with total interest costs by entering the loan amount, rate, and term."
+      "title": "Loan Calculator | Amortization Schedule",
+      "description": "Calculate your monthly payments, total interest, and complete amortization schedules easily. Discover exactly how much your mortgage, auto loan, or personal credit loan will cost over time with precision."
     },
     "salary": {
-      "title": "Salary Calculator",
-      "description": "Easily estimate your actual take-home pay by applying the latest 2024-2025 tax rates and social insurance contributions for 4 major insurances."
+      "title": "Salary Net Pay Calculator",
+      "description": "Calculate your true take-home pay based on current tax brackets and social insurance rates. Estimate your monthly net salary instantly after strict national pension, health, and employment tax deductions."
     },
     "severance": {
       "title": "Severance Pay Calculator",
-      "description": "Calculate your expected severance pay based on your start date, resignation date, and recent 3 months of salary. Compliant with legal calculation methods."
+      "description": "Accurately estimate your severance pay based on your start date, end date, and average 3-month salary. Ensure you receive the correct mandated final compensation before resigning from your job."
     },
     "minimum-wage": {
       "title": "Minimum Wage Calculator",
-      "description": "Check and calculate your actual hourly and monthly wage, including weekly holiday pay, based on the 2024 and 2025 minimum wage standards."
+      "description": "Instantly verify if your hourly wage aligns with the 2025 mandated legal minimum wage. Automatically compute your expected monthly income and strict weekly holiday allowances for part-time jobs."
     },
     "compound-interest": {
       "title": "Compound Interest Calculator",
-      "description": "Simulate the amazing power of compound interest and your final investment returns by setting the principal, monthly contribution, rate, and period."
+      "description": "Simulate the powerful effect of compound interest over time. Enter your initial principal, monthly deposits, and expected interest rate to forecast the future value of your stocks and savings."
     },
     "percent-calculator": {
       "title": "Percentage Calculator",
-      "description": "Solve everyday percentage problems effortlessly, including finding a percentage of a value, calculating increases/decreases, and discount savings."
+      "description": "Effortlessly solve all common percentage math problems. Find out exact ratios, calculate percentage increases or decreases, and determine business profit margins instantly without complex formulas."
     },
     "discount-calculator": {
       "title": "Discount Calculator",
-      "description": "Input the original price and discount rate to find the final purchase price and amount saved. Supports 1+1 offers and additional discount stacks."
+      "description": "Calculate the final sale price and the exact amount of money saved after discount percentages are applied. A perfect shopping companion used to verify double discounts or special coupon codes."
     },
     "work-hours": {
       "title": "Work Hours Calculator",
-      "description": "Easily record and check your daily total working hours and weekly accumulated time by entering your clock-in, clock-out, and break times."
+      "description": "Keep accurate track of your daily and weekly shift times. Simply input your clock-in, clock-out, and break durations to calculate exact billable total hours for proper payroll and overtime compensation."
     },
     "age-calc": {
-      "title": "Age Calculator",
-      "description": "Simply enter your date of birth to instantly calculate your current exact age, international age, and the number of days remaining until your next birthday."
+      "title": "Age Calculator | Chronological Age",
+      "description": "Instantly determine your precise age in years, months, and days based on your birth date. Understand chronological age differences or quickly count down the days until your next upcoming birthday."
     },
     "date": {
-      "title": "Date Calculator",
-      "description": "Calculate the day count between two dates or find the specific day 100/200 days from now. Manage your D-days and schedules all in one place."
+      "title": "Date Calculator | Duration & D-Day",
+      "description": "Calculate the exact duration between two dates or find what date it will be after a specific number of days. Perfect for tracking anniversaries, project deadlines, and calculating business working days."
     },
     "lunch-recommender": {
-      "title": "Lunch Menu Recommender",
-      "description": "Wondering what to eat for lunch today? Get a random menu recommendation from various categories like Korean, Chinese, and Japanese to suit your taste."
+      "title": "Random Lunch Recommender",
+      "description": "Can't decide what to eat for lunch today? Let our random generator pick a delicious meal for you from various diverse categories like Asian, Western, fast food, and more. Say goodbye to food dilemmas."
     },
     "word-count": {
-      "title": "Word Counter",
-      "description": "Instantly analyze your text to count characters (with/without spaces), words, and sentences. Perfect for checking essay lengths and social media limits."
+      "title": "Word Counter | Character & Byte Calculator",
+      "description": "Instantly analyze your text to precisely count characters with or without spaces, valid words, sentences, and data bytes. An essential optimization tool for perfecting college essays, resumes, and strict social media character limits."
     },
     "unicode": {
-      "title": "Unicode Converter",
-      "description": "Convert plain text into Unicode format or transform Unicode escape sequences back into readable text for programming and cross-platform compatibility."
+      "title": "Unicode Converter | Encode & Decode Text",
+      "description": "Convert regular plain text into universal Unicode escape sequences or accurately transform complex Unicode characters back into highly readable text. A must-have translation utility for global programmers ensuring cross-platform application compatibility."
     },
     "string-converter": {
-      "title": "String Converter",
-      "description": "Instantly transform strings between various naming conventions including Upper/Lower case, camelCase, PascalCase, and more for coding efficiency."
+      "title": "String Case Converter | camelCase, PascalCase",
+      "description": "Instantly transform any text string into various standard programming naming conventions. Quickly format codes into uppercase, lowercase, camelCase, PascalCase, or snake_case to vastly improve your daily software development efficiency and code readability."
     },
     "base64": {
-      "title": "Base64 Tool",
-      "description": "An online tool to safely encode text data into Base64 format or decode base64 strings back into their original plain text form for data transmission."
+      "title": "Base64 Encoder & Decoder",
+      "description": "Safely encode raw text data and credentials into the standard Base64 format, or rapidly decode Base64 strings back to their original plain text form. A secure online utility designed to guarantee safe data transfer without unexpected character corruption."
     },
     "html-encoder": {
-      "title": "HTML Encoder",
-      "description": "Escape and encode HTML special characters or tags for security, or decode them to their original state to prevent web vulnerabilities and simplify coding."
+      "title": "HTML Entity Encoder & Decoder",
+      "description": "Reliably escape and encode potentially dangerous HTML special characters to prevent cross-site scripting (XSS) vulnerabilities. Effortlessly decode HTML entities back to their original tags to thoroughly review web source codes and strengthen frontend security."
     },
     "morse-code": {
-      "title": "Morse Code Converter",
-      "description": "A fun tool to translate Korean, English, and numbers into international standard Morse code or translate Morse signals back into readable text."
+      "title": "Morse Code Translator",
+      "description": "Easily translate English alphabets, numbers, and Korean characters into the international standard Morse code format (dots and dashes). You can also accurately decode mysterious Morse audio signals back into readable text using this fun communication tool."
     },
     "base-converter": {
-      "title": "Base Converter",
-      "description": "Perform instant conversions between binary, octal, decimal, and hexadecimal bases. Provides precise results and formatting for each number system."
+      "title": "Base Converter | Binary Octal Hex Decimal Calculator",
+      "description": "Perform instant conversions between binary, octal, decimal, and hexadecimal bases. Formats and provides precise mathematical results suitable for computer science engineering."
     },
     "json-formatter": {
-      "title": "JSON Formatter",
-      "description": "Format complex JSON data to be human-readable and validate for syntax errors. Visualize your data structure with an easy-to-read tree view."
+      "title": "JSON Formatter and Validator Tool",
+      "description": "Format complex, messy JSON strings to be human-readable with beautiful indentation. Instantly validate syntax errors and visualize hierarchical tree structures efficiently."
     },
     "markdown-editor": {
-      "title": "Markdown Editor",
-      "description": "Write Markdown code directly in your browser and see the rendered results in real-time. A simple and efficient tool for documentation and notes."
+      "title": "Markdown Editor | Live Preview & HTML Converter",
+      "description": "Write Markdown directly in your browser with real-time preview. Convert MD to HTML and download files instantly. Optimized for GitHub READMEs and blog posts.",
+      "keywords": "markdown editor, live md preview, markdown to html, online editor, write readme"
     },
     "html-view": {
-      "title": "HTML Formatter",
-      "description": "Beautify and format your HTML code or check the real-time rendering of how your code appears in a web browser for web development and learning."
+      "title": "HTML Formatter & Live Editor Viewer",
+      "description": "Beautify unstructured HTML source code instantly or preview exactly how specific HTML tags will render on a real browser window to accelerate frontend UI verification."
     },
     "diff": {
-      "title": "Diff Checker",
-      "description": "Compare two pieces of code or text to visually identify added, deleted, or modified lines. Perfect for tracking changes and debugging."
+      "title": "Code Diff Checker | Text Comparison",
+      "description": "Visually compare two distinct text blocks or code snippets side-by-side to highlight exact additions, deletions, lines modified just like Git version control diffs."
     },
     "web-editor": {
-      "title": "Web Editor",
-      "description": "Edit HTML, CSS, and JavaScript code in real-time and instantly see the output. Great for learning web design and frontend development concepts."
+      "title": "Online Web Editor (HTML/CSS/JS)",
+      "description": "Prototype web layouts by editing HTML, CSS, and JS code directly in your browser. Validate real-time results immediately, acting like a lightweight frontend CodePen."
     },
     "hash-gen": {
-      "title": "Hash Generator",
-      "description": "Generate secure hash values from input text using various cryptographic algorithms like MD5, SHA-1, and SHA-256 instantly for data verification."
+      "title": "Secure Hash Generator | MD5 SHA-256",
+      "description": "Generate irreversible, secure hashed values from input plaintext using globally recognized cryptographic algorithms including MD5, SHA-1, SHA-256, and SHA-512 instantly."
     },
     "uuid-gen": {
-      "title": "UUID Generator",
-      "description": "Generate unique identifiers (UUID v4) for software development. Get multiple unique keys instantly for database entries and API development."
+      "title": "UUID & GUID Identifier Generator",
+      "description": "Generate bulk quantities of universally unique identifiers (UUID v4) for software environments. Perfect for assigning collision-free primary keys to database records."
     },
     "url-encoder": {
-      "title": "URL Encoder/Decoder",
-      "description": "Safely encode special characters and non-ASCII text in URLs or decode encoded addresses back into readable, original URLs for web navigation."
+      "title": "URL Percent Encoder & Decoder",
+      "description": "Securely encode special characters and foreign text within URL strings into standard percent-encoding formats, or decode illegible URI sequences back into plain text."
     },
     "jwt-decoder": {
-      "title": "JWT Decoder",
-      "description": "Decode JSON Web Token (JWT) headers and payloads to easily check and debug claims and signatures in a secure and convenient environment."
+      "title": "JWT Decoder & Payload Inspector",
+      "description": "Decode JSON Web Token (JWT) data directly on the client side to securely inspect internal payload claims, header algorithms, and signature expiration timestamps."
     },
     "regex-tester": {
       "title": "Professional Regex Tester | Real-time Pattern Validator",
@@ -187,80 +188,105 @@
       ]
     },
     "ascii-art": {
-      "title": "ASCII Art",
-      "description": "Convert plain text into vibrant ASCII Art characters to create unique visual elements for communities, forums, or code comments."
+      "title": "ASCII Art Text Generator",
+      "description": "Convert standard alphabet letters into impressive, multi-line ASCII Art font blocks. Ideal for decorating CLI terminal headers, GitHub repos, and code comments."
     },
     "ascii-table": {
-      "title": "ASCII Table",
-      "description": "A reference tool providing the ASCII character set, distinguishing between printable and control characters with their corresponding index numbers."
+      "title": "ASCII Table Reference | Decimal Hex Char Codes",
+      "description": "Explore the complete ASCII character set with decimal, hex, and clear descriptions. A fast reference for developers with easy copy functions for all characters.",
+      "keywords": "ascii table, character codes, hex to ascii, decimal codes, dev reference"
     },
     "special-char": {
-      "title": "Special Characters",
-      "description": "Access a collection of frequently used special symbols, emojis, and arrows that are difficult to type on a keyboard. Copy and paste them anywhere."
+      "title": "Special Characters | Emoji & Symbol Copier",
+      "description": "Access a curated collection of special characters, arrows, math symbols, and emojis. Copy any symbol to your clipboard with a single click for documents or web.",
+      "keywords": "special characters, symbols copier, emoji list, math symbols, arrows symbols"
     },
     "cron-generator": {
-      "title": "CRON Generator",
-      "description": "Generate CRON expressions for Linux or Unix scheduling with just a few clicks. Easily verify and understand the execution schedule of your tasks."
+      "title": "CRON Expression Generator | Crontab Schedule Tool",
+      "description": "Build complex CRON expressions easily via an intuitive UI. Preview upcoming execution schedules and manage your server tasks and automation precisely.",
+      "keywords": "cron generator, crontab UI, scheduling expression, generate cron, devops tool",
+      "faqs": [
+        { "q": "What do the special characters (*, /, -) mean in fields?", "a": "Asterisk (*) means 'every', slash (/) denotes 'intervals' or 'steps', and hyphen (-) specifies a 'range'. For example, '*/5' in the minute field means execution every 5 minutes." }
+      ]
     },
     "csv-json": {
-      "title": "CSV ↔ JSON Converter",
-      "description": "Convert CSV data from spreadsheets or databases into JSON format, and vice versa, to simplify data processing and integration tasks."
+      "title": "CSV ↔ JSON Converter | Two-Way Data Transformation",
+      "description": "Seamlessly convert CSV files to JSON format or transform JSON objects back to CSV. A fast, browser-based utility for data parsing and API integration tasks.",
+      "keywords": "csv to json, json to csv, data converter, format transformer, dev utils",
+      "faqs": [
+        { "q": "Can I convert large datasets?", "a": "Yes, you can convert thousands of rows of data within your browser's memory limits. The processing speed will depend on your local device's performance." }
+      ]
     },
     "fraction-calculator": {
-      "title": "Fraction Calculator",
-      "description": "Perform arithmetic operations including addition, subtraction, multiplication, and division with fractions. Get precise results in fractional and decimal forms."
+      "title": "Fraction Calculator with Simplification",
+      "description": "Compute complex fraction arithmetic operations (addition, subtraction, multiplication, division). Outputs mathematically reduced fractions alongside decimal values."
     },
     "encryption-tool": {
-      "title": "Encryption/Decryption",
-      "description": "Securely lock and restore important text data using powerful symmetric encryption methods like the AES algorithm with your own password."
+      "title": "AES Text Encryption & Decryption | Secure Message Tool",
+      "description": "Securely encrypt or decrypt text using the industry-standard AES-256 algorithm. Protect your sensitive data with a private password directly in your browser.",
+      "keywords": "aes encryption, text encryptor, decrypt text, secure messages, data protection",
+      "faqs": [
+        { "q": "Are my password and data stored on the server?", "a": "Absolutely not. All encryption and decryption processes occur entirely within your local browser (client-side). No sensitive data is ever sent to or stored on our servers." }
+      ]
     },
     "qr-gen": {
-      "title": "QR Code Generator",
-      "description": "Instantly convert any URL or text into a high-quality QR code and download it. A convenient tool for marketing and information sharing."
+      "title": "QR Code Generator | Create WiFi, URL & vCard QR",
+      "description": "Instantly generate high-quality QR codes for URLs, WiFi networks, and digital business cards (vCard). Download as PNG and share your info easily and for free.",
+      "keywords": "qr code generator, make qr code, wifi qr, vcard qr, free qr creator"
     },
     "barcode-gen": {
-      "title": "Barcode Generator",
-      "description": "Quickly generate barcoded images in various formats by entering numbers. Perfect for inventory management or retail tasks, for free."
+      "title": "Barcode Generator | Free Online Barcode Maker",
+      "description": "Instantly create high-quality barcodes by entering numbers. Supports various formats like Code128 and EAN-13, perfect for inventory, retail, and business needs for free."
     },
     "password-gen": {
-      "title": "Password Generator",
-      "description": "Instantly create strong, uncrackable random passwords by combining uppercase, lowercase, numbers, and symbols for your security."
+      "title": "Random Password Generator | Secure & Strong Password Maker",
+      "description": "Create secure, uncrackable random passwords instantly by combining uppercase, lowercase letters, numbers, and special symbols for maximum online security."
     },
     "color-picker": {
-      "title": "Color Picker",
-      "description": "Select the perfect color codes for your web design and instantly get HEX, RGB, and HSL formats. Useful for creating consistent color palettes."
+      "title": "Color Picker & Palette | HEX RGB HSL Converter",
+      "description": "Pick the perfect colors for your projects and get HEX, RGB, and HSL codes instantly. Use the visual picker or explore palettes to enhance your web design workflow.",
+      "keywords": "color picker, hex codes, rgb converter, color palette, design tool"
     },
     "image-base64": {
-      "title": "Image to Base64",
-      "description": "A developer tool to encode image files into Base64 strings, allowing you to embed images directly into HTML or CSS without external files."
+      "title": "Image to Base64 Converter | Online Image Encoder",
+      "description": "Convert image files into Base64 encoded strings for direct embedding in HTML and CSS. Supports PNG, JPG, and SVG formats with instant Data URI output.",
+      "keywords": "image to base64, encode image, base64 string, data uri encoder, dev tool",
+      "faqs": [
+        { "q": "Does converting to Base64 reduce image size?", "a": "No, converting binary image data to a text format actually increases the file size by about 33%. It's recommended primarily for small icons to reduce HTTP requests, not for large photos." }
+      ]
     },
     "ip-address": {
-      "title": "IP Address Check",
-      "description": "Instantly check your current public IP address and approximate network location. Useful for troubleshooting your internet connection status."
+      "title": "My IP Address Checker | Public IP & Network Info",
+      "description": "Instantly check your current public IP address, location, and ISP details. No installation needed; get your networking info directly through your browser securely.",
+      "keywords": "my ip address, check ip, public ip, ip lookup, ip location",
+      "faqs": [
+        { "q": "What is the difference between public and private IP?", "a": "A public IP is assigned by your ISP for external internet communication, while a private IP is used within your local network (router) for internal device communication." },
+        { "q": "How does this website know my IP address?", "a": "When your device sends a request to our server, it includes your public IP address in the packet header to receive the data back, which allows us to identify and display it securely." }
+      ]
     },
     "timer": {
-      "title": "Timer/Stopwatch",
-      "description": "An online timer and stopwatch for precise time measurement during work, exercise, or cooking. Includes lap time tracking functionality."
+      "title": "Online Timer & Stopwatch | Precise Time Tracking Tool",
+      "description": "A versatile online timer and stopwatch for precise time measurement during work, workouts, or cooking. Easily track lap times and manage your schedule for free."
     },
     "pomodoro-timer": {
-      "title": "Pomodoro Timer",
-      "description": "Maximize your productivity and focus by using the Pomodoro technique - 25 minutes of deep work followed by a 5-minute rejuvenating break."
+      "title": "Pomodoro Timer | 25-Minute Focus & Productivity Tool",
+      "description": "Boost your productivity and concentration using the Pomodoro technique - 25 minutes of deep focus followed by a 5-minute break to stay sharp and efficient."
     },
     "checklist": {
-      "title": "Checklist",
-      "description": "Easily record and manage your daily to-do lists or shopping items. Your list is saved locally in your browser even after you close the tab."
+      "title": "Checklist | Simple To-Do List & Task Management",
+      "description": "Quickly organize your daily tasks or shopping lists. Your progress is saved locally in your browser, ensuring your data is safe even after closing the tab."
     },
     "flashlight": {
-      "title": "Flashlight",
-      "description": "When you need light in the dark, use your mobile or laptop screen as a flashlight by turning it to maximum white brightness."
+      "title": "Flashlight | Screen-Based Emergency Light Tool",
+      "description": "Instantly turn your mobile or laptop screen into a bright white flashlight. A handy emergency light tool that works directly in your browser without any app downloads."
     },
     "image-resize": {
-      "title": "Image Resize",
-      "description": "Adjust the dimensions of your images to specific pixels and compress the file size efficiently while maintaining quality for web or social use."
+      "title": "Image Resize | Online Photo Resizer & Compressor",
+      "description": "Resize your images to exact pixel dimensions and compress file sizes efficiently while maintaining visual quality. Perfect for web optimization and social media."
     },
     "youtube-thumbnail": {
-      "title": "YouTube Thumbnail",
-      "description": "Enter a YouTube video URL to instantly extract and download high-quality thumbnail images to your computer or mobile device."
+      "title": "YouTube Thumbnail Downloader | High-Quality Image Extractor",
+      "description": "Download any YouTube video thumbnail instantly in HD. Simply paste the video URL and save high-resolution cover images to your device for free."
     },
     "mandalart": {
       "title": "Mandalart Planner",

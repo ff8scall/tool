@@ -90,9 +90,9 @@ const QrGenerator = () => {
         }
     };
 
-    const titleText = isEn ? "QR Code Generator - WiFi, URL, vCard | Utility Hub" : "QR 코드 생성기 - WiFi, URL, 명함 QR 만들기 | Utility Hub";
-    const descText = isEn ? "Create QR Codes for Text, URL, WiFi, and vCard instantly. Free PNG download available." : "텍스트, URL, WiFi, 명함(vCard)을 QR 코드로 변환하세요. 무료로 PNG 다운로드 가능합니다.";
-    const keywordsText = isEn ? "QR code, QR generator, WiFi QR, vCard QR, create QR code" : "QR코드, QR생성, 큐알코드, WiFi QR, 명함 QR, vCard, QR만들기";
+    const titleText = t('tools.qr-gen.title');
+    const descText = t('tools.qr-gen.description');
+    const keywordsText = t('tools.qr-gen.keywords');
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">

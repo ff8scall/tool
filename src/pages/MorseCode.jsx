@@ -116,10 +116,8 @@ const MorseCode = () => {
         setOutput(input);
     };
 
-    const titleText = isEn ? "Professional Morse Code Translator | Text ↔ Morse & Audio" : "실시간 모스 부호 번역기 | 텍스트 ↔ 모스 부호 변환 및 사운드 재생";
-    const descText = isEn 
-        ? "Instantly translate English text into Morse code sequence and listen to the audio Beep signals. Perfect for learning CW communication and cryptographic puzzles." 
-        : "영문 텍스트를 모스 부호로 즉시 변환하거나, 모스 부호를 다시 텍스트로 보구하세요. 실제 비프음(Beep) 사운드 재생 기능을 통해 모스 부호를 직접 시뮬레이션할 수 있습니다.";
+    const titleText = t('tools.morse-code.title');
+    const descText = t('tools.morse-code.description');
     const keywordsText = isEn ? "morse code translator, text to morse, listen to morse, cw communication, sos signal, encryption fun" : "모스부호번역기, morse code translator, 모스부호변환, SOS부호, CW통신, 암호문만들기, 모스부호듣기";
 
     const toolFaqs = isEn ? [

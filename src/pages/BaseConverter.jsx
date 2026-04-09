@@ -64,11 +64,9 @@ const BaseConverter = () => {
         setTimeout(() => setCopiedKey(null), 1500);
     };
 
-    const titleText = isEn ? t('tools.base-converter.title') : "진법 변환기 (2진수, 8진수, 10진수, 16진수) - Numeric Base";
-    const descText = isEn 
-        ? t('tools.base-converter.description')
-        : "2진수, 8진수, 10진수, 16진수를 서로 일괄 변환하세요. 실시간 진법 변환 계산기입니다.";
-    const keywordsText = isEn ? "binary converter, hex to binary, base translator, base calculator, octal converter" : "진법 변환, 2진수 변환, 16진수 변환, 진법 계산기, binary converter";
+    const titleText = t('tools.base-converter.title');
+    const descText = t('tools.base-converter.description');
+    const keywordsText = t('tools.base-converter.keywords');
 
     const faqs = isEn ? [
         {
