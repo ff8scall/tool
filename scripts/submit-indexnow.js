@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const sitemapPath = path.resolve(__dirname, '../public/sitemap.xml');
 const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
-const API_KEY = 'c6e8260628d349a68cb9d68d6e4a891c';
+const API_KEY = 'bbd0d9a6843c450eb3e9d811a0fd504a';
 const KEY_LOCATION = `${BASE_URL}/${API_KEY}.txt`;
 const HOST = new URL(BASE_URL).hostname;
 
