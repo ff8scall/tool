@@ -31,8 +31,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       
+      - name: Install Puppeteer Browser
+        run: npx puppeteer browsers install chrome
+      
       - name: Build
         run: npm run build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          CI: true
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
