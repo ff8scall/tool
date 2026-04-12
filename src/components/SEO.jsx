@@ -10,8 +10,8 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
     const siteUrl = 'https://tool.lego-sia.com';
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     const defaultDescription = lang === 'en' 
-        ? 'A collection of convenient web tools: Fortune telling, MBTI, Lotto, unit converters, loan calculators, word counts, and more. Experience over 134 free tools now.'
-        : '편리한 웹 도구 모음: 사주팔자, MBTI, 로또, 길이 변환, 무게 변환, 대출 계산, 날짜 계산, 글자수 세기, 환율 변환 등 134가지 이상의 무료 도구를 지금 체험해보세요.';
+        ? 'Explore over 134 free online web tools designed to make your daily life easier and more productive. From fun fortune telling and MBTI tests to professional unit converters, financial calculators, developer utilities, and text analysis tools, Tool Hive provides high-quality digital solutions without any sign-up required.'
+        : '일상을 더 쉽고 편리하게 만드는 134가지 이상의 다양한 온라인 웹 도구 모음입니다. 사주팔자, MBTI, 운세 테스트부터 단위 변환기, 재무 계산기, 개발자 유틸리티, 텍스트 분석까지 전문가 수준의 도구를 별도 가입 없이 무료로 즉시 이용해 보세요. 당신의 생산성을 높여주는 최고의 디지털 도구 상자입니다.';
     const metaDescription = description || defaultDescription;
     const metaKeywords = keywords 
         ? `${keywords}, ${lang === 'en' ? 'utility, tools, calculator, converter' : '유틸리티, 도구, 계산기, 변환기'}` 

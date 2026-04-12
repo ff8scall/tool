@@ -33,8 +33,8 @@
   },
   "tools": {
     "2048": {
-      "title": "2048",
-      "description": "The legendary puzzle game to reach the 2048 tile."
+      "title": "2048 Game | Addictive Number Merge Puzzle",
+      "description": "Combine identical number blocks strategically to reach the legendary 2048 tile in this highly addictive classic puzzle game. Test your logic, planning, and brainpower as you slide tiles across the grid. A perfect free online 2048 browser game for quick breaks and mental stimulation without any installation."
     },
     "length": {
       "title": "Length Converter | Meters, Feet, Inches",
@@ -97,8 +97,8 @@
       "description": "Keep accurate track of your daily and weekly shift times. Simply input your clock-in, clock-out, and break durations to calculate exact billable total hours for proper payroll and overtime compensation."
     },
     "age-calc": {
-      "title": "Age Calculator | Chronological Age",
-      "description": "Instantly determine your precise age in years, months, and days based on your birth date. Understand chronological age differences or quickly count down the days until your next upcoming birthday."
+      "title": "Age Calculator | Precise Chronological Age Tool",
+      "description": "Calculate your exact age in years, months, and days instantly by simply entering your date of birth. Our precise online tool also provides details on your next upcoming birthday countdown (D-Day), total days lived, and your Chinese zodiac sign. An essential free utility for legal documents, insurance forms, or personal milestones."
     },
     "date": {
       "title": "Date Calculator | Duration & D-Day",
@@ -188,8 +188,8 @@
       ]
     },
     "ascii-art": {
-      "title": "ASCII Art Text Generator",
-      "description": "Convert standard alphabet letters into impressive, multi-line ASCII Art font blocks. Ideal for decorating CLI terminal headers, GitHub repos, and code comments."
+      "title": "ASCII Art Generator | Text to Visual Art Converter",
+      "description": "Transform any plain English text into impressive, stylized multi-line ASCII Art font blocks instantly. Perfect for customizing GitHub README headers, terminal command line banners, or creative code comments. Use our free online ASCII creator to add a professional and unique retro-tech aesthetic to your digital projects."
     },
     "ascii-table": {
       "title": "ASCII Table Reference | Decimal Hex Char Codes",
@@ -273,8 +273,8 @@
       "description": "Boost your productivity and concentration using the Pomodoro technique - 25 minutes of deep focus followed by a 5-minute break to stay sharp and efficient."
     },
     "checklist": {
-      "title": "Checklist | Simple To-Do List & Task Management",
-      "description": "Quickly organize your daily tasks or shopping lists. Your progress is saved locally in your browser, ensuring your data is safe even after closing the tab."
+      "title": "Checklist | Simple & Efficient Online Task Manager",
+      "description": "Easily organize your daily tasks, grocery lists, or travel packing items with our lightweight and intuitive online checklist tool. Your progress is automatically saved to your local browser storage, ensuring your data remains intact even after closing the tab. Boost your productivity with this completely free and secure task management utility."
     },
     "flashlight": {
       "title": "Flashlight | Screen-Based Emergency Light Tool",
@@ -289,264 +289,264 @@
       "description": "Download any YouTube video thumbnail instantly in HD. Simply paste the video URL and save high-resolution cover images to your device for free."
     },
     "mandalart": {
-      "title": "Mandalart Planner",
-      "description": "Systematically plan your core goals and 64 detailed sub-tasks using the Mandalart technique, famously used by Ohtani for peak performance."
+      "title": "Mandalart Planner | Strategic Goal Setting Tool",
+      "description": "Systematically plan your core objective and 64 detailed sub-tasks using the professional Mandalart technique, famously used by elite performers like Shohei Ohtani. Our free online planner helps you visualize your roadmap to success, break down complex goals into actionable steps, and maintain focus on your long-term vision with clarity."
     },
     "color-extractor": {
-      "title": "Image Color Extractor",
-      "description": "Upload any photo or image file to instantly extract a professional color palette and the major HEX codes used in the image."
+      "title": "Image Color Extractor | Get HEX Codes from Photos",
+      "description": "Upload any photo or image file to instantly extract a professional color palette and the major HEX codes used in the visual. A powerful free online tool for web designers and artists seeking color inspiration from real-world photography. Identify dominant shades and create harmonious palettes for your next design project."
     },
     "world-clock": {
-      "title": "World Clock",
-      "description": "Check and compare the current time and time differences across major global cities like New York, London, Paris, and Tokyo in real-time."
+      "title": "World Clock | Compare Current Time in Global Cities",
+      "description": "Check and compare the current local time and time differences across major global cities like New York, London, Paris, and Tokyo in real-time. An essential free online utility for international travelers, global business teams, and digital nomads to coordinate meetings and stay connected across all time zones accurately and easily."
     },
     "bmi": {
-      "title": "BMI Calculator",
-      "description": "Enter your height and weight to calculate your Body Mass Index (BMI). Get instant health status guidance and obesity classification."
+      "title": "BMI Calculator | Body Mass Index & Health Status",
+      "description": "Calculate your precise Body Mass Index (BMI) by entering your height and weight. Our free online calculator provides instant health status classification and guidance based on World Health Organization standards. Assess your weight category—from underweight to obese—to help plan your fitness journey and maintain a healthy lifestyle."
     },
     "bmr": {
-      "title": "BMR Calculator",
-      "description": "Calculate your Basal Metabolic Rate (BMR) based on age, gender, and activity level to determine your daily calorie needs for effective dieting."
+      "title": "BMR Calculator | Basal Metabolic Rate & Daily Calorie Needs",
+      "description": "Estimate your precise Basal Metabolic Rate (BMR) using your age, gender, and activity level to determine exactly how many calories your body burns at rest. A vital free online tool for effective weight loss, muscle gain, or maintenance planning. Understand your metabolism better to optimize your daily diet and fitness goals accurately."
     },
     "biorhythm": {
-      "title": "Biorhythm",
-      "description": "Visualize your physical, emotional, and intellectual cycles on a graph based on your birth date to check your overall condition for today."
+      "title": "Biorhythm Calculator | Check Your Daily Life Cycles",
+      "description": "Visualize your unique physical, emotional, and intellectual cycles on a detailed graph based on your date of birth. Our free online biorhythm tool helps you understand your natural rhythms to better plan for high-energy days or periods requiring more rest. Check your current status for today and gain insights into your overall well-being."
     },
     "life-expectancy": {
-      "title": "Life Expectancy Test",
-      "description": "Take a fun survey about your habits, diet, and exercise to see your estimated life expectancy and get tips for a healthier lifestyle."
+      "title": "Life Expectancy Test | Health & Habits Survey",
+      "description": "Take a fascinating and fun survey about your daily habits, diet, and exercise routine to see your estimated life expectancy and receive practical tips for a healthier lifestyle. Reflect on your current health choices and discover how small changes in your lifestyle can lead to a longer, more vibrant, and energetic life with our free test."
     },
     "reaction-test": {
-      "title": "Reaction Time Test",
-      "description": "How fast can you react? Precisely measure your reaction speed in milliseconds the moment the screen color changes and record your score."
+      "title": "Reaction Time Test | Measure Your Reflex Speed Online",
+      "description": "How fast can you react? Precisely measure your reaction speed in milliseconds the moment the screen color changes and record your best score to see where you rank. A perfect free online training tool for competitive gamers and athletes looking to improve their hand-eye coordination and reflex speed through consistent practice."
     },
     "typing-test": {
-      "title": "Typing Speed Test",
-      "description": "Improve your typing speed (WPM) and accuracy by practicing with various sentences in English and Korean with real-time feedback."
+      "title": "Typing Speed Test | Practice WPM & Accuracy",
+      "description": "Improve your typing speed (WPM) and accuracy by practicing with various sentences in English and Korean with real-time feedback. Our free online typing tool helps you master the keyboard, reduce errors, and increase your overall digital productivity. Challenge yourself with different difficulty levels and track your progress over time."
     },
     "1to50": {
-      "title": "1 to 50",
-      "description": "A brain training game where you touch numbers from 1 to 50 in order as fast as possible. Test your reflexes and concentration skills."
+      "title": "1 to 50 Game | Brain Training & Concentration Challenge",
+      "description": "A fast-paced brain training game where you touch numbers from 1 to 50 in order as quickly as possible. Test your reflexes, peripheral vision, and concentration skills in this addictive and free online challenge. Improve your mental processing speed and aim for the top of the leaderboard in this simple yet effective cognitive exercise."
     },
     "cps-test": {
-      "title": "CPS Test",
-      "description": "Measure how many times you can click your mouse within a time limit to check your Clicks Per Second (CPS) and click speed rank."
+      "title": "CPS Test | Clicks Per Second Speed Measure",
+      "description": "Measure your Clicks Per Second (CPS) by clicking your mouse as fast as possible within the set time limit. Test your reflexes, speed, and physical reaction time to see how you rank against other gamers. A must-have free online clicking speed tool for competitive FPS players and anyone looking to improve their hardware interaction speed."
     },
     "aim-trainer": {
-      "title": "Aim Trainer",
-      "description": "Improve your mouse accuracy and reaction speed by clicking on random targets. A perfect training tool for FPS gamers and competitive play."
+      "title": "Aim Trainer Online | Improve FPS Mouse Accuracy",
+      "description": "Improve your mouse accuracy, tracking, and reaction speed by clicking on random targets in our competitive aim trainer. A perfect free online training tool for professional FPS gamers (Valorant, CS:GO) to sharpen their reflexes and dominate the leaderboard. Challenge yourself with varying difficulty levels today!"
     },
     "number-memory": {
-      "title": "Number Memory",
-      "description": "Challenge your short-term memory by remembering increasingly longer sequences of numbers. See how far you can go in this memory test."
+      "title": "Number Memory Test | Challenge Your Working Memory",
+      "description": "Challenge and expand your short-term working memory by remembering increasingly longer sequences of numbers in this addictive brain game. See how far you can go and compare your memory capacity with the global average. A simple yet powerful free online tool for cognitive improvement and memory training."
     },
     "number-baseball": {
-      "title": "Number Baseball",
-      "description": "A classic logic game where you deduce a 3-4 digit number using hints of strikes and balls. Test your deductive reasoning and strategy."
+      "title": "Number Baseball Game | Classic Logic & Strategy Puzzle",
+      "description": "A classic logic game where you deduce a secret 3-4 digit number using hints of strikes and balls after each guess. Test your deductive reasoning, numerical strategy, and pattern recognition skills in this challenging and fun free online puzzle game. Can you guess the secret number in the fewest attempts?"
     },
     "minesweeper": {
-      "title": "Minesweeper",
-      "description": "A logic-based puzzle game where you must clear all cells without detonating hidden mines by using numbered clues to reveal safe areas."
+      "title": "Minesweeper Online | Classic Logic-Based Puzzle Game",
+      "description": "Play the legendary Minesweeper game where you must clear all cells without detonating hidden mines by using strategic numbered clues. Our free online version offers various difficulty levels to test your logic and patience. A timeless and addictive brain-teaser that requires both calculation and intuition."
     },
     "roulette": {
-      "title": "Random Roulette",
-      "description": "Fairly decide anything from lunch menus to game penalties by entering your own items into a vibrant, spinning random roulette wheel."
+      "title": "Random Roulette Wheel | Fair Decision Maker Online",
+      "description": "Fairly decide anything from lunch menus to game penalties by entering your own custom items into a vibrant, spinning random roulette wheel. Our free online decision-making tool provides a fun and visually engaging way to resolve dilemmas and add excitement to your group activities. Spin the wheel of fortune today!"
     },
     "suika-game": {
-      "title": "Suika Game",
-      "description": "An addictive merge puzzle game where you combine smaller fruits to create larger ones, eventually aiming to complete a giant watermelon."
+      "title": "Suika Game | Addictive Fruit Merge Puzzle Online",
+      "description": "An addictive and physics-based merge puzzle game where you combine smaller fruits to create larger ones, eventually aiming to complete a giant watermelon. Plan your drops strategically to prevent the fruit from overflowing. A perfect free online browser game for relaxing fun and testing your spatial planning skills."
     },
     "ladder-game": {
-      "title": "Ladder Game",
-      "description": "A thrilling random draw tool where participants follow winding paths to discover their results. Perfect for betting and quick decisions."
+      "title": "Ladder Game Online | Thrilling Random Choice Tool",
+      "description": "A thrilling and fair random draw tool where participants follow winding paths to discover their unique results. Perfect for betting, gift exchanges, and making quick collaborative decisions in groups. Experience the suspense and fun of the classic ghost leg ladder game directly in your web browser for free."
     },
     "tanghulu-maker": {
-      "title": "Tanghulu Maker",
-      "description": "Stack fruits to make your own Tanghulu."
+      "title": "Tanghulu Maker | Creative Fruit Skewer Game Online",
+      "description": "Stack colorful, juicy fruits to create your own delicious virtual Tanghulu skewers in this fun and creative mini-game. Customize your skewers with various fruit combinations and share your sweet creations with friends. A simple and relaxing free online browser game for kids and food lovers of all ages."
     },
     "missile-dodge": {
-      "title": "Missile Dodge",
-      "description": "Survive as long as possible by dodging missiles!"
+      "title": "Missile Dodge | High-Intensity Survival Arcade Game",
+      "description": "Survive as long as possible by skillfully dodging an endless swarm of homing missiles in this intense arcade-style survival game. Test your reflexes and hardware control precision as you navigate through a chaotic sky filled with dangers. Challenge yourself to beat your highest survival time in our completely free online missile dodging challenge."
     },
     "flappy-bird": {
-      "title": "Flappy Bird",
-      "description": "Fly as far as you can dodging obstacles!"
+      "title": "Flappy Bird | Classic Arcade Flying Game Online",
+      "description": "Control your bird through narrow pipe obstacles by perfectly timing your flaps in this iconic arcade challenge. Re-experience the simple yet notoriously difficult gameplay that became a global sensation. Test your patience and reflexes to achieve your highest score in our completely free, browser-based Flappy Bird clone."
     },
     "snake-game": {
-      "title": "Snake Game",
-      "description": "Classic snake game eating apples and growing longer."
+      "title": "Snake Game | The Classic Retro Apple-Eating Challenge",
+      "description": "Play the classic snake game where you eat apples to grow longer while avoiding hitting walls or your own tail. Re-experience the simple joy of this retro arcade favorite directly in your web browser for free. Challenge yourself to achieve the maximum length possible and see if you still have the skills to master this timeless and addictive puzzle game."
     },
     "sudoku": {
-      "title": "Sudoku",
-      "description": "Classic logic puzzle to fill the 9x9 grid with numbers."
+      "title": "Sudoku Online | Free Classic Logic Number Puzzles",
+      "description": "Challenge your brain with our free online Sudoku puzzles. Correctly fill the 9x9 grid with numbers 1 to 9 so that each row, column, and 3x3 section contains all digits without repetition. Choose from various difficulty levels and improve your logical thinking and mathematical problem-solving skills with a new Sudoku puzzle every day."
     },
     "tower-stacker": {
-      "title": "Tower Stacker",
-      "description": "Stack the blocks as high as you can!"
+      "title": "Tower Stacker | Build the Tallest Skyscraper Online",
+      "description": "Stack the blocks as high as you can by clicking at the perfect moment in this exciting timing-based challenge. Test your patience, focus, and hand-eye coordination as you attempt to construct the ultimate virtual tower. Play our completely free browser game to beat your high score and see if you have what it takes to be a master tower builder."
     },
     "dice-roller": {
-      "title": "Dice Roller",
-      "description": "Random dice rolling tool."
+      "title": "Dice Roller | Fair Random Dice Roll Tool for Games",
+      "description": "Need a random dice roll for your favorite board games or decision-making? Use our free and fair online dice roller tool to get instant results with 3D animations. Choose from single or multiple dice and enjoy a convenient, ad-free experience that works perfectly on both desktop and mobile devices for all your gaming and randomness needs."
     },
     "time-sense": {
-      "title": "Time Sense Test",
-      "description": "Try to hit exactly 10 seconds!"
+      "title": "Time Sense Test | Challenge Your Internal Clock Precision",
+      "description": "Test your internal clock to see if you can hit precisely 10 seconds without looking at a timer! Our fun free online time sense test measures your perception of duration down to the millisecond. Improve your timing, challenge your friends, and see who has the most accurate sense of time in this simple yet surprisingly difficult mental challenge."
     },
     "pitch-test": {
-      "title": "Perfect Pitch Test",
-      "description": "Listen to the sounds and guess the correct musical note."
+      "title": "Perfect Pitch Test | Measure Your Musical Note Recall",
+      "description": "Listen to various musical tones and guess the correct note to see if you have perfect pitch or relative pitch abilities. A fantastic free online tool for musicians, students, and music lovers to train their ears and improve their melodic recognition. Challenge your auditory memory and see how many correctly identified notes you can get in a row."
     },
     "capital-quiz": {
-      "title": "World Capitals Quiz",
-      "description": "Guess the capital city of each country."
+      "title": "World Capitals Quiz | Test Your Global Geography IQ",
+      "description": "Do you know the capital city of every country in the world? Test your global geography knowledge in our fast-paced and fun world capitals quiz. A great free online educational tool for students and trivia fans to improve their memory of world nations and their major cities. Challenge yourself and see your final score after answering all questions."
     },
     "typing-defense": {
-      "title": "Typing Defense",
-      "description": "Defend by typing the falling words as fast as possible."
+      "title": "Typing Defense | Fun Word-Typing Survival Game",
+      "description": "Defend your base by typing the falling words as fast as possible in this exciting and educational typing game. Improve your keyboard speed and accuracy while managing an increasingly difficult swarm of incoming text. A perfect free online tool for anyone looking to turn their routine typing practice into a thrilling and addictive arcade experience."
     },
     "hangman": {
-      "title": "Hangman",
-      "description": "Guess the hidden word letter by letter."
+      "title": "Hangman Game Online | Classic Word Guessing Puzzle",
+      "description": "Guess the hidden word letter by letter before you run out of attempts in our free online version of the classic Hangman game. Improve your vocabulary and deductive reasoning skills with various word categories and difficulty settings. A timeless and engaging brain-teaser that you can play directly in your web browser without any installation."
     },
     "speed-math": {
-      "title": "Mental Math Game",
-      "description": "Activate your brain with fast mental calculations."
+      "title": "Mental Math Game | Fast-Paced Arithmetic Challenge",
+      "description": "Activate your brain and sharpen your numerical skills with fast-paced mental arithmetic calculations. Solve as many addition, subtraction, and multiplication problems as possible before time runs out. Our free online speed math tool is perfect for students looking to improve their counting speed and for adults who want to keep their minds sharp."
     },
     "bubble-wrap": {
-      "title": "Bubble Wrap Pop",
-      "description": "Infinite stress relief by popping virtual bubble wrap."
+      "title": "Bubble Wrap Pop | Infinite Virtual Stress Relief Tool",
+      "description": "Experience infinite stress relief and satisfaction by popping virtual bubble wrap directly in your web browser. A perfect free online tool for quick relaxation, decompression during long work hours, or just simple mindless fun. Reset the sheet and keep popping as many bubbles as you want to melt away the daily tension and anxiety easily."
     },
     "dynamic-acuity": {
-      "title": "Dynamic Visual Acuity",
-      "description": "Measure your ability to track moving objects clearly."
+      "title": "Dynamic Visual Acuity | Track Moving Objects Clearer",
+      "description": "Measure and train your ability to track moving objects clearly with our free online dynamic visual acuity test. A highly effective tool for athletes, gamers, and drivers to improve their visual perception and speed under pressure. Challenge your eyes to identify targets as they move across the screen at varying speeds in this unique vision test."
     },
     "lotto": {
-      "title": "Lotto Number Generator",
-      "description": "Extract your lucky numbers for today with our sophisticated random number generation algorithm. Combine them based on past history for your unique combination."
+      "title": "Lotto Number Generator | Get Your Lucky Numbers Today",
+      "description": "Extract your lucky lottery numbers for today with our sophisticated random number generation algorithm. Combine them based on past history or your personal inspiration to create your unique winning combination. A fast, fun, and completely free online tool for anyone looking for that extra bit of luck and statistical inspiration for the next big draw."
     },
     "lotto-sim": {
-      "title": "Lotto Simulator",
-      "description": "Check your virtual return on investment and winning odds if you were to buy lottery tickets continuously. Experience the thrill of the draw with this simulation."
+      "title": "Lotto Simulator | Virtual Drawing & Odds Experience",
+      "description": "Check your virtual return on investment and winning odds if you were to buy lottery tickets continuously over many years. Experience the thrill of the draw with this realistic simulation and understand the cold hard statistics behind the lottery. A fascinating free educational tool that demonstrates probability and long-term financial expectations in a fun way."
     },
     "tarot": {
-      "title": "Daily Tarot Reading",
-      "description": "Have your fortune, love life, and career outlook read with the 22 Major Arcana tarot cards. Mysterious card interpretations guide your way through the day."
+      "title": "Daily Tarot Reading | Free Online Tarot Predictions",
+      "description": "Have your daily fortune, love life, and career outlook read with the 22 Major Arcana tarot cards in our beautiful online simulation. Our mysterious card interpretations provide guidance and reflection to help you navigate through your day with a fresh perspective. A symbolic and insightful way to start your morning or find clarity in challenging moments."
     },
     "blood-type": {
-      "title": "Blood Type Personality",
-      "description": "Check the characteristics, personality, and dating styles of A, B, O, and AB blood types. Discover blood type compatibility with friends and lovers for fun."
+      "title": "Blood Type Personality | Traits & Compatibility Test",
+      "description": "Check the fascinating characteristics, hidden personalities, and unique dating styles of A, B, O, and AB blood types based on popular cultural theories. Discover your blood type compatibility with friends, family, and lovers for a fun and lighthearted look at your relationships. A popular and entertaining free online social test to share with everyone."
     },
     "mbti": {
-      "title": "MBTI Personality Test",
-      "description": "Discover your personality type through our deeply researched questionnaire. Get insights into your 16-personality profile and tips for better relationships."
+      "title": "MBTI Personality Test | 16 Personalities Profile Analysis",
+      "description": "Discover your true personality type through our deeply researched and intuition-based questionnaire. Get detailed insights into your 16-personality profile (INTJ, ENFP, etc.) and receive practical tips for better relationships, career growth, and personal development. The most popular free online tool for self-discovery and understanding others better."
     },
     "saju": {
-      "title": "Four Pillars (Saju)",
-      "description": "Check your innate destiny and Saju (Four Pillars of Destiny) based on your birth date and time. Get detailed interpretations rooted in traditional studies."
+      "title": "Four Pillars of Destiny | Traditional Saju Analysis",
+      "description": "Check your innate destiny and Saju (Four Pillars of Destiny) based on your precise birth date and time with our advanced online calculator. Get detailed and authentic interpretations rooted in traditional studies of metaphysics and elements. A comprehensive free guide to understanding your life path, potential wealth, and future opportunities through the wisdom of the ancients."
     },
     "zodiac-fortune": {
-      "title": "Zodiac Fortune",
-      "description": "Check your wealth, love, and health fortunes based on your Chinese Zodiac sign for today. Plan your day with traditional 12-animal zodiac insights."
+      "title": "Daily Zodiac Fortune | 12 Animal Signs Luck Forecast",
+      "description": "Check your wealth, love, and health fortunes based on your Chinese Zodiac sign for today. Plan your day with our traditional 12-animal zodiac insights (Rat, Dragon, Tiger, etc.) and discover your luckiest hours and colors. Our free online zodiac guide provides a modern take on ancient wisdom to help you maximize your daily potential and avoid obstacles."
     },
     "horoscope": {
-      "title": "Daily Horoscope",
-      "description": "Check your daily horoscope and find out your lucky color and number. Receive messages from the stars every morning to guide your cosmological energy."
+      "title": "Daily Horoscope | Free Astrology & Luck Guide",
+      "description": "Check your daily horoscope according to your zodiac sign and find out your today's lucky color and number. Receive personalized messages from the stars every morning to guide your cosmological energy and optimize your decisions in love and career. A stylish and accurate free online astrology tool to keep you aligned with the universe's vibrations."
     },
     "dream-interpretation": {
-      "title": "Dream Interpretation",
-      "description": "Wondering what your dream last night meant? Search by keywords to get clear interpretations of hidden symbols and your psychological state."
+      "title": "Dream Interpretation | Explore Meanings of Your Dreams",
+      "description": "Wondering what your mysterious dream last night meant? Search by keywords to get clear, insightful interpretations of hidden symbols and your current psychological state. Our free online dream dictionary helps you uncover the secrets of your subconscious mind and find deeper meaning in your nightly adventures today."
     },
     "birth-gen": {
-      "title": "Birthstone/Birth Flower",
-      "description": "Discover the birthstone and flower that match your birthday, and the meanings and symbolism behind them. Make your special day even more meaningful."
+      "title": "Birthstone & Birth Flower | Discover Your Symbols",
+      "description": "Discover the precious birthstone and beautiful birth flower that match your unique birthday, and explore the deep meanings and symbolism behind them. A wonderful free online tool for finding inspiration for birthday gifts, personalized jewelry ideas, or simply understanding the botanical and mineral heritage of your birth date. Make every anniversary more meaningful."
     },
     "name-analysis": {
-      "title": "Name Analysis",
-      "description": "Analyze the meaning and energy of your name based on its linguistic and traditional roots. See what kind of fortune your name brings to you."
+      "title": "Name Analysis | Meaning & Fortune of Your Identity",
+      "description": "Analyze the profound meaning and energy of your name based on its linguistic, historical, and traditional roots (Onomastics). See what kind of fortune and character traits your name might be bringing to your life with our comprehensive and free online analysis tool. Perfect for curious individuals or parents looking for deep insights into name origins and impacts."
     },
     "personal-color": {
-      "title": "Color Psychology Test",
-      "description": "Discover the best colors that match your skin tone and personality. Analyze your personal color palette and its psychological meanings."
+      "title": "Personal Color Analysis | Best Palette for Your Skin",
+      "description": "Discover the best seasonal colors (Spring, Summer, Autumn, Winter) that perfectly match your skin tone, hair color, and unique personality. Our free online personal color analysis provides you with a professional palette and psychological meanings to help you boost your confidence in fashion, makeup, and professional styling every single day."
     },
     "past-life": {
-      "title": "Past Life Finder",
-      "description": "Who were you in a previous life? Take this fun, imaginative journey through time to discover your past life's identity and personality."
+      "title": "Past Life Finder | Discover Who You Were Before",
+      "description": "Who were you in a previous life? Take this fun, imaginative journey through time to discover your past life's identity, profession, and personality traits. Our creative algorithm analyzes your current preferences and character to generate a fascinating story from history. A perfect free online game to play with friends and share your mysterious past results."
     },
     "pet-mbti": {
-      "title": "Pet MBTI",
-      "description": "Analyze your beloved dog or cat's unique personality using a pet-specialized MBTI framework. Better understand your furry companion's behavior."
+      "title": "Pet MBTI | Personality Test for Cats & Dogs",
+      "description": "Analyze your beloved dog or cat's unique personality using our specialized pet MBTI framework. Better understand your furry companion's behavior, preferences, and social style to build a stronger bond. Is your pet an ENFP 'Inspirational Storyteller' or an ISTJ 'Reliable Guardian'? Find out now with our fun and free online pet assessment tool."
     },
     "mental-age": {
-      "title": "Mental Age Test",
-      "description": "Measure your true mental age based on your attitudes, thoughts, and reactions to daily scenarios. Compare your psychological maturity with your real age."
+      "title": "Mental Age Test | Measure Your Psychological Maturity",
+      "description": "Measure your true mental age based on your attitudes, thoughts, and reactions to various daily scenarios. Are you a 'young soul' or an 'old wise spirit'? Compare your psychological maturity level with your chronological age and gain fun insights into your personality with our highly popular and completely free online mental age assessment today."
     },
     "brain-structure": {
-      "title": "Brain Structure Analysis",
-      "description": "What's filling your mind right now? Visualize your current interests, worries, and thoughts with our fun brain structure analysis tool."
+      "title": "Brain Structure Analysis | Visualize Your Current Thoughts",
+      "description": "What is filling your mind right now? Visualize your current interests, hidden worries, and major thoughts with our fun and interactive brain structure analysis tool. Answer a few lifestyle questions to generate a colorful map of your mental priorities and share it with friends to compare your 'brain architecture' in a lighthearted and creative way."
     },
     "joseon-job": {
-      "title": "Joseon Dynasty Job Test",
-      "description": "If you were born in the Joseon Dynasty, what would your profession be? Find your historical career based on your personality and traits."
+      "title": "Joseon Dynasty Job Test | Find Your Historical Role",
+      "description": "If you were born in the Joseon Dynasty, what would your profession be? Find your historical career path—from a high-ranking scholar to a brave warrior—based on your modern personality and traits. Experience a fun and educational time travel through this creative identity test and discover your place in ancient Korean society for free today!"
     },
     "if-i-am-god": {
-      "title": "If I Were God?",
-      "description": "What kind of world would you create if you were a god? Explore your divine imagination and deep psychological values through this creative test."
+      "title": "What Kind of God Am I? | Divine Personality Test",
+      "description": "What kind of world would you create and what values would you uphold if you were a god? Explore your divine imagination and deep psychological values through this unique and creative test. Discover your deity style and the mythological archetype that best represents your inner power and philosophy in this fascinating free online simulation."
     },
     "life-bgm": {
-      "title": "BGM of My Life",
-      "description": "What background music best suits your current life situation? Discover your personal soundtrack that matches your vibe and energy right now."
+      "title": "BGM of My Life | Find Your Perfect Personal Soundtrack",
+      "description": "What professional background music best suits your current life situation and emotional state? Discover your personal soundtrack that perfectly matches your unique vibe, energy, and daily story right now. Our free online analysis tool uses your personality traits to recommend a musical genre and atmosphere that represents your life's current journey."
     },
     "first-impression-color": {
-      "title": "First Impression Color",
-      "description": "What color do people first sense when they meet you? Discover the vibrant energy and aura you project to others through this color test."
+      "title": "First Impression Color | Discover Your Aura Online",
+      "description": "What vibrant color do people first sense when they meet you for the first time? Discover the unique energy and aura you project to others through this insightful color-based personality test. Gain a better understanding of your social presence and the psychological impact of your first impression with our fun and free online visualization tool."
     },
     "animal-face": {
-      "title": "Animal Face Test",
-      "description": "Which animal do you resemble the most based on your facial features? Find your animal-like charm, whether it is a puppy, cat, or a fox."
+      "title": "Animal Face Test | Which Animal Is Your Lookalike?",
+      "description": "Which animal do you resemble the most based on your unique facial features and artistic vibe? Find your animal-like charm—whether it is an adorable puppy, elegant cat, or a clever fox—using our fun visual analysis test. Perfect for sharing with friends to discover your 'animal archetype' and understanding the specific impressions your face makes."
     },
     "personal-scent": {
-      "title": "Personal Scent Finder",
-      "description": "Find the signature fragrance that matches your unique vibe and personality. Discover the scent that represents your inner self and character."
+      "title": "Personal Scent Finder | Discover Your Signature Fragrance",
+      "description": "Find the professional signature fragrance that perfectly matches your unique vibe, style, and inner personality. Our free online assessment tool recommends the best scent families (Citrus, Woody, Floral, Musk) that represent your true character and help you make a lasting impression on everyone you meet."
     },
     "ideal-type": {
-      "title": "Ideal Type World Cup",
-      "description": "Analyze your preferred romantic style through an ideal type tournament. Find out what qualities you truly value in a partner."
+      "title": "Ideal Type World Cup | Analyze Your Romantic Preferences",
+      "description": "Analyze your preferred romantic style and physical ideal through a fun and interactive tournament. Discover the specific character qualities and traits you truly value in a long-term partner with our free online psychological analysis. A perfect way to explore your dating values and share your results with friends."
     },
     "couple-compatibility": {
-      "title": "Couple Compatibility",
-      "description": "How well do you and your partner match? Analyze your dating style and harmony level to see how to build a better relationship."
+      "title": "Couple Compatibility Test | Analyze Your Romantic Harmony",
+      "description": "How well do you and your partner match? Analyze your unique dating style, communication habits, and overall harmony level to see how to build a stronger, more meaningful relationship with our expert-designed free online compatibility test. Get actionable tips and a detailed score for your romantic journey today."
     },
     "hidden-talent": {
-      "title": "My Hidden Talent",
-      "description": "Discover the special ability or potential you haven't realized yet. Check your dormant talents and find new ways to express yourself."
+      "title": "My Hidden Talent Finder | Discover Your Dormant Potential",
+      "description": "Discover the special ability or genius potential you haven't realized yet with our insightful free online talent assessment. Check your dormant strengths in creativity, logic, or leadership and find new ways to express yourself and achieve success in your personal and professional life. Unlock your hidden gifts today!"
     },
     "balance-game": {
-      "title": "Balance Game",
-      "description": "A thrilling game where you must choose between two extremely difficult options. Test your values and have fun with friends and family."
+      "title": "Balance Game Online | Tough Choices & Values Test",
+      "description": "A thrilling and fun game where you must choose between two extremely difficult and contrasting options. Test your personal values, see how others voted in real-time, and have a great time with friends and family in this addictive free online challenge. Explore hundreds of hypothetical scenarios that will make you think!"
     },
     "fortune-cookie": {
-      "title": "Fortune Cookie",
-      "description": "Cracking open a virtual cookie! Receive a short but powerful message or piece of advice to guide your day and shift your perspective."
+      "title": "Free Fortune Cookie | Daily Wisdom & Luck Messages",
+      "description": "Crack open a virtual cookie and receive a short but powerful message of wisdom or a piece of helpful advice to guide your day. Shift your perspective and attract positive energy with our beautifully animated free online fortune cookie experience. A perfect way to find inspiration and a little bit of magic in your daily routine."
     },
     "color-test": {
-      "title": "Color Sensitivity Test",
-      "description": "Test your vision and see if you can distinguish subtle color differences. Measure your visual sensitivity and color perception level."
+      "title": "Color Sensitivity Test | Measure Your Visual Precision",
+      "description": "Test your vision and see if you can distinguish subtle color differences with our professional-grade visual sensitivity test. Measure your color perception level and see how your precision compares to the global average in this challenging and fun free online tool. Perfect for designers, artists, and anyone curious about their eyes."
     },
     "hearing-test": {
-      "title": "Hearing Age Test",
-      "description": "Measure your audible frequency range to determine your current hearing age. A simple tool to check your ear health and hearing sensitivity."
+      "title": "Hearing Age Test | Measure Your Audible Frequency Range",
+      "description": "Measure your audible frequency range and determine your current physical hearing age with our precise free online hearing test. An essential simple tool to check your ear health, identify potential hearing loss, and understand your sensitivity to various sounds. Use headphones in a quiet environment for the most accurate results."
     },
     "smile-dating-test": {
-      "title": "Smile Dating Test",
-      "description": "What kind of 'smile' perfectly represents your unique dating style? Discover your romantic personality and values through this fun test."
+      "title": "Smile Dating Test | What Your Smile Says About Your Love",
+      "description": "What kind of unique 'smile' perfectly represents your romantic personality and dating style? Discover your deepest values and how you express affection through this fun and creative personality test. Get a personalized report and a cute smile profile to share with your partner or friends on social media for free today!"
     },
     "dating-test": {
-      "title": "Dating Personality Quiz",
-      "description": "Deeply analyze your romantic tendencies, values, and relationship style. Understand yourself better to build more meaningful connections."
+      "title": "Dating Personality Quiz | Deep Relationship Style Analysis",
+      "description": "Deeply analyze your romantic tendencies, fundamental values, and relationship style with our comprehensive dating personality quiz. Understand yourself better to build more meaningful, lasting, and healthy connections in your love life. Our free online tool provides expert-level insights into your romantic psyche."
     },
     "stress-test": {
-      "title": "Stress Level Test",
-      "description": "How stressed is your mind and body right now? Answer a few questions to measure your stress index and get tips for mental relaxation."
+      "title": "Stress Level Test | Self-Assessment for Mental Health",
+      "description": "How stressed is your mind and body right now? Answer a few well-researched questions to measure your stress index and receive helpful practical tips for mental relaxation and burnout prevention. A necessary free online tool for anyone looking to maintain a healthy emotional balance in their busy daily life."
     },
     "brain-type": {
       "title": "Left/Right Brain Test",
@@ -557,44 +557,44 @@
       "description": "Analyze your emotional intelligence (EQ), including empathy, self-awareness, and social skills. Understand your emotional strengths and weaknesses."
     },
     "smartphone-addiction": {
-      "title": "Smartphone Addiction Test",
-      "description": "Measure your level of smartphone dependency and digital habits. Get an objective view of your digital usage and tips for a healthier lifestyle."
+      "title": "Smartphone Addiction Test | Digital Dependency Indicator",
+      "description": "Measure your precise level of smartphone dependency and digital habits with our objective assessment tool. Get a clear view of your digital usage patterns and receive professional tips for achieving a healthier, more balanced lifestyle in the modern world. Take our free online test to start your journey toward digital wellness."
     },
     "kkondae-test": {
-      "title": "Kkondae Test (Stubbornness)",
-      "description": "Precisely measure your 'Kkondae' index based on your daily attitudes and speech. A fun, anonymous test to check your communication style."
+      "title": "Kkondae Test | Check Your Stubbornness & Communication",
+      "description": "Precisely measure your 'Kkondae' (stubborn or condescending) index based on your daily attitudes, social views, and speech. A fun, anonymous free online test designed to help you check your current communication style and ensure you are being a modern, open-minded colleague or friend. Discover your unique score today!"
     },
     "hogu-test": {
-      "title": "Hogu (Pushover) Test",
-      "description": "Do you find it hard to say no? Check if your kind nature is being taken advantage of through our fun pushover index questions."
+      "title": "Hogu (Pushover) Test | measure Your 'No-Ability'",
+      "description": "Do you find it extremely hard to say no even when you want to? Check if your kind nature is being taken advantage of through our fun and insightful pushover (Hogu) index questions. Get a fun final result and tips on how to stand up for yourself more effectively with our free online psychological assessment tool."
     },
     "debate-test": {
-      "title": "Debate Skills Test",
-      "description": "Test your logic, elocution, and reasoning abilities. Measure your debate skills and see how well you can express your opinions."
+      "title": "Debate Skills Test | Logic & Persuasion Assessment",
+      "description": "Test your logic, elocution, reasoning abilities, and persuasive power with our comprehensive free online debate skills test. Measure how well you can express your opinions and defend your arguments under pressure. A great tool for students, professionals, and anyone looking to improve their communication and critical thinking."
     },
     "idol-test": {
-      "title": "Idol Position Finder",
-      "description": "What position would you have if you debuted in an idol group? Find your perfect role, from lead vocal to main dancer, based on your traits."
+      "title": "Idol Position Finder | Which K-pop Role Fits You?",
+      "description": "What position would you have if you debuted in a world-famous idol group? Find your perfect role—from charismatic lead vocal to main dancer—based on your unique personality, aura, and traits. Our free online K-pop idol position test analyzes your star power and recommends the best fit for your potential stage career."
     },
     "resilience-test": {
-      "title": "Resilience Test",
-      "description": "Measure your inner strength to overcome difficulties and bounce back from stress. Check your psychological resilience and emotional durability."
+      "title": "Resilience Test | Measure Your Emotional Durability",
+      "description": "Measure your inner strength to overcome difficult challenges and bounce back from daily stress with our expert resilience test. Check your psychological durability and emotional intelligence levels and get actionable feedback on how to build a stronger, more resilient mind for the future. Free, fast, and insightful."
     },
     "initial-sound-quiz": {
-      "title": "Initial Sound Quiz",
-      "description": "Guess the words corresponding to the given initial consonants within the time limit. A fun quiz game to boost your vocabulary and brain agility."
+      "title": "Initial Sound Quiz | Vocabulary & Quick Thinking Game",
+      "description": "Challenge your vocabulary and cognitive agility by guessing the correct words based on given initial consonants in this addictive brain game. A fun, interactive free online training tool designed to improve your language skills, memory, and mental speed. Solve puzzles across various categories and aim for the top score!"
     },
     "food-quiz": {
-      "title": "Food/Restaurant Quiz",
-      "description": "Guess the names of various global dishes based on images or hints. A great chance to test if you are a true foodie or gourmet expert."
+      "title": "Global Food & Restaurant Quiz | Test Your Gourmet IQ",
+      "description": "Guess the names of various global dishes and famous restaurants based on high-quality images or creative hints. A great chance to test if you are a true foodie or gourmet expert in this fun and educational free online quiz. Expand your culinary knowledge and challenge your friends to see who knows more about world cuisine!"
     },
     "association-quiz": {
-      "title": "Association Quiz",
-      "description": "A high-level deduction quiz where you guess the common answer connecting several given words. Unleash your imagination and logic."
+      "title": "Association Quiz | Word Connection Deduction Puzzle",
+      "description": "A high-level logical deduction quiz where you must guess the hidden common answer that perfectly connects several distinct hint words. Unleash your imagination, vocabulary, and reasoning power to solve complex linguistic puzzles in our addictive and free online association game. Master the art of lateral thinking today!"
     },
     "spelling-quiz": {
-      "title": "Korean Spelling Ability Test | Daily Life Grammar Quiz",
-      "description": "Test your Korean spelling skills with common mistakes like '되/돼', '낫/낳', and '금새/금세'. A fun and free online way to improve your Korean grammar.",
+      "title": "Korean Spelling Test | Grammar & Orthography Challenge",
+      "description": "Test your Korean spelling skills and orthography knowledge with common mistakes like '되/돼', '낫/낳', and '금새/금세'. A fun, high-quality, and free online way to improve your Korean grammar and linguistic precision. Get detailed explanations for every answer to enhance your learning experience and master the language.",
       "faqs": [
         { "q": "What kind of questions are in the quiz?", "a": "Commonly confused Korean spellings like '되/돼', '낫/낳', and '금새/금세' that even native speakers often get wrong." },
         { "q": "Are explanations provided?", "a": "Yes, after each answer, a clear explanation based on standard Korean grammar rules is shown." },
@@ -608,12 +608,12 @@
       ]
     },
     "vocabulary-test": {
-      "title": "Vocabulary Test",
-      "description": "Test your vocabulary level from common words to advanced terminology. Check your rank and see how your word power compares to others."
+      "title": "Vocabulary Test | Measure Your Word Knowledge Level",
+      "description": "Test your vocabulary level and linguistic breadth from common everyday words to advanced professional terminology with our precise assessment. Check your rank and see how your word power compares to other native and non-native speakers in our fun and free online vocabulary challenge. Perfect for students and writers."
     },
     "simple-math": {
-      "title": "Mental Arithmetic Quiz",
-      "description": "Activate your brain with fast-paced mental arithmetic. Solve addition, subtraction, and multiplication problems as quickly as possible."
+      "title": "Mental Arithmetic Quiz | Fast Math Brain Training",
+      "description": "Activate your brain and improve your numerical processing speed with our fast-paced mental arithmetic quiz. Solve various addition, subtraction, division, and multiplication problems as quickly as possible to achieve the highest score. A perfect free online tool for students and anyone looking to sharpen their math skills."
     }
   },
   "home": {

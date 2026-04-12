@@ -7,13 +7,13 @@ const replacement = `const formatKoreanNumber = (numStr) => {
         if (!numStr) return '';
         const n = parseInt(String(numStr).replace(/[^0-9]/g, ''));
         if (isNaN(n) || n === 0) return '';
-        if (n < 10000) return \`\${n.toLocaleString()}원\`;
+        if (n < 10000) return \`\${n.toLocaleString()}??`;
 
         const unit = 10000;
         const man = Math.floor(n / unit);
         const remainder = n % unit;
 
-        return \`\${man.toLocaleString()}만원\${remainder > 0 ? \` \${remainder.toLocaleString()}원\` : ''}\`;
+        return \`\${man.toLocaleString()}만원\${remainder > 0 ? \` \${remainder.toLocaleString()}??` : ''}\`;
     };`;
 
 content = content.replace(regex, replacement);

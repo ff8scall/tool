@@ -1,4 +1,4 @@
-# robots.txt for Utility Hub
+# robots.txt for Tool Hive
 User-agent: *
 Allow: /
 

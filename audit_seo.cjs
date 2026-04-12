@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const pagesDir = 'c:/AI/Antigravity/First/utility-hub/src/pages';
+const pagesDir = 'c:/AI/Antigravity/Tool/src/pages';
 const files = fs.readdirSync(pagesDir).filter(f => f.endsWith('.jsx'));
 
 const results = [];

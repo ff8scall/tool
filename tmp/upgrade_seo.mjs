@@ -72,7 +72,7 @@ for (const [filename, data] of Object.entries(seoData)) {
   const toolGuideCode = `
             <div className="mt-12">
                 <ToolGuide
-                    title="${toolGuideTitle} 안내"
+                    title="${toolGuideTitle} ?�내"
                     intro="${description.replace(/"/g, '&quot;')}"
                     steps={toolSteps}
                     tips={toolTips}

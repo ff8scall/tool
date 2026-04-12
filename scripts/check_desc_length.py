@@ -1,7 +1,7 @@
 import os
 import re
 
-pages_dir = r'c:\AI\Antigravity\First\utility-hub\src\pages'
+pages_dir = r'c:\AI\Antigravity\Tool\src\pages'
 issues = []
 
 # Regex to find description prop in SEO component

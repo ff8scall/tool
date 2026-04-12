@@ -61,12 +61,21 @@ export default defineConfig({
         staticDir: path.join(__dirname, 'dist'),
         routes: getRoutes(),
         renderer: new vitePrerender.PuppeteerRenderer({
-          maxConcurrentRoutes: 1,
-          renderAfterTime: 2000,
-          // Critical for CI/GitHub Actions
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          maxConcurrentRoutes: 1, // Stay memory efficient
+          renderAfterTime: 2500, // Slightly more time for dynamic content
+          headless: true,
+          // CRITICAL: Ensure build fails if prerendering fails
+          skipThirdPartyRequests: true, // Speed up by ignoring non-essential external JS
+          args: [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox', 
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--hide-scrollbars'
+          ],
         }),
         postProcess(renderedRoute) {
+          // SEO Polish: Remove script tags that are not needed after prerender (optional)
           // Ensure index.html is generated for every route (directory structure)
           renderedRoute.outputPath = path.join(__dirname, 'dist', renderedRoute.route, 'index.html');
           return renderedRoute;

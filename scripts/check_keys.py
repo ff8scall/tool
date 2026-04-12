@@ -3,16 +3,16 @@ import os
 import re
 
 # Load locale files
-with open(r'c:\AI\Antigravity\First\utility-hub\src\locales\ko.json', 'r', encoding='utf-8') as f:
+with open(r'c:\AI\Antigravity\Tool\src\locales\ko.json', 'r', encoding='utf-8') as f:
     ko_data = json.load(f)
 
-with open(r'c:\AI\Antigravity\First\utility-hub\src\locales\en.json', 'r', encoding='utf-8') as f:
+with open(r'c:\AI\Antigravity\Tool\src\locales\en.json', 'r', encoding='utf-8') as f:
     en_data = json.load(f)
 
 ko_keys = set(ko_data.get('tools', {}).keys())
 en_keys = set(en_data.get('tools', {}).keys())
 
-pages_dir = r'c:\AI\Antigravity\First\utility-hub\src\pages'
+pages_dir = r'c:\AI\Antigravity\Tool\src\pages'
 mismatches = []
 
 for filename in os.listdir(pages_dir):

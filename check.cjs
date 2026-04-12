@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const toolsContent = fs.readFileSync('c:/AI/Antigravity/First/utility-hub/src/data/tools.js', 'utf-8');
-const appContent = fs.readFileSync('c:/AI/Antigravity/First/utility-hub/src/App.jsx', 'utf-8');
-const pagesDir = 'c:/AI/Antigravity/First/utility-hub/src/pages';
+const toolsContent = fs.readFileSync('c:/AI/Antigravity/Tool/src/data/tools.js', 'utf-8');
+const appContent = fs.readFileSync('c:/AI/Antigravity/Tool/src/App.jsx', 'utf-8');
+const pagesDir = 'c:/AI/Antigravity/Tool/src/pages';
 
 // 1. Get all page components
 const pageFiles = fs.readdirSync(pagesDir).filter(f => f.endsWith('.jsx') && f !== 'Home.jsx' && f !== 'CategoryPage.jsx' && f !== 'SEO.jsx');

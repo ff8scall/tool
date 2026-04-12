@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const toolsPath = 'c:/AI/Antigravity/First/utility-hub/src/data/tools.js';
-const appPath = 'c:/AI/Antigravity/First/utility-hub/src/App.jsx';
+const toolsPath = 'c:/AI/Antigravity/Tool/src/data/tools.js';
+const appPath = 'c:/AI/Antigravity/Tool/src/App.jsx';
 
 // 1. Process tools.js
 let toolsContent = fs.readFileSync(toolsPath, 'utf-8');
