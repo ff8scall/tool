@@ -3,6 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap locations
+Allow: /bbd0d9a6843c450eb3e9d811a0fd504a.txt
 Sitemap: https://tool.lego-sia.com/sitemap.xml
 
 # Allow all major search engine bots
