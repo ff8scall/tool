@@ -9,13 +9,16 @@
 1. `vite build`: React 소스 컴파일 및 번들링.
 2. `scripts/generate-sitemap.js`: `src/pages` 목록을 기반으로 `sitemap.xml` 생성.
 3. `scripts/copy-404.js`: SPA 특성상 루트 이외의 경로에서 새로고침 시 404가 발생하는 것을 방지하기 위해 `index.html`을 `404.html`로 복사.
-4. `npm run indexnow`: 생성된 사이트맵의 모든 URL을 검색 엔진(Bing, Yandex 등)에 즉시 제출.
+4. `npm run indexnow`: 생성된 사이트맵의 모든 URL을 검색 엔진(Bing, Naver 등)에 즉시 제출.
 
 ## 🔍 3. SEO 및 검색 엔진 가시성
 - **Prerendering**: `vite-plugin-prerender`를 통해 주요 페이지를 정적 HTML로 생성하여 크롤러 가독성 향상.
 - **IndexNow Integration**:
-  - `API_KEY`: `bbd0d9a6843c450eb3e9d811a0fd504a`
-  - `KEY_LOCATION`: `https://tool.lego-sia.com/bbd0d9a6843c450eb3e9d811a0fd504a.txt`
+  - `API_KEY`: `6687659b44b1f1d304f1068df35daec0`
+  - `KEY_LOCATION`: `https://tool.lego-sia.com/6687659b44b1f1d304f1068df35daec0.txt`
+  - **지원 엔진**: 
+    - Bing/Yandex (`api.indexnow.org`)
+    - Naver (`searchadvisor.naver.com`)
   - 빌드 시 자동으로 최신 콘텐츠를 검색 엔진에 통보함.
 
 ## ☯️ 4. 특수 로직 (사주/운세)

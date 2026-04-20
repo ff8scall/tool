@@ -7,9 +7,14 @@ const __dirname = path.dirname(__filename);
 
 const sitemapPath = path.resolve(__dirname, '../public/sitemap.xml');
 const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
-const API_KEY = 'bbd0d9a6843c450eb3e9d811a0fd504a';
+const API_KEY = '6687659b44b1f1d304f1068df35daec0';
 const KEY_LOCATION = `${BASE_URL}/${API_KEY}.txt`;
 const HOST = new URL(BASE_URL).hostname;
+
+const ENDPOINTS = [
+    'https://api.indexnow.org/IndexNow',
+    'https://searchadvisor.naver.com/indexnow'
+];
 
 async function submitToIndexNow() {
     console.log('Starting IndexNow submission...');
@@ -42,27 +47,34 @@ async function submitToIndexNow() {
         urlList: urlList
     };
 
-    try {
-        const response = await fetch('https://api.indexnow.org/IndexNow', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        });
+    for (const endpoint of ENDPOINTS) {
+        const engineName = new URL(endpoint).hostname;
+        console.log(`\nSubmitting to ${engineName}...`);
 
-        if (response.ok) {
-            console.log('Successfully submitted URLs to IndexNow!');
-            console.log(`Status: ${response.status} ${response.statusText}`);
-        } else {
-            console.error('Failed to submit URLs to IndexNow.');
-            console.error(`Status: ${response.status} ${response.statusText}`);
-            const errorText = await response.text();
-            console.error('Response:', errorText);
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok || response.status === 202) {
+                console.log(`[${engineName}] Successfully submitted URLs!`);
+                console.log(`Status: ${response.status} ${response.statusText}`);
+            } else {
+                console.error(`[${engineName}] Failed to submit URLs.`);
+                console.error(`Status: ${response.status} ${response.statusText}`);
+                const errorText = await response.text();
+                console.error('Response:', errorText);
+            }
+        } catch (error) {
+            console.error(`[${engineName}] Error during submission:`, error.message);
         }
-    } catch (error) {
-        console.error('Error during IndexNow submission:', error.message);
     }
+    
+    console.log('\nIndexNow submission process completed.');
 }
 
 submitToIndexNow();
