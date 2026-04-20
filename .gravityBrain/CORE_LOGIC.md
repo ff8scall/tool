@@ -14,8 +14,8 @@
 ## 🔍 3. SEO 및 검색 엔진 가시성
 - **Prerendering**: `vite-plugin-prerender`를 통해 주요 페이지를 정적 HTML로 생성하여 크롤러 가독성 향상.
 - **IndexNow Integration**:
-  - `API_KEY`: `6687659b44b1f1d304f1068df35daec0`
-  - `KEY_LOCATION`: `https://tool.lego-sia.com/6687659b44b1f1d304f1068df35daec0.txt`
+  - **Bing Key**: `bbd0d9a6843c450eb3e9d811a0fd504a`
+  - **Naver Key**: `6687659b44b1f1d304f1068df35daec0`
   - **지원 엔진**: 
     - Bing/Yandex (`api.indexnow.org`)
     - Naver (`searchadvisor.naver.com`)

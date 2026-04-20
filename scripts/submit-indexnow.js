@@ -7,9 +7,10 @@ const __dirname = path.dirname(__filename);
 
 const sitemapPath = path.resolve(__dirname, '../public/sitemap.xml');
 const BASE_URL = process.env.VITE_BASE_URL || 'https://tool.lego-sia.com';
-const API_KEY = '6687659b44b1f1d304f1068df35daec0';
-const KEY_LOCATION = `${BASE_URL}/${API_KEY}.txt`;
-const HOST = new URL(BASE_URL).hostname;
+const ENGINE_KEYS = {
+    'api.indexnow.org': 'bbd0d9a6843c450eb3e9d811a0fd504a',
+    'searchadvisor.naver.com': '6687659b44b1f1d304f1068df35daec0'
+};
 
 const ENDPOINTS = [
     'https://api.indexnow.org/IndexNow',
@@ -40,16 +41,20 @@ async function submitToIndexNow() {
 
     console.log(`Found ${urlList.length} URLs to submit.`);
 
-    const data = {
-        host: HOST,
-        key: API_KEY,
-        keyLocation: KEY_LOCATION,
-        urlList: urlList
-    };
+    const HOST = new URL(BASE_URL).hostname;
 
     for (const endpoint of ENDPOINTS) {
         const engineName = new URL(endpoint).hostname;
+        const apiKey = ENGINE_KEYS[engineName];
+        
         console.log(`\nSubmitting to ${engineName}...`);
+
+        const data = {
+            host: HOST,
+            key: apiKey,
+            keyLocation: `${BASE_URL}/${apiKey}.txt`,
+            urlList: urlList
+        };
 
         try {
             const response = await fetch(endpoint, {

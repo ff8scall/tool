@@ -42,5 +42,7 @@ graph TD
 ```
 
 ## 🔑 외부 연동
-- **IndexNow API Key**: `6687659b44b1f1d304f1068df35daec0` (Tool 전용)
+- **IndexNow API Keys**: 
+  - Bing: `bbd0d9a6843c450eb3e9d811a0fd504a`
+  - Naver: `6687659b44b1f1d304f1068df35daec0`
 - **Domain**: `https://tool.lego-sia.com`

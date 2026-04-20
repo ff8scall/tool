@@ -9,8 +9,10 @@
 
 ## 🔗 외부 연동 정보
 - **IndexNow**: `https://tool.lego-sia.com` 도메인 연동 중.
-- **API Key**: `6687659b44b1f1d304f1068df35daec0` (Tool 전용 신규 키)
-- **지원 엔진**: Bing, Naver
+- **API Keys**:
+  - Bing: `bbd0d9a6843c450eb3e9d811a0fd504a`
+  - Naver: `6687659b44b1f1d304f1068df35daec0`
+- **지원 엔진**: Bing, Naver (엔진별 별도 키 사용)
 
 ## 📌 단기 할 일
 1. [x] 네이버 IndexNow 가이드 분석 및 설계
