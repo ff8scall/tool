@@ -228,7 +228,7 @@ const Game2048 = () => {
 
             <div className="flex flex-col items-center">
                 <div className="flex justify-between w-full items-center mb-6">
-                    <h2 className="text-4xl font-extrabold text-slate-700 dark:text-slate-200">2048</h2>
+                    <h1 className="text-4xl font-extrabold text-slate-700 dark:text-slate-200">2048</h1>
                     <div className="flex gap-2">
                         <div className="bg-gray-200 dark:bg-gray-800 rounded-md px-4 py-1 text-center">
                             <div className="text-[10px] font-bold text-gray-500 uppercase">{isEn ? 'Score' : '점수'}</div>

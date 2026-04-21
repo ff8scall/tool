@@ -163,6 +163,15 @@ const LifeExpectancy = () => {
                 faqs={faqs}
             />
 
+            <header className="text-center mb-8 space-y-2">
+                <h1 className="text-3xl font-bold text-foreground">
+                    {t('tools.life-expectancy.title')}
+                </h1>
+                <p className="text-muted-foreground">
+                    {isEn ? 'Discover your potential longevity based on your habits.' : '당신의 생활 습관을 바탕으로 잠재적 기대 수명을 확인해보세요.'}
+                </p>
+            </header>
+
             <div className="bg-card border border-border rounded-2xl shadow-xl p-8 min-h-[450px] flex flex-col items-center justify-center text-center transition-all duration-300">
                 {step < questions.length ? (
                     <div className="w-full animate-in fade-in slide-in-from-bottom-4">

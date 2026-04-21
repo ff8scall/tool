@@ -1,0 +1,1106 @@
+[
+  {
+    "file": "AdditionQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AgeCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AimTrainer.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AnimalFace.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AreaConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AsciiArt.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AsciiTable.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "AssociationQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BalanceGame.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BarcodeGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Base64Tool.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BaseConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Biorhythm.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BirthGen.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BloodType.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BMI.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BMR.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BrainStructure.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BrainType.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "BubbleWrap.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CapitalQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CategoryPage.jsx",
+    "hasSEO": true,
+    "hasToolGuide": false,
+    "hasH1": true,
+    "h1Count": 2,
+    "toolGuideDetails": "Missing"
+  },
+  {
+    "file": "Checklist.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CodeDiff.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ColorExtractor.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ColorPicker.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ColorTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CompoundInterestCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CoupleCompatibility.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CpsTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CronGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "CsvJsonConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Missing"
+  },
+  {
+    "file": "CurrencyConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DateCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DatingTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DebateTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DiceRoller.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DiscountCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DreamInterpretation.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "DynamicAcuity.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "EncryptionTool.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "EqTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "FirstImpressionColor.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "FlappyBird.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Flashlight.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "FoodQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "FortuneCookie.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "FractionCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Game2048.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Hangman.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HashGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HearingTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HiddenTalent.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HoguTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Home.jsx",
+    "hasSEO": true,
+    "hasToolGuide": false,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Missing"
+  },
+  {
+    "file": "Horoscope.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HtmlEncoder.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "HtmlFormatter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "IdealType.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "IdolPositionTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "IfIAmGod.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ImageResizer.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ImageToBase64.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "InitialSoundQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "IpAddress.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "JoseonJob.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "JsonFormatter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "JwtDecoder.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "KkondaeTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LadderGame.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LengthConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LifeBgm.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LifeExpectancy.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LoanCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LottoGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LottoSimulator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "LunchRecommender.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MandalartPlanner.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MarkdownEditor.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MbtiTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 2,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MentalAge.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Minesweeper.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MinimumWageCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MissileDodge.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MorseCode.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "MultiplicationQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "NameAnalysis.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "NumberBaseball.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "NumberMemory.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "OneToFifty.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PasswordGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PastLife.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PercentCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Missing"
+  },
+  {
+    "file": "PersonalColor.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PersonalScent.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PetMbti.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PitchTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "PomodoroTimer.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "QrGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ReactionTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "RegexTester.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ResilienceTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Roulette.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Saju.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SalaryCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SeveranceCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SmartphoneAddiction.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SmileDatingTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SnakeGame.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SpecialCharacters.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SpeedConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SpeedMath.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SpellingQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "StressTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "StringConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SubtractionQuiz.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "Sudoku.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "SuikaGame.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TanghuluGame.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TarotCard.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TemperatureConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TimerStopwatch.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TimeSense.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TowerStacker.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TypingDefense.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "TypingTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "UnicodeConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "UrlEncoderDecoder.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "UuidGenerator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "VocabularyTest.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "VolumeConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "WebEditor.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 2,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "WeightConverter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "WordCounter.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "WorkHoursCalculator.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "WorldClock.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "YoutubeThumbnail.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  },
+  {
+    "file": "ZodiacFortune.jsx",
+    "hasSEO": true,
+    "hasToolGuide": true,
+    "hasH1": true,
+    "h1Count": 1,
+    "toolGuideDetails": "Present"
+  }
+]
