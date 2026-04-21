@@ -10,7 +10,8 @@
 ## 🔗 외부 연동 정보
 - **IndexNow**: `https://tool.lego-sia.com` 도메인 연동 중.
 - **API Keys**:
-  - Bing: `bbd0d9a6843c450eb3e9d811a0fd504a`
+  - Bing: `bbd0d9a6843c450eb3e9d811a0fd504a` (IndexNow)
+  - Bing Verification: `048AB450B6B91E03CAF13FDE8415F954` (Meta Tag)
   - Naver: `6687659b44b1f1d304f1068df35daec0`
 - **지원 엔진**: Bing, Naver (엔진별 별도 키 사용)
 
@@ -18,4 +19,5 @@
 1. [x] 네이버 IndexNow 가이드 분석 및 설계
 2. [x] `scripts/submit-indexnow.js` 멀티 엔드포인트 지원 수정
 3. [x] 인덱싱 요청 테스트 및 결과 확인
-4. [ ] 배포 후 네이버 검색 어드바이저에서 색인 현황 모니터링
+4. [x] Bing 사이트 인증 메타 태그 추가 (`index.html`)
+5. [ ] 배포 후 네이버/Bing 검색 어드바이저에서 색인 현황 모니터링
