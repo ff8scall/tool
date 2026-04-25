@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { tools } from '../data/tools';
 
-const SEO = ({ title, description, keywords, image, schema, category, faqs, steps }) => {
+const SEO = ({ title, description, keywords, image, schema, category, faqs, steps, canonical }) => {
     const location = useLocation();
-    const { lang, getLocalizedPath } = useLanguage();
+    const { lang } = useLanguage();
     const siteTitle = 'Tool Hive';
     const siteUrl = 'https://tool.lego-sia.com';
+
+    // Current page URL (normalized - no trailing slash, no hash for SEO)
+    const normalizedPath = location.pathname.replace(/\/$/, '') || '';
+    
+    // Find primary path from tools data to handle aliases
+    const primaryPath = useMemo(() => {
+        const cleanPathForLookup = normalizedPath.replace(/^\/(?:ko|en)(?=\/|$)/, '') || '/';
+        const matchingTool = tools.find(t => 
+            t.path === cleanPathForLookup || 
+            (t.path === '/' && cleanPathForLookup === '/')
+        );
+        return matchingTool ? matchingTool.path : cleanPathForLookup;
+    }, [normalizedPath]);
+
+    const localizedPrimaryPath = lang === 'en' ? `/en${primaryPath === '/' ? '' : primaryPath}` : primaryPath;
+    const currentUrl = canonical || `${siteUrl}${localizedPrimaryPath.replace(/\/$/, '') || ''}`;
+    
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     const defaultDescription = lang === 'en' 
         ? 'Explore over 134 free online web tools designed to make your daily life easier and more productive. From fun fortune telling and MBTI tests to professional unit converters, financial calculators, developer utilities, and text analysis tools, Tool Hive provides high-quality digital solutions without any sign-up required.'
@@ -21,10 +39,6 @@ const SEO = ({ title, description, keywords, image, schema, category, faqs, step
     const defaultImage = `${siteUrl}/og-image.png`;
     const ogImage = image || defaultImage;
 
-    // Current page URL (normalized - no trailing slash, no hash for SEO)
-    const normalizedPath = location.pathname.replace(/\/$/, '') || '';
-    const currentUrl = `${siteUrl}${normalizedPath}`;
-    
     // Internationalization URLs
     const cleanPath = normalizedPath.replace(/^\/(?:ko|en)(?=\/|$)/, '') || '';
     const koUrl = `${siteUrl}${cleanPath}` || siteUrl;

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-sitemap.js && node scripts/copy-404.js && npm run indexnow",
+    "build": "vite build && node scripts/generate-sitemap.js && node scripts/generate-static-pages.js && node scripts/copy-404.js && npm run indexnow",
     "lint": "eslint .",
     "indexnow": "node scripts/submit-indexnow.js",
     "preview": "vite preview"
